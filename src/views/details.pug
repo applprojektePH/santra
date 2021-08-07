@@ -1,0 +1,135 @@
+#content
+    .container
+        .row
+            .col-md-12
+                br
+                br
+                for order in softwareListDetails
+                    h2(id='tables') Softwareantrag #!{order.orderid} !{order.softwarename}
+                include elements/buttons-view
+                br
+                br
+                ul.progressbar
+                    for order in softwareListDetails
+                            - var list = [ 'Antrag abgeschlossen', 'Antrag entscheid', 'Antrag bei gremium', 'Antrag in prüfung', 'Antrag in bearbeitung', 'Antrag eingegangen'];
+                            -for (var i = 0; i < list.length; i++)
+                              li(class=["", "item" + n])
+                                a(href="#")= list[i]
+                br
+                br
+                br
+                br
+                .form-group-view-wrapper
+                    .form-group
+                        .row
+                            br
+                            .col-md-12
+                                h3.alert.alert-primary Angaben zur Person
+                            for order in softwareListDetails
+                                label
+                                    | Institut
+                                p= order.institut
+                                label Professur/Zentrum/Ressort
+                                p= order.professur
+                                label
+                                    | Beantragter*innen
+                                p
+                                 span= order.vorname
+                                 span &nbsp;
+                                 span= order.nachname
+                                label
+                                    | E-Mail-Adresse
+                                p= order.email
+                                label(for='form-function')
+                                    | Funktion
+                                p= order.funktion
+                                label(for='form-function')
+                                    | Studiengang
+                                p= order.studiengang
+                                label(for='form-function')
+                                    | Modulanlass
+                                p= order.modulanlass
+                            .col-md-12
+                            for order in softwareListDetails
+                                h3.alert.alert-primary Angaben zur Software
+                                label
+                                    | Anwendungs-/Lehr-/Lernszenario
+                                p= order.szenario
+                                label
+                                    | Name der Software
+                                p= order.softwarename
+                                    | TechSmith Camtasia 2020
+                                label
+                                    | Webseite der Software
+                                p= order.softwarewebseite
+                                label
+                                    | Version der Software
+                                label
+                                    | Handelt es sich um ein Update/Änderung eines bestehenden Paketes. Wenn ja, welches?
+                                p= order.softwareupdate
+                                if order.softwareupdate==='ja'
+                                    p= order.softwareupdatewelches
+                                label
+                                    | Anzahl Lizenzen
+                                p= order.lizenzenanzahl
+                                label
+                                    | Anzahl geplante Nutzer*innen
+                                p= order.nutzeranzahl
+                                label(for='form-function')
+                                    | Nutzungsdauer
+                                p= order.nutzungsdauer
+                                h3.alert.alert-primary Angaben zur Nutzung
+                                label
+                                    | Einsatz auf folgendem Betriebssystem
+                                p= order.betriebssystem
+                                label
+                                    | Verwendung mit folgendem Browser
+                                p= order.browser
+                                label
+                                    | Wie soll die Software zur Verfügung gestellt werden?
+                                p= order.softwareverfuegung
+                                label
+                                    | W&auml;re die Software auch f&uuml;r ein anderes Institut der PH interessant?
+                                p= order.softwareinstinteresse
+                                if order.softwareinstinteresse === 'ja'
+                                    p= order.softwareinstitut
+                                label
+                                    | W&auml;re die Software auch f&uuml;r andere Hochschulen interessant?
+                                p= order.softwarehochschinteresse
+                                    if order.softwarehochschinteresse === 'ja'
+                                        p= order.softwarehochschule
+                            .col-md-12
+                            for order in softwareListDetails
+                                h3.alert.alert-primary Lizensierung
+                                label
+                                    | F&uuml;r welche Institution
+                                p= order.lizenzinstitution
+                                label
+                                    | Art
+                                p= order.lizenzart
+                                h3.alert.alert-primary Kosten
+                                label
+                                    | Kosten Lizenzmodell
+                                p= order.lizenzkosten
+                                h3.alert.alert-primary Zus&auml;tzliche Angaben
+                                label
+                                    | Vergleichbarkeit
+                                p= order.vergleichbarkeit
+                                label
+                                    | Support durch
+                                p= order.support
+                                label
+                                    | Rechtliche Frage: Datenspeicherung in einer Cloud?
+                                p= order.cloud
+                                    if order.cloud === 'nein'
+                                        p= order.cloudwo
+                                label(for='form-function')
+                                    | Product Owner
+                                p= order.productowner
+                                label(for='form-function')
+                                    | Bemerkungen
+                                p= order.bemerkungen
+                                label(for='form-function')
+                                    | Datum
+                                p= order.datum
+

@@ -1,0 +1,27 @@
+.row
+    .col-md-12
+        table.table.table-striped.table-works
+            thead
+                tr(role='row')
+                    th(role='columnheader') Ticketnr.
+                    th.minwidth(role='columnheader') Produkt
+                    th(role='columnheader') Bezeichnung
+                    th(role='columnheader') Beantragt am
+                    th(role='columnheader') Ersteller*innen
+                    th(role='columnheader') Institut
+                    th(role='columnheader') Status
+            tbody
+                for order in softwareList
+                        tr
+                        td
+                            a(href="/details?tsid="+ order.orderid class="link-id")= order.orderid
+                        td= order.softwarename
+                        td= order.softwarename
+                        td= order.datum
+                        td
+                            span= order.vorname
+                            span &nbsp;
+                            span= order.nachname
+                        td= order.institut
+                        td= order.status
+

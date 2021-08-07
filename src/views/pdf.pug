@@ -1,0 +1,25 @@
+script(type="text/javascript")
+script(type='text/javascript' src="./static/src/printpdf.js")
+style.
+    include ./static/style/main.css
+div(id='wrapper-screen-pdf')
+    img(class='FHNWLogo' src='static/style/FHNW.svg')
+    div(class='pdfTitle')
+    div(id='pdfImg')
+    div(id='pdfSVG')
+    div(class="pdfViz")
+    svg(width="150" height="700" class='FHNWrect' xmlns="http://www.w3.org/2000/svg" )
+        g()
+            rect(x="0" y="150" width="60" height="220" fill='#FDE70E')
+            text(class='FHNWrectText' font-size="35" x='200' y='93' transform="translate(-50,550) rotate(-90)") Alters-Atlas
+    span(class='pdfSep')
+    img(class='FHNWLogo' src='static/style/FHNW.svg')
+    div(class='pdfTitle')
+
+    div(id='pdfText')
+    div(id='pdfMeta')
+script(type = "text/javascript").
+    pdfTemplate();
+
+script(type = "text/javascript").
+    setTimeout(function(){ window.print(); }, 1000);

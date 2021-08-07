@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        include header
+    body
+        #content
+            .container
+                .row
+                    .col-md-12
+                        br
+                        br
+                        h2 Neuer Antrag f&uuml;r Softwarebeschaffung
+                        form#formOrder.needs-validation.form-edit(method='POST' novalidate='' action="/submit-form")
+                            include elements/buttons-form
+                            br
+                            br
+                            include form
+        include footer
+
