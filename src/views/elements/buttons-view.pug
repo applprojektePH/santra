@@ -1,0 +1,53 @@
+span.service-buttons-wrapper
+    for order in softwareListDetails
+        a(href="/details?tsid="+ order.orderid class="link-id")
+            button.btn.btn-primary.btn-sm(type='submit')
+                | Antrag bearbeiten
+                i.fas.fa-edit
+    button#pdfexport.btn.btn-primary.btn-sm(type='submit')
+        | Antrag als PDF speichern
+        i.fas.fa-file-pdf
+    button.btn.btn-primary.btn-sm.hidden-xs(type='button' data-toggle='modal' data-target='#removeModal')
+        | Antrag l&ouml;schen
+        i.fas.fa-trash-alt
+    a(href='user.php')
+        button.btn.btn-primary.btn-sm.floatright(type='button')
+            | Zur&uuml;ck zu
+            | allen Antr&auml;gen
+            i.fas.fa-search
+    a(href='detailshistory.php')
+        button.btn.btn-primary.btn-sm
+            | Detallierter Verlauf der Bestellung
+            i.fas.fa-history
+// Button trigger modal
+// Modal
+#removeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Antrag l&ouml;schen
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                | Wollen Sie wirklich den Antrag unwiderruflich l&ouml;schen und Antragssteller*inn dar&uuml;ber informieren?
+            .modal-footer
+                button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Abbrechen
+                a(href='user.php')
+                    button.btn.btn-primary.btn-sm(type='button') Antrag l&ouml;schen
+// Modal
+#removeModalBack.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Zur&uuml;ck zu allen Antr&auml;gen
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                | Wollen Sie die Seite wirklich verlassen?
+                br
+                | Formulardaten werden nicht gespeichert.
+            .modal-footer
+                button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Abbrechen
+                a(href='../QDB/view.php')
+                    button.btn.btn-primary.btn-sm(type='button') OK
+br

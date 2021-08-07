@@ -1,0 +1,56 @@
+span.service-buttons-wrapper
+    button#submitform.btn.btn-primary.btn-sm(type='submit')
+        | &Auml;nderungen speichern (Entwurf)
+        i.fas.fa-save
+    button#submitform.btn.btn-primary.btn-sm(type='submit')
+        | Antrag neu einreichen
+        i.fas.fa-paper-plane
+    button.btn.btn-primary.btn-sm(type='button' data-toggle='modal' data-target='#removeModal')
+        | Formulareingaben zur&uuml;cksetzen
+        i.fas.fa-undo
+    button.btn.btn-primary.btn-sm.floatright(type='button' data-toggle='modal' data-target='#removeModalBack')
+        | Zur&uuml;ck zur Startseite
+        i.fas.fa-search
+// Button trigger modal
+// Modal
+#removeModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Formulareingaben zur&uuml;cksetzen
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                | Wollen Sie wirklich die Formulardaten verwerfen?
+            .modal-footer
+                button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Abbrechen
+                a(href='/form')
+                    button.btn.btn-primary.btn-sm(type='button') Daten l&ouml;schen
+// Modal
+#removeModalBack.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Zur&uuml;ck zur Startseite
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                | Wollen Sie die Seite wirklich verlassen?
+                br
+                | Formulardaten werden nicht gespeichert.
+            .modal-footer
+                button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Abbrechen
+                a(href='/')
+                    button.btn.btn-primary.btn-sm(type='button') OK
+// Modal
+#countModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+            .modal-header
+                h5.modal-title Maximale Anzahl
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                | Maximale Anzahl Felder erreicht
+            .modal-footer
+                button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Schliessen
