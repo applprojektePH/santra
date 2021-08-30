@@ -1,7 +1,6 @@
 $( document ).ready(function() {
          $(".accordion-collapse").collapse();
          $('.progressbar').find('li');
-
     $('#buttonsubmitformdraft').click(function(){
         $('#form-status-input').attr('value', '10');
     });
@@ -285,20 +284,20 @@ $( document ).ready(function() {
         }
     });
 
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        '#print-btn': function (element, renderer) {
-            return true;
-        }
-    };
-
-    $('#pdfexport').click(function () {
-        // doc.fromHTML($('.form-group-view-wrapper').html(), 15, 15, {
-        //     'width': 170,
-        //     'elementHandlers': specialElementHandlers
-        // });
-        // doc.save('SW-Antrag.pdf');
-    });
+    // var doc = new jsPDF();
+    // var specialElementHandlers = {
+    //     '#print-btn': function (element, renderer) {
+    //         return true;
+    //     }
+    // };
+    //
+    // $('#pdfexport').click(function () {
+    //     // doc.fromHTML($('.form-group-view-wrapper').html(), 15, 15, {
+    //     //     'width': 170,
+    //     //     'elementHandlers': specialElementHandlers
+    //     // });
+    //     // doc.save('SW-Antrag.pdf');
+    // });
 
 
     // $("#accordionForm .accordion-item").find("input, select, textarea").focus(function() {
