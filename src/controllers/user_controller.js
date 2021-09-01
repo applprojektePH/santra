@@ -1,9 +1,9 @@
-let db = require('../libs/db');
+﻿let db = require('../libs/db');
 const mysql = require('mysql');
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : 'localhost',
-    user            : 'admin',
+    user            : 'root',
     password        : 'mysecretpassword',
     database        : 'santra'
 })

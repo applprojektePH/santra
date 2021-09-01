@@ -1,0 +1,67 @@
+{
+  "Herausgeber_V2.0": [
+    "Alters-Atlas, Version 2.0, Release am 1.9.2020<br>" ,
+  "Fachhochschule Nordwestschweiz FHNW",
+  "Hochschule für Architektur, Bau und Geomatik <br>Hofackerstrasse 30 <br>4132 Muttenz",
+    "<br>T +41 61 228 55 66",
+    "E-Mail: <a href='mailto:info.habg@fhnw.ch'>info.habg@fhnw.ch</a>",
+    "<a href='https://www.fhnw.ch/habg' target='_blank'>www.fhnw.ch/habg</a>",
+    "<br>Förderung durch Nationales Innovationsnetzwerk «Alter(n) in der Gesellschaft» – AGE-NT – im Kluster: <i>Ageing & Living in Place</i> – <a href='https://www.age-netzwerk.ch/de/' target='_blank'>www.age-netzwerk.ch/de/</a>"
+  ],
+
+  "Kontakt": [
+    "Alters-Atlas Team der Fachhochschule Nordwestschweiz FHNW",
+    "<a href='mailto:altersatlas@fhnw.ch'>altersatlas@fhnw.ch</a>"
+  ],
+  "Alters-Atlas_V2.0 Team": [
+    "Susanne Bleisch – Co-Projektleitung, Institut Geomatik der Hochschule für Architektur, Bau und Geomatik FHNW (IGEO)",
+    "Lina Dönni – Co-Projektleitung, Layout, Inhalt (IGEO)",
+    "Alesya Heymann – <i>Backend, Frontend</i> Programmierung (IGEO)",
+    "Daria Hollenstein – <i>Backend, Frontend</i> Programmierung (IGEO)",
+    "Mario F. Pozza – Inhalt, Layout, Fotografie (IGEO)",
+    "Rainer Roth – Inhalt, Layout, Fotografie (IGEO)"
+  ],
+  "Version": [
+    "Alters-Atlas, Version 2.0, Release am 04.12.2019"
+  ],
+
+  "Verwendete Web Technologien": [
+    "./static/data/d3js.png",
+    "./static/data/orientdb.png",
+    "./static/data/nodejs.png",
+    "./static/data/timeline.png"
+  ],
+"": [
+  "Die Netzwerkvisualisierung wurde mit <a target='_blank' href='https://github.com/d3/d3-force'>d3.js’s d3-force</a> und einem Beispiel von <a href='https://gist.github.com/khalidaissi/d895899ff588a6589c6a7da316eb93cc' target='_blank'>khalidaissi</a>  realisiert.",
+  "Die Zeitstrahlen (engl. <i>Timelines</i>) wurden mit TimelineJS von Northwestern University Knight Lab (<a href='http://timeline.knightlab.com/' target='_blank'> http://timeline.knightlab.com </a>) realisiert."
+],
+  "<hr>Haftungsausschluss": [
+    "Das Alters-Atlas Team ist um richtige und aktualisierte Informationen auf dieser Webseite bestrebt. Die Teammitglieder übernehmen jedoch keinerlei Garantie und geben keine Zusicherung hinsichtlich Aktualität und Vollständigkeit der bereitgestellten Informationen. Das Alters-Atlas Team behält sich vor, Inhalte ohne Ankündigung ganz oder teilweise zu ändern, zu löschen oder (zeitweise) nicht zu veröffentlichen. In keinem Fall haftet das Alters-Atlas Team für Verluste oder Schäden materieller oder immaterieller Art, die sich aus oder im Zusammenhang mit der Nutzung oder Nichtnutzung der angebotenen Informationen bzw. durch die Nutzung fehlerhafter oder unvollständiger Informationen entstehen können.",
+  "Das Alters-Atlas Team übernimmt keine Verantwortung für fremde, d.h. nicht auf ihren Servern oder in ihrem Einflussbereich liegende Webseiten und deren Inhalte, die darauf angebotenen Produkte, Dienstleistungen oder sonstigen Angebote, die mit dieser Webseite über Verknüpfungen (<i>Hyperlinks</i>) allenfalls verbunden sind.<hr>"
+  ],
+
+  "Herausgeber_V1.0": [
+    "Fachhochschule Nordwestschweiz FHNW",
+    "Institut Geomatik der Hochschule für Architektur, Bau und Geomatik (IGEO)",
+    "Institut für Wirtschaftsinformatik der Hochschule für Wirtschaft FHNW (IWI)",
+    "Förderung durch die Strategische Initiative «Alternde Gesellschaft» der FHNW"
+  ],
+  "Kontakt": [
+    "Alters-Atlas Team",
+    "<a href='mailto:altersatlas@fhnw.ch'>altersatlas@fhnw.ch</a>"
+  ],
+  "Alters-Atlas_V1.0 Team": [
+    "Andreas Allenspach – Codestruktur der Visualisierungen (IWI)",
+    "Susanne Bleisch – Projektleitung (IGEO)",
+    "Darjan Hil – Projektinitator (ehemals IWI)",
+    "Janine Jäger – Vorbereitung Inhalt (lWI)",
+    "Safak Korkut – Design (IWI) ",
+    "Jonas Lutz – Backend-Programmierung (IWI)",
+    "Philipp Meyer – Frontend-Programmierung (ehemals IGEO) ",
+    "Pascal Moriggl – Inhalt (IWI)",
+    "Adriana Zanda – Inhalt (IGEO)"
+  ],
+  "Version": [
+    "Alters-Atlas, Version 1.0, Release am 15.12.2017"
+  ]
+}

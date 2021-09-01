@@ -1,0 +1,249 @@
+body {
+    background-color: lightgrey;
+}
+
+#vizSVG {
+    background-color: white;
+}
+
+/* Symbol Attributes */
+
+.sym { stroke-rule: evenodd; }
+
+
+.WhiteSpace { stroke: #ffffff}
+
+
+
+/* Gender 1a/b/c*/
+
+.MalGend { stroke: #5F7E91; fill: #ffffff  }
+
+.FemGend { stroke: #964850; fill: #ffffff }
+
+.Age { stroke: #91a983; fill: #ffffff  }
+
+
+/* Age Classe Female 2a*/
+
+.FemAge-21 { stroke: #d8adb2; fill: #ffffff } /*Two Female*/
+.FemAge-22 { stroke: #9f3f49; fill: #ffffff } /*Two Female*/
+
+.FemAge-31 { stroke: #E0C8CB; fill: #ffffff } /*Three Female*/
+.FemAge-32 { stroke: #BC8A8F; fill: #ffffff} /*Three Female*/
+.FemAge-33 { stroke: #783A40; fill: #ffffff } /*Three Female*/
+
+.FemAge-41 { stroke: #E0C8CB; fill: #ffffff } /*Four Female*/
+.FemAge-42 { stroke: #9f3f49; fill: #ffffff } /*Four Female*/
+.FemAge-43 { stroke:  #d57280; fill: #ffffff} /*Four Female*/
+.FemAge-44 { stroke: #783A40; fill: #ffffff } /*Four Female*/
+
+.FemAge-51 { stroke: #E0C8CB; fill: #ffffff } /*Five Female*/
+.FemAge-52 { stroke: #BC8A8F; fill: #ffffff  } /*Five Female*/
+.FemAge-53 { stroke:  #d57280; fill: #ffffff } /*Five Female*/
+.FemAge-54 { stroke: #9f3f49; fill: #ffffff } /*Five Female*/
+.FemAge-55 { stroke: #783A40; fill: #ffffff } /*Five Female*/
+
+.FemAge-61 { stroke: #E0C8CB; fill: #ffffff } /*Six Female*/
+.FemAge-62 { stroke: #BC8A8F; fill: #ffffff } /*Six Female*/
+.FemAge-63 { stroke:  #d57280; fill: #ffffff } /*Six Female*/
+.FemAge-64 { stroke: #9f3f49; fill: #ffffff } /*Six Female*/
+.FemAge-65 { stroke: #783A40; fill: #ffffff } /*Six Female*/
+.FemAge-66 { stroke: #A9A9A9; fill: #ffffff } /*Six Female*/
+
+.FemAge-71 { stroke: #ECDEE0; fill: #ffffff } /*Seven Female*/
+.FemAge-72 { stroke: #BC8A8F; fill: #ffffff } /*Seven Female*/
+.FemAge-73 { stroke:  #d57280; fill: #ffffff } /*Seven Female*/
+.FemAge-74 { stroke: #9f3f49; fill: #ffffff } /*Seven Female*/
+.FemAge-75 { stroke: #783A40; fill: #ffffff } /*Seven Female*/
+.FemAge-76 { stroke: #A9A9A9; fill: #ffffff }  /*Seven Female*/
+.FemAge-77 { stroke: #545454; fill: #ffffff } /*Seven Female*/
+
+
+
+/* Age Classes Male 2b*/
+
+.MalAge-21 { stroke: #c8d7db; fill: #ffffff } /*Two Male*/
+.MalAge-22 { stroke: #7399ab; fill: #ffffff } /*Two Male*/
+
+.MalAge-31 { stroke: #cedee7; fill: #ffffff } /*Three Male*/
+.MalAge-32 { stroke: #7399ab; fill: #ffffff } /*Three Male*/
+.MalAge-33 { stroke: #3c5464; fill: #ffffff } /*Three Male*/
+
+.MalAge-41 { stroke: #cedee7; fill: #ffffff } /*Four Male*/
+.MalAge-42 { stroke: #85b2c2; fill: #ffffff } /*Four Male*/
+.MalAge-43 { stroke: #618193; fill: #ffffff } /*Four Male*/
+.MalAge-44 { stroke: #3c5464; fill: #ffffff} /*Four Male*/
+
+.MalAge-51 { stroke: #cedee7; fill: #ffffff } /*Five Male*/
+.MalAge-52 { stroke: #91becc; fill: #ffffff } /*Five Male*/
+.MalAge-53 { stroke: #7399ab; fill: #ffffff } /*Five Male*/
+.MalAge-54 { stroke: #577587; fill: #ffffff } /*Five Male*/
+.MalAge-55 { stroke: #3c5464; fill: #ffffff } /*Five Male*/
+
+.MalAge-61 { stroke: #cedee7; fill: #ffffff } /*Six Male*/
+.MalAge-62 { stroke: #91becc; fill: #ffffff } /*Six Male*/
+.MalAge-63 { stroke: #7399ab; fill: #ffffff } /*Six Male*/
+.MalAge-64 { stroke: #577587; fill: #ffffff } /*Six Male*/
+.MalAge-65 { stroke: #3c5464; fill: #ffffff } /*Six Male*/
+.MalAge-66 { stroke: #102A3B; fill: #ffffff } /*Six Male*/
+
+.MalAge-71 { stroke: #cedee7; fill: #ffffff } /*Seven Male*/
+.MalAge-72 { stroke: #91becc; fill: #ffffff } /*Seven Male*/
+.MalAge-73 { stroke: #7399ab; fill: #ffffff } /*Seven Male*/
+.MalAge-74 { stroke: #577587; fill: #ffffff } /*Seven Male*/
+.MalAge-75 { stroke: #3c5464; fill: #ffffff } /*Seven Male*/
+.MalAge-76 { stroke: #A9A9A9; fill: #ffffff }  /*Seven Male*/
+.MalAge-77 { stroke: #545454; fill: #ffffff } /*Seven Male*/
+
+
+
+/* Age Classe Both 2c*/
+
+.Age-21 { stroke: #91a983; fill: #ffffff } /*Two Age class*/
+.Age-22 { stroke: #426b4b; fill: #ffffff } /*Two Age class*/
+
+.Age-31 { stroke: #e0ebca; fill: #ffffff } /*Three Age class*/
+.Age-32 { stroke: #6a8961; fill: #ffffff } /*Three Age class*/
+.Age-33 { stroke: #072e2c; fill: #ffffff} /*Three Age class*/
+
+.Age-41 { stroke: #e0ebca; fill: #ffffff } /*Four Age class*/
+.Age-42 { stroke: #91a983; fill: #ffffff } /*Four Age class*/
+.Age-43 { stroke: #426b4b; fill: #ffffff } /*Four Age class*/
+.Age-44 { stroke: #072e2c; fill: #ffffff } /*Four Age class*/
+
+.Age-51 { stroke: #e0ebca; fill: #ffffff } /*Five Age class*/
+.Age-52 { stroke: #a3b995; fill: #ffffff } /*Five Age class*/
+.Age-53 { stroke: #6a8961; fill: #ffffff } /*Five Age class*/
+.Age-54 { stroke: #305b42; fill: #ffffff } /*Five Age class*/
+.Age-55 { stroke: #072e2c; fill: #ffffff } /*Five Age class*/
+
+.Age-61 { stroke: #e0ebca; fill: #ffffff } /*Six Age class*/
+.Age-62 { stroke: #a3b995; fill: #ffffff  } /*Six Age class*/
+.Age-63 { stroke: #6a8961; fill: #ffffff } /*Six Age class*/
+.Age-64 { stroke: #305b42; fill: #ffffff } /*Six Age class*/
+.Age-65 { stroke: #072e2c; fill: #ffffff } /*Six Age class*/
+.Age-66 { stroke: #A9A9A9; fill: #ffffff } /*Six Age class*/
+
+.Age-71 { stroke: #e0ebca; fill: #ffffff } /*Seven Age class*/
+.Age-72 { stroke: #a3b995; fill: #ffffff } /*Seven Age class*/
+.Age-73 { stroke: #6a8961; fill: #ffffff } /*Seven Age class*/
+.Age-74 { stroke: #305b42; fill: #ffffff } /*Seven Age class*/
+.Age-75 { stroke: #072e2c; fill: #ffffff } /*Seven Age class*/
+.Age-76 { stroke: #A9A9A9; fill: #ffffff }  /*Seven Age class*/
+.Age-77 { stroke: #545454; fill: #ffffff	} /*Seven Age class*/
+
+
+
+/* Category 3*/
+
+.Cate-21 { stroke: #bf7a1d; fill: #ffffff } /*Two Objects/ Category*/
+
+.Cate-21 { stroke: #bf7a1d; fill: #ffffff } /*Two Objects/ Category*/
+.Cate-22 { stroke: #722442; fill: #ffffff } /*Two Objects/ Category*/
+
+.Cate-31 { stroke: #bf7a1d; fill: #ffffff } /*Three Objects/ Category*/
+.Cate-32 { stroke: #722442; fill: #ffffff } /*Three Objects/ Category*/
+.Cate-33 { stroke: #9cb097; fill: #ffffff } /*Three Objects/ Category*/
+
+.Cate-41 { stroke: #bf7a1d; fill: #ffffff }  /*Four Objects/ Category*/
+.Cate-42 { stroke: #722442; fill: #ffffff }  /*Four Objects/ Category*/
+.Cate-43 { stroke: #9cb097; fill: #ffffff } /*Four Objects/ Category*/
+.Cate-44 { stroke: #05304a; fill: #ffffff } /*Four Objects/ Category*/
+
+.Cate-51 { stroke: #bf7a1d; fill: #ffffff } /*Five Objects/ Category*/
+.Cate-52 { stroke: #722442; fill: #ffffff } /*Five Objects/ Category*/
+.Cate-53 { stroke: #9cb097; fill: #ffffff } /*Five Objects/ Category*/
+.Cate-54 { stroke: #05304a; fill: #ffffff } /*Five Objects/ Category*/
+.Cate-55 { stroke: #c3a579; fill: #ffffff } /*Five Objects/ Category*/
+
+.Cate-61 { stroke: #bf7a1d; fill: #ffffff } /*Six Objects/ Category*/
+.Cate-62 { stroke: #722442; fill: #ffffff } /*Six Objects Category*/
+.Cate-63 { stroke: #9cb097; fill: #ffffff } /*Six Objects Category*/
+.Cate-64 { stroke: #05304a; fill: #ffffff } /*Six Objects Category*/
+.Cate-65 { stroke: #c3a579; fill: #ffffff } /*Six Objects Category*/
+.Cate-66 { stroke: #ded6cc; fill: #ffffff } /*Six Objects Category*/
+
+.Cate-extra1 { stroke: #e3bd8a; fill: #ffffff } /*Three Objects/ Category*/
+.Cate-extra2 { stroke: #a17284; fill: #ffffff } /*Three Objects/ Category*/
+.Cate-extra3 { stroke: #d4e3d1; fill: #ffffff } /*Three Objects/ Category*/
+.Cate-extra4 { stroke: #587587; fill: #ffffff }  /*Four Objects/ Category*/
+.Cate-extra5 { stroke: #c7bcab; fill: #ffffff }  /*Four Objects/ Category*/
+.Cate-extra6 { stroke: #857f76; fill: #ffffff } /*Four Objects/ Category*/
+
+
+
+
+/* Diverging 4*/
+
+.Div-21 { stroke: #BB8233; fill: #ffffff } /*Two Diverging*/
+.Div-22 { stroke: #2E866E; fill: #ffffff } /*Two Diverging*/
+
+.Div-31 { stroke: #BB8233; fill: #ffffff } /*Three Diverging*/
+.Div-32 { stroke: #DCDADB; fill: #ffffff } /*Three Diverging*/
+.Div-33 { stroke: #2E866E; fill: #ffffff } /*Three Diverging*/
+
+.Div-41 { stroke: #BB8233; fill: #ffffff }  /*Four Diverging*/
+.Div-42 { stroke: #E8D5BB; fill: #ffffff }  /*Four Diverging*/
+.Div-43 { stroke: #B0DCD0; fill: #ffffff } /*Four Diverging*/
+.Div-44 { stroke: #2E866E; fill: #ffffff } /*Four Diverging*/
+
+.Div-51 { stroke: #BB8233; fill: #ffffff } /*Five Diverging*/
+.Div-52 { stroke: #E8D5BB; fill: #ffffff } /*Five Diverging*/
+.Div-53 { stroke: #DCDADB; fill: #ffffff } /*Five Diverging*/
+.Div-54 { stroke: #B0DCD0; fill: #ffffff }  /*Five Diverging*/
+.Div-55 { stroke: #2E866E; fill: #ffffff } /*Five Diverging*/
+
+
+
+/* For Differences */
+
+/* Gender 1a/b/c*/
+
+.MalGend4 { stroke: #9fb6c4; fill: #ffffff }
+
+.FemGend4 { stroke: #ba848a; fill: #ffffff }
+
+.Age4 { stroke: #c3cfbc; fill: #ffffff }
+
+
+
+/* Age Classe Female 2a*/
+
+.FemAge-214 { stroke: #f2d8db; fill: #ffffff} /*Two Female*/
+.FemAge-224 { stroke: #9f3f49; fill: #ffffff } /*Two Female*/
+
+
+
+/* Age Classes Male 2b*/
+
+.MalAge-214 { stroke: #e6eced; fill: #ffffff} /*Two Male*/
+.MalAge-224 { stroke: #7399ab; fill: #ffffff } /*Two Male*/
+
+
+
+
+/* Age Classe Both 2c*/
+
+.Age-214 { stroke: #c1d4b6; fill: #ffffff} /*Two Age class*/
+.Age-224 { stroke: #78967f; fill: #ffffff} /*Two Age class*/
+
+
+
+
+/* Category 3*/
+
+
+
+.Cate-214 { stroke: #cf9d5b; fill: #ffffff } /*Two Objects/ Category*/
+.Cate-224 { stroke: #a67789; fill: #ffffff  } /*Two Objects/ Category*/
+
+
+
+
+
+/* Diverging 4*/
+
+.Div-214 { stroke: #c7a77b; fill: #ffffff } /*Two Diverging*/
+.Div-224 { stroke: #74a698; fill: #ffffff } /*Two Diverging*/
+
