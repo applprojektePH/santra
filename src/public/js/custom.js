@@ -1,9 +1,13 @@
 $( document ).ready(function() {
-         $(".accordion-collapse").collapse();
-    $('#buttonsubmitformdraft').click(function(){
+    $(".accordion-collapse").collapse();
+    $('#collapseFilterbtn').click(function() {
+        $('#collapseFilter').collapse('toggle');
+    });
+    $('.collapseFilter').collapse();
+    $('#buttonsubmitformdraft').click(function () {
         $('#form-status-input').attr('value', '10');
     });
-    $('#buttonsubmitform').click(function(){
+    $('#buttonsubmitform').click(function () {
         $('#form-status-input').attr('value', '1');
     });
     //     var maxChar = parseInt($(".textarea-js").attr("maxlength"));
@@ -31,8 +35,8 @@ $( document ).ready(function() {
     /*add field*/
     //Clone the hidden element and shows it
     let count = 0;
-    $('.add-one').click(function(){
-        if (count<=0){
+    $('.add-one').click(function () {
+        if (count <= 0) {
             $('.dynamic-element').first().clone().appendTo('.dynamic-stuff').show();
             attach_delete();
             $('.add-one').addClass('hidden');
@@ -42,16 +46,16 @@ $( document ).ready(function() {
              $('.add-one').addClass('hidden');
            count=count-1;
          }*/
-        count ++;
+        count++;
     });
 
 //Attach functionality to delete buttons
-    function attach_delete(){
+    function attach_delete() {
         $('.delete').off();
-        $('.delete').click(function(){
+        $('.delete').click(function () {
             $(this).closest('.form-group').remove();
             $('.add-one').removeClass('hidden');
-            count --;
+            count--;
         });
     };
     /*$('.btn-delete-js').click(function(){
@@ -116,7 +120,7 @@ $( document ).ready(function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 var htmlPreview =
                     '<i style="font-size: 18px;" class="fas fa-file-alt"></i>' +
                     '<p>' + input.files[0].name + '</p>';
@@ -139,23 +143,23 @@ $( document ).ready(function() {
         $('.remove-preview').removeClass('hidden');
     }
 
-    $(".dropzone").change(function() {
+    $(".dropzone").change(function () {
         readFile(this);
     });
 
-    $('.dropzone-wrapper').on('dragover', function(e) {
+    $('.dropzone-wrapper').on('dragover', function (e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).addClass('dragover');
     });
 
-    $('.dropzone-wrapper').on('dragleave', function(e) {
+    $('.dropzone-wrapper').on('dragleave', function (e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).removeClass('dragover');
     });
 
-    $('.remove-preview').on('click', function() {
+    $('.remove-preview').on('click', function () {
         var boxZone = $(this).parents('.preview-zone').find('.box-body');
         var previewZone = $(this).parents('.preview-zone');
         var dropzone = $(this).parents('.form-group').find('.dropzone');
@@ -163,7 +167,7 @@ $( document ).ready(function() {
         previewZone.addClass('hidden');
         reset(dropzone);
     });
-    $(".search-btn-js").click(function() {
+    $(".search-btn-js").click(function () {
 
         $("body,html").animate(
             {
@@ -177,10 +181,10 @@ $( document ).ready(function() {
 
     /*add class mobile*/
     let showChar = 300;
-    $(window).resize(function() {
+    $(window).resize(function () {
 
         // This will fire each time the window is resized:
-        if($(window).width() >= 1024) {
+        if ($(window).width() >= 1024) {
             // if larger or equal
 
             $('#content').removeClass('mobile');
@@ -247,16 +251,14 @@ $( document ).ready(function() {
     */
 
 
-
-    $('#submitform').click(function() {
-        $("#accordionForm").find(".accordion-item").each(function() {
-            $(this).find("input, select, textarea").filter('[required]').each(function() {
-                if (($(this).val() == "")||($(this).val() == null)) {
+    $('#submitform').click(function () {
+        $("#accordionForm").find(".accordion-item").each(function () {
+            $(this).find("input, select, textarea").filter('[required]').each(function () {
+                if (($(this).val() == "") || ($(this).val() == null)) {
                     let current = $(this).closest(".accordion-collapse").prev();
                     current.addClass('required-header');
                     //alert($(this).val());
-                }
-                else{
+                } else {
                     let current = $(this).closest(".accordion-collapse").prev();
                     current.removeClass('required-header');
                 }
@@ -265,20 +267,18 @@ $( document ).ready(function() {
         });
     });
 
-    $(".custom-control-label").click(function() {
-        if ( $(this).attr('answer') == "open" ) {
+    $(".custom-control-label").click(function () {
+        if ($(this).attr('answer') == "open") {
             $(this).closest(".custom-control").nextAll(".inputHide").delay(300).slideDown("slow");
-        }
-        else{
+        } else {
             $(this).closest(".custom-control").nextAll(".inputHide").delay(300).slideUp("slow");
         }
     });
     $(".custom-control-select").on('change', function (e) {
         var valueSelected = $('option:selected', this).attr('answer');
-        if ( valueSelected == "open" ) {
+        if (valueSelected == "open") {
             $(this).closest(".custom-select-js").nextAll(".inputHide").delay(300).slideDown("slow");
-        }
-        else{
+        } else {
             $(this).closest(".custom-select-js").nextAll(".inputHide").delay(300).slideUp("slow");
         }
     });
@@ -299,25 +299,23 @@ $( document ).ready(function() {
     // });
 
 
-    // $("#accordionForm .accordion-item").find("input, select, textarea").focus(function() {
-    //     let current = $(this).closest(".accordion-collapse").prev();
-    //     current.removeClass('required-header');
-    // });
-    $("#inlineCheckbox5").click(function(){
+    $("#accordionForm .accordion-item").find("input, select, textarea").focus(function() {
+        let current = $(this).closest(".accordion-collapse").prev();
+        current.removeClass('required-header');
+    });
+    $("#inlineCheckbox5").click(function () {
         var paramChangeBoxes = $("input:checkbox.form-check-input-js");
         if ($(this).is(":checked")) {
             paramChangeBoxes.attr("disabled", "disabled");
             $(".form-check-input-js").prop("checked", false);
-        }
-        else {
+        } else {
             $(".form-check-input-js").removeAttr("disabled");
         }
     });
 
-    if ((location.pathname.split("/")[1]) !== ""){
+    if ((location.pathname.split("/")[1]) !== "") {
         $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
-    }
-    else {
+    } else {
         $('nav li.home-link a').addClass('active');
     }
     $('.nav-tabs .nav-item a').on('click', function (e) {

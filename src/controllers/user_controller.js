@@ -1,11 +1,12 @@
 let db = require('../libs/db');
 const mysql = require('mysql');
+let CONSTANTS = require("../libs/constants");
 const pool  = mysql.createPool({
     connectionLimit : 10,
-    host            : 'localhost',
-    user            : 'admin',
-    password        : 'mysecretpassword',
-    database        : 'santra'
+    host            : CONSTANTS.SETTINGS.DB.HOST,
+    user            : CONSTANTS.SETTINGS.DB.USERNAME,
+    password        : CONSTANTS.SETTINGS.DB.PASSWORD,
+    database        : CONSTANTS.SETTINGS.DBNAME.NAME
 })
 module.exports = function (models) {
 
