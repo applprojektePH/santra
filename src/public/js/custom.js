@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    
     $(".accordion-collapse").collapse();
     $('#collapseFilterbtn').click(function() {
         $('#collapseFilter').collapse('toggle');
@@ -10,6 +11,100 @@ $( document ).ready(function() {
     $('#buttonsubmitform').click(function () {
         $('#form-status-input').attr('value', '1');
     });
+        $(".excel-export-btn").click(function(e){
+            var table = $(".table-works");
+            if(table && table.length){
+                $(table).table2excel({
+                    exclude: ".noExl",
+                    name: "Excel Document Name",
+                    filename: "SW-Anträge" + ".xls",
+                    fileext: ".xls",
+                    exclude_img: true,
+                    exclude_links: false,
+                    exclude_inputs: true
+                });
+            }
+        });
+
+        $(".table-works").DataTable(
+            {
+                "language": {
+                "sEmptyTable":   	"Keine Daten in der Tabelle vorhanden",
+                "sInfo":         	"_START_ bis _END_ von _TOTAL_ Einträgen",
+                "sInfoEmpty":    	"0 bis 0 von 0 Einträgen",
+                "sInfoFiltered": 	"(gefiltert von _MAX_ Einträgen)",
+                "sInfoPostFix":  	"",
+                "sInfoThousands":  	".",
+                "sLengthMenu":   	"_MENU_ Einträge anzeigen",
+                "sLoadingRecords": 	"Wird geladen...",
+                "sProcessing":   	"Bitte warten...",
+                "sSearch":       	"Suchen",
+                "sZeroRecords":  	"Keine Einträge vorhanden.",
+                "oPaginate": {
+                "sFirst":    	"Erste",
+                    "sPrevious": 	"Zurück",
+                    "sNext":     	"Nächste",
+                    "sLast":     	"Letzte"
+            },
+                "oAria": {
+                "sSortAscending":  ": aktivieren, um Spalte aufsteigend zu sortieren",
+                    "sSortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
+            },
+                    "paginate": {
+                        next: "&#187;",
+                        previous: "&#171;"
+                    }
+                },
+                columnDefs: [{
+                    "type": "html",
+                    "targets": "_all"
+                }],
+                stateSave: true,
+                "processing": true,
+                "serverSide": true,
+                "animation": true,
+                page : "all",
+                order: [
+                    [1, "desc"],
+                    [0, "asc"]
+                ],
+                //
+                // ajax: function (data, callback, settings) {
+                //     let initialLoad = true;
+                //     if (initialLoad) {
+                //         initialLoad = false;
+                //         callback({data: []}); // don't fire ajax, just return empty set
+                //         return;
+                //     }
+                //     // Ajax will now only fire programmatically, via ajax.reload()
+                //     $.getJSON("/user", function (data) {
+                //         callback(data);
+                //     });
+                // },
+                // columns: [{
+                //     name: "title",
+                //     data: 0
+                // }, {
+                //     name: "year",
+                //     data: 1
+                // }, {
+                //     name: "author",
+                //     data: 2
+                // }, {
+                //     name: "thesis_type",
+                //     data: 3
+                // }, {
+                //     name: "download_link",
+                //     data: 5,
+                //     class: "hidden"
+                // },{
+                //     name: "",
+                //     data: null, "defaultContent": ""
+                // }]
+
+            },
+        );
+
     //     var maxChar = parseInt($(".textarea-js").attr("maxlength"));
     //     $(".textarea-js[maxlength]").parent().find(".charleft").html(maxChar - $(this).val().length);
     //     var char = $(".textarea-js").val().length;
@@ -66,25 +161,69 @@ $( document ).ready(function() {
     })*/
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
-
+    (() => {
+        'use strict';
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
+        const forms = document.querySelectorAll('.needs-validation');
 
         // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                 //   event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+    //
+    // $('form').bootstrapValidator({
+    //     feedbackIcons: {
+    //         valid: 'glyphicon glyphicon-ok',
+    //         invalid: 'glyphicon glyphicon-remove',
+    //         validating: 'glyphicon glyphicon-refresh'
+    //     },
+    //     fields: {
+    //         firstName: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: 'The first name is required and cannot be empty'
+    //                 }
+    //             }
+    //         },
+    //         lastName: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: 'The last name is required and cannot be empty'
+    //                 }
+    //             }
+    //         },
+    //         email: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: 'The email address is required'
+    //                 },
+    //                 emailAddress: {
+    //                     message: 'The input is not a valid email address'
+    //                 }
+    //             }
+    //         },
+    //         gender: {
+    //             validators: {
+    //                 notEmpty: {
+    //                     message: 'The gender is required'
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     submitHandler: function(validator, form, submitButton) {
+    //         var fullName = [validator.getFieldElements('firstName').val(),
+    //             validator.getFieldElements('lastName').val()].join(' ');
+    //         alert('Hello ' + fullName);
+    //     }
+    // });
 
     // BACK-TO-TOP
     var back_to_top_button = ['<a href="#top" class="back-to-top"></a>'].join('');
@@ -250,8 +389,7 @@ $( document ).ready(function() {
         });
     */
 
-
-    $('#submitform').click(function () {
+    $('.submitformbtn').click(function () {
         $("#accordionForm").find(".accordion-item").each(function () {
             $(this).find("input, select, textarea").filter('[required]').each(function () {
                 if (($(this).val() == "") || ($(this).val() == null)) {

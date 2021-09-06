@@ -1,9 +1,8 @@
 label(for='form-author-firstname')
         | UserID*
 input#form-id.form-control(type='text' required='' name='userid' value="123")
-label(for='form-status-input')
-        | Status*
-input#form-status-input.form-control(type='text' required='' name='status')
+
+//input#form-status-input.form-control(type='text' required='' name='status')
 
 #accordionForm.accordion
                                                 .accordion-item
@@ -118,312 +117,312 @@ input#form-status-input.form-control(type='text' required='' name='status')
                                                                                                                 input#form-modul.form-control(type='text' required='' name='modulanlass')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
-                                                .accordion-item
-                                                        h2#headingTwo.accordion-header
-                                                                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo')
-                                                                        h3 Angaben zur Software
-                                                        #collapseTwo.accordion-collapse.collapse(aria-labelledby='headingTwo' data-bs-parent='#accordionForm')
-                                                                .accordion-body
-                                                                        label.form-label(for='validationTextarea') Anwendungs-/Lehr-/Lernszenario
-                                                                        small
-                                                                                | (Bitte beschreiben Sie kurz, in welchem Setting und welcher Art die Software
-                                                                                | eingesetzt werden soll)
-                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required='' name='szenario')
-                                                                        small.floatright.text-small-char
-                                                                                | Noch
-                                                                                span.charleft
-                                                                                |                                     Zeichen
-                                                                        .invalid-feedback
-                                                                                | Pflichtfeld
-                                                                        br
-                                                                        .row
-                                                                                .col-md-12.fields
-                                                                                        label(for='form-softwarename')
-                                                                                                | Name der Software*
-                                                                                        input#form-softwarename.form-control(type='text' required='' name='softwarename')
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .col-md-12.fields
-                                                                                        br
-                                                                                        label(for='form-softwarewebsite')
-                                                                                                | Webseite der Software*
-                                                                                        input#form-softwarewebsite.form-control(type='text' required='' name='softwarewebseite')
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .col-md-12.fields
-                                                                                        br
-                                                                                        label.form-label(for='validationTextarea') Version der Software*
-                                                                                        span
-                                                                                                | Handelt es sich um ein Update/&Auml;nderung eines bestehenden Paketes. Wenn
-                                                                                                | ja, welches?
-                                                                                        .custom-control.custom-radio
-                                                                                                input#customRadioDisabled2.custom-control-input(type='radio' value="no" name='softwareupdate' required='')
-                                                                                                label.custom-control-label(for='customRadioDisabled2' answer='no') Nein
-                                                                                        .custom-control.custom-radio
-                                                                                                input#customRadioDisabled1.custom-control-input(type='radio' value="yes" name='softwareupdate' required='')
-                                                                                                label.custom-control-label(for='customRadioDisabled1' answer='open') Ja
-                                                                                                .invalid-feedback
-                                                                                                        | Pflichtfeld
-                                                                                        .collapse.inputHide
-                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required='' name='softwareversionwelches')
-                                                                                                small.floatright.text-small-char
-                                                                                                        | Noch
-                                                                                                        span.charleft
-                                                                                                        |                                                 Zeichen
-                                                                                                .invalid-feedback
-                                                                                                        | Pflichtfeld
-                                                                        br
-                                                                        .row
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-lizenz')
-                                                                                                | Anzahl Lizenzen*
-                                                                                        input#form-lizenz.form-control(type='text' required='' name='lizenzenanzahl')
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-user')
-                                                                                                | Anzahl geplante Nutzer*innen*
-                                                                                        input#form-user.form-control(type='text' required='' name='nutzeranzahl')
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                        .row
-                                                                                .col-md-6.fields
-                                                                                        br
-                                                                                        label(for='form-lizenz')
-                                                                                                | Nutzungsdauer*
-                                                                                        .custom-select-js
-                                                                                                .custom-select-js
-                                                                                                        select.form-select.form-control.custom-control-select(required='' name='nutzungsdauer')
-                                                                                                                option(selected='' disabled='' value='') Auswahl oder Eingabe
-                                                                                                                option(value="1 Semester") 1 Semester
-                                                                                                                option(value="2 Semester")  2 Semester
-                                                                                                                option(value="3 bis 6 Semester")  3 bis 6 Semester
-                                                                                                                option.custom-control-input(name='radioInst' answer='open')
-                                                                                                                        | eigene Eingabe
-                                                                                                        .invalid-feedback
-                                                                                                                | Pflichtfeld
-                                                                                                .collapse.inputHide
-                                                                                                        br
-                                                                                                        input.form-control(type='text')
-                                                                                                        .invalid-feedback
-                                                                                                                | Pflichtfeld
-                                                                        br
-                                                .accordion-item
-                                                        h2#headingThree.accordion-header
-                                                                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseThree' aria-expanded='false' aria-controls='collapseThree')
-                                                                        h3 Angaben zur Nutzung
-                                                        #collapseThree.accordion-collapse.collapse(aria-labelledby='headingThree' data-bs-parent='#accordionForm')
-                                                                .accordion-body
-                                                                        .row
-                                                                                p Bitte erg&auml;nzen Sie die Angaben zum Betrieb der Software
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-bs')
-                                                                                                | Einsatz auf folgendem Betriebssystem*:
-                                                                                        select.form-select.form-control(required='' name='betriebssystem')
-                                                                                                option(selected='' disabled='' value='') Auswahl
-                                                                                                option(value="Windows") Windows
-                                                                                                option(value="Apple") Apple
-                                                                                                option(value="beide Betriebssysteme") beide Betriebssysteme
-                                                                                                option(value="Ich weiss es nicht") Ich weiss es nicht
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-browser')
-                                                                                                | Verwendung mit folgendem Browser*:
-                                                                                        .row
-                                                                                                .col-md-6
-                                                                                                        .form-check
-                                                                                                                label.form-check-label
-                                                                                                                        input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser')
-                                                                                                                        |  Microsoft Edge
-                                                                                                        .form-check
-                                                                                                                label.form-check-label
-                                                                                                                        input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser')
-                                                                                                                        |  Safari (Apple)
-                                                                                                .col-md-6
-                                                                                                        .form-check
-                                                                                                                label.form-check-label
-                                                                                                                        input#inlineCheckbox3.form-check-input.form-check-input-js(type='checkbox' value='Firefox' name='browser')
-                                                                                                                        |  Firefox
-                                                                                                        .form-check
-                                                                                                                label.form-check-label
-                                                                                                                        input#inlineCheckbox4.form-check-input.form-check-input-js(type='checkbox' value='Chrome' name='browser')
-                                                                                                                        |  Chrome
-                                                                                                        .form-check
-                                                                                                                label.form-check-label
-                                                                                                                        input#inlineCheckbox5.form-check-input.check-alldisabled(type='checkbox' value='weissnicht' name='browser')
-                                                                                                                        |  Ich weiss es nicht
-                                                                                                .form-check.form-check-inline
-                                                                                                        label.form-check-label
-                                                                                                                .invalid-feedback
-                                                                                                                        | Pflichtfeld
-                                                                                .col-md-6.fields
-                                                                                        br
-                                                                                        label(for='form-browser')
-                                                                                                | Wie soll die Software zur Verf&uuml;gung gestellt
-                                                                                                | werden*?
-                                                                                        select.form-select.form-control(required='' name='softwareverfuegung')
-                                                                                                option(selected='' disabled='' value='') Auswahl
-                                                                                                option(value="Softwarecenter/Softwarekiosk") Softwarecenter/Softwarekiosk
-                                                                                                option(value="Softwaredownloadseite") Softwaredownloadseite
-                                                                                                option(value="Ich weiss es nicht") Ich weiss es nicht
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                        br
-                                                                        .form-group
-                                                                                label
-                                                                                        | W&auml;re die Software auch f&uuml;r ein anderes Institut der
-                                                                                        | PH
-                                                                                        | interessant*? Wenn ja, warum und welche:
-                                                                                .custom-control.custom-radio
-                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="nein" required='' name='softwareinteresse')
-                                                                                        label.custom-control-label(for='customRadioDisabled2' answer='no') Nein
-                                                                                .custom-control.custom-radio
-                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="ja" required='' name='softwareinteresse')
-                                                                                        label.custom-control-label(for='customRadioDisabled1' answer='open') Ja
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .collapse.inputHide
-                                                                                        .card.card-body
-                                                                                                input#form-institute.form-control(type='text' required='' name='softwareinstitut')
-                                                                        br
-                                                                        .form-group
-                                                                                label(for='form-inst')
-                                                                                        | W&auml;re die Software auch f&uuml;r andere Hochschulen
-                                                                                        | interessant*? Wenn
-                                                                                        | ja, warum und welche:
-                                                                                .custom-control.custom-radio
-                                                                                        input#customRadioDisabled3.custom-control-input(type='radio' value="nein" required='' name='softwarehochschinteresse')
-                                                                                        label.custom-control-label(for='customRadioDisabled3' answer='no') Nein
-                                                                                .custom-control.custom-radio
-                                                                                        input#customRadioDisabled4.custom-control-input(type='radio' value="ja" required='' name='softwarehochschinteresse')
-                                                                                        label.custom-control-label(for='customRadioDisabled4' answer='open') Ja
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .collapse.inputHide
-                                                                                        .card.card-body
-                                                                                                input#form-hs.form-control(type='text' required='' name='softwarehochschule')
-                                                                        br
-                                                .accordion-item
-                                                        h2#headingFour.accordion-header
-                                                                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseFour' aria-expanded='false' aria-controls='collapseFour')
-                                                                        h3 Lizenzierung
-                                                        #collapseFour.accordion-collapse.collapse(aria-labelledby='headingFour' data-bs-parent='#accordionForm')
-                                                                .accordion-body
-                                                                        .row
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-bs')
-                                                                                                | F&uuml;r welche Institution*
-                                                                                        select.form-select.form-control(required='' name='lizenzinstitution')
-                                                                                                option(selected='' disabled='' value='') Auswahl
-                                                                                                option(value='Pädagogische Hochschule') P&auml;dagogische Hochschule
-                                                                                                option(value='FHNW') FHNW
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-type')
-                                                                                                | Art der Lizenz*
-                                                                                        select.form-select.form-control(required='' name='lizenzart')
-                                                                                                option(selected='' disabled='' value='') Auswahl
-                                                                                                option(value='Cloude/Abo')  Cloude/Abo
-                                                                                                option(value='Cloude/Abo &amp; Support/Storage')  Cloude/Abo &amp; Support/Storage
-                                                                                                option(value='Einmalkauf')  Einmalkauf
-                                                                                                option(value='Einmalkauf &amp; Support')  Einmalkauf &amp; Support
-                                                                                                option(value='andere')  andere
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                .accordion-item
-                                                        h2#headingFive.accordion-header
-                                                                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseFive' aria-expanded='false' aria-controls='collapseFour')
-                                                                        h3 Kosten
-                                                        #collapseFive.accordion-collapse.collapse(aria-labelledby='headingFive' data-bs-parent='#accordionForm')
-                                                                .accordion-body
-                                                                        .row
-                                                                                .col-md-6.fields
-                                                                                        label(for='form-type')
-                                                                                                | Kosten Lizenzmodell*
-                                                                                        select.form-select.form-control(required='' name='lizenzkosten')
-                                                                                                option(selected='' disabled='' value='') Auswahl
-                                                                                                option(value='Freeware') Freeware
-                                                                                                option(value='Jährlich') J&auml;hrlich
-                                                                                                option(value='Einmalig') Einmalig
-                                                                                                option(value='Einmalig/Abo') Einmalig/Abo
-                                                                                                option(value='Person- o. Arbeitsplatzgebunden') Person- o. Arbeitsplatzgebunden
-                                                                                        .invalid-feedback
-                                                                                                | Pflichtfeld
-                                                .accordion-item
-                                                        h2#headingSix.accordion-header
-                                                                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseSix' aria-expanded='false' aria-controls='collapseFour')
-                                                                        h3 Zus&auml;tzliche Angaben
-                                                        #collapseSix.accordion-collapse.collapse(aria-labelledby='headingFive' data-bs-parent='#accordionForm')
-                                                                .accordion-body
-                                                                        .row
-                                                                                .row
-                                                                                        .col-md-12.fields
-                                                                                                label(for='form-softwarewebsite')
-                                                                                                        | Vergleichbarkeit*
-                                                                                                small
-                                                                                                        | (Angabe der bestehenden Software oder keine angeben. Welche
-                                                                                                        | andere Software
-                                                                                                        | w&auml;re allenfalls auch zweckdienlich resp. mit welcher Software
-                                                                                                        | arbeite ich
-                                                                                                        | bislang prim&auml;r? Welches sind die Vorteile der gew&uuml;nschten
-                                                                                                        | Software?)
-                                                                                                input#form-softwarecompare.form-control(type='text' required='' name='vergleichbarkeit')
-                                                                                                .invalid-feedback
-                                                                                                        | Pflichtfeld
-                                                                                        .col-md-6.fields
-                                                                                                br
-                                                                                                label(for='form-support')
-                                                                                                        | Support durch*
-                                                                                                select.form-select.form-control(required='' name='support')
-                                                                                                        option(selected='' disabled='' value='') Auswahl
-                                                                                                        option(value='Institut') Institut
-                                                                                                        option(value='FHNW') FHNW
-                                                                                                        option(value='Ich weiss es nicht') Ich weiss es nicht
-                                                                                                .invalid-feedback
-                                                                                                        | Pflichtfeld
-                                                                                        .col-md-12.fields
-                                                                                                .form-group
-                                                                                                        br
-                                                                                                        label(for='form-safedata')
-                                                                                                                | Rechtliche Frage: Datenspeicherung in
-                                                                                                                | einer Cloud?*
-                                                                                                                | Wenn nein, wo werden Daten gespeichert:
-                                                                                                        .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled6.custom-control-input(type='radio' name='cloud' value="ja" required='')
-                                                                                                                label.custom-control-label(for='customRadioDisabled6' answer='ja') Ja
-                                                                                                        .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled5.custom-control-input(type='radio' name='cloud' value="nein" required='')
-                                                                                                                label.custom-control-label(for='customRadioDisabled5' answer='open') Nein
-                                                                                                                .invalid-feedback
-                                                                                                                        | Pflichtfeld
-                                                                                                        .collapse.inputHide
-                                                                                                                .card.card-body
-                                                                                                                        input#form-safety.form-control(type='text' required='')
-                                                                                .col-md-12.fields
-                                                                                        .form-group
-                                                                                                br
-                                                                                                label(for='form-productowner') Product Owner*
-                                                                                                small
-                                                                                                        | (Wer ist f&uuml;r die Software verantwortlich? Besteller*in,
-                                                                                                        | Professur)
-                                                                                                input#form-productowner.form-control(type='text' required='')
-                                                                                                .invalid-feedback
-                                                                                                        | Pflichtfeld
-                                                                                                br
-                                                                                                label.form-label(for='validationTextarea') Bemerkungen
-                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7')
-                                                                                                .row
-                                                                                                        .col-md-6.fields
-                                                                                                                br
-                                                                                                                label(for='form-data')
-                                                                                                                        | Datum*
-                                                                                                                .input-group.date.date-picker(data-provide='datepicker')
-                                                                                                                        .input-group-addon
-                                                                                                                        input.form-control(type='text' placeholder='Datum auswählen' required='')
-                                                                                                                        .invalid-feedback
-                                                                                                                                | Pflichtfeld
+                                                //.accordion-item
+                                                //        h2#headingTwo.accordion-header
+                                                //                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo')
+                                                //                        h3 Angaben zur Software
+                                                //        #collapseTwo.accordion-collapse.collapse(aria-labelledby='headingTwo' data-bs-parent='#accordionForm')
+                                                //                .accordion-body
+                                                //                        label.form-label(for='validationTextarea') Anwendungs-/Lehr-/Lernszenario
+                                                //                        small
+                                                //                                | (Bitte beschreiben Sie kurz, in welchem Setting und welcher Art die Software
+                                                //                                | eingesetzt werden soll)
+                                                //                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required='' name='szenario')
+                                                //                        small.floatright.text-small-char
+                                                //                                | Noch
+                                                //                                span.charleft
+                                                //                                |                                     Zeichen
+                                                //                        .invalid-feedback
+                                                //                                | Pflichtfeld
+                                                //                        br
+                                                //                        .row
+                                                //                                .col-md-12.fields
+                                                //                                        label(for='form-softwarename')
+                                                //                                                | Name der Software*
+                                                //                                        input#form-softwarename.form-control(type='text' required='' name='softwarename')
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .col-md-12.fields
+                                                //                                        br
+                                                //                                        label(for='form-softwarewebsite')
+                                                //                                                | Webseite der Software*
+                                                //                                        input#form-softwarewebsite.form-control(type='text' required='' name='softwarewebseite')
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .col-md-12.fields
+                                                //                                        br
+                                                //                                        label.form-label(for='validationTextarea') Version der Software*
+                                                //                                        span
+                                                //                                                | Handelt es sich um ein Update/&Auml;nderung eines bestehenden Paketes. Wenn
+                                                //                                                | ja, welches?
+                                                //                                        .custom-control.custom-radio
+                                                //                                                input#customRadioDisabled2.custom-control-input(type='radio' value="no" name='softwareupdate' required='')
+                                                //                                                label.custom-control-label(for='customRadioDisabled2' answer='no') Nein
+                                                //                                        .custom-control.custom-radio
+                                                //                                                input#customRadioDisabled1.custom-control-input(type='radio' value="yes" name='softwareupdate' required='')
+                                                //                                                label.custom-control-label(for='customRadioDisabled1' answer='open') Ja
+                                                //                                                .invalid-feedback
+                                                //                                                        | Pflichtfeld
+                                                //                                        .collapse.inputHide
+                                                //                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required='' name='softwareversionwelches')
+                                                //                                                small.floatright.text-small-char
+                                                //                                                        | Noch
+                                                //                                                        span.charleft
+                                                //                                                        |                                                 Zeichen
+                                                //                                                .invalid-feedback
+                                                //                                                        | Pflichtfeld
+                                                //                        br
+                                                //                        .row
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-lizenz')
+                                                //                                                | Anzahl Lizenzen*
+                                                //                                        input#form-lizenz.form-control(type='text' required='' name='lizenzenanzahl')
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-user')
+                                                //                                                | Anzahl geplante Nutzer*innen*
+                                                //                                        input#form-user.form-control(type='text' required='' name='nutzeranzahl')
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                        .row
+                                                //                                .col-md-6.fields
+                                                //                                        br
+                                                //                                        label(for='form-lizenz')
+                                                //                                                | Nutzungsdauer*
+                                                //                                        .custom-select-js
+                                                //                                                .custom-select-js
+                                                //                                                        select.form-select.form-control.custom-control-select(required='' name='nutzungsdauer')
+                                                //                                                                option(selected='' disabled='' value='') Auswahl oder Eingabe
+                                                //                                                                option(value="1 Semester") 1 Semester
+                                                //                                                                option(value="2 Semester")  2 Semester
+                                                //                                                                option(value="3 bis 6 Semester")  3 bis 6 Semester
+                                                //                                                                option.custom-control-input(name='radioInst' answer='open')
+                                                //                                                                        | eigene Eingabe
+                                                //                                                        .invalid-feedback
+                                                //                                                                | Pflichtfeld
+                                                //                                                .collapse.inputHide
+                                                //                                                        br
+                                                //                                                        input.form-control(type='text')
+                                                //                                                        .invalid-feedback
+                                                //                                                                | Pflichtfeld
+                                                //                        br
+                                                //.accordion-item
+                                                //        h2#headingThree.accordion-header
+                                                //                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseThree' aria-expanded='false' aria-controls='collapseThree')
+                                                //                        h3 Angaben zur Nutzung
+                                                //        #collapseThree.accordion-collapse.collapse(aria-labelledby='headingThree' data-bs-parent='#accordionForm')
+                                                //                .accordion-body
+                                                //                        .row
+                                                //                                p Bitte erg&auml;nzen Sie die Angaben zum Betrieb der Software
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-bs')
+                                                //                                                | Einsatz auf folgendem Betriebssystem*:
+                                                //                                        select.form-select.form-control(required='' name='betriebssystem')
+                                                //                                                option(selected='' disabled='' value='') Auswahl
+                                                //                                                option(value="Windows") Windows
+                                                //                                                option(value="Apple") Apple
+                                                //                                                option(value="beide Betriebssysteme") beide Betriebssysteme
+                                                //                                                option(value="Ich weiss es nicht") Ich weiss es nicht
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-browser')
+                                                //                                                | Verwendung mit folgendem Browser*:
+                                                //                                        .row
+                                                //                                                .col-md-6
+                                                //                                                        .form-check
+                                                //                                                                label.form-check-label
+                                                //                                                                        input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser')
+                                                //                                                                        |  Microsoft Edge
+                                                //                                                        .form-check
+                                                //                                                                label.form-check-label
+                                                //                                                                        input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser')
+                                                //                                                                        |  Safari (Apple)
+                                                //                                                .col-md-6
+                                                //                                                        .form-check
+                                                //                                                                label.form-check-label
+                                                //                                                                        input#inlineCheckbox3.form-check-input.form-check-input-js(type='checkbox' value='Firefox' name='browser')
+                                                //                                                                        |  Firefox
+                                                //                                                        .form-check
+                                                //                                                                label.form-check-label
+                                                //                                                                        input#inlineCheckbox4.form-check-input.form-check-input-js(type='checkbox' value='Chrome' name='browser')
+                                                //                                                                        |  Chrome
+                                                //                                                        .form-check
+                                                //                                                                label.form-check-label
+                                                //                                                                        input#inlineCheckbox5.form-check-input.check-alldisabled(type='checkbox' value='weissnicht' name='browser')
+                                                //                                                                        |  Ich weiss es nicht
+                                                //                                                .form-check.form-check-inline
+                                                //                                                        label.form-check-label
+                                                //                                                                .invalid-feedback
+                                                //                                                                        | Pflichtfeld
+                                                //                                .col-md-6.fields
+                                                //                                        br
+                                                //                                        label(for='form-browser')
+                                                //                                                | Wie soll die Software zur Verf&uuml;gung gestellt
+                                                //                                                | werden*?
+                                                //                                        select.form-select.form-control(required='' name='softwareverfuegung')
+                                                //                                                option(selected='' disabled='' value='') Auswahl
+                                                //                                                option(value="Softwarecenter/Softwarekiosk") Softwarecenter/Softwarekiosk
+                                                //                                                option(value="Softwaredownloadseite") Softwaredownloadseite
+                                                //                                                option(value="Ich weiss es nicht") Ich weiss es nicht
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                        br
+                                                //                        .form-group
+                                                //                                label
+                                                //                                        | W&auml;re die Software auch f&uuml;r ein anderes Institut der
+                                                //                                        | PH
+                                                //                                        | interessant*? Wenn ja, warum und welche:
+                                                //                                .custom-control.custom-radio
+                                                //                                        input#customRadioDisabled2.custom-control-input(type='radio' value="nein" required='' name='softwareinteresse')
+                                                //                                        label.custom-control-label(for='customRadioDisabled2' answer='no') Nein
+                                                //                                .custom-control.custom-radio
+                                                //                                        input#customRadioDisabled1.custom-control-input(type='radio' value="ja" required='' name='softwareinteresse')
+                                                //                                        label.custom-control-label(for='customRadioDisabled1' answer='open') Ja
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .collapse.inputHide
+                                                //                                        .card.card-body
+                                                //                                                input#form-institute.form-control(type='text' required='' name='softwareinstitut')
+                                                //                        br
+                                                //                        .form-group
+                                                //                                label(for='form-inst')
+                                                //                                        | W&auml;re die Software auch f&uuml;r andere Hochschulen
+                                                //                                        | interessant*? Wenn
+                                                //                                        | ja, warum und welche:
+                                                //                                .custom-control.custom-radio
+                                                //                                        input#customRadioDisabled3.custom-control-input(type='radio' value="nein" required='' name='softwarehochschinteresse')
+                                                //                                        label.custom-control-label(for='customRadioDisabled3' answer='no') Nein
+                                                //                                .custom-control.custom-radio
+                                                //                                        input#customRadioDisabled4.custom-control-input(type='radio' value="ja" required='' name='softwarehochschinteresse')
+                                                //                                        label.custom-control-label(for='customRadioDisabled4' answer='open') Ja
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .collapse.inputHide
+                                                //                                        .card.card-body
+                                                //                                                input#form-hs.form-control(type='text' required='' name='softwarehochschule')
+                                                //                        br
+                                                //.accordion-item
+                                                //        h2#headingFour.accordion-header
+                                                //                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseFour' aria-expanded='false' aria-controls='collapseFour')
+                                                //                        h3 Lizenzierung
+                                                //        #collapseFour.accordion-collapse.collapse(aria-labelledby='headingFour' data-bs-parent='#accordionForm')
+                                                //                .accordion-body
+                                                //                        .row
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-bs')
+                                                //                                                | F&uuml;r welche Institution*
+                                                //                                        select.form-select.form-control(required='' name='lizenzinstitution')
+                                                //                                                option(selected='' disabled='' value='') Auswahl
+                                                //                                                option(value='Pädagogische Hochschule') P&auml;dagogische Hochschule
+                                                //                                                option(value='FHNW') FHNW
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-type')
+                                                //                                                | Art der Lizenz*
+                                                //                                        select.form-select.form-control(required='' name='lizenzart')
+                                                //                                                option(selected='' disabled='' value='') Auswahl
+                                                //                                                option(value='Cloude/Abo')  Cloude/Abo
+                                                //                                                option(value='Cloude/Abo &amp; Support/Storage')  Cloude/Abo &amp; Support/Storage
+                                                //                                                option(value='Einmalkauf')  Einmalkauf
+                                                //                                                option(value='Einmalkauf &amp; Support')  Einmalkauf &amp; Support
+                                                //                                                option(value='andere')  andere
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //.accordion-item
+                                                //        h2#headingFive.accordion-header
+                                                //                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseFive' aria-expanded='false' aria-controls='collapseFour')
+                                                //                        h3 Kosten
+                                                //        #collapseFive.accordion-collapse.collapse(aria-labelledby='headingFive' data-bs-parent='#accordionForm')
+                                                //                .accordion-body
+                                                //                        .row
+                                                //                                .col-md-6.fields
+                                                //                                        label(for='form-type')
+                                                //                                                | Kosten Lizenzmodell*
+                                                //                                        select.form-select.form-control(required='' name='lizenzkosten')
+                                                //                                                option(selected='' disabled='' value='') Auswahl
+                                                //                                                option(value='Freeware') Freeware
+                                                //                                                option(value='Jährlich') J&auml;hrlich
+                                                //                                                option(value='Einmalig') Einmalig
+                                                //                                                option(value='Einmalig/Abo') Einmalig/Abo
+                                                //                                                option(value='Person- o. Arbeitsplatzgebunden') Person- o. Arbeitsplatzgebunden
+                                                //                                        .invalid-feedback
+                                                //                                                | Pflichtfeld
+                                                //.accordion-item
+                                                //        h2#headingSix.accordion-header
+                                                //                button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseSix' aria-expanded='false' aria-controls='collapseFour')
+                                                //                        h3 Zus&auml;tzliche Angaben
+                                                //        #collapseSix.accordion-collapse.collapse(aria-labelledby='headingFive' data-bs-parent='#accordionForm')
+                                                //                .accordion-body
+                                                //                        .row
+                                                //                                .row
+                                                //                                        .col-md-12.fields
+                                                //                                                label(for='form-softwarewebsite')
+                                                //                                                        | Vergleichbarkeit*
+                                                //                                                small
+                                                //                                                        | (Angabe der bestehenden Software oder keine angeben. Welche
+                                                //                                                        | andere Software
+                                                //                                                        | w&auml;re allenfalls auch zweckdienlich resp. mit welcher Software
+                                                //                                                        | arbeite ich
+                                                //                                                        | bislang prim&auml;r? Welches sind die Vorteile der gew&uuml;nschten
+                                                //                                                        | Software?)
+                                                //                                                input#form-softwarecompare.form-control(type='text' required='' name='vergleichbarkeit')
+                                                //                                                .invalid-feedback
+                                                //                                                        | Pflichtfeld
+                                                //                                        .col-md-6.fields
+                                                //                                                br
+                                                //                                                label(for='form-support')
+                                                //                                                        | Support durch*
+                                                //                                                select.form-select.form-control(required='' name='support')
+                                                //                                                        option(selected='' disabled='' value='') Auswahl
+                                                //                                                        option(value='Institut') Institut
+                                                //                                                        option(value='FHNW') FHNW
+                                                //                                                        option(value='Ich weiss es nicht') Ich weiss es nicht
+                                                //                                                .invalid-feedback
+                                                //                                                        | Pflichtfeld
+                                                //                                        .col-md-12.fields
+                                                //                                                .form-group
+                                                //                                                        br
+                                                //                                                        label(for='form-safedata')
+                                                //                                                                | Rechtliche Frage: Datenspeicherung in
+                                                //                                                                | einer Cloud?*
+                                                //                                                                | Wenn nein, wo werden Daten gespeichert:
+                                                //                                                        .custom-control.custom-radio
+                                                //                                                                input#customRadioDisabled6.custom-control-input(type='radio' name='cloud' value="ja" required='')
+                                                //                                                                label.custom-control-label(for='customRadioDisabled6' answer='ja') Ja
+                                                //                                                        .custom-control.custom-radio
+                                                //                                                                input#customRadioDisabled5.custom-control-input(type='radio' name='cloud' value="nein" required='')
+                                                //                                                                label.custom-control-label(for='customRadioDisabled5' answer='open') Nein
+                                                //                                                                .invalid-feedback
+                                                //                                                                        | Pflichtfeld
+                                                //                                                        .collapse.inputHide
+                                                //                                                                .card.card-body
+                                                //                                                                        input#form-safety.form-control(type='text' required='')
+                                                //                                .col-md-12.fields
+                                                //                                        .form-group
+                                                //                                                br
+                                                //                                                label(for='form-productowner') Product Owner*
+                                                //                                                small
+                                                //                                                        | (Wer ist f&uuml;r die Software verantwortlich? Besteller*in,
+                                                //                                                        | Professur)
+                                                //                                                input#form-productowner.form-control(type='text' required='')
+                                                //                                                .invalid-feedback
+                                                //                                                        | Pflichtfeld
+                                                //                                                br
+                                                //                                                label.form-label(for='validationTextarea') Bemerkungen
+                                                //                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7')
+                                                //                                                .row
+                                                //                                                        .col-md-6.fields
+                                                //                                                                br
+                                                //                                                                label(for='form-data')
+                                                //                                                                        | Datum*
+                                                //                                                                .input-group.date.date-picker(data-provide='datepicker')
+                                                //                                                                        .input-group-addon
+                                                //                                                                        input.form-control(type='text' placeholder='Datum auswählen' required='')
+                                                //                                                                        .invalid-feedback
+                                                //                                                                                | Pflichtfeld
                                                                                 // Modal
                                                                                 #countModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
                                                                                         .modal-dialog.modal-dialog-centered(role='document')

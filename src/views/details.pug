@@ -11,7 +11,7 @@
                 br
                 ul.progressbar
                     for order in softwareListDetails
-                            - var list = [ 'Antrag abgeschlossen', 'Antrag entscheid', 'Antrag bei gremium', 'Antrag in prüfung', 'Antrag in bearbeitung', 'Antrag eingegangen'];
+                            -let list = ['Antrag eingegangen', 'Antrag in bearbeitung', 'Antrag in prüfung', 'Antrag bei gremium', 'Antrag entscheid','Antrag abgeschlossen'];
                             -for (var i = 0; i < list.length; i++)
                               li(class=["", "item" + n])
                                 a(href="#")= list[i]

@@ -75,14 +75,4 @@ module.exports = function(models){
 // REQUESTED DB QUERIES
 /*
 
-
-function searchNodes(searchString) {
-	
-	return [
-		{id:5001, title:'Story Nr 5001'},
-		{id:5002, title:'Story Nr 5002'},
-		{id:6002, title:'Story Nr 6002'},
-		{id:1995, title:'Story Nr 1995'}
-		];
-}
 */

@@ -1,6 +1,7 @@
 let db = require('../libs/db');
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
+let bodyParser = require('body-parser');
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -11,7 +12,6 @@ const pool  = mysql.createPool({
 module.exports = function (models) {
     let page = {};
     let CONSTANTS = require("../libs/constants");
-
     this.main = function (req, res, next) {
       //  var tsID = parseInt(req.query.tsid);
         page.title = "Santra - Softwareantrag\n" +
@@ -20,6 +20,7 @@ module.exports = function (models) {
             page.path = "/"+CONSTANTS.SETTINGS.WEB.PATH_STRING;
         else
             page.path = "";
+
         pool.getConnection((err, connection) => {
             if(err) throw err
             let orderid = req.body.orderid;
@@ -57,9 +58,11 @@ module.exports = function (models) {
             let bemerkungen= req.body.bemerkungen;
             let datum= req.body.datum;
             let userid= req.body.userid;
-            let status= req.body.status;
+            //hier status unterscheiden
+            let status= 1;
             let notizen= req.body.notizen;
-            connection.query("INSERT INTO software (institut, professur, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datum, userid, status, notizen) VALUES ('"+institut+"', '"+professur+"','"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datum+"', '"+userid+"', '"+status+"', '"+notizen+"')", (err, rows) => {
+            let softwareList = [];
+            connection.query("INSERT INTO software (orderid, institut, professur, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datum, userid, status, notizen) VALUES ('"+orderid+"', '"+institut+"', '"+professur+"','"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datum+"', '"+userid+"', '"+status+"', '"+notizen+"')", (err, rows) => {
                 connection.release() // return the connection to pool
                 if (!err) {
                     function convertDate(inputFormat) {
@@ -69,6 +72,7 @@ module.exports = function (models) {
                     }
                     for (let i = 0; i < rows.length; i++) {
                         // Create an object to save current row's data
+
                         let order = {
                             'orderid':rows[i].orderid,
                             'institut':rows[i].institut,
@@ -109,7 +113,7 @@ module.exports = function (models) {
                             'status':rows[i].status
                         }
                         // Add object into array
-                      //  softwareListDetails.push(order);
+                        softwareList.push(order);
                     }
 
                 }
@@ -119,11 +123,11 @@ module.exports = function (models) {
             })
             setTimeout(
                 function(){
-                    res.render('layout_info', {
-                      //  "softwareListDetails": softwareListDetails
+                    res.render('layout_user', {
+                      // "softwareList": softwareList
                     });
                 }, 500);
 
-        })
+       })
     };
 };

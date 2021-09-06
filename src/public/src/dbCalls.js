@@ -1,16 +1,9 @@
-/**
- * [description]
- * @project AltersAtlas
- * @author Philipp Meyer <philipp.meyer@fhnw.ch>
- * @date 13.09.2017
- * @version 1.0
- */
-
 
 function getAllNodes(callback) {
 
-    $.getJSON('./getAllNodes', function (data) {
-        callback(data.sort(compareNodes));
+    $.getJSON('./user/', function (data) {
+        callback(data);
+          console.log(data);
     });
 }
 
