@@ -1,0 +1,93 @@
+#canvasSVG {
+    box-sizing: border-box;
+    height: 99vh;
+}
+
+
+.name {
+    font-size: 100pt;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+
+.mainPath {
+    fill: none;
+    stroke-width: 2px;
+}
+
+
+.relatedPath {
+    fill: none;
+    stroke-width: 2px;
+}
+
+.categorieText {
+    cursor: pointer;
+}
+
+#searchForm {
+    position: relative;
+    width: 200px;
+    height: 30px;
+    box-sizing: border-box;
+    opacity: 0;
+}
+#canvasSVG {
+    box-sizing: border-box;
+}
+.pageTitle{
+    font-size: 80px;
+    position: absolute;
+    bottom: 15px;
+    left: 78px;
+    color: #4d4d4d;
+    text-transform: uppercase;
+}
+.pageTitle span{
+    font-size: 50px;
+    top: 80px;
+    right: -30px;
+    position: absolute;
+}
+.mainInfoWrapper{
+  padding: 15px 0;
+}
+.mainInfoWrapper a{
+    text-decoration: underline;
+}
+.mainInfoWrapper h3{
+    margin-top: 20px;
+}
+.mainInfoWrapper h4{
+    margin-top: 20px;
+}
+.mainInfoWrapper br{
+    margin-top: 20px;
+}
+.mainImpressum h3{
+    display: block;
+    clear: both;
+}
+.imgImpressum{
+    max-width: 200px;
+    display: block;
+    float: left;
+    margin: 20px 50px 20px 0;
+}
+.imgImpressum.high{
+    max-width: 100px;
+    max-height: 100px;
+}
+.imgImpressum.margin{
+   margin-top: 48px;
+}
+.cap-color{
+    font-size: 21px;
+    font-variant: all-petite-caps;
+    color: #5f9ce1;
+}
+.mainDatenschutz hr{
+    margin-top: 0.6rem;
+    margin-bottom: 0.4rem;
+    border-top: 3px solid rgba(0, 0, 0, 0.1);
+}

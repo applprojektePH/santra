@@ -1,0 +1,829 @@
+
+/* Definition of story lines */
+.storyLine{
+    fill: none;
+    cursor: pointer;
+}
+.countLine{
+    stroke-width: 2;
+}
+
+/* Definition of story labels */
+
+.storyLabel {
+    font-size: 8px;
+    cursor: pointer;
+}
+
+#nodeLabel1 {
+    cursor: auto;
+}
+
+.previousNode {
+    stroke-dasharray: 151 193 100;
+}
+.nextNode{
+    stroke-dasharray: 150 194 0 0;
+}
+.relatedNode, .proposedNode{
+    stroke-dasharray: 155 78 0 124;
+}
+.whiteBackground {
+    fill: transparent;
+}
+
+.storyNodes {
+    cursor: pointer;
+}
+/* colors for related elements*/
+/*.related1 {
+    stroke: #DE7070;
+}
+.related2 {
+    stroke: #DE7070;
+}
+.related3 {
+    stroke: #DE7070;
+}
+.related4 {
+    stroke: #9F8DBF;
+}
+.related5 {
+    stroke: #D68B45;
+}
+.related6 {
+    stroke: #3B87B8;
+}
+.related7 {
+    stroke: #D97D56;
+}
+.related8 {
+    stroke: #D97D56;
+}
+.related9 {
+     stroke: #D97D56;
+ }*/
+
+/*new Version*/
+
+body, html{
+    position: relative;
+}
+h2{
+    font-size: 24px;
+    margin: 10px 15px 25px 0;
+}
+h3{
+    font-size: 18px;
+    font-weight: 700;
+}
+p{
+   /* font-size: 1.3vw;*/
+}
+a.ui-link{
+    color: #38c;
+}
+img{
+    width: 100%;
+    height: auto;
+}
+.content{
+    padding: 5px 5px 85px 5px;
+    background: #fff;
+    width: 100%;
+    overflow: hidden;
+    height: 600px;
+}
+/*.modal{
+    max-width: 100%;
+}
+.modal-dialog{
+    max-height: 100%;
+    max-width: 100%;
+    margin:0;
+}
+.modal-content{
+    min-height: 100%;
+}
+.btn.btn-modal-open{
+    width: 50px;
+    float: right;
+}
+button.close-btn{
+    width: auto;
+}*/
+#nav-wrapper{
+    padding: 85px 85px 85px 58px;
+    position: relative;
+    overflow: hidden;
+    background: #ededed;
+    height: 100vh;
+}
+
+/*.nav-right, .nav-left{
+    background: green;
+}
+.nav-bottom, .nav-top{
+    background: blue;
+}*/
+.nav-right{
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    height: 100%;
+    padding-right: 15px;
+    position: fixed;
+    background: #ddd;
+    z-index:110;
+}
+.nav-left{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    left:0;
+    background: #ddd;
+}
+.nav-left .arrow-right{
+    width: 100%;
+    border: 2px dashed #000;
+}
+.nav-bottom{
+    position: fixed;
+    z-index: 106;
+    right: 0;
+    bottom: 0;
+    left: 150px;
+    width: 100%;
+}
+.nav-top{
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 60px;
+    width: 100%;
+    height: 100%;
+    margin-left: -60px;
+}
+#RightTopnav{
+    margin-right: 50px;
+    top: 15px;
+    left: 875px;
+    display: block;
+    position: absolute;
+}
+.righttopnav span{
+    position: relative;
+    color: #29e;
+}
+.righttopnav span + span{
+    color: #f86c6c;
+}
+#node176{
+    transition: all .75s ease;
+    opacity: 1;
+
+}
+.card-panel-show{
+    position: absolute;
+    top: 40%;
+    font-size: 36px;
+    z-index: 2;
+}
+
+.main-connect{
+    border: 3px dashed black;
+}
+#prev, #next{
+    position: relative;
+    top: 45%;
+}
+.drag-drop.rel-connect-red{
+    background: #f86c6c;
+}
+.hidden{
+    display: none !important;
+}
+
+/*Draggable*/
+#outer-dropzone {
+    touch-action: none;
+}
+
+.dropzone {
+    border: dashed 4px transparent;
+    border-radius: 4px;
+    width: 100%;
+    transition: background-color 0.3s;
+    height: 100%;
+    position: relative;
+}
+
+.drop-active {
+    border-color: #aaa;
+}
+
+.drop-target {
+    background-color: #29e;
+    border-color: #fff;
+    border-style: solid;
+}
+
+.drag-drop {
+    display: inline-block;
+    min-width: 40px;
+    padding: 5px;
+    color: #fff;
+    background-color: #29e;
+    -webkit-transform: translate(0px, 50%);
+    transform: translate(0px, 0px);
+    transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+    color: #000;
+    background-color: #4e4;
+}
+.black{
+    background: black;
+}
+/*svg*/
+.sym-purple-primary-0 {
+    fill: #7861A1;
+    fill-rule: evenodd;
+    stroke-width: 0px;
+}
+.sym-darkGrey-primary-0 {
+    fill: #505252;
+    fill-rule: evenodd;
+    stroke-width: 0px;
+}
+
+/*Swipe*/
+
+.swipe-card{
+
+}
+
+.slide-left {
+    /*transform: rotate(30deg) scale(0.8);*/
+    transition: 1s;
+    cursor: e-resize;
+    opacity: 0;
+    z-index: 10;
+}
+.slide-right {
+    /* transform: rotate(-30deg) scale(0.8);*/
+    transition: 1s;
+    cursor: w-resize;
+    z-index: 10;
+
+}
+
+#slide {
+    position: absolute;
+    left: -600px;
+    width: 600px;
+    height: 370px;
+    background: blue;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
+}
+
+/*Navigation*/
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    z-index: 107; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+#OpenNav{
+    top: 25px;
+    position: absolute;
+    left: 15px;
+    font-size: 36px;
+}
+
+.card-vis{
+    position: absolute;
+    z-index: 1;
+}
+.card-text-show{
+    margin-top: 12px;
+    font-size: 26px;
+    cursor: pointer;
+    width: 50px;
+   right: 0;
+    z-index: 106;
+    position: absolute;
+    transition: all .75s ease;
+}
+
+.card-text {
+    height: 150px;
+    width: 1px;
+    opacity: 0;
+    transition: all .75s ease;
+    z-index: 2;
+    position: absolute;
+    background:rgba(255,255,255, 0.9);
+}
+
+.card-text.show {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+
+}
+#card-panel-show{
+    z-index: 2;
+}
+/*Menu side push*/
+.sidenav-panel {
+    height: 100%;
+    width: 0;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    background: #f0f0f0;
+    position: absolute;
+}
+
+.sidenav-panel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav-panel a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav-panel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.card-content {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav-panel {padding-top: 15px;}
+    .sidenav-panel a {font-size: 18px;}
+}
+/*draggable */
+
+
+.drop-active {
+    border: 1px dashed #aaa;
+}
+
+
+
+.drag-drop {
+    display: inline-block;
+    min-width: 40px;
+    padding: 5px;
+    color: #fff;
+    background-color: #29e;
+    -webkit-transform: translate(0px, 50%);
+    transform: translate(0px, 0px);
+    transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+
+    background-color: #4e4;
+}
+.storytext{
+    font-size: 8px;
+}
+#relatedNodes{
+    width: 100%;
+    margin-left: 145px;
+}
+#relatedNodes.relatedLast{
+    width: auto;
+}
+.nodesTitelRelatedProposed{
+    bottom: 12px;
+    line-height: 1.3;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 2;
+    position: absolute;
+    margin-left: 15px;
+    right: 430px;
+    width: 100px;
+}
+@media (max-width:1200px) {
+    .nodesTitelRelatedProposed{
+        right: 400px;
+    }
+}
+#relatedNodesTitle{
+    left: 43px;
+}
+#proposedNodes{
+    width: 450px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.relatedLine, .storyrelatedLine {
+    stroke-dasharray: 0.5%;
+    stroke: #ffffff;
+    stroke-width:2;
+    z-index: 1;
+    position: relative;
+}
+.nodeLabelGroup{
+    z-index: 2;
+    position: relative;
+}
+.nodeText{
+    font-size: 13px;
+    max-width: 200px;
+}
+.storyLabel{
+    fill:#fff;
+    stroke-width:1;
+}
+.nodeRect{
+fill: #ededed;
+    stroke-width: 2px;
+}
+.titleTools .fa, .metaTools .fa{
+    opacity: 0.3;
+}
+.fa.active,.titleTools .fa:hover, .metaTools .fa:hover{
+   opacity: 1;
+}
+.menuButton{
+    font-size: 24px;
+}
+#headerBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
+}
+@media (max-width: 767px) {
+    #headerBar{
+        top: 2px;
+    }
+}
+.counterText{
+    fill: #9c9c9c;
+}
+.navbar-brand{
+    padding-top: 0;
+}
+.navbar-toggler{
+  padding: 12px 15px 15px 15px;
+  border: 0;
+}
+#storyName tspan{
+    font-size: 18px;
+}
+.dragactive{
+    background: rgb(237, 237, 237) !important;
+}
+
+/*new construction*/
+
+.nodeWrapper{
+    position: absolute;
+}
+svg{
+    width: 100%;
+    height: 100%;
+}
+.storynode1{
+    left: 450px;
+}
+@media (max-width: 1200px){
+    .storynode1 {
+        left: 32vw;
+    }
+}
+.storynode2{
+    left: 830px;
+}
+@media (max-width:1499px) {
+    .storynode2 {
+        left: 65vw;
+    }
+    .storynode3{
+        top: 180px;
+    }
+    .storynode4{
+        bottom: 120px;
+    }
+
+    .nodeLabelGroup3 .nodeText#nodeLabel3{
+        transform: translate(122px, 10px) rotate(90deg);
+    }
+    .nodeLabelGroup3 .nodeRect#nodeLabel3{
+        transform: translate(125px, 5px) rotate(90deg);
+    }
+    .nodeLabelGroup4 .nodeText#nodeLabel4{
+        transform: translate(122px, 10px) rotate(90deg);
+    }
+    .nodeLabelGroup4 .nodeRect#nodeLabel4{
+        transform: translate(125px, 5px) rotate(90deg);
+    }
+
+}
+@media screen and (max-height: 500px) {
+    .storynode4{
+        display: none;
+    }
+}
+.storynode1, .storynode2{
+    width: 160px;
+    height: 130px;
+    position: absolute;
+    top: 15px;
+    z-index: 2;
+}
+.storynode3, .storynode4{
+    height: 160px;
+    width: 160px;
+    position: absolute;
+    right: -15px;
+    z-index: 2;
+}
+.prevnodeLine, .nextnodeLine{
+    position: absolute;
+    z-index: 1;
+}
+.prevnodeLine{
+    left: 127px;
+    right: 150px;
+    height: 49px;
+    top: 38px;
+}
+.nextnodeLine{
+    top: 150px;
+    right: 40px;
+    bottom: 231px;
+    width: 45px;
+}
+#storynodesnextCounter{
+    transform: rotate(90deg);
+    position: absolute;
+    color: #808080;
+    transform: rotate(90deg);
+    display: block;
+    left: 57px;
+}
+
+@media (min-width: 1500px) {
+    #nav-wrapper {
+        padding: 85px 25px 85px 25px;
+    }
+    .prevnodeLine{
+        right: 210px;
+        left: 141px;
+    }
+
+    .prevnodeLine.prevnodeLineEnd{
+        right: 120px;
+    }
+    .prevnodeLine #path1{
+        display: none;
+    }
+    .prevnodeLine.prevnodeLineEnd #path1{
+        display: block;
+    }
+    .nextnodeLine{
+        top: 38px;
+        left: 950px;
+        height: 50px;
+    }
+    #storynodesnextCounter {
+       opacity: 1 !important;
+        top: 3px;
+        left: 57px;
+        transform: rotate(0deg);
+    }
+    .nodeLabelGroup3 .nodeText#nodeLabel3{
+        transform: translate(18px, 5px) rotate(0deg);
+    }
+    .nodeLabelGroup3 .nodeRect#nodeLabel3{
+        transform: translate(15px, 2px) rotate(0deg);
+    }
+    .nodeLabelGroup4 .nodeText#nodeLabel4{
+        transform: translate(18px, 5px) rotate(0deg);
+    }
+    .nodeLabelGroup4 .nodeRect#nodeLabel4{
+        transform: translate(15px, 2px) rotate(0deg);
+    }
+    #nav-wrapper .storynodesnext{
+        transform: rotate(90deg);
+        top: 22px;
+        right: 333px;
+        width: 200px;
+        height: auto;
+    }
+}
+.storynode5Wrapper{
+    width: 100vw;
+    height: 132px;
+    position: relative;
+}
+.Slider5Wrapper{
+    left: 0vw;
+    width: 85vw;
+    height: 132px;
+    bottom: 15px;
+    z-index: 2;
+    position: absolute;
+    overflow: hidden;
+}
+.Slider5Wrapper.hasproposed{
+    width: 100vw;
+}
+@media (max-width:1200px) {
+    .Slider5Wrapper.hasproposed #relatedNodes{
+         width: 340px;
+    }
+}
+.relatedNode, .proposedNode{
+   position: relative;
+    width: 155px;
+    height: 48px;
+    z-index: 2;
+    display: inline-block;
+}
+.storynodesnext, .storynodesprev{
+    z-index: 2;
+    position: absolute;
+}
+.storynodesprev{
+    left: 620px;
+    top: 3px;
+    width: 100%;
+    height: 85px;
+}
+@media (max-width:1499px) {
+    .storynodesprev {
+        left: 48vw;
+    }
+}
+.storynodesnext{
+    top: 365px;
+    right: 0px;
+    width: 85px;
+    height: 100%;
+}
+
+@media (min-width: 1500px) {
+    .storynode3{
+        right: 525px;
+        top: 15px;
+        width: 160px;
+    }
+
+    .storynode4{
+        right: 200px;
+        top: 15px;
+        width: 160px;
+    }
+    .storynodesnext{
+        top: 15px;
+        right: 400px;
+        width: 85px;
+        height: 100%;
+    }
+
+}
+#navigationSVG{
+    display: none;
+}
+#storyNameSVG{
+    left: 121px;
+    top: 0;
+    width: 210px;
+    height: 85px;
+    position: absolute;
+}
+    @media (max-width: 1024px) {
+        #storyName tspan{
+        font-size: 16px !important;
+    }
+    #storyName {
+        transform: translateY(1.3em);
+    }
+}
+#storynodesnextCounter{
+    opacity: 0;
+}
+@media (max-height: 900px) {
+#storynodesnextCounter{
+    opacity: 1;
+}
+}
+
+@media (min-width: 1500px)
+{
+    #nav-wrapper {
+        padding: 85px 25px;
+    }
+    #storyNameSVG{
+        left: 135px;
+    }
+}
+@media (max-width:736px) {
+    .storynodesnext{
+        display: none;
+    }
+    .nextnodeLine {
+        top: 100px;
+    }
+    .storynode2 {
+        display: none;
+    }
+    .storynode3 {
+        top: 113px;
+    }
+    .prevnodeLine{
+        right: 100px;
+    }
+    .storynode1 {
+        left: 47vw;
+    }
+    #storyNameSVG {
+        left: 95px;
+    }
+    .storyLogo {
+        left: 10px;
+    }
+
+}

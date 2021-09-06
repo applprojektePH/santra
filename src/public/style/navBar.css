@@ -1,0 +1,240 @@
+
+.sidenav {
+  /*  height: calc(100% - 30px);
+   background-color: #F0F014;
+   */
+    width: 20px;
+    position: fixed;
+    z-index: 109;
+    top: 30px;
+    left: 0;
+
+    transition: 0.5s;
+    opacity: 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+
+/* when the screen size is bigger than 1600px */
+/*@media (min-width: 1618px) {
+    #headerBar {
+        left: calc(50% - 800px);
+    }
+    .sidenav {
+        left: calc(50% - 800px);
+    }
+}*/
+
+/* The navigation menu links */
+.sidenav .menuLink {
+    padding: 8px 8px 8px 12px;
+    margin-left: 20px;
+    width: 200px;
+    text-decoration: none;
+    font-size: 1.3em;
+    color: black;
+    display: block;
+    transition: 0.3s;
+    line-height: 0.8em;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav .menuLink:hover, .offcanvas .menuLink:focus{
+    color: coral;
+}
+
+#menuButtonBox {
+    height: 30px;
+    width: 25px;
+    right: 0px;
+    cursor: pointer;
+}
+
+/* The navigation menu open/close buttons */
+.sidenav .menuButton {
+    position: relative;
+    height: 30px;
+    width: 25px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    /*display: block;*/
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+/* The main AltersAtlas logo div*/
+.sidenav #logo {
+    position: relative;
+    left: 20px;
+    margin-top: 45px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+/* The AltersAtlas text */
+.sidenav #logoText {
+    fill: black;
+    text-anchor: middle;
+    /*font-size: 56px;*/
+    /*font-family: 'Cookie', cursive;*/
+    font-size: 60px;
+    font-family: 'Droid Sans';
+}
+
+/* The footer for different font sizes */
+.sidenav #sidenavFooter {
+    position: absolute;
+    width: 210px;
+    height: 50px;
+    border-top: solid 1px black;
+    box-sizing: border-box;
+    bottom: 10px;
+    left: 20px;
+    color: black;
+    display: none;
+    text-align: center;
+}
+
+#sidenavFooter .font {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#sidenavFooter .font:hover, #footer .font:focus {
+    /*text-decoration: none;*/
+    color: #000;
+}
+
+#sidenavFooter .font1 {
+    font-size: 16px;
+}
+
+#sidenavFooter .font2 {
+    font-size: 19px;
+}
+
+#sidenavFooter .font3 {
+    font-size: 22px;
+}
+
+.sidenav #fhnwLogo {
+    position: absolute;
+    width: 200px;
+    padding-left: 35px;
+    bottom: 50px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+#mySidenavFooter {
+    position: absolute;
+    width: 200px;
+    bottom: 10px;
+    padding-left: 42px;
+}
+
+
+#footerBar {
+    width: 100%;
+    max-width: 1600px;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0px;
+    box-sizing: border-box;
+    z-index: 108;
+}
+
+/* when the screen size is bigger than 1600px */
+@media (min-width: 1618px) {
+    #footerBar {
+        left: calc(50% - 800px);
+    }
+}
+
+#searchFormNav {
+    width: 250px;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+#searchInputNav {
+    margin-left: 30px;
+    position: relative;
+    background: #ffffff00;
+    color: black;
+    /*width: 122px;*/
+    /*border-radius: 1px;*/
+}
+
+#searchButton {
+    /*border-radius: 5px;*/
+}
+
+input[type=text] {
+    height: 25px;
+    width: 185px;
+    box-sizing: border-box;
+    border: 2px solid #000;
+    /*border-radius: 4px;*/
+    font-size: 1.3em;
+    background-color: white;
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    padding: 0 0 0 4px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #000;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #000;
+    opacity: 1;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #000;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color: #000;
+}
+
+#navbarSupportedContent{
+    background: rgba(255, 255, 255, 0.95);
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    z-index: 5;
+    width: 40%;
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 0.5s; /* Firefox < 16 */
+    -ms-animation: fadein 0.5s; /* Internet Explorer */
+    -o-animation: fadein 0.5s; /* Opera < 12.1 */
+    animation: fadein 0.5s;
+
+}
+.navbar-toggler .fa{
+    font-size: 24px;
+}
+.navbar-toggler .fa:before{
+    content: "\f00d";
+}
+.navbar-toggler.collapsed .fa:before{
+    content: "\f0c9";
+
+}
