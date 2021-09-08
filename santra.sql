@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 30. Aug 2021 um 14:25
+-- Erstellungszeit: 08. Sep 2021 um 10:54
 -- Server-Version: 10.4.18-MariaDB
 -- PHP-Version: 7.3.28
 
@@ -72,9 +72,12 @@ CREATE TABLE `software` (
 --
 
 INSERT INTO `software` (`orderid`, `institut`, `professur`, `vorname`, `nachname`, `email`, `funktion`, `studiengang`, `modulanlass`, `szenario`, `softwarename`, `softwarewebseite`, `softwareupdate`, `softwareupdatewelches`, `lizenzenanzahl`, `nutzeranzahl`, `nutzungsdauer`, `betriebssystem`, `browser`, `softwareverfuegung`, `softwareinteresse`, `softwareinstitut`, `softwarehochschinteresse`, `softwarehochschule`, `lizenzinstitution`, `lizenzart`, `lizenzkosten`, `vergleichbarkeit`, `support`, `cloud`, `cloudwo`, `productowner`, `bemerkungen`, `datum`, `userid`, `status`, `notizen`) VALUES
-(5, 'PH', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', 0, 1, ''),
-(6, 'IGEO', 'TestProfessur', 'Alesya', 'Heymann', 'alesya.heymann@fhnw.ch', 'Testfunktion', 'Teststudiengang', 'Testmodulanlass', 'testszenario', 'Softwarename', 'softwarewebseite', 'nein', '', 2, 2, 2, 'betriebssystem', 'browser', 'softwareverfuegung	', '', 'softwareinstitut', '', 'softwarehochschule	', 'lizenzinstitution', 'lizenzart', 'lizenzkosten', 'vergleichbarkeit', 'support', 'ja', '', 'productowner', 'bemerkungen', '2021-05-11', 123, 6, ''),
-(12, 'IGEO', 'TestProfessur', 'Alesya', 'Heymann', 'alesya.heymann@fhnw.ch', 'Testfunktion', 'Teststudiengang', 'Testmodulanlass', 'testszenario', 'Softwarename', 'softwarewebseite', '', '', 2, 2, 2, 'betriebssystem', 'browser', 'softwareverfuegung	', '', 'softwareinstitut', '', 'softwarehochschule	', 'lizenzinstitution', 'lizenzart', 'lizenzkosten', 'vergleichbarkeit', 'support', 'cloud', '', 'productowner', 'bemerkungen', '2021-05-11', 123, 1, '');
+(1, 'PH', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', 0, 2, ''),
+(2, 'IGEO', 'TestProfessur', 'Alesya', 'Heymann', 'alesya.heymann@fhnw.ch', 'Testfunktion', 'Teststudiengang', 'Testmodulanlass', 'testszenario', 'Softwarename', 'softwarewebseite', 'nein', '', 2, 2, 2, 'betriebssystem', 'browser', 'softwareverfuegung	', '', 'softwareinstitut', '', 'softwarehochschule	', 'lizenzinstitution', 'lizenzart', 'lizenzkosten', 'vergleichbarkeit', 'support', 'ja', '', 'productowner', 'bemerkungen', '2021-05-11', 123, 3, ''),
+(3, 'IGEO', 'TestProfessur', 'Alesya', 'Heymann', 'alesya.heymann@fhnw.ch', 'Testfunktion', 'Teststudiengang', 'Testmodulanlass', 'testszenario', 'Softwarename', 'softwarewebseite', '', '', 2, 2, 2, 'betriebssystem', 'browser', 'softwareverfuegung	', '', 'softwareinstitut', '', 'softwarehochschule	', 'lizenzinstitution', 'lizenzart', 'lizenzkosten', 'vergleichbarkeit', 'support', 'cloud', '', 'productowner', 'bemerkungen', '2021-05-11', 123, 1, ''),
+(181, 'Kindergarten-/Unterstufe', '', '', '', '', '', '', '', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 0, 0, 0, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', '0000-00-00', 123, 1, 'undefined'),
+(182, 'Kindergarten-/Unterstufe', '', '', '', '', '', '', '', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 0, 0, 0, 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', '0000-00-00', 123, 1, 'undefined'),
+(183, 'undefined', '', '', '', '', '', '', '', '', '', '', 'undefined', 'undefined', 0, 0, 0, 'undefined', 'undefined', 'undefined', 'undefined', '', 'undefined', '', 'undefined', 'undefined', 'undefined', '', 'undefined', 'undefined', 'undefined', 'undefined', 'undefined', '0000-00-00', 123, 1, 'undefined');
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `software`
 --
 ALTER TABLE `software`
-  MODIFY `orderid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `orderid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT für Tabelle `users`
