@@ -2,11 +2,8 @@ let path = require('path');
 let express = require('express');
 let app = express();
 let server = require('http').Server(app);
-
 let CONSTANTS = require("./libs/constants");
-
 let models = null;
-
 const helmet = require('helmet');
 
 
@@ -23,7 +20,7 @@ app.use('/jquery', express.static(path.join(__dirname, CONSTANTS.PATHS.JQUERY)))
 app.use('/d3', express.static(path.join(__dirname, CONSTANTS.PATHS.D3)));
 app.use('/bootstrap', express.static(path.join(__dirname, CONSTANTS.PATHS.BOOTSTRAP)));
 app.use('/static',express.static(path.join(__dirname, CONSTANTS.PATHS.STATIC)));
-app.use(helmet());
+app.use(helmet({contentSecurityPolicy: false}));
 
 // initialize persistence layer
 //models = require('./models/');

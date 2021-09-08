@@ -9,12 +9,17 @@
                 include elements/buttons-view
                 br
                 br
-                ul.progressbar
-                    for order in softwareListDetails
+                for order in softwareListDetails
+                    ul.progressbar
+                        for order in softwareListDetails
                             -let list = ['Antrag eingegangen', 'Antrag in bearbeitung', 'Antrag in prüfung', 'Antrag bei gremium', 'Antrag entscheid','Antrag abgeschlossen'];
                             -for (var i = 0; i < list.length; i++)
-                              li(class=["", "item" + n])
-                                a(href="#")= list[i]
+                                    if(i < order.status)
+                                        li(class=["li-status", "active item" + i])
+                                            a(href="#")= list[i]
+                                    else
+                                        li(class=["li-status", "item" + i])
+                                            a(href="#")= list[i]
                 br
                 br
                 br
