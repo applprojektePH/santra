@@ -3,6 +3,7 @@ let db = require('../libs/db');
 var async = require('async');
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
+let mail = require('sendmail')();
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -73,6 +74,18 @@ module.exports = function (models) {
                 sql2 = "INSERT INTO software (orderid, institut, professur, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datum, userid, status, notizen) VALUES ('"+orderid+"', '"+institut+"', '"+professur+"','"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datum+"', '"+userid+"', '"+status+"', '"+notizen+"')";
 
 if (url=="/submit-form"){
+    mail({
+            from: 'noreply@meinedomain.com',
+            to: 'alesya.heymann@fhnw.ch',
+            subject: 'Mail versendet mit sendmail',
+            content: 'Kein text.'
+        },
+        function(err,response){
+            if(err){
+                console.log(err);
+            }
+            console.dir(response);
+        });
     connection.query(""+sql2+"",
         (err, rows) => {
             //  connection.release() // return the connection to pool
