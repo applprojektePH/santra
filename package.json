@@ -1,0 +1,39 @@
+{
+  "name": "santra",
+  "version": "1.0.0",
+  "description": "Software ordering tool",
+  "main": "src/server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^3.3.7",
+    "d3": "^4.10.2",
+    "express": "^4.17.1",
+    "forever": "^3.0.4",
+    "helmet": "^4.6.0",
+    "jquery": "^3.6.0",
+    "mssql": "^7.1.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "orientjs": "^3.0.11",
+    "pug": "^3.0.2",
+    "q": "^1.5.0",
+    "sendmail": "^1.6.1",
+    "sequelize": "^6.6.2",
+    "winston": "^2.3.1",
+    "xlsjs": "^0.7.6",
+    "xlsx": "^0.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": " sh ./node_modules/.bin/forever list",
+    "start": "sh ./node_modules/.bin/forever start -w --minUptime 1000 --spinSleepTime 1000 --a --uid \"santra\" -l ./santra-forever.log ./src/server.js ",
+    "stop": "sh ./node_modules/.bin/forever stop \"santra\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/applprojektePH/santra.git.git"
+  },
+  "author": "applprojektePH_FHNW",
+  "license": "ISC",
+  "homepage": "https://github.com/applprojektePH/santra.git#readme"
+}
