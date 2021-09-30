@@ -4,8 +4,6 @@ module.exports = function(models) {
 
   this.formController = new (require('./form_controller'))(models);
 
-  this.formsubmitController = new (require('./form-submit_controller'))(models);
-
   this.infoController = new (require('./info_controller'))(models);
 
   this.userController = new (require('./user_controller'))(models);

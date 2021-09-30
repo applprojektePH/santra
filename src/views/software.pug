@@ -19,11 +19,14 @@
                         td= order.softwarename
                         td= order.datum
                         td
+                            span= order.anrede
+                            span &nbsp;
                             span= order.vorname
                             span &nbsp;
                             span= order.nachname
                         td= order.institut
                         td= order.status
+
 script(type='text/javascript' src="./static/js/libs/jquery.js")
 script(type='text/javascript' src="./static/js/libs/datepicker.js")
 script(type='text/javascript' src="./static/js/libs/datepicker-de.js")

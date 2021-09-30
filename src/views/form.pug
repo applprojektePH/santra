@@ -37,25 +37,38 @@ input#form-id.form-control.hidden(type='text' required='' name='userid' value="1
                                                                                                 label(for='form-name')
                                                                                                         | Beantragter*innen
                                                                                                 .row
-                                                                                                        .col-md-6.fields
+                                                                                                        .col-md-4.fields
+                                                                                                                label(for='form-author-firstname')
+                                                                                                                        | Anrede*
+                                                                                                                .custom-select-js
+                                                                                                                        .custom-select-js
+                                                                                                                                select.form-select.form-control.custom-control-select(required='' name='anrede')
+                                                                                                                                        option(selected='' disabled='' value='') Auswahl
+                                                                                                                                        option(value="Frau") Frau
+                                                                                                                                        option(value="Herr") Herr
+                                                                                                                                .invalid-feedback
+                                                                                                                                        | Wählen Sie eine option
+                                                                                                        .col-md-4.fields
                                                                                                                 label(for='form-author-firstname')
                                                                                                                         | Vorname*
                                                                                                                 input#form-author-name.form-control(type='text' required='' name='vorname')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
-                                                                                                        .col-md-6.fields
+                                                                                                        .col-md-4.fields
                                                                                                                 label(for='form-author-name')
                                                                                                                         | Nachname*
                                                                                                                 input#form-author-firstname.form-control(type='text' required='' name='nachname')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-6.fields
+                                                                                                                br
                                                                                                                 label(for='form-author-name')
                                                                                                                         | E-Mail-Adresse*
                                                                                                                 input#form-author-email.form-control(type='email' required='' name='email')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-6.fields
+                                                                                                                br
                                                                                                                 label(for='form-author-function')
                                                                                                                         | Funktion*
                                                                                                                 input#form-author-function.form-control(type='text' required='' name='funktion')
@@ -66,21 +79,34 @@ input#form-id.form-control.hidden(type='text' required='' name='userid' value="1
                                                                                                         .form-group.dynamic-element.addone-wrapper(style='display:none')
                                                                                                                 br
                                                                                                                 .row
-                                                                                                                        .col-md-6.fields
+                                                                                                                        .col-md-4.fields
+                                                                                                                                label(for='form-author-firstname')
+                                                                                                                                        | Anrede*
+                                                                                                                                .custom-select-js
+                                                                                                                                        .custom-select-js
+                                                                                                                                                select.form-select.form-control.custom-control-select(required='' name='title')
+                                                                                                                                                        option(selected='' disabled='' value='') Auswahl
+                                                                                                                                                        option(value="Frau") Frau
+                                                                                                                                                        option(value="Herr")  Herr
+                                                                                                                                                .invalid-feedback
+                                                                                                                                                        | Wählen Sie eine option
+                                                                                                                        .col-md-4.fields
                                                                                                                                 label(for='form-author-firstname')
                                                                                                                                         | Vorname
                                                                                                                                 input#form-author-name.form-control(type='text')
-                                                                                                                        .col-md-6.fields
+                                                                                                                        .col-md-4.fields
                                                                                                                                 label(for='form-author-name')
                                                                                                                                         | Nachname
                                                                                                                                 input#form-author-firstname.form-control(type='text')
                                                                                                                         .col-md-6.fields
+                                                                                                                                br
                                                                                                                                 label(for='form-author-name')
                                                                                                                                         | E-Mail-Adresse
                                                                                                                                 input#form-author-email.form-control(type='text' required='')
                                                                                                                                 .invalid-feedback
                                                                                                                                         | Pflichtfeld
                                                                                                                         .col-md-6.fields
+                                                                                                                                br
                                                                                                                                 label(for='form-author-function')
                                                                                                                                         | Funktion
                                                                                                                                 input#form-author-function.form-control(type='text')
@@ -203,7 +229,7 @@ input#form-id.form-control.hidden(type='text' required='' name='userid' value="1
                                                                                                         br
                                                                                                         input.form-control(type='text')
                                                                                                         .invalid-feedback
-                                                                                                                | Pflichtfeld
+                                                                                                                | Wählen Sie eine option
                                                                         br
                                                 .accordion-item
                                                         h2#headingThree.accordion-header

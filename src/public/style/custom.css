@@ -714,13 +714,22 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     content: none;
 }
 .progressbar li.active, .progressbar li.active a{
-    color: green;
+    color: #55b776;
 }
 .progressbar li.active:before {
     border-color: #55b776;
 }
 .progressbar li.active + li:after {
     background-color: #55b776;
+}
+.progressbar li.preactive, .progressbar li.preactive a{
+    color: #ff8800;
+}
+.progressbar li.preactive:before {
+    border-color: #ff8800;
+}
+.progressbar li.preactive + li:after {
+    background-color: #ff8800;
 }
 .form-group-view-wrapper label{
     font-weight: 700;
@@ -826,4 +835,18 @@ a:hover{
 }
 .indented{
     margin-left: 20px;
+}
+.li-status{
+    cursor: pointer;
+}
+.li-status.active{
+    cursor: default;
+}
+.modalStatus textarea{
+    border: none;
+    width: 100%;
+}
+.modalStatus .modal-body button{
+    display: inline-block;
+    margin-right: 25px;
 }

@@ -13,14 +13,71 @@
                     ul.progressbar
                         for order in softwareListDetails
                             -let list = ['Antrag eingegangen', 'Antrag in bearbeitung', 'Antrag in prüfung', 'Antrag bei gremium', 'Antrag entscheid','Antrag abgeschlossen'];
-                            -for (var i = 0; i < list.length; i++)
-                                    if(i < order.status)
-                                        li(class=["li-status", "active item" + i])
-                                            a(href="#")= list[i]
+                            -for (var i = 1; i < list.length; i++)
+                                    if(i <= order.status)
+                                        li(class=["li-status", "active item" + i] id="orderstatus" + i)
+                                            span= list[i]
                                     else
-                                        li(class=["li-status", "item" + i])
-                                            a(href="#")= list[i]
-                br
+                                        li(class=["li-status", "item" + i] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal'+i)
+                                            span= list[i]
+
+                #Modal2.modalStatus.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5.modal-title Antrag in bearbeitung
+                            .modal-body
+                                button.btn.btn-secondary.btn-sm.custom-control-button-open(type='button') Antrag genehmigen
+                                for order in softwareListDetails
+                                    span.inputHide
+                                        textarea.modalEmailTextarea(placeholder='EmailVorlage' rows='10')
+                                            | Santra: Antrag Nummer# #{order.orderid} &#10;Guten Tag #{order.anrede} #{order.nachname} &#10;&#10;Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können. &#10;&#10;Freundliche Grüsse&#10;Ihr A&P Team&#10;applprojekte.ph@fhnw.ch&#10;n|w
+                                        button#btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                br
+                                button.btn.btn-primary.btn-sm(type='button') Antrag ablehnen
+                                button.btn.btn-primary.btn-sm(type='button') Antrag zum Gremium
+                            .modal-footer
+                                a(href='#')
+                                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Status bestätigen
+                                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
+                #Modal3.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5.modal-title Antrag bei Gremimum
+                            .modal-body
+                                button.btn.btn-primary.btn-sm(type='button') Antrag beim Gremium (Benutzer informieren)
+                            .modal-footer
+                                a(href='#')
+                                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
+                #Modal4.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5.modal-title Antrag Entscheid
+                            .modal-body
+                                a(href='#')
+                                    button.btn.btn-secondary.btn-sm(type='button') Status in Bearbeitung (Benutzer nicht informieren)
+                                a(href='#')
+                                    button.btn.btn-primary.btn-sm(type='button') Antrag genehmigen (Benutzer informieren)
+                                a(href='#')
+                                    button.btn.btn-primary.btn-sm(type='button') Antrag zum Gremium (Benutzer informieren)
+                            .modal-footer
+                                a(href='#')
+                                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
+                #Modal5.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5.modal-title Antrag abschliessen
+                            .modal-body
+                                a(href='#')
+                                    button.btn.btn-secondary.btn-sm(type='button') Antrag abschliessen (Benutzer informieren)
+
+                            .modal-footer
+                                a(href='#')
+                                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                 br
                 br
                 br
@@ -39,6 +96,8 @@
                                 label
                                     | Beantragter*innen
                                 p
+                                 span= order.anrede
+                                 span &nbsp;
                                  span= order.vorname
                                  span &nbsp;
                                  span= order.nachname
@@ -137,4 +196,5 @@
                                 label(for='form-function')
                                     | Datum
                                 p= order.datum
+
 

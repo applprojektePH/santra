@@ -36,6 +36,7 @@ module.exports = function (models) {
                             'orderid':rows[i].orderid,
                             'institut':rows[i].institut,
                             'professur':rows[i].professur,
+                            'anrede':rows[i].anrede,
                             'vorname':rows[i].vorname,
                             'nachname':rows[i].nachname,
                             'email':rows[i].email,

@@ -25,7 +25,39 @@ $( document ).ready(function() {
                 });
             }
         });
-
+    $('.li-status').click(function (event) {
+        let status =  $(this).attr('id').slice(-1);
+           // $(this).unbind("click");
+            //$(this).prevAll().unbind("click");
+        $(this).addClass('preactive');
+        $(this).prevAll().addClass('preactive');
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const currenturlParam = urlParams.get('tsid');
+        //     $.ajax({
+        //         type: 'GET',
+        //         data:{status:status},
+        //         url: '/details?tsid='+currenturlParam+'&st='+status,
+        //         error: function (xhr, ajaxOptions, thrownError) {
+        //             alert(xhr.status);
+        //             alert(thrownError);
+        //         }
+        //     });
+        });
+    $('.button-email-send').click(function (event) {
+        let status =  $(this).attr('id').slice(-1);
+        alert(status);
+        const urlParams = new URLSearchParams(window.location.search);
+        const currenturlParam = urlParams.get('tsid');
+        $.ajax({
+            type: 'GET',
+            data:{status:status},
+            url: '/details?tsid='+currenturlParam+'&st='+status,
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    });
     //     var maxChar = parseInt($(".textarea-js").attr("maxlength"));
     //     $(".textarea-js[maxlength]").parent().find(".charleft").html(maxChar - $(this).val().length);
     //     var char = $(".textarea-js").val().length;
@@ -332,6 +364,12 @@ $( document ).ready(function() {
         } else {
             $(this).closest(".custom-control").nextAll(".inputHide").delay(300).slideUp("slow");
         }
+    });
+    $(".custom-control-button-open").click(function () {
+            $(this).next(".inputHide").delay(300).slideDown("slow");
+    });
+    $(".custom-control-button-close").click(function () {
+        $(this).closest(".inputHide").delay(300).slideUp("slow");
     });
     $(".custom-control-select").on('change', function (e) {
         var valueSelected = $('option:selected', this).attr('answer');
