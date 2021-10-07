@@ -13,11 +13,14 @@ module.exports = function (models) {
     let page = {};
     this.main = function (req, res, next) {
         let tsID = parseInt(req.query.tsid);
+        let datetime = req.query.datetime;
+        //let mailuser = req.query.mailuser;
+        let mailtype = req.query.mailtype;
         let anrede;
         let nachname;
         let email;
         let orderid;
-     //   let statusset = req.query.status;
+        //let statusset = req.query.st;
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -29,12 +32,21 @@ module.exports = function (models) {
             let softwareListDetails = [];
             sql1 = 'SELECT * FROM orders WHERE (userid IN (SELECT id FROM users) AND orderid IN (SELECT '+tsID+' FROM orders))';
             let statusset = parseInt(req.query.status);
-            if ( (!isNaN(statusset))) {
+            console.log(statusset);
+            let mailt = req.query.mailtext;
+           /* deaktiviert for tests
+           if ( (!isNaN(statusset))) {
                     sql2 = 'UPDATE orders SET status='+statusset+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
                     connection.query(""+sql2+"",
                         (err, rows) => {
                         })
-                }
+                }*/
+            if ( (!isNaN(orderid))||(!isNaN(datetime))||/*(!isNaN(mailuser))||*/(!isNaN(mailtype)) ) {
+                sql3 = "INSERT INTO history (orderid, datetime, mailuser, mailtype, mailtext, orderstatus) VALUES ( '" + tsID + "', '" + datetime + "', 'alesya.heymann@fhnw.ch', '" + mailtype + "', '" + mailt + "', '" + statusset + "')";
+                connection.query("" + sql3 + "",
+                    (err, rows) => {
+                    })
+            }
             connection.query(""+sql1+"", (err, rows) => {
 
                 //connection.release() // return the connection to pool
@@ -97,39 +109,38 @@ module.exports = function (models) {
                 else {
                     console.log(err)
                 }
-                if(typeof status != 'undefined') {
-                    if(status == 2){
-                       console.log('status2');
-                       let transport1 = nodemailer.createTransport("SMTP", {
+                if(typeof statusset != 'undefined') {
+                    if(statusset == 2){
+                       let transport2 = nodemailer.createTransport("SMTP", {
                            host: "lmailer.fhnw.ch",
                            port: 25
                        });
-                       let messageSender1 = {
+                       let messageSender2 = {
                            // sender info
                            from: 'Santra <applprojekte.ph@fhnw.ch>',
-
                            // Comma separated list of recipients
                            //to: '+nachname+ <'+email+'>',
                            to: 'Heymann <alesya.heymann@fhnw.ch>',
                            // Subject of the message
-                           subject: 'Santra 1: Antrag Nummer XY in bearbeitung',
+                           subject: 'Santra: Antrag Nummer #'+orderid+'',
 
                            // plaintext body
-                           text: '2 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                               '\n' +
-                               'Vielen Dank und freundliche Grüsse \n' +
-                               'Ihr ApplProjekte Supportteam \n' +
-                               'n|w\n',
+                           //text: mailt,
                            // HTML body
-                           html:'<p><span>2Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
+                           html: ''+mailt
                        };
-
+                        // transport2.sendMail(messageSender2, function(error){
+                        //         if(error){
+                        //             console.log('Error occured');
+                        //             console.log(error.message);
+                        //             return;
+                        //         }
+                        //
+                        //         console.log('2Message sent successfully!');
+                        //         transport2.close();
+                        //     });
                    }
-                         else if (status == 3)  {
+                         else if (statusset == 3)  {
                        console.log('status3');
                        // let transport2 = nodemailer.createTransport("SMTP", {
                        //     host: "lmailer.fhnw.ch",
@@ -192,7 +203,7 @@ module.exports = function (models) {
                        //     transport2.close();
                        // });
                         }
-                        else if (status == 4) {
+                        else if (statusset == 4) {
                        console.log('status4');
                        // let transport3 = nodemailer.createTransport("SMTP", {
                        //     host: "lmailer.fhnw.ch",
@@ -256,7 +267,7 @@ module.exports = function (models) {
                        // });
                    }
 
-                            else if (status==5){
+                            else if (statusset==5){
                        console.log('status5');
                        // let transport4 = nodemailer.createTransport("SMTP", {
                        //     host: "lmailer.fhnw.ch",
@@ -320,7 +331,7 @@ module.exports = function (models) {
                        // });
                    }
 
-                            else if(status == 5){
+                            else if(statusset == 5){
                        console.log('status5');
                        // let transport5 = nodemailer.createTransport("SMTP", {
                        //     host: "lmailer.fhnw.ch",
@@ -389,7 +400,7 @@ module.exports = function (models) {
             setTimeout(
                 function(){
                      res.render('layout_details', {
-                         "softwareListDetails": softwareListDetails
+                         "softwareListDetails": softwareListDetails, "mailstatus": true
                      });
                 }, 500);
 

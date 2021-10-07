@@ -154,12 +154,12 @@ if (url=="/submit-form"){
 
                         // Comma separated list of recipients
                         to: '+nachname+ <'+email+'>',
-
+                        //bcc: 'applprojekte.ph@fhnw.ch',
                         // Subject of the message
-                        subject: 'Santra: Antrag Nummer XY',
+                        subject: 'Santra: Antrag Nummer #'+orderid+'',
 
                         // plaintext body
-                        text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
+                        text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/user nach der Anmeldung. \n' +
                             '\n' +
                             'Vielen Dank und freundliche Grüsse \n' +
                             'Ihr ApplProjekte Supportteam \n' +
@@ -167,8 +167,8 @@ if (url=="/submit-form"){
 
                         // HTML body
                         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                            '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch '+orderidmail+' nach der Anmeldung.' +
-                            '</br>Vielen Dank und freundliche Grüsse' +
+                            '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/user nach der Anmeldung.' +
+                            '</br></br>Vielen Dank und freundliche Grüsse' +
                             '</br>Ihr ApplProjekte Supportteam ' +
                             '</br>n|w</p>'
                     };
@@ -180,23 +180,15 @@ if (url=="/submit-form"){
                         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
                         to: '<alesya.heymann@fhnw.ch>',
                         // Subject of the message
-                        subject: 'Santra: Antrag Nummer XY ✔',
+                        subject: 'Santra: Antrag Nummer #'+orderid+'',
 
                         // plaintext body
-                        text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                            '\n' +
-                            'freundliche Grüsse \n' +
-                            'Santra Softwareantrag Software \n' +
-                            'n|w\n',
+                        text: 'Liebes Applprojekte Team</br></br>Ein neuer Antrag ist eingegangen: </br>Antrag Nummer '+orderid+' </br> Name der Software '+softwarename+' </br>Direktlinkt auf Antrag: http://santra.ph.fhnw.ch/details?tsid='+orderid+' </br></br>Vielen Dank und freundliche Grüsse </br>Ihr ApplProjekte Supportteam </br>n|w',
 
                         // HTML body
-                        html:'<p><span>Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                            '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                            '</br>Vielen Dank und freundliche Grüsse' +
-                            '</br>Ihr ApplProjekte Supportteam ' +
-                            '</br>n|w</p>'
+                        html:'<p><span>Liebes Applprojekte Team</span></br></br><p>Ein neuer Antrag ist eingegangen: </br>Antrag Nummer '+orderid+' </br> Name der Software '+softwarename+' </br>Direktlinkt auf Antrag: http://santra.ph.fhnw.ch/details?tsid='+orderid+' </br></br>Vielen Dank und freundliche Grüsse </br>Ihr ApplProjekte Supportteam </br>n|w</p>'
                     };
-//console.log('Sending Mail');
+                    //console.log('Sending Mail');
                     transport.sendMail(messageSender, function(error){
 
                     });
@@ -247,7 +239,7 @@ else if (url == "/user"){
                         'anrede': rows[i].anrede,
                         'vorname': rows[i].vorname,
                         'nachname': rows[i].nachname,
-                         'email': rows[i].email,
+                        'email': rows[i].email,
                         'funktion': rows[i].funktion,
                         'studiengang': rows[i].studiengang,
                         'modulanlass': rows[i].modulanlass,

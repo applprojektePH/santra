@@ -1,0 +1,29 @@
+#content
+    .container
+        .row
+            .col-md-12
+                br
+                br
+                h2(id='tables') Softwareantrag #!{orderid}
+                include elements/buttons-history
+                br
+                br
+        .row
+            .col-md-12
+                table.table.table-striped.table-works
+                    thead
+                        tr(role='row')
+                            th(role='columnheader') Datum
+                            th.minwidth(role='columnheader') Ereignis
+                            th(role='columnheader') Nachricht
+                            th(role='columnheader') Absender
+                    tbody
+                        for order in softwareListHistory
+                            tr
+                            td= order.datetime
+                            td= order.mailtype
+                            td= order.mailtext
+                            td= order.mailuser
+
+
+

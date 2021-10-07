@@ -20,15 +20,16 @@ span.service-buttons-wrapper
                 .modal-footer
                     a(href='')
                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss="modal") Abbrechen
-                    a(href='/user')
+                    a.btn-remove(href='/user')
                         button.btn.btn-primary.btn-sm(type='button') Antrag l&ouml;schen
     a(href='/user')
         button.btn.btn-primary.btn-sm.floatright(type='button')
             | Zur&uuml;ck zu
             | allen Antr&auml;gen
             i.fas.fa-search
-    a(href='/detailshistory')
-        button.btn.btn-primary.btn-sm
-            | Detallierter Verlauf der Bestellung
-            i.fas.fa-history
+    for order in softwareListDetails
+        a(href="/history?tsid="+ order.orderid class="link-id")
+            button.btn.btn-primary.btn-sm
+                | Detallierter Verlauf der Bestellung
+                i.fas.fa-history
 br

@@ -31,14 +31,25 @@
                                 for order in softwareListDetails
                                     span.inputHide
                                         textarea.modalEmailTextarea(placeholder='EmailVorlage' rows='10')
-                                            | Santra: Antrag Nummer# #{order.orderid} &#10;Guten Tag #{order.anrede} #{order.nachname} &#10;&#10;Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können. &#10;&#10;Freundliche Grüsse&#10;Ihr A&P Team&#10;applprojekte.ph@fhnw.ch&#10;n|w
-                                        button#btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                            |Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                        button.btn-email1.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
                                 br
-                                button.btn.btn-primary.btn-sm(type='button') Antrag ablehnen
-                                button.btn.btn-primary.btn-sm(type='button') Antrag zum Gremium
+                                button.btn.btn-primary.btn-sm.custom-control-button-open(type='button') Antrag ablehnen
+                                for order in softwareListDetails
+                                    span.inputHide
+                                        textarea.modalEmailTextarea(placeholder='EmailVorlage' rows='10')
+                                            | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde geprüft. Leider müssen wir Ihnen mitteilen, dass eine Anschaffung abgelehnt werden muss. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                        button.btn-email2.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                button.btn.btn-primary.btn-sm.custom-control-button-open(type='button') Antrag zum Gremium
+                                for order in softwareListDetails
+                                    span.inputHide
+                                        textarea.modalEmailTextarea(placeholder='EmailVorlage' rows='10')
+                                            | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} muss durch das Gremium weiter geprüft werden. </br>Bitte beachten Sie, dass die Bearbeitung in aufwendigen Fällen (Bsp. grössere Lizenzpakete) bis zu 3 Monate dauern kann. Sie erhalten dann eine Rückmeldung zur Anschaffung oder Nicht-Anschaffung der gewünschten Software. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                        button.btn-email3.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
                             .modal-footer
-                                a(href='#')
                                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Status bestätigen
                                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                 #Modal3.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')

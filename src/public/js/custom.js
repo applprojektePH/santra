@@ -44,20 +44,60 @@ $( document ).ready(function() {
         //     });
         });
     $('.button-email-send').click(function (event) {
-        let status =  $(this).attr('id').slice(-1);
-        alert(status);
+        let mailtype =  $(this).attr('class').split(' ')[0].slice(-1);
+        let status =  $(this).attr('class').split(' ')[1].slice(-1);
         const urlParams = new URLSearchParams(window.location.search);
         const currenturlParam = urlParams.get('tsid');
+        let mailtext = $(this).prev().val();
+        let d = new Date();
+        let month = d.getMonth()+1;
+        let day = d.getDate();
+        let hour = d.getHours();
+        let minute = d.getMinutes();
+        let second = d.getSeconds();
+
+        let datetime = d.getFullYear() + '-' +
+            ((''+month).length<2 ? '0' : '') + month + '-' +
+            ((''+day).length<2 ? '0' : '') + day + ' ' +
+            ((''+hour).length<2 ? '0' :'') + hour + ':' +
+            ((''+minute).length<2 ? '0' :'') + minute + ':' +
+            ((''+second).length<2 ? '0' :'') + second;
         $.ajax({
             type: 'GET',
             data:{status:status},
-            url: '/details?tsid='+currenturlParam+'&st='+status,
+            url: '/details?tsid='+currenturlParam+'&st='+status+'&mailtext='+mailtext+'&datetime='+datetime+'&mailtype='+mailtype,
+            // success: function(data) {
+            //     alert();
+            //     $(this).parent(".inputHide").delay(300).slideDown("slow");
+            // },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
                 alert(thrownError);
             }
         });
+
+
     });
+    $('.btn-remove').click(function (event) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currenturlParam = urlParams.get('tsid');
+        $.post('/user', { remove: 'true', tsID: currenturlParam });
+        // $.ajax({
+        //     type: 'POST',
+        //     data:{remove:currenturlParam},
+        //     url: '/user?&tsid='+currenturlParam,
+        //     success: function() {
+        //         alert(remove);
+        //     },
+        //     error: function (xhr, ajaxOptions, thrownError) {
+        //         alert(xhr.status);
+        //         alert(thrownError);
+        //     }
+        // });
+
+
+    });
+
     //     var maxChar = parseInt($(".textarea-js").attr("maxlength"));
     //     $(".textarea-js[maxlength]").parent().find(".charleft").html(maxChar - $(this).val().length);
     //     var char = $(".textarea-js").val().length;

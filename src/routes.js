@@ -13,7 +13,7 @@ module.exports = function (app, models) {
   app.get('/details', controllers.detailsController.main);
   app.get('/edit', controllers.editController.main);
   app.post('/submit-form', controllers.userController.main);
-    //app.get('/detailshistory', controllers.detailshistoryController.main);
+  app.get('/history', controllers.historyController.main);
  // app.get('/db', controllers.dbController.getOrders);
 
   // app.get('/getAllNodes', controllers.dbController.getAllNodes);
