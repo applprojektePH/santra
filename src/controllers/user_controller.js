@@ -36,6 +36,11 @@ module.exports = function (models) {
             let nachname = req.body.nachname;
             let email = req.body.email;
             let funktion = req.body.funktion;
+            let anrede2 = req.body.anrede2;
+            let vorname2 = req.body.vorname2;
+            let nachname2 = req.body.nachname2;
+            let email2 = req.body.email2;
+            let funktion2 = req.body.funktion2;
             let studiengang = req.body.studiengang;
             let modulanlass = req.body.modulanlass;
             let szenario = req.body.szenario;
@@ -46,6 +51,7 @@ module.exports = function (models) {
             let lizenzenanzahl = req.body.lizenzenanzahl;
             let nutzeranzahl = req.body.nutzeranzahl;
             let nutzungsdauer = req.body.nutzungsdauer;
+            let nutzungsdauertext = req.body.nutzungsdauertext;
             let betriebssystem = req.body.betriebssystem;
             let browser = req.body.browser;
             let softwareverfuegung = req.body.softwareverfuegung;
@@ -62,17 +68,34 @@ module.exports = function (models) {
             let cloudwo = req.body.cloudwo;
             let productowner = req.body.productowner;
             let bemerkungen = req.body.bemerkungen;
-            let datum = req.body.datum;
+            let datumantrag = req.body.datumantrag;
             let userid = req.body.userid;
             //hier status unterscheiden
-	    let notizen = req.body.notizen;
-            let status = '1';
+	        let notizen = req.body.notizen;
+            let status = req.body.status;
  	    let softwareList = [];
-                sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users)';
- sql2 = "INSERT INTO orders ( institut, professur, anrede, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datum, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datum+"', '"+userid+"', '"+notizen+"', '"+status+"')";
 
 if (url=="/submit-form"){
-  
+    let vorname2extr;
+    let nachname2extr;
+    let email2extr;
+    let funktion2extr;
+    for (let i = 0; i < vorname2.length; i++) {
+        vorname2extr = vorname2[1];
+    }
+    for (let i = 0; i < nachname2.length; i++) {
+        nachname2extr = nachname2[1];
+    }
+    for (let i = 0; i < email2.length; i++) {
+        email2extr = email2[1];
+    }
+    for (let i = 0; i < funktion2.length; i++) {
+        funktion2extr = funktion2[1];
+    }
+
+    sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
+    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2extr+"', '"+nachname2extr+"', '"+email2extr+"', '"+funktion2extr+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
+
     connection.query(""+sql2+"",
         (err, rows) => {
             //  connection.release() // return the connection to pool
@@ -82,16 +105,28 @@ if (url=="/submit-form"){
                     //    connection.release() // return the connection to pool
 
                     if (!err) {
-                        function convertDate(inputFormat) {
-                            function pad(s) {
-                                return (s < 10) ? '0' + s : s;
-                            }
-
-                            var d = new Date(inputFormat)
-                            return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('.')
-                        }
-
                         for (let i = 0; i < rows.length; i++) {
+                            let statuscurrent;
+                            switch (rows[i].status) {
+                                case 10:
+                                    statuscurrent = 'Entwurf';
+                                    break;
+                                case 1:
+                                    statuscurrent = 'Antrag in Bearbeitung';
+                                    break;
+                                case 2:
+                                    statuscurrent = 'Antrag in Prüfung';
+                                    break;
+                                case 3:
+                                    statuscurrent = 'Antrag bei Gremium';
+                                    break;
+                                case 4:
+                                    statuscurrent = 'Antrag Entscheid';
+                                    break;
+                                case 5:
+                                    statuscurrent = 'Antrag abgeschlossen';
+                                    break;
+                            }
                             // Create an object to save current row's data
                             let order = {
                                 'orderid': rows[i].orderid,
@@ -103,6 +138,11 @@ if (url=="/submit-form"){
                                 'nachname': rows[i].nachname,
                                 'email': rows[i].email,
                                 'funktion': rows[i].funktion,
+                                'anrede2': rows[i].anrede2,
+                                'vorname2': rows[i].vorname2,
+                                'nachname2': rows[i].nachname2,
+                                'email2': rows[i].email2,
+                                'funktion2': rows[i].funktion2,
                                 'studiengang': rows[i].studiengang,
                                 'modulanlass': rows[i].modulanlass,
                                 'szenario': rows[i].szenario,
@@ -114,10 +154,11 @@ if (url=="/submit-form"){
                                 'lizenzenanzahl': rows[i].lizenzenanzahl,
                                 'nutzeranzahl': rows[i].nutzeranzahl,
                                 'nutzungsdauer': rows[i].nutzungsdauer,
+                                'nutzungsdauertext': rows[i].nutzungsdauertext,
                                 'betriebssystem': rows[i].betriebssystem,
                                 'browser': rows[i].browser,
                                 'softwareverfuegung': rows[i].softwareverfuegung,
-                                'softwareinstinteresse': rows[i].softwareinstinteresse,
+                                'softwareinteresse': rows[i].softwareinteresse,
                                 'softwareinstitut': rows[i].softwareinstitut,
                                 'softwarehochschinteresse': rows[i].softwarehochschinteresse,
                                 'softwarehochschule': rows[i].softwarehochschule,
@@ -129,9 +170,10 @@ if (url=="/submit-form"){
                                 'cloud': rows[i].cloud,
                                 'productowner': rows[i].roductowner,
                                 'bemerkungen': rows[i].bemerkungen,
-                                'datum': convertDate(rows[i].datum),
+                                'datumantrag': rows[i].datumantrag,
+                                'notizen': rows[i].notizen,
                                 'userid': rows[i].userid,
-                                'status': rows[i].status
+                                'status': statuscurrent
                             }
                             // Add object into array
                             softwareList.push(order);
@@ -188,7 +230,7 @@ if (url=="/submit-form"){
                         // HTML body
                         html:'<p><span>Liebes Applprojekte Team</span></br></br><p>Ein neuer Antrag ist eingegangen: </br>Antrag Nummer '+orderid+' </br> Name der Software '+softwarename+' </br>Direktlinkt auf Antrag: http://santra.ph.fhnw.ch/details?tsid='+orderid+' </br></br>Vielen Dank und freundliche Grüsse </br>Ihr ApplProjekte Supportteam </br>n|w</p>'
                     };
-                    //console.log('Sending Mail');
+                    console.log('Sending Mail');
                     transport.sendMail(messageSender, function(error){
 
                     });
@@ -200,22 +242,27 @@ if (url=="/submit-form"){
 
 }
 else if (url == "/user"){
+    sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
+    sql2 = "INSERT INTO orders ( institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2+"','"+nachname2+"', '"+email2+"', '"+funktion2+"' '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql1+"",
         (err, rows) => {
-            //    connection.release() // return the connection to pool
-
+            //    connection.release() // return t
+            //    he connection to pool
             if (!err) {
-                function convertDate(inputFormat) {
+                /*function convertDate(inputFormat) {
                     function pad(s) {
                         return (s < 10) ? '0' + s : s;
                     }
                     var d = new Date(inputFormat)
                     return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('.')
-                }
+                }*/
                 for (let i = 0; i < rows.length; i++) {
                     // Create an object to save current row's data
                     let statuscurrent;
                     switch (rows[i].status) {
+                        case 10:
+                            statuscurrent = 'Entwurf';
+                            break;
                         case 1:
                             statuscurrent = 'Antrag in Bearbeitung';
                             break;
@@ -252,10 +299,11 @@ else if (url == "/user"){
                         'lizenzenanzahl': rows[i].lizenzenanzahl,
                         'nutzeranzahl': rows[i].nutzeranzahl,
                         'nutzungsdauer': rows[i].nutzungsdauer,
+                        'nutzungsdauertext': rows[i].nutzungsdauertext,
                         'betriebssystem': rows[i].betriebssystem,
                         'browser': rows[i].browser,
                         'softwareverfuegung': rows[i].softwareverfuegung,
-                        'softwareinstinteresse': rows[i].softwareinstinteresse,
+                        'softwareinteresse': rows[i].softwareinteresse,
                         'softwareinstitut': rows[i].softwareinstitut,
                         'softwarehochschinteresse': rows[i].softwarehochschinteresse,
                         'softwarehochschule': rows[i].softwarehochschule,
@@ -265,9 +313,10 @@ else if (url == "/user"){
                         'vergleichbarkeit': rows[i].vergleichbarkeit,
                         'support': rows[i].support,
                         'cloud': rows[i].cloud,
+                        'cloudwo':rows[i].cloudwo,
                         'productowner': rows[i].productowner,
                         'bemerkungen': rows[i].bemerkungen,
-                        'datum': convertDate(rows[i].datum),
+                        'datumantrag': rows[i].datumantrag,
                         'userid': rows[i].userid,
                         'status': statuscurrent
                     }
@@ -278,6 +327,9 @@ else if (url == "/user"){
                 console.log(err)
             }
         })
+}
+else if (url=="/edit"){
+
 }
             setTimeout(
                 function () {

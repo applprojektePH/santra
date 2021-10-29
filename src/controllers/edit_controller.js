@@ -20,9 +20,51 @@ module.exports = function (models) {
         else
             page.path = "";
         pool.getConnection((err, connection) => {
-            if(err) throw err
+            let tsID = parseInt(req.query.tsid);
+            let status = parseInt(req.query.currenturlParam);
+            let userid = '123';
+            let orderidmail;
+            let institut = req.body.institut;
+            let professur = req.body.professur;
+            let anrede = req.body.anrede;
+            let vorname = req.body.vorname;
+            let nachname = req.body.nachname;
+            let email = req.body.email;
+            let funktion = req.body.funktion;
+            let studiengang = req.body.studiengang;
+            let modulanlass = req.body.modulanlass;
+            let szenario = req.body.szenario;
+            let softwarename = req.body.softwarename;
+            let softwarewebseite = req.body.softwarewebseite;
+            let softwareupdate = req.body.softwareupdate;
+            let softwareupdatewelches = req.body.softwareupdatewelches;
+            let lizenzenanzahl = req.body.lizenzenanzahl;
+            let nutzeranzahl = req.body.nutzeranzahl;
+            let nutzungsdauer = req.body.nutzungsdauer;
+            let betriebssystem = req.body.betriebssystem;
+            let browser = req.body.browser;
+            let softwareverfuegung = req.body.softwareverfuegung;
+            let softwareinteresse = req.body.softwareinteresse;
+            let softwareinstitut = req.body.softwareinstitut;
+            let softwarehochschinteresse = req.body.softwarehochschinteresse;
+            let softwarehochschule = req.body.softwarehochschule;
+            let lizenzinstitution = req.body.lizenzinstitution;
+            let lizenzart = req.body.lizenzart;
+            let lizenzkosten = req.body.lizenzkosten;
+            let vergleichbarkeit = req.body.vergleichbarkeit;
+            let support = req.body.support;
+            let cloud = req.body.cloud;
+            let cloudwo = req.body.cloudwo;
+            let productowner = req.body.productowner;
+            let bemerkungen = req.body.bemerkungen;
+            let datum = req.body.datum;
+            let datumantrag = req.body.datumantrag;
+            //hier status unterscheiden
+            let notizen = req.body.notizen;
+            let softwareList = [];
+
             let softwareListDetails = [];
-            connection.query('SELECT * FROM software WHERE (userid IN (SELECT id FROM users) AND orderid IN (SELECT '+tsID+' FROM software))', (err, rows) => {
+            connection.query('SELECT * FROM orders WHERE (userid IN (SELECT id FROM users) AND orderid IN (SELECT '+tsID+' FROM orders))', (err, rows) => {
                 connection.release() // return the connection to pool
                 if (!err) {
                     function convertDate(inputFormat) {
@@ -41,6 +83,11 @@ module.exports = function (models) {
                             'nachname':rows[i].nachname,
                             'email':rows[i].email,
                             'funktion':rows[i].funktion,
+                            'anrede2':rows[i].anrede2,
+                            'vorname2':rows[i].vorname2,
+                            'nachname2':rows[i].nachname2,
+                            'email2':rows[i].email2,
+                            'funktion2':rows[i].funktion2,
                             'studiengang':rows[i].studiengang,
                             'modulanlass':rows[i].modulanlass,
                             'szenario':rows[i].szenario,
@@ -50,9 +97,11 @@ module.exports = function (models) {
                             'lizenzenanzahl':rows[i].lizenzenanzahl,
                             'nutzeranzahl':rows[i].nutzeranzahl,
                             'nutzungsdauer':rows[i].nutzungsdauer,
+                            'nutzungsdauertext':rows[i].nutzungsdauertext,
                             'betriebssystem':rows[i].betriebssystem,
                             'browser':rows[i].browser,
                             'softwareverfuegung':rows[i].softwareverfuegung,
+                            'softwareinteresse':rows[i].softwareinteresse,
                             'softwareinstitut':rows[i].softwareinstitut,
                             'softwarehochschule':rows[i].softwarehochschule,
                             'lizenzinstitution':rows[i].lizenzinstitution,
@@ -61,15 +110,16 @@ module.exports = function (models) {
                             'vergleichbarkeit':rows[i].vergleichbarkeit,
                             'support':rows[i].support,
                             'cloud':rows[i].cloud,
-                            'productowner':rows[i].roductowner,
+                            'cloudwo':rows[i].cloudwo,
+                            'productowner':rows[i].productowner,
                             'bemerkungen':rows[i].bemerkungen,
-                            'datum': convertDate(rows[i].datum),
+                            'datumantrag': rows[i].datumantrag,
+                            'notizen': rows[i].notizen,
                             'userid':rows[i].userid,
                             'status':rows[i].status
                         }
                         // Add object into array
                         softwareListDetails.push(order);
-
                     } }
                 else {
                     console.log(err)
@@ -78,7 +128,7 @@ module.exports = function (models) {
             setTimeout(
                 function(){
                     // res.send(req.params.tsid);
-                    res.render('layout_edit', {
+                    res.render('layout_form-filled', {
                         "softwareListDetails": softwareListDetails
                     });
                 }, 100);

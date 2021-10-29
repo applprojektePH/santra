@@ -1,7 +1,9 @@
 var path        = require('path');
 var express     = require('express');
 const bodyParser = require('body-parser');
+const controllers = require("./controllers/");
 var jsonParser = bodyParser.json();
+
 module.exports = function (app, models) {
   app.use(bodyParser.urlencoded({ extended: false }));
   var controllers = require('./controllers/');
@@ -11,7 +13,9 @@ module.exports = function (app, models) {
   app.get('/user', controllers.userController.main);
   app.get('/info', controllers.infoController.main);
   app.get('/details', controllers.detailsController.main);
+  app.get('/remove', controllers.removeController.main);
   app.get('/edit', controllers.editController.main);
+  app.post('/edit', controllers.editedController.main);
   app.post('/submit-form', controllers.userController.main);
   app.get('/history', controllers.historyController.main);
  // app.get('/db', controllers.dbController.getOrders);

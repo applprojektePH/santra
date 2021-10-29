@@ -178,6 +178,11 @@ div.dropdown-menu{
     top: 60px;
     z-index: 2;
     border-bottom: 2px solid #dee2e6;
+    background: #fff;
+}
+.table-works tr th {
+    /* background: #fff;
+     border-bottom: 1px solid #dee2e6;*/
 }
 @media only screen and (max-width: 1255px) {
     .table-works  th {
@@ -672,10 +677,10 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     background: #fde70e;
     color: #000;
 }
-
-
 .progressbar {
     counter-reset: step;
+    display: block;
+    margin: 35px 0 100px;
 }
 .progressbar li {
     list-style-type: none;
@@ -735,6 +740,16 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     font-weight: 700;
     padding-left: 15px;
 }
+.form-group-view-wrapper span{
+    display: inline-block;
+    width: auto;
+    padding-right: 0;
+    padding-left: 5px;
+    margin-bottom: 1.5rem;
+}
+.form-group-view-wrapper label + span{
+    padding-left: 15px;
+}
 .form-group-view-wrapper p{
     padding-left: 15px;
 }
@@ -756,7 +771,7 @@ form .form-group.addone-wrapper{
     background-position: right calc(.40625em + .5rem) center;
     background-size: calc(.8125em + 1rem) calc(.8125em + 1rem);
 }
-.inputHide{
+.inputHide, inputHide2{
     display: none;
 }
 .dataTables_wrapper .dataTables_length select{
@@ -849,4 +864,29 @@ a:hover{
 .modalStatus .modal-body button{
     display: inline-block;
     margin-right: 25px;
+}
+.span-draft{
+    margin: 25px 0 25px;
+    display: block;
+    color: #FFA500;
+    font-weight: 400;
+}
+.page-item.active .page-link{
+    z-index: 1;
+}
+.accordion-item {
+    margin-bottom: 0;
+}
+.form-date{
+    font-weight:500;
+}
+.fixed-table-toolbar .search{
+    width: 50%;
+    margin-bottom:15px;
+}
+.fixed-table-loading {
+    display: none;
+}
+.fixed-table-pagination .pagination-detail{
+    display: none;
 }

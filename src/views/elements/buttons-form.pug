@@ -17,8 +17,7 @@ span.service-buttons-wrapper
                     | Wollen Sie wirklich die Formulardaten verwerfen?
                 .modal-footer
                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
-                    a(href='/form')
-                        button.btn.btn-primary.btn-sm(type='button') Daten l&ouml;schen
+                    button.btn.btn-primary.btn-sm.btn-remove(type='submit' action="/user" name='sub') Daten l&ouml;schen
     button.btn.btn-primary.btn-sm.floatright(type='button' data-bs-toggle='modal' data-bs-target='#removeModalBack')
         | Zur&uuml;ck zur Startseite
         i.fas.fa-search

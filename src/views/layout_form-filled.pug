@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head
+        include header
+    body
+        #content
+            .container
+                .row
+                    .col-md-12
+                        br
+                        br
+                        for order in softwareListDetails
+                            h2(id='tables') Softwareantrag #!{order.orderid} !{order.softwarename}
+                        form#formOrder.needs-validation.form-edit(novalidate='' method="POST")
+                            include elements/buttons-edit
+                            br
+                            br
+                            include form
+        include footer
+

@@ -10,7 +10,11 @@ module.exports = function(models) {
 
   this.detailsController = new (require('./details_controller'))(models);
 
+  this.removeController = new (require('./remove_controller'))(models);
+
   this.editController = new (require('./edit_controller'))(models);
+
+  this.editedController = new (require('./edited_controller'))(models);
 
   this.dbController = new (require('./db_controller'))(models);
 

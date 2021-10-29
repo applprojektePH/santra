@@ -1,6 +1,7 @@
 .row
     .col-md-12
-        table.table.table-striped.table-works
+        table.table.table-striped.table-works(data-toggle="table" data-pagination="true"
+            data-search="true" data-sort="true")
             thead
                 tr(role='row')
                     th(role='columnheader') Ticketnr.
@@ -17,10 +18,8 @@
                             a#link(href="/details?tsid="+ order.orderid class="link-id")= order.orderid
                         td= order.softwarename
                         td= order.softwarename
-                        td= order.datum
+                        td= order.datumantrag
                         td
-                            span= order.anrede
-                            span &nbsp;
                             span= order.vorname
                             span &nbsp;
                             span= order.nachname
@@ -51,21 +50,17 @@ script(type='text/javascript' src="./static/js/libs/bootstrap.bundle.min.js" cro
 //script(src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js")
 
 script(type='text/javascript' src="./static/js/libs/cookiealert.js")
-script(type='text/javascript' src="./static/js/libs/datatables.js")
 script(type='text/javascript' src="./static/js/all.js")
 script(type='text/javascript' src="./static/js/main.js")
 script(type='text/javascript' src="./static/js/custom.js")
-    script(type='text/javascript' src="./static/js/libs/datepicker.js")
-        script(type='text/javascript' src="./static/js/libs/datepicker.js")
-            script(type='text/javascript' src="./static/js/validator.js")
+script(type='text/javascript' src="./static/js/validator.js")
+//script(type='text/javascript' src="./static/js/libs/bootstrap-table.js")
+
+script(type="text/javascript" src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js")
+script(type='text/javascript' src="./static/js/libs/bootstrap-extension.js")
 script(type='text/javascript').
     $(document).ready(function () {
 
-        // $(".table-works").DataTable({
-        //     // "ajax": {
-        //     //     "url": "/user",
-        //     //     "dataSrc": test
-        //     // },
-        // });
-        });
+
+    });
 

@@ -1,0 +1,20 @@
+span.service-buttons-wrapper
+    a(href="/user")
+        button.btn.btn-primary.btn-sm.floatright(type='button')
+                | Zur&uuml;ck zu
+                | allen Antr&auml;gen
+                i.fas.fa-search
+    button.btn.btn-primary.btn-sm.floatright.btn-back-edit(type='button')
+            | Zur&uuml;ck zum Antrag
+            i.fas.fa-search
+br
+
+script(type='text/javascript' src="./static/js/libs/jquery.js")                                                                                                             button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal')
+script(type='text/javascript').
+    $(document).ready(function () {
+        $('.btn-back-edit').click(function (event) {
+        const urlParams = new URLSearchParams(window.location.search);
+            const currenturlParam = urlParams.get('tsid');
+            window.location.replace("/details?tsid="+currenturlParam);
+        });
+    });
