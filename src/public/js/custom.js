@@ -36,14 +36,6 @@ $( document ).ready(function() {
                 });
             });
         });
-
-        $(".custom-control-button-open").click(function () {
-            $(this).next(".inputHide").delay(300).slideDown("slow");
-        });
-        $(".custom-control-button-close").click(function () {
-            $(this).closest(".inputHide").delay(300).slideUp("slow");
-        });
-
     }
     $('#buttonsubmitformdraft').click(function () {
         $('#form-status-input').attr('value', '10');

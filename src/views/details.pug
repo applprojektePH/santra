@@ -252,5 +252,13 @@
                                 label(for='form-function')
                                     | Datum
                                 p= order.datumantrag
-
-
+script(type='text/javascript' src="./static/js/libs/jquery.js")                                                                                                             button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal')
+script(type='text/javascript').
+    $(document).ready(function () {
+        $(".custom-control-button-open").click(function () {
+            $(this).next(".inputHide").delay(300).slideDown("slow");
+        });
+        $(".custom-control-button-close").click(function () {
+            $(this).closest(".inputHide").delay(300).slideUp("slow");
+        });
+    });
