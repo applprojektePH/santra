@@ -12,6 +12,9 @@ const pool  = mysql.createPool({
 module.exports = function (models) {
     let page = {};
     this.main = function (req, res, next) {
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        res.setHeader("Expires", "0"); // Proxies.
         let tsID = parseInt(req.query.tsid);
         let datetime = req.query.datetime;
         let mailuser = req.query.mailuser;
@@ -20,8 +23,11 @@ module.exports = function (models) {
         let nachname;
         let email;
         let orderid;
-        let statuschange =  parseInt(req.query.statuschange);
-        console.log(statuschange);
+        let reqBody = req.body;
+        let edited = reqBody.edited;
+
+            let statuschange = parseInt(req.query.statuschange);
+            console.log('statuschange' + statuschange);
 
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
@@ -33,9 +39,17 @@ module.exports = function (models) {
             if(err) throw err
             let softwareListDetails = [];
             sql1 = 'SELECT * FROM orders WHERE (userid IN (SELECT id FROM users) AND orderid IN (SELECT '+tsID+' FROM orders))';
+            if ( (!isNaN(edited))) {
+                console.log('statuschangemail'+statuschange);
+                sql4 = 'UPDATE orders SET status='+statuschange+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
+                connection.query(""+sql4+"",
+                    (err, rows) => {
+                    })
+            }
             let statusset = parseInt(req.query.status);
             let mailt = req.query.mailtext;
             if ( (!isNaN(statuschange))) {
+                console.log('statuschangemail'+statuschange);
                 sql4 = 'UPDATE orders SET status='+statuschange+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
                 connection.query(""+sql4+"",
                     (err, rows) => {
@@ -125,10 +139,14 @@ module.exports = function (models) {
                 }
                 if(typeof statusset != 'undefined') {
                     if(statusset == 2){
-                       let transport2 = nodemailer.createTransport("SMTP", {
-                           host: "lmailer.fhnw.ch",
-                           port: 25
-                       });
+                        let transport2 = nodemailer.createTransport({
+                            host: "lmailer.fhnw.ch",
+                            secure: false, // use SSL
+                            port: 25,
+                            tls: {
+                                rejectUnauthorized: false
+                            }
+                        });
                        let messageSender2 = {
                            // sender info
                            from: 'Santra <applprojekte.ph@fhnw.ch>',
@@ -143,23 +161,26 @@ module.exports = function (models) {
                            // HTML body
                            html: ''+mailt
                        };
-                        transport2.sendMail(messageSender2, function(error){
+                       /* transport2.sendMail(messageSender2, function(error){
                                 if(error){
                                     console.log('Error occured');
                                     console.log(error.message);
                                     return;
                                 }
-
                                 console.log('2Message sent successfully!');
                                 transport2.close();
-                            });
+                            });*/
                    }
                          else if (statusset == 3)  {
                        console.log('status3');
-                       let transport2 = nodemailer.createTransport("SMTP", {
-                           host: "lmailer.fhnw.ch",
-                           port: 25
-                       });
+                        let transport2 = nodemailer.createTransport({
+                            host: "lmailer.fhnw.ch",
+                            secure: false, // use SSL
+                            port: 25,
+                            tls: {
+                                rejectUnauthorized: false
+                            }
+                        });
                        let messageSender2 = {
                            // sender info
                            from: 'Santra 2 <applprojekte.ph@fhnw.ch>',
@@ -213,16 +234,20 @@ module.exports = function (models) {
                            console.log('Message sent successfully!');
                            transport2.close();
                        });
-                       transport2.sendMail(messageSupport2, function(error){
+                       /*transport2.sendMail(messageSupport2, function(error){
                            transport2.close();
-                       });
+                       });*/
                         }
                         else if (statusset == 4) {
                        console.log('status4');
-                       let transport3 = nodemailer.createTransport("SMTP", {
-                           host: "lmailer.fhnw.ch",
-                           port: 25
-                       });
+                        let transport3 = nodemailer.createTransport({
+                            host: "lmailer.fhnw.ch",
+                            secure: false, // use SSL
+                            port: 25,
+                            tls: {
+                                rejectUnauthorized: false
+                            }
+                        });
                        let messageSender3 = {
                            // sender info
                            from: '3 Santra <applprojekte.ph@fhnw.ch>',
@@ -276,17 +301,21 @@ module.exports = function (models) {
                            console.log('Message sent successfully!');
                            transport3.close();
                        });
-                       transport3.sendMail(messageSupport3, function(error){
+                       /*transport3.sendMail(messageSupport3, function(error){
                            transport3.close();
-                       });
+                       });*/
                    }
 
                             else if (statusset==5){
                        console.log('status5');
-                       let transport4 = nodemailer.createTransport("SMTP", {
-                           host: "lmailer.fhnw.ch",
-                           port: 25
-                       });
+                        let transport4 = nodemailer.createTransport({
+                            host: "lmailer.fhnw.ch",
+                            secure: false, // use SSL
+                            port: 25,
+                            tls: {
+                                rejectUnauthorized: false
+                            }
+                        });
                        let messageSender4 = {
                            // sender info
                            from: 'Status 4 Santra <applprojekte.ph@fhnw.ch>',
@@ -340,17 +369,21 @@ module.exports = function (models) {
                            //console.log('4Message sent successfully!');
                            transport4.close();
                        });
-                       transport4.sendMail(messageSupport4, function(error){
+                      /* transport4.sendMail(messageSupport4, function(error){
                            transport4.close();
-                       });
+                       });*/
                    }
 
                             else if(statusset == 5){
                        console.log('status5');
-                       let transport5 = nodemailer.createTransport("SMTP", {
-                           host: "lmailer.fhnw.ch",
-                           port: 25
-                       });
+                        let transport5 = nodemailer.createTransport({
+                            host: "lmailer.fhnw.ch",
+                            secure: false, // use SSL
+                            port: 25,
+                            tls: {
+                                rejectUnauthorized: false
+                            }
+                        });
                        let messageSender5 = {
                            // sender info
                            from: 'Status 5 Santra <applprojekte.ph@fhnw.ch>',
@@ -404,9 +437,9 @@ module.exports = function (models) {
                            //  console.log('5Message sent successfully!');
                            transport5.close();
                        });
-                       transport5.sendMail(messageSupport5, function(error){
+                       /*transport5.sendMail(messageSupport5, function(error){
                            transport5.close();
-                       });
+                       });*/
                    }
                 }
             })

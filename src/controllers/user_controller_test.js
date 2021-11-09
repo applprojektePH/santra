@@ -14,9 +14,6 @@ module.exports = function (models) {
     let page = {};
     let CONSTANTS = require("../libs/constants");
     this.main = function (req, res) {
-        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-        res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-        res.setHeader("Expires", "0"); // Proxies.
         let url = req.url;
         let softwareList = [];
         page.title = "Santra - Softwareantrag\n" +
@@ -29,59 +26,59 @@ module.exports = function (models) {
         pool.getConnection((err, connection) => {
             if (err) throw err
             console.log('connected as id ' + connection.threadId)
-            let orderid = '';
-            let institut = req.body.institut;
-            let professur = req.body.professur;
-            let anrede = req.body.anrede;
-            let vorname = req.body.vorname;
-            let nachname = req.body.nachname;
-            let email = req.body.email;
-            let funktion = req.body.funktion;
-            let anrede2 = req.body.anrede2;
-            let vorname2 = req.body.vorname2;
-            let nachname2 = req.body.nachname2;
-            let email2 = req.body.email2;
-            let funktion2 = req.body.funktion2;
-            let studiengang = req.body.studiengang;
-            let modulanlass = req.body.modulanlass;
-            let szenario = req.body.szenario;
-            let softwarename = req.body.softwarename;
-            let softwarewebseite = req.body.softwarewebseite;
-            let softwareupdate = req.body.softwareupdate;
-            let softwareupdatewelches = req.body.softwareupdatewelches;
-            let lizenzenanzahl = req.body.lizenzenanzahl;
-            let nutzeranzahl = req.body.nutzeranzahl;
-            let nutzungsdauer = req.body.nutzungsdauer;
-            let nutzungsdauertext = req.body.nutzungsdauertext;
-            let betriebssystem = req.body.betriebssystem;
-            let browser = req.body.browser;
-            let softwareverfuegung = req.body.softwareverfuegung;
-            let softwareinteresse = req.body.softwareinteresse;
-            let softwareinstitut = req.body.softwareinstitut;
-            let softwarehochschinteresse = req.body.softwarehochschinteresse;
-            let softwarehochschule = req.body.softwarehochschule;
-            let lizenzinstitution = req.body.lizenzinstitution;
-            let lizenzart = req.body.lizenzart;
-            let lizenzkosten = req.body.lizenzkosten;
-            let vergleichbarkeit = req.body.vergleichbarkeit;
-            let support = req.body.support;
-            let cloud = req.body.cloud;
-            let cloudwo = req.body.cloudwo;
-            let productowner = req.body.productowner;
-            let bemerkungen = req.body.bemerkungen;
-            let datumantrag = req.body.datumantrag;
-            let userid = req.body.userid;
-            //hier status unterscheiden
-            let notizen = req.body.notizen;
-            let status = req.body.status;
-            let softwareList = [];
-            let orderidformail;
-
 if (url=="/submit-form"){
+    let orderid = '';
+    let institut = req.body.institut;
+    let professur = req.body.professur;
+    let anrede = req.body.anrede;
+    let vorname = req.body.vorname;
+    let nachname = req.body.nachname;
+    let email = req.body.email;
+    let funktion = req.body.funktion;
+    let anrede2 = req.body.anrede2;
+    let vorname2 = req.body.vorname2;
+    let nachname2 = req.body.nachname2;
+    let email2 = req.body.email2;
+    let funktion2 = req.body.funktion2;
+    let studiengang = req.body.studiengang;
+    let modulanlass = req.body.modulanlass;
+    let szenario = req.body.szenario;
+    let softwarename = req.body.softwarename;
+    let softwarewebseite = req.body.softwarewebseite;
+    let softwareupdate = req.body.softwareupdate;
+    let softwareupdatewelches = req.body.softwareupdatewelches;
+    let lizenzenanzahl = req.body.lizenzenanzahl;
+    let nutzeranzahl = req.body.nutzeranzahl;
+    let nutzungsdauer = req.body.nutzungsdauer;
+    let nutzungsdauertext = req.body.nutzungsdauertext;
+    let betriebssystem = req.body.betriebssystem;
+    let browser = req.body.browser;
+    let softwareverfuegung = req.body.softwareverfuegung;
+    let softwareinteresse = req.body.softwareinteresse;
+    let softwareinstitut = req.body.softwareinstitut;
+    let softwarehochschinteresse = req.body.softwarehochschinteresse;
+    let softwarehochschule = req.body.softwarehochschule;
+    let lizenzinstitution = req.body.lizenzinstitution;
+    let lizenzart = req.body.lizenzart;
+    let lizenzkosten = req.body.lizenzkosten;
+    let vergleichbarkeit = req.body.vergleichbarkeit;
+    let support = req.body.support;
+    let cloud = req.body.cloud;
+    let cloudwo = req.body.cloudwo;
+    let productowner = req.body.productowner;
+    let bemerkungen = req.body.bemerkungen;
+    let datumantrag = req.body.datumantrag;
+    let userid = req.body.userid;
+    //hier status unterscheiden
+    let notizen = req.body.notizen;
+    let status = req.body.status;
+    let softwareList = [];
+    let orderidformail;
     let vorname2extr;
     let nachname2extr;
     let email2extr;
     let funktion2extr;
+
     for (let i = 0; i < vorname2.length; i++) {
         vorname2extr = vorname2[1];
     }
@@ -109,6 +106,7 @@ if (url=="/submit-form"){
                         for (let i = 0; i < rows.length; i++) {
                             let statuscurrent;
                             orderidformail = rows[0].orderid;
+                            console.log(orderidformail);
                             switch (rows[i].status) {
                                 case 10:
                                     statuscurrent = 'Entwurf';
@@ -251,11 +249,11 @@ if (url=="/submit-form"){
                     }
             })
         })
+
 }
 else if (url == "/user"){
-        var tsID = req.body;
     sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
-    //sql2 = "INSERT INTO orders ( institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2+"','"+nachname2+"', '"+email2+"', '"+funktion2+"' '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
+    sql2 = "INSERT INTO orders ( institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2+"','"+nachname2+"', '"+email2+"', '"+funktion2+"' '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql1+"",
         (err, rows) => {
             //    connection.release() // return t
@@ -340,7 +338,9 @@ else if (url == "/user"){
             }
         })
 }
+else if (url=="/edit"){
 
+}
             setTimeout(
                 function () {
                     res.render('layout_user', {

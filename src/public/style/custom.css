@@ -164,6 +164,9 @@ div.dropdown-menu{
     width: 100%;
     min-width: 148px;
 }
+.table-works a{
+    text-decoration: underline;
+}
 .table-works button i{
     text-align: left;
 }
@@ -691,6 +694,7 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     text-align: center;
     text-transform: uppercase;
     color: #7d7d7d;
+    background: none;
 }
 .progressbar li:before {
     width: 30px;
@@ -863,13 +867,17 @@ a:hover{
 }
 .modalStatus .modal-body button{
     display: inline-block;
-    margin-right: 25px;
+    margin-bottom: 15px;
 }
 .span-draft{
     margin: 25px 0 25px;
     display: block;
     color: #FFA500;
     font-weight: 400;
+}
+.green{
+    color: #55b776;
+    display: block;
 }
 .page-item.active .page-link{
     z-index: 1;
@@ -889,4 +897,7 @@ a:hover{
 }
 .fixed-table-pagination .pagination-detail{
     display: none;
+}
+.modal-backdrop{
+    z-index: 1;
 }

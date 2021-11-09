@@ -12,11 +12,12 @@
                     th(role='columnheader') Institut
                     th(role='columnheader') Status
             tbody
+            if (typeof (softwareList) !== 'undefined')
                 for order in softwareList
                         tr
+                            order.orderid
                         td
                             a#link(href="/details?tsid="+ order.orderid class="link-id")= order.orderid
-                        td= order.softwarename
                         td= order.softwarename
                         td= order.datumantrag
                         td
@@ -27,40 +28,10 @@
                         td= order.status
 
 script(type='text/javascript' src="./static/js/libs/jquery.js")
-script(type='text/javascript' src="./static/js/libs/datepicker.js")
-script(type='text/javascript' src="./static/js/libs/datepicker-de.js")
 script(type='text/javascript' src="./static/js/libs/bootstrap.bundle.min.js" crossorigin="anonymous")
-    script(type='text/javascript' src="./static/js/libs/tether.js")
-        script(type='text/javascript' src="./static/js/libs/bootstrap.js")
-            script(type='text/javascript' src="./static/js/libs/tether.js")
-//script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js')
-//script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.de.min.js')
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/vendor/tether.min.js")
-//
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/dist/js/bootstrap.js")
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/vendor/anchor.min.js")
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/vendor/clipboard.min.js")
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/vendor/holder.min.js")
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/src/application.js")
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/ie10-viewport-bug-workaround.js")
-//script(type='text/javascript' src="https://webteam.pages.fhnw.ch/bootstrap-styleguide/assets/js/ie-emulation-modes-warning.js")
-//
-//script(type='text/javascript' src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js")
-
-//script(src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js")
-
-script(type='text/javascript' src="./static/js/libs/cookiealert.js")
-script(type='text/javascript' src="./static/js/all.js")
-script(type='text/javascript' src="./static/js/main.js")
 script(type='text/javascript' src="./static/js/custom.js")
-script(type='text/javascript' src="./static/js/validator.js")
-//script(type='text/javascript' src="./static/js/libs/bootstrap-table.js")
-
+script(type='text/javascript' src="./static/js/libs/bootstrap-table.js")
 script(type="text/javascript" src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js")
 script(type='text/javascript' src="./static/js/libs/bootstrap-extension.js")
-script(type='text/javascript').
-    $(document).ready(function () {
 
-
-    });
 

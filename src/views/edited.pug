@@ -4,5 +4,14 @@ br
     .container
         .row
             .col-md-12
-            h3(id='tables') Ihr Softwareantrag # !{orderid} wurde erfolgreich gespeichert
-            include elements/buttons-back
+                h3(class='green') Ihre Änderungen wurden erfolgreich gespeichert
+                    // include elements/buttons-back
+    script(type='text/javascript' src="./static/js/libs/jquery.js")                                                                                                             button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal')
+    script(type='text/javascript').
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const currenturlParam = urlParams.get('tsid');
+            window.setTimeout(function() {
+            window.location.replace("/details?tsid=" + currenturlParam);
+            }, 1000);
+        });

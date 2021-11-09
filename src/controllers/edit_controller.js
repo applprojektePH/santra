@@ -12,7 +12,11 @@ module.exports = function (models) {
     let page = {};
     let CONSTANTS = require("../libs/constants");
     this.main = function (req, res, next) {
-        var tsID = parseInt(req.query.tsid);
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        res.setHeader("Expires", "0"); // Proxies.
+       // let tsID = parseInt(req.query.tsid);
+
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         if(CONSTANTS.SETTINGS.WEB.SUB_PATH)

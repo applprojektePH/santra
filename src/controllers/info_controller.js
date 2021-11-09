@@ -4,7 +4,9 @@ module.exports = function (models) {
 	let CONSTANTS = require("../libs/constants");
 
 	this.main = function (req, res, next) {
-		console.log(new Date().toLocaleString() + " - rendering topic");
+		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		res.setHeader("Expires", "0"); // Proxies.
 
 		page.title = "Santra - Softwareantrag\n" +
 			"Pädagogische Hochschule FHNW";
@@ -12,11 +14,6 @@ module.exports = function (models) {
 			page.path = "/"+CONSTANTS.SETTINGS.WEB.PATH_STRING;
 		else
 			page.path = "";
-
-		if(Object.keys(req.query).length === 0)
-			req.query.topic = "";
-
-		page.query = req.query;
 
 		res.render('layout_info', {
 			page: page

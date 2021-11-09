@@ -10,16 +10,16 @@ $( document ).ready(function() {
     if (window.location.href.indexOf("form") > -1) {
 
 //only edit and form functions
-        var maxChar = parseInt($('.textarea-js').attr('maxlength'));
-        $('.textarea-js[maxlength]').parent().find('.charleft').html(maxChar - $(this).val().length);
-        var char = $('.textarea-js').val().length;
-        $('.textarea-js').parent().find('.charleft').html(maxChar - char);
-        $('.textarea-js[maxlength]').keyup(function(){
-            if($(this).val().length > maxChar){
-                $(this).val($(this).val().substr(0, maxChar));
-            }
-            $(this).parent().find('.charleft').html(maxChar - $(this).val().length);
-        });
+//         var maxChar = parseInt($('.textarea-js').attr('maxlength'));
+//         $('.textarea-js[maxlength]').parent().find('.charleft').html(maxChar - $(this).val().length);
+//         var char = $('.textarea-js').val().length;
+//         $('.textarea-js').parent().find('.charleft').html(maxChar - char);
+//         $('.textarea-js[maxlength]').keyup(function(){
+//             if($(this).val().length > maxChar){
+//                 $(this).val($(this).val().substr(0, maxChar));
+//             }
+//             $(this).parent().find('.charleft').html(maxChar - $(this).val().length);
+//         });
 
         $('.submitformbtn').click(function () {
             $("#accordionForm").find(".accordion-item").each(function () {
@@ -27,7 +27,6 @@ $( document ).ready(function() {
                     if (($(this).val() == "") || ($(this).val() == null)) {
                         let current = $(this).closest(".accordion-collapse").prev();
                         current.addClass('required-header');
-                        //alert($(this).val());
                     } else {
                         let current = $(this).closest(".accordion-collapse").prev();
                         current.removeClass('required-header');
@@ -39,14 +38,12 @@ $( document ).ready(function() {
     }
     $('#buttonsubmitformdraft').click(function () {
         $('#form-status-input').attr('value', '10');
-
         let d = new Date();
         let month = d.getMonth()+1;
         let day = d.getDate();
         let hour = d.getHours();
         let minute = d.getMinutes();
         let second = d.getSeconds();
-
         let datetime = d.getFullYear() + '-' +
             ((''+month).length<2 ? '0' : '') + month + '-' +
             ((''+day).length<2 ? '0' : '') + day + ' ' +
@@ -85,38 +82,47 @@ $( document ).ready(function() {
                 });
             }
         });
-    $('.li-status').click(function (event) {
-        let status =  $(this).attr('id').slice(-1);
-           // $(this).unbind("click");
-            //$(this).prevAll().unbind("click");
-        $(this).addClass('preactive');
-        $(this).prevAll().addClass('preactive');
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const currenturlParam = urlParams.get('tsid');
-        //     $.ajax({
-        //         type: 'GET',
-        //         data:{status:status},
-        //         url: '/details?tsid='+currenturlParam+'&st='+status,
-        //         error: function (xhr, ajaxOptions, thrownError) {
-        //             alert(xhr.status);
-        //             alert(thrownError);
-        //         }
-        //     });
-        });
-
     $('.button-email-send').click(function (event) {
+        $(this).append('span');
+        $(this).closest('span').text('Ihr E-Mail wurde erfolgreich an Benutzer versendet').addClass('green');
+    });
+
+    $('.li-status').click(function (event) {
+        $(this).prevAll().addClass('active');
+    })
+    // $('.li-status').click(function (event) {
+    //     let status =  $(this).attr('id').slice(-1);
+    //        $(this).unbind("click");
+    //         $(this).prevAll().unbind("click");
+    //     // $(this).addClass('preactive');
+    //     // $(this).prevAll().addClass('preactive');
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const currenturlParam = urlParams.get('tsid');
+    //         $.ajax({
+    //             type: 'GET',
+    //             data:{status:status},
+    //             url: '/details?tsid='+currenturlParam+'&st='+status,
+    //             error: function (xhr, ajaxOptions, thrownError) {
+    //                 alert(xhr.status);
+    //                 alert(thrownError);
+    //             }
+    //         });
+    //     });
+
+    $('.button-email-send').click(function (e) {
+        e.preventDefault();
         let mailtype =  $(this).attr('class').split(' ')[0].slice(-1);
         let status =  $(this).attr('class').split(' ')[1].slice(-1);
         const urlParams = new URLSearchParams(window.location.search);
         const currenturlParam = urlParams.get('tsid');
-        let mailtext = $(this).prev().val();
+        let mailtext = $(this).prevAll().val();
+        alert(mailtext);
         let d = new Date();
         let month = d.getMonth()+1;
         let day = d.getDate();
         let hour = d.getHours();
         let minute = d.getMinutes();
         let second = d.getSeconds();
-
         let datetime = d.getFullYear() + '-' +
             ((''+month).length<2 ? '0' : '') + month + '-' +
             ((''+day).length<2 ? '0' : '') + day + ' ' +
@@ -127,10 +133,11 @@ $( document ).ready(function() {
             type: 'GET',
             data:{status:status},
             url: '/details?tsid='+currenturlParam+'&st='+status+'&mailtext='+mailtext+'&datetime='+datetime+'&mailtype='+mailtype,
-            // success: function(data) {
-            //     alert();
-            //     $(this).parent(".inputHide").delay(300).slideDown("slow");
-            // },
+            success: function(data) {
+                alert('ajax');
+
+                $(this).parent(".inputHide").delay(300).slideDown("slow");
+            },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);
                 alert(thrownError);
@@ -433,6 +440,33 @@ $( document ).ready(function() {
     //     }
     // };
     //
+    $('.link-id-delete').click(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currenturlParam = urlParams.get('tsid');
+        $.ajax({
+            type: 'post',
+            data:{str:parseInt(currenturlParam)},
+            url: '/user'
+        });
+        setTimeout(
+            function () {
+        window.location.replace('/user');
+            }, 500);
+    })
+  /*  $('.link-id-edit').click(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currenturlParam = urlParams.get('tsid');
+        window.location.replace('/details?tsid='+currenturlParam);
+        $.ajax({
+            type: 'post',
+            data:{edited: 'true'},
+            url: '/details?tsid='+currenturlParam
+        });
+        setTimeout(
+            function () {
+                window.location.replace('/details?tsid='+currenturlParam);
+            }, 500);
+    })*/
     $('#pdfexport').click(function () {
         doc.fromHTML($('.form-group-view-wrapper').html(), 15, 15, {
             'width': 170,
