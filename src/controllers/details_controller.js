@@ -26,8 +26,9 @@ module.exports = function (models) {
         let reqBody = req.body;
         let edited = reqBody.edited;
 
-            let statuschange = parseInt(req.query.statuschange);
-            console.log('statuschange' + statuschange);
+
+        let statuschange = parseInt(req.query.statuschange);
+            console.log('statuschange'+ mailtype);
 
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
@@ -55,7 +56,6 @@ module.exports = function (models) {
                     (err, rows) => {
                     })
             }
-           // deaktiviert for tests
            if ( (!isNaN(statusset))) {
                     sql2 = 'UPDATE orders SET status='+statusset+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
                     connection.query(""+sql2+"",
@@ -161,7 +161,7 @@ module.exports = function (models) {
                            // HTML body
                            html: ''+mailt
                        };
-                       /* transport2.sendMail(messageSender2, function(error){
+                        transport2.sendMail(messageSender2, function(error){
                                 if(error){
                                     console.log('Error occured');
                                     console.log(error.message);
@@ -169,7 +169,7 @@ module.exports = function (models) {
                                 }
                                 console.log('2Message sent successfully!');
                                 transport2.close();
-                            });*/
+                            });
                    }
                          else if (statusset == 3)  {
                        console.log('status3');
@@ -234,9 +234,9 @@ module.exports = function (models) {
                            console.log('Message sent successfully!');
                            transport2.close();
                        });
-                       /*transport2.sendMail(messageSupport2, function(error){
+                       transport2.sendMail(messageSupport2, function(error){
                            transport2.close();
-                       });*/
+                       });
                         }
                         else if (statusset == 4) {
                        console.log('status4');
@@ -301,9 +301,9 @@ module.exports = function (models) {
                            console.log('Message sent successfully!');
                            transport3.close();
                        });
-                       /*transport3.sendMail(messageSupport3, function(error){
+                       transport3.sendMail(messageSupport3, function(error){
                            transport3.close();
-                       });*/
+                       });
                    }
 
                             else if (statusset==5){
@@ -366,12 +366,12 @@ module.exports = function (models) {
                                console.log(error.message);
                                return;
                            }
-                           //console.log('4Message sent successfully!');
+                           console.log('4Message sent successfully!');
                            transport4.close();
                        });
-                      /* transport4.sendMail(messageSupport4, function(error){
+                       transport4.sendMail(messageSupport4, function(error){
                            transport4.close();
-                       });*/
+                       });
                    }
 
                             else if(statusset == 5){
@@ -434,12 +434,12 @@ module.exports = function (models) {
                                console.log(error.message);
                                return;
                            }
-                           //  console.log('5Message sent successfully!');
+                             console.log('5Message sent successfully!');
                            transport5.close();
                        });
-                       /*transport5.sendMail(messageSupport5, function(error){
+                       transport5.sendMail(messageSupport5, function(error){
                            transport5.close();
-                       });*/
+                       });
                    }
                 }
             })

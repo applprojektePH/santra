@@ -14,7 +14,6 @@ module.exports = function (models) {
     this.main = function (req, res, next) {
         let tsID = parseInt(req.query.tsid);
         let status = req.query.st;
-        console.log(status);
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -24,7 +23,6 @@ module.exports = function (models) {
         pool.getConnection((err, connection) => {
             if(err) throw err
             let softwareListHistory = [];
-            let
             sql1 = 'SELECT * FROM history WHERE (orderid = "'+tsID+'")';
             connection.query(""+sql1+"", (err, rows) => {
                 //connection.release() // return the connection to pool

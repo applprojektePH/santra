@@ -16,9 +16,12 @@
     "mysql2": "^2.2.5",
     "nodemailer": "^6.7.0",
     "orientjs": "^3.0.11",
+    "passport": "^0.5.0",
+    "passport-saml": "^3.2.0",
     "pug": "^3.0.2",
     "q": "^1.5.0",
     "sequelize": "^6.6.2",
+    "shibboleth": "^0.1.4",
     "winston": "^2.3.1",
     "xlsjs": "^0.7.6",
     "xlsx": "^0.17.1"

@@ -242,11 +242,11 @@ input#form-status-input.form-control.hidden(type='text' required1='' name='statu
                                                                                            | #{order.szenario}`
                                                                         else
                                                                                 textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required1='' name='szenario')
-                                                                        small.floatright.text-small-char
-                                                                                | Noch
-                                                                                | &nbsp;
-                                                                                span.charleft
-                                                                                |      Zeichen
+                                                                        //small.floatright.text-small-char
+                                                                        //        | Noch
+                                                                        //        | &nbsp;
+                                                                        //        span.charleft
+                                                                        //        |      Zeichen
                                                                         .invalid-feedback
                                                                                 | Pflichtfeld
                                                                         br
@@ -747,9 +747,10 @@ input#form-status-input.form-control.hidden(type='text' required1='' name='statu
                                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                 for order in softwareListDetails
                                                                                                                  if order.notizen
+                                                                                                                        br
                                                                                                                         label.form-label(for='validationTextarea') Bemerkungen
                                                                                                                                 textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required1='' name='notizen')
-                                                                                                                                        | #{order.notizen}`
+                                                                                                                                        | #{order.notizen}
                                                                                                         .row
                                                                                                                 .col-md-6.fields
                                                                                                                         br
@@ -772,8 +773,11 @@ input#form-status-input.form-control.hidden(type='text' required1='' name='statu
                                                                                                                 | Maximale Anzahl Felder erreicht
                                                                                                         .modal-footer
 
-script(type='text/javascript' src="./static/js/libs/jquery.js")                                                                                                             button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal')
+script(type='text/javascript' src="./static/js/libs/jquery.js")
+script(type='text/javascript' src="./static/js/validator.js")
+
 script(type='text/javascript').
+
         $(document).ready(function () {
                 if (window.location.href.indexOf("edit") > -1) {
                         $("form").find(".form-select").each(function () {
@@ -839,4 +843,72 @@ script(type='text/javascript').
                         (('' + second).length < 2 ? '0' : '') + second;
                 $('.form-date').text(datetime);
                 $('.form-date-input').attr('value', datetime);
+
+                (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                        event.preventDefault()
+                                event.stopPropagation()
+                }
+
+                        form.classList.add('was-validated')
+                }, false)
+                })
+                })()
+                // $('form').bootstrapValidator({
+                //     feedbackIcons: {
+                //         valid: 'glyphicon glyphicon-ok',
+                //         invalid: 'glyphicon glyphicon-remove',
+                //         validating: 'glyphicon glyphicon-refresh'
+                //     },
+                //     fields: {
+                //         firstName: {
+                //             validators: {
+                //                 notEmpty: {
+                //                     message: 'The first name is required and cannot be empty'
+                //                 }
+                //             }
+                //         },
+                //         lastName: {
+                //             validators: {
+                //                 notEmpty: {
+                //                     message: 'The last name is required and cannot be empty'
+                //                 }
+                //             }
+                //         },
+                //         email: {
+                //             validators: {
+                //                 notEmpty: {
+                //                     message: 'The email address is required'
+                //                 },
+                //                 emailAddress: {
+                //                     message: 'The input is not a valid email address'
+                //                 }
+                //             }
+                //         },
+                //         gender: {
+                //             validators: {
+                //                 notEmpty: {
+                //                     message: 'The gender is required'
+                //                 }
+                //             }
+                //         }
+                //     },
+                //     submitHandler: function(validator, form, submitButton) {
+                //         var fullName = [validator.getFieldElements('firstName').val(),
+                //             validator.getFieldElements('lastName').val()].join(' ');
+                //         alert('Hello ' + fullName);
+                //     }
+               // });
+
+
+
         });

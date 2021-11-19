@@ -128,6 +128,9 @@ if (url=="/submit-form"){
                                 case 5:
                                     statuscurrent = 'Antrag abgeschlossen';
                                     break;
+                                case 6:
+                                    statuscurrent = 'Antrag abgeschlossen';
+                                    break;
                             }
                             // Create an object to save current row's data
                             let order = {
@@ -288,6 +291,9 @@ else if (url == "/user"){
                             statuscurrent = 'Antrag Entscheid';
                             break;
                         case 5:
+                            statuscurrent = 'Antrag abgeschlossen';
+                            break;
+                        case 6:
                             statuscurrent = 'Antrag abgeschlossen';
                             break;
                     }

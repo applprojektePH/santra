@@ -14,7 +14,7 @@
                     if(order.status != 10)
                         ul.progressbar
                             for order in softwareListDetails
-                                -let list = ['Antrag eingegangen', 'Antrag in bearbeitung', 'Antrag in prüfung', 'Antrag bei gremium', 'Antrag entscheid','Antrag abgeschlossen'];
+                                -let list = ['Antrag eingegangen', 'Antrag in Bearbeitung', 'Antrag in Prüfung', 'Antrag bei Gremium', 'Antrag Entscheid','Antrag abgeschlossen'];
                                 -for (var i = 1; i < list.length; i++)
                                         if((i < order.status))
                                             li(class=["li-status", "active item" + i] id="orderstatus" + i)
@@ -37,8 +37,11 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea1(placeholder='EmailVorlage' rows='10')
                                             |Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        button.btn-email1.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        a.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid + "&statuschange=4" class="link-id")
+                                            | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                        p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
+                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an Entwickler
                                         hr
                                 br
                                 button.btn.btn-primary.btn-sm.custom-control-button-open(type='button') Antrag ablehnen
@@ -46,8 +49,12 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea2(placeholder='EmailVorlage' rows='10')
                                             | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde geprüft. Leider müssen wir Ihnen mitteilen, dass eine Anschaffung abgelehnt werden muss.</br>Begründung:</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        button.btn-email2.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        a.btn.btn-secondary.btn-sm(href="/details?tsid="+ order.orderid + "&statuschange=4" class="link-id")
+                                            | Email senden
+                                        //button.btn-email2.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                        p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
+                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an Entwickler
                                         hr
                                 br
                                 button.btn.btn-primary.btn-sm.custom-control-button-open(type='button') Antrag zum Gremium
@@ -55,13 +62,16 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea3(placeholder='EmailVorlage' rows='10')
                                             | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} muss durch das Gremium weiter geprüft werden. </br>Bitte beachten Sie, dass die Bearbeitung in aufwendigen Fällen (Bsp. grössere Lizenzpakete) bis zu 3 Monate dauern kann. Sie erhalten dann eine Rückmeldung zur Anschaffung oder Nicht-Anschaffung der gewünschten Software. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        button.btn-email3.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        a.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid + "&statuschange=3" class="link-id")
+                                            | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                        p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
+                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an Entwickler
                                         hr
                             .modal-footer
                                 for order in softwareListDetails
-                                    a.btn.btn-secondary.btn-sm(href="/details?tsid="+ order.orderid + "&statuschange=2" class="link-id")
-                                        | Status bestätigen
+                                    //a.btn.btn-secondary.btn-sm(href="/details?tsid="+ order.orderid + "&statuschange=2" class="link-id")
+                                       // | Status bestätigen
                                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                                     hr
 
@@ -76,8 +86,11 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea12(placeholder='EmailVorlage' rows='10')
                                             | Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} wurde durch das Gremium geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können.</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        button.btn-email1.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        a.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid + "&statuschange=4" class="link-id")
+                                            | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                        p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
+                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an Entwickler
                                         hr
                                 br
                                 button.btn.btn-primary.btn-sm.custom-control-button-open#modalEmailTextarea22(type='button') Antrag ablehnen
@@ -85,21 +98,15 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea(placeholder='EmailVorlage' rows='10')
                                             | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde durch das Gremium geprüft. Leider müssen wir Ihnen mitteilen, dass eine Anschaffung abgelehnt werden muss.</br>Begründung: </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        button.btn-email2.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
+                                        a.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid + "&statuschange=4" class="link-id btn-email2 btn-email-status2")
+                                            | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
-                                        hr
-                                br
-                                button.btn.btn-primary.btn-sm.custom-control-button-open(type='button') Antrag zum Gremium
-                                for order in softwareListDetails
-                                    span.inputHide
-                                        textarea.modalEmailTextarea#modalEmailTextarea32(placeholder='EmailVorlage' rows='10')
-                                            | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} muss durch das Gremium weiter geprüft werden. </br>Bitte beachten Sie, dass die Bearbeitung in aufwendigen Fällen (Bsp. grössere Lizenzpakete) bis zu 3 Monate dauern kann. Sie erhalten dann eine Rückmeldung zur Anschaffung oder Nicht-Anschaffung der gewünschten Software. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        button.btn-email3.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
-                                        button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
+                                        p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
+                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an Entwickler
                                         hr
                             .modal-footer
                                 for order in softwareListDetails
-                                    a.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid + "&statuschange=3" class="link-id")
+                                    a.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid + "&statuschange=5" class="link-id")
                                         | Status bestätigen
                                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                 #Modal4.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
@@ -109,7 +116,7 @@
                                 h5.modal-title Antrag abschliessen
                             .modal-body
                                 for order in softwareListDetails
-                                    a.btn.btn-secondary.btn-sm(href="/details?tsid="+ order.orderid + "&statuschange=4" class="link-id")
+                                    a.btn.btn-secondary.btn-sm(href="/details?tsid="+ order.orderid + "&statuschange=5" class="link-id")
                                         | Antrag abschliessen
                                     a(href='#')
                                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
@@ -120,7 +127,7 @@
                                 h5.modal-title Antrag abschliessen
                             .modal-body
                                 for order in softwareListDetails
-                                    a.btn.btn-secondary.btn-sm(href="/details?tsid="+ order.orderid + "&statuschange=5" class="link-id")
+                                    a.btn.btn-secondary.btn-sm.btn-ready(href="/details?tsid="+ order.orderid + "&statuschange=6" class="link-id")
                                         | Antrag abschliessen (Benutzer informieren)
                                     a(href='#')
                                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
@@ -168,7 +175,7 @@
                                             | E-Mail-Adresse
                                         p= order.email2
                                 for order in softwareListDetails
-                                    if order.funktion2
+                                    if order.funktion2!== 'undefined'
                                         label(for='form-function')
                                             | Funktion
                                         p= order.funktion2
@@ -187,7 +194,6 @@
                                 label
                                     | Name der Software
                                 p= order.softwarename
-                                    | TechSmith Camtasia 2020
                                 label
                                     | Webseite der Software
                                 p= order.softwarewebseite
@@ -276,5 +282,41 @@ script(type='text/javascript').
         });
         $(".custom-control-button-close").click(function () {
             $(this).closest(".inputHide").delay(300).slideUp("slow");
+        });
+        $('.button-email-send').click(function (e) {
+            e.preventDefault();
+            let mailtype = $(this).attr('class').split(' ')[0].slice(-1);
+            let status = $(this).attr('class').split(' ')[1].slice(-1);
+            const urlParams = new URLSearchParams(window.location.search);
+            const currenturlParam = urlParams.get('tsid');
+            let mailtext = $(this).prev().val();
+            let d = new Date();
+            let month = d.getMonth() + 1;
+            let day = d.getDate();
+            let hour = d.getHours();
+            let minute = d.getMinutes();
+            let second = d.getSeconds();
+            let datetime = d.getFullYear() + '-' +
+                (('' + month).length < 2 ? '0' : '') + month + '-' +
+                (('' + day).length < 2 ? '0' : '') + day + ' ' +
+                (('' + hour).length < 2 ? '0' : '') + hour + ':' +
+                (('' + minute).length < 2 ? '0' : '') + minute + ':' +
+                (('' + second).length < 2 ? '0' : '') + second;
+            $.ajax({
+                type: 'GET',
+                data: {status: status},
+                url: '/details?tsid=' + currenturlParam + '&st=' + status + '&mailtext=' + mailtext + '&datetime=' + datetime + '&mailtype=' + mailtype,
+                success: function (data) {
+                  //  $(this).add('span').text('Ihr E-Mail wurde erfolgreich an Benutzer versendet').addClass('green');
+                    $('.green').removeClass('hidden');
+                    $(this).parent(".inputHide").delay(300).slideDown("slow");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //$(this).add('span').text('Ihr E-Mail wurde erfolgreich an Benutzer versendet').addClass('green');
+                    $('.red').removeClass('hidden');
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
         });
     });

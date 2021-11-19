@@ -82,14 +82,11 @@ $( document ).ready(function() {
                 });
             }
         });
-    $('.button-email-send').click(function (event) {
-        $(this).append('span');
-        $(this).closest('span').text('Ihr E-Mail wurde erfolgreich an Benutzer versendet').addClass('green');
-    });
 
-    $('.li-status').click(function (event) {
-        $(this).prevAll().addClass('active');
-    })
+
+    // $('.li-status').click(function (event) {
+    //     $(this).prevAll().addClass('active');
+    // })
     // $('.li-status').click(function (event) {
     //     let status =  $(this).attr('id').slice(-1);
     //        $(this).unbind("click");
@@ -109,41 +106,7 @@ $( document ).ready(function() {
     //         });
     //     });
 
-    $('.button-email-send').click(function (e) {
-        e.preventDefault();
-        let mailtype =  $(this).attr('class').split(' ')[0].slice(-1);
-        let status =  $(this).attr('class').split(' ')[1].slice(-1);
-        const urlParams = new URLSearchParams(window.location.search);
-        const currenturlParam = urlParams.get('tsid');
-        let mailtext = $(this).prevAll().val();
-        alert(mailtext);
-        let d = new Date();
-        let month = d.getMonth()+1;
-        let day = d.getDate();
-        let hour = d.getHours();
-        let minute = d.getMinutes();
-        let second = d.getSeconds();
-        let datetime = d.getFullYear() + '-' +
-            ((''+month).length<2 ? '0' : '') + month + '-' +
-            ((''+day).length<2 ? '0' : '') + day + ' ' +
-            ((''+hour).length<2 ? '0' :'') + hour + ':' +
-            ((''+minute).length<2 ? '0' :'') + minute + ':' +
-            ((''+second).length<2 ? '0' :'') + second;
-        $.ajax({
-            type: 'GET',
-            data:{status:status},
-            url: '/details?tsid='+currenturlParam+'&st='+status+'&mailtext='+mailtext+'&datetime='+datetime+'&mailtype='+mailtype,
-            success: function(data) {
-                alert('ajax');
 
-                $(this).parent(".inputHide").delay(300).slideDown("slow");
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });
-    });
 
     // $('#submitformchanges').click(function (event) {
     //     const urlParams = new URLSearchParams(window.location.search);
@@ -234,53 +197,6 @@ $( document ).ready(function() {
             }, false);
         });
     })();
-
-    //
-    // $('form').bootstrapValidator({
-    //     feedbackIcons: {
-    //         valid: 'glyphicon glyphicon-ok',
-    //         invalid: 'glyphicon glyphicon-remove',
-    //         validating: 'glyphicon glyphicon-refresh'
-    //     },
-    //     fields: {
-    //         firstName: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: 'The first name is required and cannot be empty'
-    //                 }
-    //             }
-    //         },
-    //         lastName: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: 'The last name is required and cannot be empty'
-    //                 }
-    //             }
-    //         },
-    //         email: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: 'The email address is required'
-    //                 },
-    //                 emailAddress: {
-    //                     message: 'The input is not a valid email address'
-    //                 }
-    //             }
-    //         },
-    //         gender: {
-    //             validators: {
-    //                 notEmpty: {
-    //                     message: 'The gender is required'
-    //                 }
-    //             }
-    //         }
-    //     },
-    //     submitHandler: function(validator, form, submitButton) {
-    //         var fullName = [validator.getFieldElements('firstName').val(),
-    //             validator.getFieldElements('lastName').val()].join(' ');
-    //         alert('Hello ' + fullName);
-    //     }
-    // });
 
     // BACK-TO-TOP
     var back_to_top_button = ['<a href="#top" class="back-to-top"></a>'].join('');

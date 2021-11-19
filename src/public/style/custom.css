@@ -160,6 +160,9 @@ div.dropdown-menu{
     max-width: 100px;
     display: inline-block;
 }
+.table-works tbody+tbody{
+    display:none;
+}
 .table-works button{
     width: 100%;
     min-width: 148px;
@@ -208,7 +211,7 @@ div.dropdown-menu{
     z-index: 1;
 }
 .table-works th.minwidth{
-    min-width: 90px;
+    min-width: 170px;
 }
 form .workdetails-labelcol input{
     display: inline;
@@ -879,6 +882,10 @@ a:hover{
     color: #55b776;
     display: block;
 }
+.red{
+    color: #DC1C13;
+    display: block;
+}
 .page-item.active .page-link{
     z-index: 1;
 }
@@ -900,4 +907,10 @@ a:hover{
 }
 .modal-backdrop{
     z-index: 1;
+}
+.link-id{
+    margin-bottom: 15px;
+}
+.link-id:hover {
+   text-decoration: none;
 }
