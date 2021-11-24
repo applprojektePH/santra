@@ -31,7 +31,7 @@ module.exports = function (app, models) {
   app.post('/user', controllers.removeController.main);
   app.get('/info', controllers.infoController.main);
   app.get('/details', controllers.detailsController.main);
-  //app.post('/details', controllers.detailsController.main);
+  app.post('/details', controllers.detailsController.main);
   //app.get('/remove', controllers.removeController.main);
   app.get('/edit', controllers.editController.main);
   app.post('/edit', controllers.editedController.main);

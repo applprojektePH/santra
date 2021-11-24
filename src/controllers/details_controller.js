@@ -16,19 +16,19 @@ module.exports = function (models) {
         res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         res.setHeader("Expires", "0"); // Proxies.
         let tsID = parseInt(req.query.tsid);
-        let datetime = req.query.datetime;
-        let mailuser = req.query.mailuser;
-        let mailtype = req.query.mailtype;
+        let status = parseInt(req.query.status);
         let anrede;
         let nachname;
         let email;
         let orderid;
         let reqBody = req.body;
         let edited = reqBody.edited;
-
-
-        let statuschange = parseInt(req.query.statuschange);
-            console.log('statuschange'+ mailtype);
+        let statuschange = reqBody.statuschange;
+        let mailtext = reqBody.mailtext;
+        let datetime = reqBody.datetime;
+        let mailtype = reqBody.mailtype;
+        let mailuser = reqBody.mailuser;
+        let orderstatus = reqBody.orderstatus;
 
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
@@ -40,30 +40,32 @@ module.exports = function (models) {
             if(err) throw err
             let softwareListDetails = [];
             sql1 = 'SELECT * FROM orders WHERE (userid IN (SELECT id FROM users) AND orderid IN (SELECT '+tsID+' FROM orders))';
-            if ( (!isNaN(edited))) {
-                console.log('statuschangemail'+statuschange);
-                sql4 = 'UPDATE orders SET status='+statuschange+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
-                connection.query(""+sql4+"",
-                    (err, rows) => {
-                    })
-            }
-            let statusset = parseInt(req.query.status);
-            let mailt = req.query.mailtext;
             if ( (!isNaN(statuschange))) {
-                console.log('statuschangemail'+statuschange);
                 sql4 = 'UPDATE orders SET status='+statuschange+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
                 connection.query(""+sql4+"",
                     (err, rows) => {
                     })
             }
-           if ( (!isNaN(statusset))) {
-                    sql2 = 'UPDATE orders SET status='+statusset+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
-                    connection.query(""+sql2+"",
-                        (err, rows) => {
-                        })
-                }
-            if ( (!isNaN(orderid))||(!isNaN(datetime))||/*(!isNaN(mailuser))||*/(!isNaN(mailtype)) ) {
-                sql3 = "INSERT INTO history (orderid, datetime, mailuser, mailtype, mailtext, orderstatus) VALUES ( '" + tsID + "', '" + datetime + "', 'alesya.heymann@fhnw.ch', '" + mailtype + "', '" + mailt + "', '" + statusset + "')";
+            if ( (!isNaN(status))) {
+                sql4 = 'UPDATE orders SET status='+status+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
+                connection.query(""+sql4+"",
+                    (err, rows) => {
+                    })
+            }
+           //  if ( (!isNaN(statuschange))) {
+           //      sql4 = 'UPDATE orders SET status='+statuschange+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
+           //      connection.query(""+sql4+"",
+           //          (err, rows) => {
+           //          })
+           //  }
+           // if ( (!isNaN(statusset))) {
+           //          sql2 = 'UPDATE orders SET status='+statusset+' WHERE orderid IN (SELECT '+tsID+' FROM orders)';
+           //          connection.query(""+sql2+"",
+           //              (err, rows) => {
+           //              })
+           //      }
+            if ( (!isNaN(orderid))||(!isNaN(datetime))||/*(!isNaN(mailuser))||*/(!isNaN(mailtype))||(!isNaN(mailtext)||(!isNaN(orderstatus)) )) {
+                sql3 = "INSERT INTO history (orderid, datetime, mailuser, mailtype, mailtext, orderstatus) VALUES ( '" + tsID + "', '" + datetime + "', 'alesya.heymann@fhnw.ch', '" + mailtype + "', '" + mailtext + "', '" + orderstatus + "')";
                 connection.query("" + sql3 + "",
                     (err, rows) => {
                     })
@@ -137,8 +139,8 @@ module.exports = function (models) {
                 else {
                     console.log(err)
                 }
-                if(typeof statusset != 'undefined') {
-                    if(statusset == 2){
+
+                    if((mailtype == 2) && (typeof statuschange != 'undefined')) {
                         let transport2 = nodemailer.createTransport({
                             host: "lmailer.fhnw.ch",
                             secure: false, // use SSL
@@ -157,9 +159,9 @@ module.exports = function (models) {
                            subject: 'Santra: Antrag Nummer #'+orderid+'',
 
                            // plaintext body
-                           text: mailt,
+                           text: mailtext,
                            // HTML body
-                           html: ''+mailt
+                           html: ''+mailtext
                        };
                         transport2.sendMail(messageSender2, function(error){
                                 if(error){
@@ -167,12 +169,10 @@ module.exports = function (models) {
                                     console.log(error.message);
                                     return;
                                 }
-                                console.log('2Message sent successfully!');
                                 transport2.close();
                             });
                    }
-                         else if (statusset == 3)  {
-                       console.log('status3');
+                         else if (status == 1)  {
                         let transport2 = nodemailer.createTransport({
                             host: "lmailer.fhnw.ch",
                             secure: false, // use SSL
@@ -183,7 +183,7 @@ module.exports = function (models) {
                         });
                        let messageSender2 = {
                            // sender info
-                           from: 'Santra 2 <applprojekte.ph@fhnw.ch>',
+                           from: 'Santra <applprojekte.ph@fhnw.ch>',
 
                            // Comma separated list of recipients
                            to: '+nachname+ <'+email+'>',
@@ -192,7 +192,7 @@ module.exports = function (models) {
                            subject: 'Santra 2: Antrag Nummer XY in bearbeitung',
 
                            // plaintext body
-                           text: '2 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
+                           text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
                                '\n' +
                                'Vielen Dank und freundliche Grüsse \n' +
                                'Ihr ApplProjekte Supportteam \n' +
@@ -219,7 +219,7 @@ module.exports = function (models) {
                                'Santra Softwareantrag Software \n' +
                                'n|w\n',
                            // HTML body
-                           html:'<p><span>1 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
+                           html:'<p><span>Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
                                '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
                                '</br>Vielen Dank und freundliche Grüsse' +
                                '</br>Ihr ApplProjekte Supportteam ' +
@@ -238,216 +238,251 @@ module.exports = function (models) {
                            transport2.close();
                        });
                         }
-                        else if (statusset == 4) {
-                       console.log('status4');
-                        let transport3 = nodemailer.createTransport({
-                            host: "lmailer.fhnw.ch",
-                            secure: false, // use SSL
-                            port: 25,
-                            tls: {
-                                rejectUnauthorized: false
-                            }
-                        });
-                       let messageSender3 = {
-                           // sender info
-                           from: '3 Santra <applprojekte.ph@fhnw.ch>',
+                if((mailtype == 4) && (typeof statuschange != 'undefined')) {
+                    let transport4 = nodemailer.createTransport({
+                        host: "lmailer.fhnw.ch",
+                        secure: false, // use SSL
+                        port: 25,
+                        tls: {
+                            rejectUnauthorized: false
+                        }
+                    });
+                    let messageSender4 = {
+                        // sender info
+                        from: 'Santra <applprojekte.ph@fhnw.ch>',
+                        // Comma separated list of recipients
+                        //to: '+nachname+ <'+email+'>',
+                        to: 'Heymann <alesya.heymann@fhnw.ch>',
+                        // Subject of the message
+                        subject: 'Santra: Antrag Nummer #'+orderid+'',
 
-                           // Comma separated list of recipients
-                           to: '+nachname+ <'+email+'>',
-
-                           // Subject of the message
-                           subject: 'Santra 3: Antrag Nummer XY in bearbeitung',
-
-                           // plaintext body
-                           text: '3 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                               '\n' +
-                               'Vielen Dank und freundliche Grüsse \n' +
-                               'Ihr ApplProjekte Supportteam \n' +
-                               'n|w\n',
-                           // HTML body
-                           html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
-                       };
-                       let messageSupport3 = {
-                           // sender info
-                           from: '3 Santra <applprojekte.ph@fhnw.ch>',
-                           // Comma separated list of recipients
-                           //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                           to: '<alesya.heymann@fhnw.ch>',
-                           // Subject of the message
-                           subject: 'Status 3 Santra: Antrag Nummer XY ✔',
-                           // plaintext body
-                           text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                               '\n' +
-                               'freundliche Grüsse \n' +
-                               'Santra Softwareantrag Software \n' +
-                               'n|w\n',
-                           // HTML body
-                           html:'<p><span>3 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
-                       };
-                       transport3.sendMail(messageSender3, function(error){
-                           if(error){
-                               console.log('Error occured');
-                               console.log(error.message);
-                               return;
-                           }
-                           console.log('Message sent successfully!');
-                           transport3.close();
-                       });
-                       transport3.sendMail(messageSupport3, function(error){
-                           transport3.close();
-                       });
-                   }
-
-                            else if (statusset==5){
-                       console.log('status5');
-                        let transport4 = nodemailer.createTransport({
-                            host: "lmailer.fhnw.ch",
-                            secure: false, // use SSL
-                            port: 25,
-                            tls: {
-                                rejectUnauthorized: false
-                            }
-                        });
-                       let messageSender4 = {
-                           // sender info
-                           from: 'Status 4 Santra <applprojekte.ph@fhnw.ch>',
-
-                           // Comma separated list of recipients
-                           to: '+nachname+ <'+email+'>',
-
-                           // Subject of the message
-                           subject: 'Santra 4: Antrag Nummer XY in bearbeitung',
-
-                           // plaintext body
-                           text: '4 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                               '\n' +
-                               'Vielen Dank und freundliche Grüsse \n' +
-                               'Ihr ApplProjekte Supportteam \n' +
-                               'n|w\n',
-                           // HTML body
-                           html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
-                       };
-                       let messageSupport4 = {
-                           // sender info
-                           from: 'Santra Status 4 <applprojekte.ph@fhnw.ch>',
-                           // Comma separated list of recipients
-                           //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                           to: '<alesya.heymann@fhnw.ch>',
-                           // Subject of the message
-                           subject: 'Status 4 Santra: Antrag Nummer XY ✔',
-                           // plaintext body
-                           text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                               '\n' +
-                               'freundliche Grüsse \n' +
-                               'Santra Softwareantrag Software \n' +
-                               'n|w\n',
-                           // HTML body
-                           html:'<p><span>4 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
-                       };
-                       transport4.sendMail(messageSender4, function(error){
-                           if(error){
-                               console.log('Error occured');
-                               console.log(error.message);
-                               return;
-                           }
-                           console.log('4Message sent successfully!');
-                           transport4.close();
-                       });
-                       transport4.sendMail(messageSupport4, function(error){
-                           transport4.close();
-                       });
-                   }
-
-                            else if(statusset == 5){
-                       console.log('status5');
-                        let transport5 = nodemailer.createTransport({
-                            host: "lmailer.fhnw.ch",
-                            secure: false, // use SSL
-                            port: 25,
-                            tls: {
-                                rejectUnauthorized: false
-                            }
-                        });
-                       let messageSender5 = {
-                           // sender info
-                           from: 'Status 5 Santra <applprojekte.ph@fhnw.ch>',
-
-                           // Comma separated list of recipients
-                           to: '+nachname+ <'+email+'>',
-
-                           // Subject of the message
-                           subject: 'Santra 5: Antrag Nummer XY in bearbeitung',
-
-                           // plaintext body
-                           text: '5 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                               '\n' +
-                               'Vielen Dank und freundliche Grüsse \n' +
-                               'Ihr ApplProjekte Supportteam \n' +
-                               'n|w\n',
-                           // HTML body
-                           html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
-                       };
-                       let messageSupport5 = {
-                           // sender info
-                           from: 'Santra Status 5 <applprojekte.ph@fhnw.ch>',
-                           // Comma separated list of recipients
-                           //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                           to: '<alesya.heymann@fhnw.ch>',
-                           // Subject of the message
-                           subject: 'Status 5 Santra: Antrag Nummer XY ✔',
-                           // plaintext body
-                           text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                               '\n' +
-                               'freundliche Grüsse \n' +
-                               'Santra Softwareantrag Software \n' +
-                               'n|w\n',
-                           // HTML body
-                           html:'<p><span>5 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                               '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                               '</br>Vielen Dank und freundliche Grüsse' +
-                               '</br>Ihr ApplProjekte Supportteam ' +
-                               '</br>n|w</p>'
-                       };
-                       transport5.sendMail(messageSender5, function(error){
-                           if(error){
-                               console.log('Error occured');
-                               console.log(error.message);
-                               return;
-                           }
-                             console.log('5Message sent successfully!');
-                           transport5.close();
-                       });
-                       transport5.sendMail(messageSupport5, function(error){
-                           transport5.close();
-                       });
-                   }
+                        text: ''+orderid+'Antrag abgeschlossen' +
+                            'freundliche Grüsse \n' +
+                            'Santra Softwareantrag Software \n' +
+                            'n|w\n',
+                        // HTML body
+                        html:'<p><span>Antrag abgeschlossen</span>' +
+                             '</br>Vielen Dank und freundliche Grüsse' +
+                            '</br>Ihr ApplProjekte Supportteam ' +
+                            '</br>n|w</p>'
+                    };
+                    transport4.sendMail(messageSender4, function(error){
+                        if(error){
+                            console.log('Error occured');
+                            console.log(error.message);
+                            return;
+                        }
+                        transport4.close();
+                    });
                 }
+                   //      else if (mailtype == 4) {
+                   //      let transport3 = nodemailer.createTransport({
+                   //          host: "lmailer.fhnw.ch",
+                   //          secure: false, // use SSL
+                   //          port: 25,
+                   //          tls: {
+                   //              rejectUnauthorized: false
+                   //          }
+                   //      });
+                   //     let messageSender3 = {
+                   //         // sender info
+                   //         from: '3 Santra <applprojekte.ph@fhnw.ch>',
+                   //
+                   //         // Comma separated list of recipients
+                   //         to: '+nachname+ <'+email+'>',
+                   //
+                   //         // Subject of the message
+                   //         subject: 'Santra 3: Antrag Nummer XY in bearbeitung',
+                   //
+                   //         // plaintext body
+                   //         text: '3 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
+                   //             '\n' +
+                   //             'Vielen Dank und freundliche Grüsse \n' +
+                   //             'Ihr ApplProjekte Supportteam \n' +
+                   //             'n|w\n',
+                   //         // HTML body
+                   //         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
+                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
+                   //             '</br>Vielen Dank und freundliche Grüsse' +
+                   //             '</br>Ihr ApplProjekte Supportteam ' +
+                   //             '</br>n|w</p>'
+                   //     };
+                   //     let messageSupport3 = {
+                   //         // sender info
+                   //         from: '3 Santra <applprojekte.ph@fhnw.ch>',
+                   //         // Comma separated list of recipients
+                   //         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
+                   //         to: '<alesya.heymann@fhnw.ch>',
+                   //         // Subject of the message
+                   //         subject: 'Status 3 Santra: Antrag Nummer XY ✔',
+                   //         // plaintext body
+                   //         text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
+                   //             '\n' +
+                   //             'freundliche Grüsse \n' +
+                   //             'Santra Softwareantrag Software \n' +
+                   //             'n|w\n',
+                   //         // HTML body
+                   //         html:'<p><span>3 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
+                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
+                   //             '</br>Vielen Dank und freundliche Grüsse' +
+                   //             '</br>Ihr ApplProjekte Supportteam ' +
+                   //             '</br>n|w</p>'
+                   //     };
+                   //     transport3.sendMail(messageSender3, function(error){
+                   //         if(error){
+                   //             console.log('Error occured');
+                   //             console.log(error.message);
+                   //             return;
+                   //         }
+                   //         console.log('Message sent successfully!');
+                   //         transport3.close();
+                   //     });
+                   //     transport3.sendMail(messageSupport3, function(error){
+                   //         transport3.close();
+                   //     });
+                   // }
+
+                   //          else if (mailtype==4){
+                   //      let transport4 = nodemailer.createTransport({
+                   //          host: "lmailer.fhnw.ch",
+                   //          secure: false, // use SSL
+                   //          port: 25,
+                   //          tls: {
+                   //              rejectUnauthorized: false
+                   //          }
+                   //      });
+                   //     let messageSender4 = {
+                   //         // sender info
+                   //         from: 'Status 4 Santra <applprojekte.ph@fhnw.ch>',
+                   //
+                   //         // Comma separated list of recipients
+                   //         to: '+nachname+ <'+email+'>',
+                   //
+                   //         // Subject of the message
+                   //         subject: 'Santra 4: Antrag Nummer XY in bearbeitung',
+                   //
+                   //         // plaintext body
+                   //         text: '4 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
+                   //             '\n' +
+                   //             'Vielen Dank und freundliche Grüsse \n' +
+                   //             'Ihr ApplProjekte Supportteam \n' +
+                   //             'n|w\n',
+                   //         // HTML body
+                   //         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
+                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
+                   //             '</br>Vielen Dank und freundliche Grüsse' +
+                   //             '</br>Ihr ApplProjekte Supportteam ' +
+                   //             '</br>n|w</p>'
+                   //     };
+                   //     let messageSupport4 = {
+                   //         // sender info
+                   //         from: 'Santra Status 4 <applprojekte.ph@fhnw.ch>',
+                   //         // Comma separated list of recipients
+                   //         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
+                   //         to: '<alesya.heymann@fhnw.ch>',
+                   //         // Subject of the message
+                   //         subject: 'Status 4 Santra: Antrag Nummer XY ✔',
+                   //         // plaintext body
+                   //         text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
+                   //             '\n' +
+                   //             'freundliche Grüsse \n' +
+                   //             'Santra Softwareantrag Software \n' +
+                   //             'n|w\n',
+                   //         // HTML body
+                   //         html:'<p><span>4 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
+                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
+                   //             '</br>Vielen Dank und freundliche Grüsse' +
+                   //             '</br>Ihr ApplProjekte Supportteam ' +
+                   //             '</br>n|w</p>'
+                   //     };
+                   //     transport4.sendMail(messageSender4, function(error){
+                   //         if(error){
+                   //             console.log('Error occured');
+                   //             console.log(error.message);
+                   //             return;
+                   //         }
+                   //         console.log('4Message sent successfully!');
+                   //         transport4.close();
+                   //     });
+                   //     transport4.sendMail(messageSupport4, function(error){
+                   //         transport4.close();
+                   //     });
+                   // }
+                   //
+                   //          else if(mailtype == 5){
+                   //     console.log('status5');
+                   //      let transport5 = nodemailer.createTransport({
+                   //          host: "lmailer.fhnw.ch",
+                   //          secure: false, // use SSL
+                   //          port: 25,
+                   //          tls: {
+                   //              rejectUnauthorized: false
+                   //          }
+                   //      });
+                   //     let messageSender5 = {
+                   //         // sender info
+                   //         from: 'Status 5 Santra <applprojekte.ph@fhnw.ch>',
+                   //
+                   //         // Comma separated list of recipients
+                   //         to: '+nachname+ <'+email+'>',
+                   //
+                   //         // Subject of the message
+                   //         subject: 'Santra 5: Antrag Nummer XY in bearbeitung',
+                   //
+                   //         // plaintext body
+                   //         text: '5 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
+                   //             '\n' +
+                   //             'Vielen Dank und freundliche Grüsse \n' +
+                   //             'Ihr ApplProjekte Supportteam \n' +
+                   //             'n|w\n',
+                   //         // HTML body
+                   //         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
+                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
+                   //             '</br>Vielen Dank und freundliche Grüsse' +
+                   //             '</br>Ihr ApplProjekte Supportteam ' +
+                   //             '</br>n|w</p>'
+                   //     };
+                   //     let messageSupport5 = {
+                   //         // sender info
+                   //         from: 'Santra Status 5 <applprojekte.ph@fhnw.ch>',
+                   //         // Comma separated list of recipients
+                   //         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
+                   //         to: '<alesya.heymann@fhnw.ch>',
+                   //         // Subject of the message
+                   //         subject: 'Status 5 Santra: Antrag Nummer XY ✔',
+                   //         // plaintext body
+                   //         text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
+                   //             '\n' +
+                   //             'freundliche Grüsse \n' +
+                   //             'Santra Softwareantrag Software \n' +
+                   //             'n|w\n',
+                   //         // HTML body
+                   //         html:'<p><span>5 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
+                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
+                   //             '</br>Vielen Dank und freundliche Grüsse' +
+                   //             '</br>Ihr ApplProjekte Supportteam ' +
+                   //             '</br>n|w</p>'
+                   //     };
+                   //     transport5.sendMail(messageSender5, function(error){
+                   //         if(error){
+                   //             console.log('Error occured');
+                   //             console.log(error.message);
+                   //             return;
+                   //         }
+                   //           console.log('5Message sent successfully!');
+                   //         transport5.close();
+                   //     });
+                   //     transport5.sendMail(messageSupport5, function(error){
+                   //         transport5.close();
+                   //     });
+                   // }
+
             })
 
             setTimeout(
                 function(){
                      res.render('layout_details', {
-                         "softwareListDetails": softwareListDetails, "mailstatus": true
+                         "softwareListDetails": softwareListDetails
                      });
                 }, 500);
 

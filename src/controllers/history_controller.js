@@ -35,27 +35,24 @@ module.exports = function (models) {
                     for (let i = 0; i < rows.length; i++) {
                         // Create an object to save current row's data
                         let mailtypecurrent;
-                        switch ((rows[i].mailtype)|(rows[i].orderstatus)) {
-                            case 1 | 2:
+                        switch (rows[i].orderstatus) {
+                            case 1:
                                 mailtypecurrent = 'Antrag in Prüfung: Antrag genehmigt';
                                 break;
-                            case 2 | 2:
+                            case 2:
                                 mailtypecurrent = 'Antrag in Prüfung: Antrag abgelehnt';
                                 break;
-                            case 3 | 2:
+                            case 3:
                                 mailtypecurrent = 'Antrag in Prüfung: Antrag zu Gremium';
                                 break;
-                            case 1 | 3:
-                                mailtypecurrent = 'Antrag in Prüfung: Antrag genehmigt';
+                            case 4:
+                                mailtypecurrent = 'Antrag beim Gremium: Antrag genehmigt';
                                 break;
-                            case 1 | 4:
-                                mailtypecurrent = 'Antrag in Prüfung: Antrag abgelehnt';
+                            case 5:
+                                mailtypecurrent = 'Antrag beim Gremium: Antrag abgelehnt';
                                 break;
-                            case 2 | 4:
-                                mailtypecurrent = 'Antrag in Prüfung: Antrag zu Gremium';
-                                break;
-                            case 3 | 4:
-                                mailtypecurrent = 'Antrag in Prüfung: Antrag zu Gremium';
+                            case 6:
+                                mailtypecurrent = 'Antrag abgeschlossen';
                                 break;
                         }
                         let order = {
