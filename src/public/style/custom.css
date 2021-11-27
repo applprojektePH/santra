@@ -868,7 +868,7 @@ a:hover{
     border: none;
     width: 100%;
 }
-.modalStatus .modal-body button{
+.modalStatus .modal-body button, .modalStatus .modal-body a{
     display: inline-block;
     margin-bottom: 15px;
 }

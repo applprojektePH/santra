@@ -5,7 +5,7 @@ module.exports = function (models) {
 
 	this.main = function (req, res, next) {
 		console.log(new Date().toLocaleString() + " - rendering main");
-
+		console.log(process.env);
 		page.title = "Santra - Softwareantrag\n" +
 			"Pädagogische Hochschule FHNW";
 		if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -17,7 +17,7 @@ module.exports = function (models) {
       req.query.start = "";
   
 		page.query = req.query;
-
+//console.log(logged);
 		res.render('layout', {
 			page: page
 		});

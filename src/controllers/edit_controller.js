@@ -80,6 +80,7 @@ module.exports = function (models) {
                     for (let i = 0; i < rows.length; i++) {
                         // Create an object to save current row's data
                         let order = {
+                            'notizen': rows[i].notizen,
                             'orderid':rows[i].orderid,
                             'institut':rows[i].institut,
                             'professur':rows[i].professur,
@@ -119,7 +120,6 @@ module.exports = function (models) {
                             'productowner':rows[i].productowner,
                             'bemerkungen':rows[i].bemerkungen,
                             'datumantrag': rows[i].datumantrag,
-                            'notizen': rows[i].notizen,
                             'userid':rows[i].userid,
                             'status':rows[i].status
                         }

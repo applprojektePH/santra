@@ -7,27 +7,27 @@ $( document ).ready(function() {
         $('#collapseFilter').collapse('toggle');
     });
     $('.collapseFilter').collapse();
-    if (window.location.href.indexOf("form") > -1) {
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
+//     if (window.location.href.indexOf("form") > -1) {
+// // Example starter JavaScript for disabling form submissions if there are invalid fields
+//         (function () {
+//             'use strict'
+//
+//             // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//             var forms = document.querySelectorAll('.needs-validation')
+//
+//             // Loop over them and prevent submission
+//             Array.prototype.slice.call(forms)
+//                 .forEach(function (form) {
+//                     form.addEventListener('submit', function (event) {
+//                         if (!form.checkValidity()) {
+//                             event.preventDefault()
+//                             event.stopPropagation()
+//                         }
+//
+//                         form.classList.add('was-validated')
+//                     }, false)
+//                 })
+//         })()
 //only edit and form functions
 //         var maxChar = parseInt($('.textarea-js').attr('maxlength'));
 //         $('.textarea-js[maxlength]').parent().find('.charleft').html(maxChar - $(this).val().length);
@@ -40,7 +40,7 @@ $( document ).ready(function() {
 //             $(this).parent().find('.charleft').html(maxChar - $(this).val().length);
 //         });
 
-        $('.submitformbtn').click(function () {
+        $('#buttonsubmitform').click(function () {
             $("#accordionForm").find(".accordion-item").each(function () {
                 $(this).find("input, select, textarea").filter('[required]').each(function () {
                     if (($(this).val() == "") || ($(this).val() == null)) {
@@ -54,9 +54,8 @@ $( document ).ready(function() {
                 });
             });
         });
-    }
-    $('#buttonsubmitformdraft').click(function () {
-        $('#form-status-input').attr('value', '10');
+
+    $('.submitformbtn').click(function () {
         let d = new Date();
         let month = d.getMonth()+1;
         let day = d.getDate();
@@ -73,19 +72,6 @@ $( document ).ready(function() {
     });
     $('#buttonsubmitform').click(function () {
         $('#form-status-input').attr('value', '1');
-        let d = new Date();
-        let month = d.getMonth()+1;
-        let day = d.getDate();
-        let hour = d.getHours();
-        let minute = d.getMinutes();
-        let second = d.getSeconds();
-        let datetime = d.getFullYear() + '-' +
-            ((''+month).length<2 ? '0' : '') + month + '-' +
-            ((''+day).length<2 ? '0' : '') + day + ' ' +
-            ((''+hour).length<2 ? '0' :'') + hour + ':' +
-            ((''+minute).length<2 ? '0' :'') + minute + ':' +
-            ((''+second).length<2 ? '0' :'') + second;
-        $('.btn-datumantrag').attr('value', datetime);
     });
         $(".excel-export-btn").click(function(e){
             var table = $(".table-works");

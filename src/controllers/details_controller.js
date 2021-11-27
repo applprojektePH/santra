@@ -29,7 +29,6 @@ module.exports = function (models) {
         let mailtype = reqBody.mailtype;
         let mailuser = reqBody.mailuser;
         let orderstatus = reqBody.orderstatus;
-
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -83,13 +82,13 @@ module.exports = function (models) {
                         // Create an object to save current row's data
                         let order = {
                             'orderid':rows[i].orderid,
-                            'institut':rows[i].institut,
-                            'professur':rows[i].professur,
-                            'anrede':rows[i].anrede,
-                            'vorname':rows[i].vorname,
-                            'nachname':rows[i].nachname,
-                            'email':rows[i].email,
-                            'funktion':rows[i].funktion,
+                            'institut':(rows[i].institut === "undefined" ? " " : rows[i].institut),
+                            'professur':(rows[i].professur === "undefined" ? " " : rows[i].professur),
+                            'anrede':(rows[i].anrede === "undefined" ? " " : rows[i].anrede),
+                            'vorname':(rows[i].vorname === "undefined" ? " " : rows[i].vorname),
+                            'nachname': (rows[i].nachname === "undefined" ? " " : rows[i].nachname),
+                            'email': (rows[i].email === "undefined" ? " " : rows[i].email),
+                            'funktion':(rows[i].funktion === "undefined" ? " " : rows[i].funktion),
                             'anrede2':rows[i].anrede2,
                             'vorname2':rows[i].vorname2,
                             'nachname2':rows[i].nachname2,
@@ -105,7 +104,7 @@ module.exports = function (models) {
                             'softwareversion':rows[i].softwareversion,
                             'lizenzenanzahl':rows[i].lizenzenanzahl,
                             'nutzeranzahl':rows[i].nutzeranzahl,
-                            'nutzungsdauer':rows[i].nutzungsdauer,
+                            'nutzungsdauer':(rows[i].nutzungsdauer === "undefined" ? " " : rows[i].nutzungsdauer),
                             'nutzungsdauertext':rows[i].nutzungsdauertext,
                             'betriebssystem':rows[i].betriebssystem,
                             'browser':rows[i].browser,
@@ -140,7 +139,7 @@ module.exports = function (models) {
                     console.log(err)
                 }
 
-                    if((mailtype == 2) && (typeof statuschange != 'undefined')) {
+                    if((mailtype == 2) && (typeof statuschange != 'undefined') && (typeof email != 'undefined')) {
                         let transport2 = nodemailer.createTransport({
                             host: "lmailer.fhnw.ch",
                             secure: false, // use SSL
@@ -172,7 +171,7 @@ module.exports = function (models) {
                                 transport2.close();
                             });
                    }
-                         else if (status == 1)  {
+                         else if ((status == 1)&& (typeof email != 'undefined'))  {
                         let transport2 = nodemailer.createTransport({
                             host: "lmailer.fhnw.ch",
                             secure: false, // use SSL
@@ -189,7 +188,7 @@ module.exports = function (models) {
                            to: '+nachname+ <'+email+'>',
 
                            // Subject of the message
-                           subject: 'Santra 2: Antrag Nummer XY in bearbeitung',
+                           subject: "Santra: Antrag Nummer #"+orderid+" in bearbeitung",
 
                            // plaintext body
                            text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
@@ -211,7 +210,7 @@ module.exports = function (models) {
                            //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
                            to: '<alesya.heymann@fhnw.ch>',
                            // Subject of the message
-                           subject: 'Status 2 Santra: Antrag Nummer XY ✔',
+                           subject: "Santra: Antrag Nummer #"+orderid+"",
                            // plaintext body
                            text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
                                '\n' +
@@ -238,7 +237,7 @@ module.exports = function (models) {
                            transport2.close();
                        });
                         }
-                if((mailtype == 4) && (typeof statuschange != 'undefined')) {
+                if((mailtype == 4) && (typeof statuschange != 'undefined') && (typeof email != 'undefined')) {
                     let transport4 = nodemailer.createTransport({
                         host: "lmailer.fhnw.ch",
                         secure: false, // use SSL

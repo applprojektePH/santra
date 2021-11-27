@@ -114,7 +114,7 @@
                                 h5.modal-title Antrag abschliessen
                             .modal-body
                                 for order in softwareListDetails
-                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=5, mailtype=0, orderstatus=0)
+                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=5, mailtype=0, orderstatus=6)
                                         | Antrag abschliessen
                                     a(href='#')
                                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
@@ -125,7 +125,7 @@
                                 h5.modal-title Antrag abschliessen
                             .modal-body
                                 for order in softwareListDetails
-                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=6, mailtype=4, orderstatus=6)
+                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=6, mailtype=4, orderstatus=7)
                                         | Antrag abschliessen (Benutzer informieren)
                                     a(href='#')
                                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
@@ -135,6 +135,11 @@
                         .row
                             br
                             .col-md-12
+                            for order in softwareListDetails
+                                if (order.notizen !== 'undefined') && ((order.notizen).length)
+                                    label(for='form-function')
+                                        | Notizen zum Antrag (vertraulich)
+                                    p= order.notizen
                                 h3.alert.alert-primary Angaben zur Person
                             for order in softwareListDetails
                                 label
@@ -173,7 +178,7 @@
                                             | E-Mail-Adresse
                                         p= order.email2
                                 for order in softwareListDetails
-                                    if order.funktion2!== 'undefined'
+                                    if order.funktion2
                                         label(for='form-function')
                                             | Funktion
                                         p= order.funktion2
@@ -265,10 +270,10 @@
                                     | Product Owner
                                 p= order.productowner
                                 for order in softwareListDetails
-                                    if order.notizen!== 'undefined'
+                                    if order.bemerkungen!== 'undefined' && ((order.bemerkungen).length)
                                       label(for='form-function')
                                         | Bemerkungen
-                                      p= order.notizen
+                                      p= order.bemerkungen
                                 label(for='form-function')
                                     | Datum
                                 p= order.datumantrag
@@ -281,41 +286,59 @@ script(type='text/javascript').
         $(".custom-control-button-close").click(function () {
             $(this).closest(".inputHide").delay(300).slideUp("slow");
         });
-        $('.button-email-send').click(function (e) {
+        $('.button-email-send').one('click',function (e) {
             e.preventDefault();
             let mailtype = $(this).attr('mailtype');
             let statuschange = $(this).attr('statuschange');
             let orderstatus  = $(this).attr('orderstatus');
             const urlParams = new URLSearchParams(window.location.search);
             const currenturlParam = urlParams.get('tsid');
-            let mailtext = $(this).prev().val();
+            let mailtext;
+            if (orderstatus==6){
+                mailtext = '';
+            }
+            else if (orderstatus==7){
+                mailtext = 'Antrag wurde abgeschlossen';
+            }
+            else{
+             mailtext = $(this).prev().val();
+            }
             let d = new Date();
             let month = d.getMonth() + 1;
             let day = d.getDate();
             let hour = d.getHours();
             let minute = d.getMinutes();
             let second = d.getSeconds();
-            let datetime = d.getFullYear() + '-' +
-                (('' + month).length < 2 ? '0' : '') + month + '-' +
-                (('' + day).length < 2 ? '0' : '') + day + ' ' +
+            let datetime =
+                (('' + day).length < 2 ? '0' : '') + day + '.' +
+                (('' + month).length < 2 ? '0' : '') + month + '.' +
+                d.getFullYear() + ' ' +
                 (('' + hour).length < 2 ? '0' : '') + hour + ':' +
                 (('' + minute).length < 2 ? '0' : '') + minute + ':' +
                 (('' + second).length < 2 ? '0' : '') + second;
-            $.ajax({
-                type: 'POST',
-                data: {statuschange: statuschange, mailtext: mailtext, datetime: datetime, mailtype: mailtype, orderstatus: orderstatus},
-                url: '/details?tsid=' + currenturlParam,
-                success: function (data) {
-                    $('.green').removeClass('hidden');
-                    window.setTimeout(function () {
-                        window.location.replace("/details?tsid=" + currenturlParam);
-                    }, 1000);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    $('.red').removeClass('hidden');
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
-            });
+
+                $.ajax({
+                    type: 'POST',
+                    data: {
+                        statuschange: statuschange,
+                        mailtext: mailtext,
+                        datetime: datetime,
+                        mailtype: mailtype,
+                        orderstatus: orderstatus
+                    },
+                    url: '/details?tsid=' + currenturlParam,
+                    success: function (data) {
+                        $('.green').removeClass('hidden');
+                        window.setTimeout(function () {
+                            window.location.replace("/details?tsid=" + currenturlParam);
+                        }, 1000);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $('.red').removeClass('hidden');
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+
         });
     });

@@ -2,7 +2,7 @@ span.service-buttons-wrapper
     button#buttonsubmitformdraft.submitformbtn.btn.btn-primary.btn-sm(type='submit')
         | &Auml;nderungen speichern (Entwurf)
         i.fas.fa-save
-    button#buttonsubmitform.submitformbtn.btn.btn-primary.btn-sm(type='submit' action="/submit-form")
+    button#buttonsubmitform.submitformbtn.submitformbtnaction.btn.btn-primary.btn-sm(type='submit' action="/submit-form")
         | Antrag einreichen
         i.fas.fa-paper-plane
     button.btn.btn-primary.btn-sm(type='button' data-bs-toggle='modal' data-bs-target='#removeModal')
@@ -17,7 +17,8 @@ span.service-buttons-wrapper
                     | Wollen Sie wirklich die Formulardaten verwerfen?
                 .modal-footer
                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
-                    button.btn.btn-primary.btn-sm.btn-remove(type='submit' action="/user" name='sub') Daten l&ouml;schen
+                    a(href="/form").btn.btn-primary.btn-sm.btn-remove
+                        |  Daten l&ouml;schen
     button.btn.btn-primary.btn-sm.floatright(type='button' data-bs-toggle='modal' data-bs-target='#removeModalBack')
         | Zur&uuml;ck zur Startseite
         i.fas.fa-search

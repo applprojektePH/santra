@@ -68,7 +68,27 @@ module.exports = function (models) {
             //hier status unterscheiden
             let notizen = req.body.notizen;
             let softwareList = [];
+            let anrede2extr;
+            let vorname2extr;
+            let nachname2extr;
+            let email2extr;
+            let funktion2extr;
 
+            if (vorname2){
+                for (let i = 0; i < vorname2.length; i++) {
+                    vorname2extr = vorname2[vorname2.length-1];
+                }
+            }
+
+            for (let i = 0; i < nachname2.length; i++) {
+                nachname2extr = nachname2[nachname2.length-1];
+            }
+            for (let i = 0; i < email2.length; i++) {
+                email2extr = email2[email2.length-1];
+            }
+            for (let i = 0; i < funktion2.length; i++) {
+                funktion2extr = funktion2[funktion2-1];
+            }
             let softwareListDetails = [];
 
             sql = 'UPDATE orders SET institut="'+institut+'", professur="'+professur+'", anrede="'+anrede+'", nachname="'+nachname+'", vorname="'+vorname+'", email="'+email+'", funktion="'+funktion+'", anrede2="'+anrede2+'", vorname2="'+vorname2+'", nachname2="'+nachname2+'", email2="'+email2+'", funktion2="'+funktion2+'", studiengang="'+studiengang+'", modulanlass="'+modulanlass+'", szenario="'+szenario+'", softwarename="'+softwarename+'", softwarewebseite="'+softwarewebseite+'", softwareupdate="'+softwareupdate+'", softwareupdatewelches="'+softwareupdatewelches+'", lizenzenanzahl="'+lizenzenanzahl+'", nutzeranzahl="'+nutzeranzahl+'", nutzungsdauer="'+nutzungsdauer+'", nutzungsdauertext="'+nutzungsdauertext+'", betriebssystem="'+betriebssystem+'", browser="'+browser+'", softwareverfuegung="'+softwareverfuegung+'", softwareinteresse="'+softwareinteresse+'", softwareinstitut="'+softwareinstitut+'", softwarehochschinteresse="'+softwarehochschinteresse+'", softwarehochschule="'+softwarehochschule+'", lizenzinstitution="'+lizenzinstitution+'", lizenzart="'+lizenzart+'", lizenzkosten="'+lizenzkosten+'", vergleichbarkeit="'+vergleichbarkeit+'", support="'+support+'", cloud="'+cloud+'", cloudwo="'+cloudwo+'", productowner="'+productowner+'", bemerkungen="'+bemerkungen+'", notizen="'+notizen+'" WHERE orderid="'+tsID+'"'
