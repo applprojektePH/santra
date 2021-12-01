@@ -1,7 +1,5 @@
 $( document ).ready(function() {
     //$('.collapseFilter').collapse();
-
-
     $(".accordion-collapse").collapse();
     $('#collapseFilterbtn').click(function() {
         $('#collapseFilter').collapse('toggle');

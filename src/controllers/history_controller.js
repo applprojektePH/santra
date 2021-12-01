@@ -2,6 +2,7 @@ let db = require('../libs/db');
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
 let nodemailer = require('nodemailer');
+let LOGIN = require('../login');
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -61,7 +62,7 @@ module.exports = function (models) {
                         let order = {
                             'orderid':rows[i].orderid,
                             'datetime':rows[i].datetime,
-                            'mailuser':rows[i].mailuser,
+                            'mailuser':LOGIN.emaillog,
                             'mailtext':rows[i].mailtext,
                             'mailtype':mailtypecurrent,
                             'orderstatus':rows[i].orderstatus

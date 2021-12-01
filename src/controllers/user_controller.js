@@ -3,6 +3,9 @@ var async = require('async');
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
 let nodemailer = require('nodemailer');
+let LOGIN = require("../login");
+
+
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -18,7 +21,6 @@ module.exports = function (models) {
         res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         res.setHeader("Expires", "0"); // Proxies.
         let url = req.url;
-        let softwareList = [];
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -256,9 +258,14 @@ if (url=="/submit-form"){
         })
 }
 else if (url == "/user"){
-    let admin;
+    let admin= LOGIN.ADMIN;
     let tsID = req.body;
-    sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
+    if (admin==true){
+        sql1 = 'SELECT * FROM orders ORDER BY orderid DESC';
+    }
+    else{
+        sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
+    }
     //sql2 = "INSERT INTO orders ( institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2+"','"+nachname2+"', '"+email2+"', '"+funktion2+"' '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql1+"",
         (err, rows) => {
@@ -347,11 +354,15 @@ else if (url == "/user"){
             }
         })
 }
-
             setTimeout(
                 function () {
                     res.render('layout_user', {
-                        "softwareList": softwareList
+                        "softwareList": softwareList,
+                        "vornamelog": LOGIN.vornamelog,
+                        "useridlog": LOGIN.useridlog,
+                        "emaillog": LOGIN.emaillog,
+                        "titlelog": LOGIN.titlelog,
+                        "namelog": LOGIN.namelog,
                     });
                 }, 500);
 

@@ -858,10 +858,13 @@ a:hover{
 .indented{
     margin-left: 20px;
 }
-.li-status{
+.li-status-admin.preactive:first-child{
+    cursor: default;
+}
+.li-status-admin{
     cursor: pointer;
 }
-.li-status.active{
+.li-status-admin.active{
     cursor: default;
 }
 .modalStatus textarea{

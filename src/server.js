@@ -5,8 +5,7 @@ let server = require('http').Server(app);
 let CONSTANTS = require("./libs/constants");
 let models = null;
 const helmet = require('helmet');
-let logged = true;
-let ADMIN = true;
+
     /*
     const { Shibboleth } = require("shibboleth");
 

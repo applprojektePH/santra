@@ -1,4 +1,4 @@
-input#form-id.form-control.hidden(type='text' name='userid' value="123")
+input#form-id.form-control.hidden(type='text' name='userid' value=useridlog)
 input#form-status-input.form-control.hidden(type='text' name='status')
 
 #accordionForm.accordion
@@ -68,7 +68,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                         .invalid-feedback
                                                                                                                                                 | Wählen Sie eine option
                                                                                                                         else
-                                                                                                                                select.form-select.form-control.custom-control-select(required1='' name='anrede')
+                                                                                                                                select.form-select.form-control.custom-control-select(required1='' name='anrede' filled=titlelog)
                                                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                                                         option(value="Frau") Frau
                                                                                                                                         option(value="Herr") Herr
@@ -82,7 +82,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         for order in softwareListDetails
                                                                                                                                 input#form-author-firstname.form-control(type='text' required1='' name='vorname' value=order.vorname)
                                                                                                                 else
-                                                                                                                        input#form-author-firstname.form-control(type='text' required1='' name='vorname')
+                                                                                                                        input#form-author-firstname.form-control(type='text' required1='' name='vorname' value=vornamelog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-4.fields
@@ -92,7 +92,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         for order in softwareListDetails
                                                                                                                                 input#form-author-name.form-control(type='text' required1='' name='nachname' value=order.nachname)
                                                                                                                 else
-                                                                                                                        input#form-author-name.form-control(type='text' required1='' name='nachname')
+                                                                                                                        input#form-author-name.form-control(type='text' required1='' name='nachname' value=namelog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
 
@@ -104,7 +104,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         for order in softwareListDetails
                                                                                                                                 input#form-author-email.form-control(type='email' required1='' name='email' value=order.email)
                                                                                                                 else
-                                                                                                                        input#form-author-email.form-control(type='email' required1='' name='email')
+                                                                                                                        input#form-author-email.form-control(type='email' required1='' name='email' value=emaillog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-6.fields

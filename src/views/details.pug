@@ -9,22 +9,37 @@
                     for order in softwareListDetails
                         if(order.status == 10)
                             span.span-draft Entwurf
-                include elements/buttons-view
+                if (admin==true)
+                    include elements/buttons-view-admin
+                else
+                    include elements/buttons-view
                 for order in softwareListDetails
                     if(order.status != 10)
                         ul.progressbar
                             for order in softwareListDetails
                                 -let list = ['Antrag eingegangen', 'Antrag in Bearbeitung', 'Antrag in Prüfung', 'Antrag bei Gremium', 'Antrag Entscheid','Antrag abgeschlossen'];
-                                -for (var i = 1; i < list.length; i++)
-                                        if((i < order.status))
-                                            li(class=["li-status", "active item" + i] id="orderstatus" + i)
-                                                span= list[i]
-                                        else if(i == order.status)
-                                            li(class=["li-status", "preactive item" + i] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal'+i)
-                                                span= list[i]
-                                        else
-                                            li(class=["li-status", "item" + i] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal'+i)
-                                                span= list[i]
+                                if (admin == true)
+                                    -for (var i = 1; i < list.length; i++)
+                                                                            if((i < order.status))
+                                                                                li(class=["li-status", "active item" + i, "li-status-admin"] id="orderstatus" + i, )
+                                                                                    span= list[i]
+                                                                            else if(i == order.status)
+                                                                                li(class=["li-status", "preactive item" + i, "li-status-admin"] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal' + i)
+                                                                                    span= list[i]
+                                                                            else
+                                                                                li(class=["li-status", "item" + i, "li-status-admin"] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal' + i)
+                                                                                    span= list[i]
+                                else
+                                    -for (var i = 1; i < list.length; i++)
+                                                                                                                if((i < order.status))
+                                                                                                                    li(class=["li-status", "active item" + i] id="orderstatus" + i)
+                                                                                                                        span= list[i]
+                                                                                                                else if(i == order.status)
+                                                                                                                    li(class=["li-status", "preactive item" + i] id="orderstatus" + i)
+                                                                                                                        span= list[i]
+                                                                                                                else
+                                                                                                                    li(class=["li-status", "item" + i] id="orderstatus" + i)
+                                                                                                                        span= list[i]
 
                 #Modal2.modalStatus.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
                     .modal-dialog.modal-dialog-centered(role='document')

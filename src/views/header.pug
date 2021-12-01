@@ -40,10 +40,11 @@ header
         li#user.mr-auto
           a.btn.btn-outline-secondary.btn-sm.pl-3.pr-3(href='/Shibboleth.sso/Login?target=/')
             span.fas.fa-user.mr-2
-            |  Login
+            label= vornamelog
+            label= nachnamelog
         li#user.mr-auto
           a.btn.btn-outline-secondary.btn-sm.pl-3.pr-3(href='/Shibboleth.sso/Logout')
-            span.fas.fa-user.mr-2
+            span.fa.fa-sign-out-alt.mr-2
             |  Logout
 
         //li#user.mr-auto

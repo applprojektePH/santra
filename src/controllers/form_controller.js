@@ -1,3 +1,4 @@
+const LOGIN = require("../login");
 module.exports = function (models) {
 	let page = {};
 	let CONSTANTS = require("../libs/constants");
@@ -17,7 +18,11 @@ module.exports = function (models) {
 		page.query = req.query;
 
 		res.render('layout_form', {
-			page: page
+			"useridlog": LOGIN.useridlog,
+			"vornamelog": LOGIN.vornamelog,
+			"emaillog": LOGIN.emaillog,
+			"titlelog": LOGIN.titlelog,
+			"namelog": LOGIN.namelog
 		});
 
 	};

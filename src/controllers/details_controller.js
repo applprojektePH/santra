@@ -2,6 +2,7 @@
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
 let nodemailer = require('nodemailer');
+let LOGIN = require("../login");
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -89,41 +90,41 @@ module.exports = function (models) {
                             'nachname': (rows[i].nachname === "undefined" ? " " : rows[i].nachname),
                             'email': (rows[i].email === "undefined" ? " " : rows[i].email),
                             'funktion':(rows[i].funktion === "undefined" ? " " : rows[i].funktion),
-                            'anrede2':rows[i].anrede2,
-                            'vorname2':rows[i].vorname2,
-                            'nachname2':rows[i].nachname2,
-                            'email2':rows[i].email2,
-                            'funktion2':rows[i].funktion2,
-                            'studiengang':rows[i].studiengang,
-                            'modulanlass':rows[i].modulanlass,
-                            'szenario':rows[i].szenario,
-                            'softwarename':rows[i].softwarename,
-                            'softwarewebseite':rows[i].softwarewebseite,
-                            'softwareupdate':rows[i].softwareupdate,
-                            'softwareupdatewelches':rows[i].softwareupdatewelches,
-                            'softwareversion':rows[i].softwareversion,
-                            'lizenzenanzahl':rows[i].lizenzenanzahl,
-                            'nutzeranzahl':rows[i].nutzeranzahl,
+                            'anrede2':(rows[i].anrede2 === "undefined" ? " " : rows[i].anrede2),
+                            'vorname2':(rows[i].vorname2 === "undefined" ? " " : rows[i].vorname2),
+                            'nachname2':(rows[i].nachname2 === "undefined" ? " " : rows[i].nachname2),
+                            'email2':(rows[i].email2 === "undefined" ? " " : rows[i].email2),
+                            'funktion2':(rows[i].funktion2 === "undefined" ? " " : rows[i].funktion2),
+                            'studiengang':(rows[i].studiengang === "undefined" ? " " : rows[i].studiengang),
+                            'modulanlass':(rows[i].modulanlass === "undefined" ? " " : rows[i].modulanlass),
+                            'szenario':(rows[i].szenario === "undefined" ? " " : rows[i].szenario),
+                            'softwarename':(rows[i].softwarename === "undefined" ? " " : rows[i].softwarename),
+                            'softwarewebseite':(rows[i].softwarewebseite === "undefined" ? " " : rows[i].softwarewebseite),
+                            'softwareupdate':(rows[i].softwareupdate === "undefined" ? " " : rows[i].softwareupdate),
+                            'softwareupdatewelches':(rows[i].softwareupdatewelches === "undefined" ? " " : rows[i].softwareupdatewelches),
+                            'softwareversion':(rows[i].softwareversion === "undefined" ? " " : rows[i].softwareversion),
+                            'lizenzenanzahl':(rows[i].lizenzenanzahl === "undefined" ? " " : rows[i].lizenzenanzahl),
+                            'nutzeranzahl':(rows[i].nutzeranzahl === "undefined" ? " " : rows[i].nutzeranzahl),
                             'nutzungsdauer':(rows[i].nutzungsdauer === "undefined" ? " " : rows[i].nutzungsdauer),
-                            'nutzungsdauertext':rows[i].nutzungsdauertext,
-                            'betriebssystem':rows[i].betriebssystem,
-                            'browser':rows[i].browser,
-                            'softwareverfuegung':rows[i].softwareverfuegung,
-                            'softwareinteresse':rows[i].softwareinteresse,
-                            'softwareinstitut':rows[i].softwareinstitut,
-                            'softwarehochschinteresse':rows[i].softwarehochschinteresse,
-                            'softwarehochschule':rows[i].softwarehochschule,
-                            'lizenzinstitution':rows[i].lizenzinstitution,
-                            'lizenzart':rows[i].lizenzart,
-                            'lizenzkosten':rows[i].lizenzkosten,
-                            'vergleichbarkeit':rows[i].vergleichbarkeit,
-                            'support':rows[i].support,
-                            'cloud':rows[i].cloud,
-                            'cloudwo':rows[i].cloudwo,
-                            'productowner':rows[i].productowner,
-                            'bemerkungen':rows[i].bemerkungen,
-                            'datumantrag': rows[i].datumantrag,
-                            'notizen': rows[i].notizen,
+                            'nutzungsdauertext':(rows[i].nutzungsdauertext === "undefined" ? " " : rows[i].nutzungsdauertext),
+                            'betriebssystem':(rows[i].betriebssystem === "undefined" ? " " : rows[i].betriebssystem),
+                            'browser':(rows[i].browser === "undefined" ? " " : rows[i].browser),
+                            'softwareverfuegung':(rows[i].softwareverfuegung === "undefined" ? " " : rows[i].softwareverfuegung),
+                            'softwareinteresse':(rows[i].softwareinteresse === "undefined" ? " " : rows[i].softwareinteresse),
+                            'softwareinstitut':(rows[i].softwareinstitut === "undefined" ? " " : rows[i].softwareinstitut),
+                            'softwarehochschinteresse':(rows[i].softwarehochschinteresse === "undefined" ? " " : rows[i].softwarehochschinteresse),
+                            'softwarehochschule':(rows[i].softwarehochschule === "undefined" ? " " : rows[i].softwarehochschule),
+                            'lizenzinstitution':(rows[i].lizenzinstitution === "undefined" ? " " : rows[i].lizenzinstitution),
+                            'lizenzart':(rows[i].lizenzart === "undefined" ? " " : rows[i].lizenzart),
+                            'lizenzkosten':(rows[i].lizenzkosten === "undefined" ? " " : rows[i].lizenzkosten),
+                            'vergleichbarkeit':(rows[i].vergleichbarkeit === "undefined" ? " " : rows[i].vergleichbarkeit),
+                            'support':(rows[i].support === "undefined" ? " " : rows[i].support),
+                            'cloud':(rows[i].cloud === "undefined" ? " " : rows[i].cloud),
+                            'cloudwo':(rows[i].cloudwo === "undefined" ? " " : rows[i].cloudwo),
+                            'productowner':(rows[i].productowner === "undefined" ? " " : rows[i].productowner),
+                            'bemerkungen':(rows[i].bemerkungen === "undefined" ? " " : rows[i].bemerkungen),
+                            'datumantrag':(rows[i].datumantrag === "undefined" ? " " : rows[i].datumantrag),
+                            'notizen':(rows[i].notizen === "undefined" ? " " : rows[i].notizen),
                             'userid':rows[i].userid,
                             'status':rows[i].status
                         }
@@ -274,214 +275,13 @@ module.exports = function (models) {
                         transport4.close();
                     });
                 }
-                   //      else if (mailtype == 4) {
-                   //      let transport3 = nodemailer.createTransport({
-                   //          host: "lmailer.fhnw.ch",
-                   //          secure: false, // use SSL
-                   //          port: 25,
-                   //          tls: {
-                   //              rejectUnauthorized: false
-                   //          }
-                   //      });
-                   //     let messageSender3 = {
-                   //         // sender info
-                   //         from: '3 Santra <applprojekte.ph@fhnw.ch>',
-                   //
-                   //         // Comma separated list of recipients
-                   //         to: '+nachname+ <'+email+'>',
-                   //
-                   //         // Subject of the message
-                   //         subject: 'Santra 3: Antrag Nummer XY in bearbeitung',
-                   //
-                   //         // plaintext body
-                   //         text: '3 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                   //             '\n' +
-                   //             'Vielen Dank und freundliche Grüsse \n' +
-                   //             'Ihr ApplProjekte Supportteam \n' +
-                   //             'n|w\n',
-                   //         // HTML body
-                   //         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                   //             '</br>Vielen Dank und freundliche Grüsse' +
-                   //             '</br>Ihr ApplProjekte Supportteam ' +
-                   //             '</br>n|w</p>'
-                   //     };
-                   //     let messageSupport3 = {
-                   //         // sender info
-                   //         from: '3 Santra <applprojekte.ph@fhnw.ch>',
-                   //         // Comma separated list of recipients
-                   //         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                   //         to: '<alesya.heymann@fhnw.ch>',
-                   //         // Subject of the message
-                   //         subject: 'Status 3 Santra: Antrag Nummer XY ✔',
-                   //         // plaintext body
-                   //         text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                   //             '\n' +
-                   //             'freundliche Grüsse \n' +
-                   //             'Santra Softwareantrag Software \n' +
-                   //             'n|w\n',
-                   //         // HTML body
-                   //         html:'<p><span>3 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                   //             '</br>Vielen Dank und freundliche Grüsse' +
-                   //             '</br>Ihr ApplProjekte Supportteam ' +
-                   //             '</br>n|w</p>'
-                   //     };
-                   //     transport3.sendMail(messageSender3, function(error){
-                   //         if(error){
-                   //             console.log('Error occured');
-                   //             console.log(error.message);
-                   //             return;
-                   //         }
-                   //         console.log('Message sent successfully!');
-                   //         transport3.close();
-                   //     });
-                   //     transport3.sendMail(messageSupport3, function(error){
-                   //         transport3.close();
-                   //     });
-                   // }
-
-                   //          else if (mailtype==4){
-                   //      let transport4 = nodemailer.createTransport({
-                   //          host: "lmailer.fhnw.ch",
-                   //          secure: false, // use SSL
-                   //          port: 25,
-                   //          tls: {
-                   //              rejectUnauthorized: false
-                   //          }
-                   //      });
-                   //     let messageSender4 = {
-                   //         // sender info
-                   //         from: 'Status 4 Santra <applprojekte.ph@fhnw.ch>',
-                   //
-                   //         // Comma separated list of recipients
-                   //         to: '+nachname+ <'+email+'>',
-                   //
-                   //         // Subject of the message
-                   //         subject: 'Santra 4: Antrag Nummer XY in bearbeitung',
-                   //
-                   //         // plaintext body
-                   //         text: '4 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                   //             '\n' +
-                   //             'Vielen Dank und freundliche Grüsse \n' +
-                   //             'Ihr ApplProjekte Supportteam \n' +
-                   //             'n|w\n',
-                   //         // HTML body
-                   //         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                   //             '</br>Vielen Dank und freundliche Grüsse' +
-                   //             '</br>Ihr ApplProjekte Supportteam ' +
-                   //             '</br>n|w</p>'
-                   //     };
-                   //     let messageSupport4 = {
-                   //         // sender info
-                   //         from: 'Santra Status 4 <applprojekte.ph@fhnw.ch>',
-                   //         // Comma separated list of recipients
-                   //         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                   //         to: '<alesya.heymann@fhnw.ch>',
-                   //         // Subject of the message
-                   //         subject: 'Status 4 Santra: Antrag Nummer XY ✔',
-                   //         // plaintext body
-                   //         text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                   //             '\n' +
-                   //             'freundliche Grüsse \n' +
-                   //             'Santra Softwareantrag Software \n' +
-                   //             'n|w\n',
-                   //         // HTML body
-                   //         html:'<p><span>4 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                   //             '</br>Vielen Dank und freundliche Grüsse' +
-                   //             '</br>Ihr ApplProjekte Supportteam ' +
-                   //             '</br>n|w</p>'
-                   //     };
-                   //     transport4.sendMail(messageSender4, function(error){
-                   //         if(error){
-                   //             console.log('Error occured');
-                   //             console.log(error.message);
-                   //             return;
-                   //         }
-                   //         console.log('4Message sent successfully!');
-                   //         transport4.close();
-                   //     });
-                   //     transport4.sendMail(messageSupport4, function(error){
-                   //         transport4.close();
-                   //     });
-                   // }
-                   //
-                   //          else if(mailtype == 5){
-                   //     console.log('status5');
-                   //      let transport5 = nodemailer.createTransport({
-                   //          host: "lmailer.fhnw.ch",
-                   //          secure: false, // use SSL
-                   //          port: 25,
-                   //          tls: {
-                   //              rejectUnauthorized: false
-                   //          }
-                   //      });
-                   //     let messageSender5 = {
-                   //         // sender info
-                   //         from: 'Status 5 Santra <applprojekte.ph@fhnw.ch>',
-                   //
-                   //         // Comma separated list of recipients
-                   //         to: '+nachname+ <'+email+'>',
-                   //
-                   //         // Subject of the message
-                   //         subject: 'Santra 5: Antrag Nummer XY in bearbeitung',
-                   //
-                   //         // plaintext body
-                   //         text: '5 Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung. \n' +
-                   //             '\n' +
-                   //             'Vielen Dank und freundliche Grüsse \n' +
-                   //             'Ihr ApplProjekte Supportteam \n' +
-                   //             'n|w\n',
-                   //         // HTML body
-                   //         html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                   //             '</br>Vielen Dank und freundliche Grüsse' +
-                   //             '</br>Ihr ApplProjekte Supportteam ' +
-                   //             '</br>n|w</p>'
-                   //     };
-                   //     let messageSupport5 = {
-                   //         // sender info
-                   //         from: 'Santra Status 5 <applprojekte.ph@fhnw.ch>',
-                   //         // Comma separated list of recipients
-                   //         //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                   //         to: '<alesya.heymann@fhnw.ch>',
-                   //         // Subject of the message
-                   //         subject: 'Status 5 Santra: Antrag Nummer XY ✔',
-                   //         // plaintext body
-                   //         text: ''+orderid+'Liebes Applprojekte Team, neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung. \n' +
-                   //             '\n' +
-                   //             'freundliche Grüsse \n' +
-                   //             'Santra Softwareantrag Software \n' +
-                   //             'n|w\n',
-                   //         // HTML body
-                   //         html:'<p><span>5 Status Liebes Applprojekte Team</span><p>neues Antrag ist eingegangen. Eine Gesamtübersicht des Antrags erhalten Sie unter http://santra.ph.fhnw.ch nach der Anmeldung.' +
-                   //             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderid+' nach der Anmeldung.' +
-                   //             '</br>Vielen Dank und freundliche Grüsse' +
-                   //             '</br>Ihr ApplProjekte Supportteam ' +
-                   //             '</br>n|w</p>'
-                   //     };
-                   //     transport5.sendMail(messageSender5, function(error){
-                   //         if(error){
-                   //             console.log('Error occured');
-                   //             console.log(error.message);
-                   //             return;
-                   //         }
-                   //           console.log('5Message sent successfully!');
-                   //         transport5.close();
-                   //     });
-                   //     transport5.sendMail(messageSupport5, function(error){
-                   //         transport5.close();
-                   //     });
-                   // }
-
             })
 
             setTimeout(
                 function(){
                      res.render('layout_details', {
-                         "softwareListDetails": softwareListDetails
+                         "softwareListDetails": softwareListDetails,
+                         "admin": LOGIN.ADMIN
                      });
                 }, 500);
 
