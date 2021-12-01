@@ -372,6 +372,10 @@ $( document ).ready(function() {
         window.location.replace('/user');
             }, 500);
     })
+    $('.btn-reload').one("click",function () {
+        window.location.reload();
+    })
+
   /*  $('.link-id-edit').click(function () {
         const urlParams = new URLSearchParams(window.location.search);
         const currenturlParam = urlParams.get('tsid');

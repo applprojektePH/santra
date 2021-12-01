@@ -6,6 +6,7 @@ const controllers = require("./controllers/");
 module.exports = function (app, models) {
 
   app.use(bodyParser.urlencoded({ extended: false }));
+
   let controllers = require('./controllers/');
   controllers = new controllers(models);
   app.get('/', controllers.mainController.main);
@@ -16,7 +17,6 @@ module.exports = function (app, models) {
   app.get('/info', controllers.infoController.main);
   app.get('/details', controllers.detailsController.main);
   app.post('/details', controllers.detailsController.main);
-  //app.get('/remove', controllers.removeController.main);
   app.get('/edit', controllers.editController.main);
   app.post('/edit', controllers.editedController.main);
   app.post('/submit-form', controllers.userController.main);

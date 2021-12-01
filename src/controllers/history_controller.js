@@ -53,10 +53,10 @@ module.exports = function (models) {
                                 mailtypecurrent = 'Antrag beim Gremium: Antrag abgelehnt';
                                 break;
                             case 6:
-                                mailtypecurrent = 'Antrag abgeschlossen (kein E-Mail wurde verschickt)';
+                                mailtypecurrent = 'Antrag Entscheid';
                                 break;
                             case 7:
-                                mailtypecurrent = 'Antrag abgeschlossen (Benutzer informiert)';
+                                mailtypecurrent = 'Antrag abgeschlossen';
                                 break;
                         }
                         let order = {

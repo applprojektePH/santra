@@ -1,0 +1,20 @@
+span.service-buttons-wrapper
+    for order in softwareListDetails
+        if(order.status == 10)
+            a(href="/edit?tsid=" + order.orderid class="link-id")
+                button.btn.btn-primary.btn-sm.btn-orderedit(type='submit')
+                    | Antrag bearbeiten
+                    i.fas.fa-edit
+            a(href="/details?tsid="+ order.orderid + "&status=1" class="link-id")
+                button#buttonsubmitformdraft.submitformbtn.btn.btn-primary.btn-sm(type='submit')
+                    | Antrag einreichen
+                    i.fas.fa-paper-plane
+        button#pdfexport.btn.btn-primary.btn-sm(type='button')
+            | Antrag als PDF speichern
+            i.fas.fa-file-pdf
+        a(href='/user')
+            button.btn.btn-primary.btn-sm(type='button')
+                | Zur&uuml;ck zu
+                | allen Antr&auml;gen
+                i.fas.fa-search
+    br

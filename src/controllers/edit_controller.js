@@ -1,6 +1,7 @@
 let db = require('../libs/db');
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
+const LOGIN = require("../login");
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -16,7 +17,24 @@ module.exports = function (models) {
         res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         res.setHeader("Expires", "0"); // Proxies.
        // let tsID = parseInt(req.query.tsid);
-
+        /* USER start */
+        let obj_user = {};
+        let admins = ['alesya.heymann@fhnw.ch', 'giovanni.casonati@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch'];
+        let adminlog;
+        req.rawHeaders.forEach(function(val, i) {
+            if (i % 2 === 1) return;
+            obj_user[val] = req.rawHeaders[i + 1];
+        });
+        JSON.stringify(obj_user);
+        admins.forEach(function(val, i) {
+            if(obj_user.mail==admins[i]){
+                adminlog = true;
+            }
+            else{
+                adminlog = false;
+            }
+        })
+        /* USER end */
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -134,6 +152,11 @@ module.exports = function (models) {
                 function(){
                     // res.send(req.params.tsid);
                     res.render('layout_form-filled', {
+                        "vornamelog": obj_user.givenName,
+                        "nachnamelog": obj_user.surname,
+                        "emaillog": obj_user.mail,
+                        "admin": adminlog,
+                        "useridlog": LOGIN.useridlog,
                         "softwareListDetails": softwareListDetails
                     });
                 }, 100);

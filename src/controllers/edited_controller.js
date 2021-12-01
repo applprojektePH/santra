@@ -23,7 +23,6 @@ module.exports = function (models) {
         pool.getConnection((err, connection) => {
             let tsID = parseInt(req.query.tsid);
             let status = parseInt(req.query.currenturlParam);
-            let userid = '123';
             let institut = req.body.institut;
             let professur = req.body.professur;
             let anrede = req.body.anrede;

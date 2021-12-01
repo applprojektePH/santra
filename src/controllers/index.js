@@ -16,8 +16,6 @@ module.exports = function(models) {
 
   this.editedController = new (require('./edited_controller'))(models);
 
-  this.dbController = new (require('./db_controller'))(models);
-
   this.pdfController = new (require('./pdf_controller'))(models);
 
   this.historyController = new (require('./history_controller'))(models);

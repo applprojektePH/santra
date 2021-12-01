@@ -92,7 +92,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         for order in softwareListDetails
                                                                                                                                 input#form-author-name.form-control(type='text' required1='' name='nachname' value=order.nachname)
                                                                                                                 else
-                                                                                                                        input#form-author-name.form-control(type='text' required1='' name='nachname' value=namelog)
+                                                                                                                        input#form-author-name.form-control(type='text' required1='' name='nachname' value=nachnamelog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
 
@@ -892,7 +892,7 @@ script(type='text/javascript').
                 $('.form-date').text(datetime);
                 $('.form-date-input').attr('value', datetime);
                 let formsubmit = false;
-                $(".submitformbtnaction").click(function () {
+                $(".submitformbtnaction").one("click",function () {
                         $("#accordionForm").find(".accordion-item").each(function () {
                                 $(this).find("input, select, textarea").filter('[required1]').each(function () {
                                         if (($(this).val() == "") || ($(this).val() == null)) {

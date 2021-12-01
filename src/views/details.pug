@@ -9,10 +9,12 @@
                     for order in softwareListDetails
                         if(order.status == 10)
                             span.span-draft Entwurf
-                if (admin==true)
-                    include elements/buttons-view-admin
-                else
-                    include elements/buttons-view
+                            if (admin == true)
+                                include elements/buttons-view-admin
+                            else
+                                include elements/buttons-view-draft
+                        else
+                            include elements/buttons-view
                 for order in softwareListDetails
                     if(order.status != 10)
                         ul.progressbar
@@ -140,8 +142,8 @@
                                 h5.modal-title Antrag abschliessen
                             .modal-body
                                 for order in softwareListDetails
-                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=6, mailtype=4, orderstatus=7)
-                                        | Antrag abschliessen (Benutzer informieren)
+                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=6, mailtype=0, orderstatus=7)
+                                        | Antrag abschliessen
                                     a(href='#')
                                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                 br
@@ -309,11 +311,8 @@ script(type='text/javascript').
             const urlParams = new URLSearchParams(window.location.search);
             const currenturlParam = urlParams.get('tsid');
             let mailtext;
-            if (orderstatus==6){
+            if (orderstatus==6 || orderstatus==7){
                 mailtext = '';
-            }
-            else if (orderstatus==7){
-                mailtext = 'Antrag wurde abgeschlossen';
             }
             else{
              mailtext = $(this).prev().val();
@@ -343,10 +342,15 @@ script(type='text/javascript').
                     },
                     url: '/details?tsid=' + currenturlParam,
                     success: function (data) {
-                        $('.green').removeClass('hidden');
-                        window.setTimeout(function () {
+                        if (orderstatus == 6 || orderstatus == 7) {
                             window.location.replace("/details?tsid=" + currenturlParam);
-                        }, 1000);
+                        }
+                        else{
+                            $('.green').removeClass('hidden');
+                            window.setTimeout(function () {
+                                window.location.replace("/details?tsid=" + currenturlParam);
+                            }, 500);
+                               }
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         $('.red').removeClass('hidden');

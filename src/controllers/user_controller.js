@@ -27,7 +27,24 @@ module.exports = function (models) {
             page.path = "/"+CONSTANTS.SETTINGS.WEB.PATH_STRING;
         else
             page.path = "";
-
+        /* USER start */
+        let obj_user = {};
+        let admins = ['alesya.heymann@fhnw.ch', 'giovanni.casonati@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch'];
+        let adminlog;
+        req.rawHeaders.forEach(function(val, i) {
+            if (i % 2 === 1) return;
+            obj_user[val] = req.rawHeaders[i + 1];
+        });
+        JSON.stringify(obj_user);
+        admins.forEach(function(val, i) {
+            if(obj_user.mail==admins[i]){
+                adminlog = true;
+            }
+            else{
+                adminlog = false;
+            }
+        })
+        /* USER end */
         pool.getConnection((err, connection) => {
             if (err) throw err
             console.log('connected as id ' + connection.threadId)
@@ -358,11 +375,11 @@ else if (url == "/user"){
                 function () {
                     res.render('layout_user', {
                         "softwareList": softwareList,
-                        "vornamelog": LOGIN.vornamelog,
                         "useridlog": LOGIN.useridlog,
-                        "emaillog": LOGIN.emaillog,
-                        "titlelog": LOGIN.titlelog,
-                        "namelog": LOGIN.namelog,
+                        "vornamelog": obj_user.givenName,
+                        "nachnamelog": obj_user.surname,
+                        "emaillog": obj_user.mail,
+                        "admin": adminlog
                     });
                 }, 500);
 

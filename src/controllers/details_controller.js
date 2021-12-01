@@ -16,6 +16,22 @@ module.exports = function (models) {
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         res.setHeader("Expires", "0"); // Proxies.
+        let obj_user = {};
+        let admins = ['giovanni.casonati@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch'];
+        req.rawHeaders.forEach(function(val, i) {
+            if (i % 2 === 1) return;
+            obj_user[val] = req.rawHeaders[i + 1];
+        });
+        JSON.stringify(obj_user);
+        let adminlog = admins.find(element => element==obj_user.mail);
+        if (adminlog!==undefined){
+            adminlog = true;
+        }
+        else
+        {
+            adminlog = false;
+        }
+
         let tsID = parseInt(req.query.tsid);
         let status = parseInt(req.query.status);
         let anrede;
@@ -154,7 +170,7 @@ module.exports = function (models) {
                            from: 'Santra <applprojekte.ph@fhnw.ch>',
                            // Comma separated list of recipients
                            //to: '+nachname+ <'+email+'>',
-                           to: 'Heymann <alesya.heymann@fhnw.ch>',
+                           to: obj_user.mail,
                            // Subject of the message
                            subject: 'Santra: Antrag Nummer #'+orderid+'',
 
@@ -186,7 +202,7 @@ module.exports = function (models) {
                            from: 'Santra <applprojekte.ph@fhnw.ch>',
 
                            // Comma separated list of recipients
-                           to: '+nachname+ <'+email+'>',
+                           to: '+nachname+ <'+obj_user.mail+'>',
 
                            // Subject of the message
                            subject: "Santra: Antrag Nummer #"+orderid+" in bearbeitung",
@@ -238,50 +254,52 @@ module.exports = function (models) {
                            transport2.close();
                        });
                         }
-                if((mailtype == 4) && (typeof statuschange != 'undefined') && (typeof email != 'undefined')) {
-                    let transport4 = nodemailer.createTransport({
-                        host: "lmailer.fhnw.ch",
-                        secure: false, // use SSL
-                        port: 25,
-                        tls: {
-                            rejectUnauthorized: false
-                        }
-                    });
-                    let messageSender4 = {
-                        // sender info
-                        from: 'Santra <applprojekte.ph@fhnw.ch>',
-                        // Comma separated list of recipients
-                        //to: '+nachname+ <'+email+'>',
-                        to: 'Heymann <alesya.heymann@fhnw.ch>',
-                        // Subject of the message
-                        subject: 'Santra: Antrag Nummer #'+orderid+'',
-
-                        text: ''+orderid+'Antrag abgeschlossen' +
-                            'freundliche Grüsse \n' +
-                            'Santra Softwareantrag Software \n' +
-                            'n|w\n',
-                        // HTML body
-                        html:'<p><span>Antrag abgeschlossen</span>' +
-                             '</br>Vielen Dank und freundliche Grüsse' +
-                            '</br>Ihr ApplProjekte Supportteam ' +
-                            '</br>n|w</p>'
-                    };
-                    transport4.sendMail(messageSender4, function(error){
-                        if(error){
-                            console.log('Error occured');
-                            console.log(error.message);
-                            return;
-                        }
-                        transport4.close();
-                    });
-                }
+                // if((mailtype == 4) && (typeof statuschange != 'undefined') && (typeof email != 'undefined')) {
+                //     let transport4 = nodemailer.createTransport({
+                //         host: "lmailer.fhnw.ch",
+                //         secure: false, // use SSL
+                //         port: 25,
+                //         tls: {
+                //             rejectUnauthorized: false
+                //         }
+                //     });
+                //     let messageSender4 = {
+                //         // sender info
+                //         from: 'Santra <applprojekte.ph@fhnw.ch>',
+                //         // Comma separated list of recipients
+                //         //to: '+nachname+ <'+email+'>',
+                //         to: obj_user.mail,
+                //         // Subject of the message
+                //         subject: 'Santra: Antrag Nummer #'+orderid+'',
+                //
+                //         text: ''+orderid+'Antrag abgeschlossen' +
+                //             'freundliche Grüsse \n' +
+                //             'Santra Softwareantrag Software \n' +
+                //             'n|w\n',
+                //         // HTML body
+                //         html:'<p><span>Antrag abgeschlossen</span>' +
+                //              '</br>Vielen Dank und freundliche Grüsse' +
+                //             '</br>Ihr ApplProjekte Supportteam ' +
+                //             '</br>n|w</p>'
+                //     };
+                //     transport4.sendMail(messageSender4, function(error){
+                //         if(error){
+                //             console.log('Error occured');
+                //             console.log(error.message);
+                //             return;
+                //         }
+                //         transport4.close();
+                //     });
+                // }
             })
 
             setTimeout(
                 function(){
                      res.render('layout_details', {
                          "softwareListDetails": softwareListDetails,
-                         "admin": LOGIN.ADMIN
+                         "vornamelog": obj_user.givenName,
+                         "nachnamelog": obj_user.surname,
+                         "admin": adminlog
                      });
                 }, 500);
 
