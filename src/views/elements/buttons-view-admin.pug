@@ -1,10 +1,5 @@
 span.service-buttons-wrapper
     for order in softwareListDetails
-        if(order.status == 10)
-            a(href="/details?tsid="+ order.orderid + "&status=1" class="link-id")
-                button#buttonsubmitformdraft.submitformbtn.btn.btn-primary.btn-sm(type='submit')
-                    | Antrag einreichen
-                    i.fas.fa-paper-plane
         a(href="/edit?tsid="+ order.orderid class="link-id")
             button.btn.btn-primary.btn-sm.btn-orderedit(type='submit')
                 | Antrag bearbeiten

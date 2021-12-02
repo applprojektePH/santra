@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const CONSTANTS = require("../libs/constants");
+const LOGIN = require("../login");
 module.exports = function (models) {
 	//const LOGIN = require("../login");
 	let page = {};
@@ -16,7 +17,6 @@ module.exports = function (models) {
 
 		/* USER start */
 		let obj_user = {};
-		let admins = ['alesya.heymann@fhnw.ch', 'giovanni.casonati@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch'];
 		let adminlog;
 		req.rawHeaders.forEach(function(val, i) {
 			if (i % 2 === 1) return;
@@ -29,15 +29,9 @@ module.exports = function (models) {
 		else{
 			accesslog = false;
 		}
-		admins.forEach(function(val, i) {
-			if(obj_user.mail==admins[i]){
-				adminlog = true;
-			}
-			else{
-				adminlog = false;
-			}
-		})
+		adminlog=LOGIN.admins.includes(obj_user.mail)
 		/* USER end */
+
 		if(accesslog==true){
 			pool.getConnection((err, connection) => {
 				if (err) throw err

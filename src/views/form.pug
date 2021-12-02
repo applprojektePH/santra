@@ -28,7 +28,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         .invalid-feedback
                                                                                                                                 | Pflichtfeld
                                                                                                 else
-                                                                                                        select.form-select.form-control(required1='' name='institut')
+                                                                                                        select.form-select.form-control(required='' name='institut')
                                                                                                                 option(selected='' disabled='' value='')
                                                                                                                         | W&auml;hlen Sie ein Institut...
                                                                                                                 option Kindergarten-/Unterstufe
@@ -44,9 +44,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 label(for='form-prof') Professur/Zentrum/Ressort*
                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                         for order in softwareListDetails
-                                                                                                                input#form-prof.form-control(type='text' required1='' name='professur' value=order.professur)
+                                                                                                                input#form-prof.form-control(type='text' required='' name='professur' value=order.professur)
                                                                                                 else
-                                                                                                        input#form-prof.form-control(type='text' required1='' name='professur')
+                                                                                                        input#form-prof.form-control(type='text' required='' name='professur')
                                                                                                 .invalid-feedback
                                                                                                         | Pflichtfeld
                                                                                         .col-md-12.fields
@@ -61,14 +61,14 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         .custom-select-js
                                                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                                 for order in softwareListDetails
-                                                                                                                                        select.form-select.form-control.custom-control-select(required1='' name='anrede' filled=order.anrede)
+                                                                                                                                        select.form-select.form-control.custom-control-select(required='' name='anrede' filled=order.anrede)
                                                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                                                 option(value="Frau") Frau
                                                                                                                                                 option(value="Herr") Herr
                                                                                                                                         .invalid-feedback
                                                                                                                                                 | Wählen Sie eine option
                                                                                                                         else
-                                                                                                                                select.form-select.form-control.custom-control-select(required1='' name='anrede' filled=titlelog)
+                                                                                                                                select.form-select.form-control.custom-control-select(required='' name='anrede' filled=titlelog)
                                                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                                                         option(value="Frau") Frau
                                                                                                                                         option(value="Herr") Herr
@@ -80,9 +80,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         | Vorname*
                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                         for order in softwareListDetails
-                                                                                                                                input#form-author-firstname.form-control(type='text' required1='' name='vorname' value=order.vorname)
+                                                                                                                                input#form-author-firstname.form-control(type='text' required='' name='vorname' value=order.vorname)
                                                                                                                 else
-                                                                                                                        input#form-author-firstname.form-control(type='text' required1='' name='vorname' value=vornamelog)
+                                                                                                                        input#form-author-firstname.form-control(type='text' required='' name='vorname' value=vornamelog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-4.fields
@@ -90,9 +90,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         | Nachname*
                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                         for order in softwareListDetails
-                                                                                                                                input#form-author-name.form-control(type='text' required1='' name='nachname' value=order.nachname)
+                                                                                                                                input#form-author-name.form-control(type='text' required='' name='nachname' value=order.nachname)
                                                                                                                 else
-                                                                                                                        input#form-author-name.form-control(type='text' required1='' name='nachname' value=nachnamelog)
+                                                                                                                        input#form-author-name.form-control(type='text' required='' name='nachname' value=nachnamelog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
 
@@ -102,9 +102,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         | E-Mail-Adresse*
                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                         for order in softwareListDetails
-                                                                                                                                input#form-author-email.form-control(type='email' required1='' name='email' value=order.email)
+                                                                                                                                input#form-author-email.form-control(type='email' required='' name='email' value=order.email)
                                                                                                                 else
-                                                                                                                        input#form-author-email.form-control(type='email' required1='' name='email' value=emaillog)
+                                                                                                                        input#form-author-email.form-control(type='email' required='' name='email' value=emaillog)
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-6.fields
@@ -113,9 +113,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         | Funktion*
                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                         for order in softwareListDetails
-                                                                                                                                input#form-author-function.form-control(type='text' required1='' name='funktion' value=order.funktion)
+                                                                                                                                input#form-author-function.form-control(type='text' required='' name='funktion' value=order.funktion)
                                                                                                                 else
-                                                                                                                        input#form-author-function.form-control(type='text' required1='' name='funktion')
+                                                                                                                        input#form-author-function.form-control(type='text' required='' name='funktion')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
 
@@ -229,9 +229,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         | Studiengang*
                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                         for order in softwareListDetails
-                                                                                                                                input#form-study.form-control(type='text' required1='' name='studiengang' value=order.studiengang)
+                                                                                                                                input#form-study.form-control(type='text' required='' name='studiengang' value=order.studiengang)
                                                                                                                 else
-                                                                                                                        input#form-study.form-control(type='text' required1='' name='studiengang')
+                                                                                                                        input#form-study.form-control(type='text' required='' name='studiengang')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                         .col-md-6.fields
@@ -239,9 +239,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         | Modulanlass*
                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                         for order in softwareListDetails
-                                                                                                                                input#form-modul.form-control(type='text' required1='' name='modulanlass' value=order.modulanlass)
+                                                                                                                                input#form-modul.form-control(type='text' required='' name='modulanlass' value=order.modulanlass)
                                                                                                                 else
-                                                                                                                        input#form-modul.form-control(type='text' required1='' name='modulanlass')
+                                                                                                                        input#form-modul.form-control(type='text' required='' name='modulanlass')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                 .accordion-item
@@ -256,10 +256,10 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                 | eingesetzt werden soll)
                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                 for order in softwareListDetails
-                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required1='' name='szenario')
-                                                                                           | #{order.szenario}
+                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required='' name='szenario')
+                                                                                                | #{order.szenario}
                                                                         else
-                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required1='' name='szenario')
+                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required='' name='szenario')
                                                                         //small.floatright.text-small-char
                                                                         //        | Noch
                                                                         //        | &nbsp;
@@ -274,9 +274,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Name der Software*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        input#form-softwarename.form-control(type='text' required1='' name='softwarename' value=order.softwarename)
+                                                                                                        input#form-softwarename.form-control(type='text' required='' name='softwarename' value=order.softwarename)
                                                                                         else
-                                                                                                input#form-softwarename.form-control(type='text' required1='' name='softwarename')
+                                                                                                input#form-softwarename.form-control(type='text' required='' name='softwarename')
                                                                                         .invalid-feedback
                                                                                                 | Pflichtfeld
                                                                                 .col-md-12.fields
@@ -285,9 +285,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Webseite der Software*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        input#form-softwarewebseite.form-control(type='text' required1='' name='softwarewebseite' value=order.softwarewebseite)
+                                                                                                        input#form-softwarewebseite.form-control(type='text' required='' name='softwarewebseite' value=order.softwarewebseite)
                                                                                         else
-                                                                                                input#form-softwarewebsite.form-control(type='text' required1='' name='softwarewebseite')
+                                                                                                input#form-softwarewebsite.form-control(type='text' required='' name='softwarewebseite')
                                                                                         .invalid-feedback
                                                                                                 | Pflichtfeld
                                                                                 .col-md-12.fields
@@ -298,60 +298,72 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | ja, welches?
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        if (order.softwareupdate == "no")
+                                                                                                        if (order.softwareupdate == "Nein")
                                                                                                                 .custom-control.custom-radio
-                                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="no" name='softwareupdate' required1='')
+                                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="Nein" name='softwareupdate' required='' checked)
                                                                                                                         label.custom-control-label.custom-control-label-js(for='customRadioDisabled1' answer='no') Nein
                                                                                                                 .custom-control.custom-radio
-                                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="yes" name='softwareupdate' required1='')
+                                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="Ja" name='softwareupdate' required='')
                                                                                                                         label.custom-control-label.custom-control-label-js(for='customRadioDisabled2' answer='open') Ja
                                                                                                                         .invalid-feedback
                                                                                                                                 | Pflichtfeld
                                                                                                                 .collapse.inputHide
-                                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='softwareupdatewelches')
-                                                                                                                        | #{order.softwareupdate}
-                                                                                                                small.floatright.text-small-char
-                                                                                                                        | Noch
-                                                                                                                        | &nbsp;
-                                                                                                                        span.charleft
-                                                                                                                        |                                                 Zeichen
+                                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='softwareupdatewelches')
+                                                                                                                        //small.floatright.text-small-char
+                                                                                                                        //        | Noch
+                                                                                                                        //        | &nbsp;
+                                                                                                                        //        span.charleft
+                                                                                                                        //        |                                                 Zeichen
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
+                                                                                                                //small.floatright.text-small-char
+                                                                                                                //        | Noch
+                                                                                                                //        | &nbsp;
+                                                                                                                //        span.charleft
+                                                                                                                //        |                                                 Zeichen
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
-                                                                                                        else if (order.softwareupdate == "yes")
+                                                                                                        else if (order.softwareupdate == "Ja")
                                                                                                                 .custom-control.custom-radio
-                                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="no" name='softwareupdate' required1='')
-                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled1' answer='no') Nein
+                                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="Nein" name='softwareupdate' required='')
+                                                                                                                        label.custom-control-label(for='customRadioDisabled1' answer='no') Nein
                                                                                                                 .custom-control.custom-radio
-                                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="yes" name='softwareupdate' required1='')
-                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled2' answer='open') Ja
+                                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="Ja" name='softwareupdate' required='' checked)
+                                                                                                                        label.custom-control-label(for='customRadioDisabled2' answer='open') Ja
                                                                                                                         .invalid-feedback
                                                                                                                                 | Pflichtfeld
-                                                                                                                .collapse.inputHide
-                                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='softwareupdatewelches')
-                                                                                                                        | #{order.softwareupdate}
-                                                                                                                small.floatright.text-small-char
-                                                                                                                        | Noch
-                                                                                                                        | &nbsp;
-                                                                                                                        span.charleft
-                                                                                                                        | Zeichen
+                                                                                                                textarea#validationTextarea.form-control(maxlength='5000' rows='7' name='softwareupdatewelches' required)
+                                                                                                                        | #{order.softwareupdatewelches}
+                                                                                                                //small.floatright.text-small-char
+                                                                                                                //        | Noch
+                                                                                                                //        | &nbsp;
+                                                                                                                //        span.charleft
+                                                                                                                //        |                                                 Zeichen
+
+
+                                                                                                                //small.floatright.text-small-char
+                                                                                                                //        | Noch
+                                                                                                                //        | &nbsp;
+                                                                                                                //        span.charleft
+                                                                                                                //        | Zeichen
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                         else
                                                                                                 .custom-control.custom-radio
-                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="Nein" name='softwareupdate' required1='')
+                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="Nein" name='softwareupdate' required='')
                                                                                                         label.custom-control-label.custom-control-label-js(for='customRadioDisabled1' answer='no') Nein
                                                                                                 .custom-control.custom-radio
-                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="Ja" name='softwareupdate' required1='')
+                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="Ja" name='softwareupdate' required='')
                                                                                                         label.custom-control-label.custom-control-label-js(for='customRadioDisabled2' answer='open') Ja
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                                                 .collapse.inputHide
-                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' required1='' name='softwareupdatewelches')
-                                                                                                        small.floatright.text-small-char
-                                                                                                                | Noch
-                                                                                                                | &nbsp;
-                                                                                                                span.charleft
-                                                                                                                |                                                 Zeichen
+                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='softwareupdatewelches')
+                                                                                                        //small.floatright.text-small-char
+                                                                                                        //        | Noch
+                                                                                                        //        | &nbsp;
+                                                                                                        //        span.charleft
+                                                                                                        //        |                                                 Zeichen
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                         br
@@ -361,9 +373,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Anzahl Lizenzen*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        input#form-lizenz.form-control(min="1" type='number' required1='' name='lizenzenanzahl' value=order.lizenzenanzahl)
+                                                                                                        input#form-lizenz.form-control(min="1" type='number' required='' name='lizenzenanzahl' value=order.lizenzenanzahl)
                                                                                         else
-                                                                                                input#form-lizenz.form-control(min="1" type='number' required1='' name='lizenzenanzahl')
+                                                                                                input#form-lizenz.form-control(min="1" type='number' required='' name='lizenzenanzahl')
                                                                                         .invalid-feedback
                                                                                                 | Pflichtfeld
                                                                                 .col-md-6.fields
@@ -371,9 +383,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Anzahl geplante Nutzer*innen*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        input#form-user.form-control(min="1" type='number' required1='' name='nutzeranzahl' value=order.nutzeranzahl)
+                                                                                                        input#form-user.form-control(min="1" type='number' required='' name='nutzeranzahl' value=order.nutzeranzahl)
                                                                                         else
-                                                                                                input#form-user.form-control(min="1" type='number' required1='' name='nutzeranzahl')
+                                                                                                input#form-user.form-control(min="1" type='number' required='' name='nutzeranzahl')
                                                                                         .invalid-feedback
                                                                                                 | Pflichtfeld
                                                                         .row
@@ -385,7 +397,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 .custom-select-js
                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                         for order in softwareListDetails
-                                                                                                                        select.form-select.form-control.custom-control-select(required1='' name='nutzungsdauer' filled=order.nutzungsdauer)
+                                                                                                                        select.form-select.form-control.custom-control-select(required='' name='nutzungsdauer' filled=order.nutzungsdauer)
                                                                                                                                 option(selected='' disabled='' value='') Auswahl oder Eingabe
                                                                                                                                 option(value="1 Semester") 1 Semester
                                                                                                                                 option(value="2 Semester")  2 Semester
@@ -398,7 +410,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                 .invalid-feedback
                                                                                                                                         | Pflichtfeld
                                                                                                 else
-                                                                                                                select.form-select.form-control.custom-control-select(required1='' name='nutzungsdauer')
+                                                                                                                select.form-select.form-control.custom-control-select(required='' name='nutzungsdauer')
                                                                                                                         option(selected='' disabled='' value='') Auswahl oder Eingabe
                                                                                                                         option(value="1 Semester") 1 Semester
                                                                                                                         option(value="2 Semester")  2 Semester
@@ -424,7 +436,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Einsatz auf folgendem Betriebssystem*:
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        select.form-select.form-control(required1='' name='betriebssystem' filled=order.betriebssystem)
+                                                                                                        select.form-select.form-control(required='' name='betriebssystem' filled=order.betriebssystem)
                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                 option(value="Windows") Windows
                                                                                                                 option(value="Apple") Apple
@@ -433,7 +445,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                         else
-                                                                                                select.form-select.form-control(required1='' name='betriebssystem')
+                                                                                                select.form-select.form-control(required='' name='betriebssystem')
                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                         option(value="Windows") Windows
                                                                                                         option(value="Apple") Apple
@@ -450,11 +462,11 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         .col-md-6.form-check-wrapper(filled=order.browser)
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox1.form-check-input.form-check-input-js(required1='' type='checkbox' value='Microsoft Edge' name='browser' )
+                                                                                                                                input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser')
                                                                                                                                 |  Microsoft Edge
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox2.form-check-input.form-check-input-js(required1='' type='checkbox' value='Safari' name='browser')
+                                                                                                                                input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser')
                                                                                                                                 |  Safari (Apple)
                                                                                                         .col-md-6
                                                                                                                 .form-check
@@ -507,7 +519,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | werden*?
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        select.form-select.form-control(required1='' name='softwareverfuegung' filled=order.softwareverfuegung)
+                                                                                                        select.form-select.form-control(required='' name='softwareverfuegung' filled=order.softwareverfuegung)
                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                 option(value="Softwarecenter/Softwarekiosk") Softwarecenter/Softwarekiosk
                                                                                                                 option(value="Softwaredownloadseite") Softwaredownloadseite
@@ -515,7 +527,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                                         else
-                                                                                                select.form-select.form-control(required1='' name='softwareverfuegung')
+                                                                                                select.form-select.form-control(required='' name='softwareverfuegung')
                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                         option(value="Softwarecenter/Softwarekiosk") Softwarecenter/Softwarekiosk
                                                                                                         option(value="Softwaredownloadseite") Softwaredownloadseite
@@ -530,25 +542,39 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                         | interessant*? Wenn ja, warum und welche:
                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                         for order in softwareListDetails
-                                                                                                div.custom-radio-wrapper(filled=order.softwareinteresse)
-                                                                                                        .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled3.custom-control-input(type='radio' value="Nein" required1='' name='softwareinteresse')
-                                                                                                                label.custom-control-label.custom-control-label-js(for='customRadioDisabled3' answer='no') Nein
-                                                                                                        .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled4.custom-control-input(type='radio' value="Ja" required1='' name='softwareinteresse')
-                                                                                                                label.custom-control-label.custom-control-label-js(for='customRadioDisabled4' answer='open') Ja
-                                                                                                                .invalid-feedback
-                                                                                                                        | Pflichtfeld
-                                                                                                        .collapse.inputHide
+                                                                                                if (order.softwareinteresse == "Nein")
+                                                                                                        div.custom-radio-wrapper(filled=order.softwareinteresse)
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled3.custom-control-input(type='radio' value="Nein" required='' name='softwareinteresse' checked)
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled3' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled4.custom-control-input(type='radio' value="Ja" required='' name='softwareinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled4' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
+                                                                                                                .collapse.inputHide
+                                                                                                                        .card.card-body
+                                                                                                                                input#form-hs.form-control(type='text' name='softwareinstitut' value=order.softwareinstitut)
+                                                                                                else if (order.softwareinteresse == "Ja")
+                                                                                                        div.custom-radio-wrapper(filled=order.softwareinteresse)
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled3.custom-control-input(type='radio' value="Nein" required='' name='softwareinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled3' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled4.custom-control-input(type='radio' value="Ja" required='' name='softwareinteresse' checked)
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled4' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
                                                                                                                 .card.card-body
-                                                                                                                        input#form-hs.form-control(type='text' name='softwareinstitut' value=order.softwareinstitut)
+                                                                                                                        input#form-hs.form-control(type='text' name='softwareinstitut' value=order.softwareinstitut required='')
+
 
                                                                                 else
                                                                                         .custom-control.custom-radio
-                                                                                                input#customRadioDisabled3.custom-control-input(type='radio' value="Nein" required1='' name='softwareinteresse')
+                                                                                                input#customRadioDisabled3.custom-control-input(type='radio' value="Nein" required='' name='softwareinteresse')
                                                                                                 label.custom-control-label.custom-control-label-js(for='customRadioDisabled3' answer='no') Nein
                                                                                         .custom-control.custom-radio
-                                                                                                input#customRadioDisabled4.custom-control-input(type='radio' value="Ja" required1='' name='softwareinteresse')
+                                                                                                input#customRadioDisabled4.custom-control-input(type='radio' value="Ja" required='' name='softwareinteresse')
                                                                                                 label.custom-control-label.custom-control-label-js(for='customRadioDisabled4' answer='open') Ja
                                                                                                 .invalid-feedback
                                                                                                         | Pflichtfeld
@@ -563,24 +589,39 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                         | ja, warum und welche:
                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                         for order in softwareListDetails
-                                                                                                div.custom-radio-wrapper(filled=order.softwarehochschinteresse)
-                                                                                                        .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled5.custom-control-input(type='radio' value="Nein" required1='' name='softwarehochschinteresse')
-                                                                                                                label.custom-control-label.custom-control-label-js2(for='customRadioDisabled5' answer='no') Nein
-                                                                                                        .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled6.custom-control-input.custom-control-label-js(type='radio' value="Ja" required1='' name='softwarehochschinteresse')
-                                                                                                                label.custom-control-label.custom-control-label-js2(for='customRadioDisabled6' answer='open') Ja
-                                                                                                                .invalid-feedback
-                                                                                                                        | Pflichtfeld
-                                                                                                        .collapse.inputHide2
+                                                                                                if (order.softwarehochschinteresse == "Nein")
+                                                                                                        div.custom-radio-wrapper(filled=order.softwarehochschinteresse)
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled5.custom-control-input(type='radio' value="Nein" required='' name='softwarehochschinteresse' checked)
+                                                                                                                        label.custom-control-label.custom-control-label-js2(for='customRadioDisabled5' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled6.custom-control-input.custom-control-label-js(type='radio' value="Ja" required='' name='softwarehochschinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js2(for='customRadioDisabled6' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
+                                                                                                                .collapse.inputHide2
+                                                                                                                        .card.card-body
+                                                                                                                                input#form-hs.form-control(type='text' name='softwarehochschule' value=order.softwarehochschule)
+                                                                                                else if (order.softwarehochschinteresse == "Ja")
+                                                                                                        div.custom-radio-wrapper(filled=order.softwarehochschinteresse)
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled5.custom-control-input(type='radio' value="Nein" required='' name='softwarehochschinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js2(for='customRadioDisabled5' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled6.custom-control-input.custom-control-label-js(type='radio' value="Ja" required='' name='softwarehochschinteresse' checked)
+                                                                                                                        label.custom-control-label.custom-control-label-js2(for='customRadioDisabled6' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
                                                                                                                 .card.card-body
-                                                                                                                        input#form-hs.form-control(type='text' name='softwarehochschule' value=order.softwarehochschule)
+                                                                                                                        input#form-hs.form-control(type='text' name='softwarehochschule' value=order.softwarehochschule required='')
+
+
                                                                                 else
                                                                                         .custom-control.custom-radio
-                                                                                                input#customRadioDisabled5.custom-control-input(type='radio' value="Nein" required1='' name='softwarehochschinteresse')
+                                                                                                input#customRadioDisabled5.custom-control-input(type='radio' value="Nein" required='' name='softwarehochschinteresse')
                                                                                                 label.custom-control-label.custom-control-label-js2(for='customRadioDisabled5' answer='no') Nein
                                                                                         .custom-control.custom-radio
-                                                                                                input#customRadioDisabled6.custom-control-input.custom-control-label-js(type='radio' value="Ja" required1='' name='softwarehochschinteresse')
+                                                                                                input#customRadioDisabled6.custom-control-input.custom-control-label-js(type='radio' value="Ja" required='' name='softwarehochschinteresse')
                                                                                                 label.custom-control-label.custom-control-label-js2(for='customRadioDisabled6' answer='open') Ja
                                                                                                 .invalid-feedback
                                                                                                         | Pflichtfeld
@@ -601,14 +642,14 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | F&uuml;r welche Institution*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        select.form-select.form-control(required1='' name='lizenzinstitution' filled=order.lizenzinstitution)
+                                                                                                        select.form-select.form-control(required='' name='lizenzinstitution' filled=order.lizenzinstitution)
                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                 option(value='Pädagogische Hochschule') P&auml;dagogische Hochschule
                                                                                                                 option(value='FHNW') FHNW
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                                         else
-                                                                                                select.form-select.form-control(required1='' name='lizenzinstitution')
+                                                                                                select.form-select.form-control(required='' name='lizenzinstitution')
                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                         option(value='Pädagogische Hochschule') P&auml;dagogische Hochschule
                                                                                                         option(value='FHNW') FHNW
@@ -619,7 +660,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Art der Lizenz*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        select.form-select.form-control(required1='' name='lizenzart' filled=order.lizenzart)
+                                                                                                        select.form-select.form-control(required='' name='lizenzart' filled=order.lizenzart)
                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                 option(value='Cloude/Abo')  Cloude/Abo
                                                                                                                 option(value='Cloude/Abo &amp; Support/Storage')  Cloude/Abo &amp; Support/Storage
@@ -629,7 +670,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                                         else
-                                                                                                select.form-select.form-control(required1='' name='lizenzart')
+                                                                                                select.form-select.form-control(required='' name='lizenzart')
                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                         option(value='Cloude/Abo')  Cloude/Abo
                                                                                                         option(value='Cloude/Abo &amp; Support/Storage')  Cloude/Abo &amp; Support/Storage
@@ -650,7 +691,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 | Kosten Lizenzmodell*
                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                 for order in softwareListDetails
-                                                                                                        select.form-select.form-control(required1='' name='lizenzkosten' filled=order.lizenzkosten)
+                                                                                                        select.form-select.form-control(required='' name='lizenzkosten' filled=order.lizenzkosten)
                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                 option(value='Freeware') Freeware
                                                                                                                 option(value='Jährlich') J&auml;hrlich
@@ -660,7 +701,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                                         else
-                                                                                                select.form-select.form-control(required1='' name='lizenzkosten')
+                                                                                                select.form-select.form-control(required='' name='lizenzkosten')
                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                         option(value='Freeware') Freeware
                                                                                                         option(value='Jährlich') J&auml;hrlich
@@ -689,9 +730,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         | Software?)
                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                         for order in softwareListDetails
-                                                                                                                input#form-softwarecompare.form-control(type='text' required1='' name='vergleichbarkeit' value=order.vergleichbarkeit)
+                                                                                                                input#form-softwarecompare.form-control(type='text' required='' name='vergleichbarkeit' value=order.vergleichbarkeit)
                                                                                                 else
-                                                                                                        input#form-softwarecompare.form-control(type='text' required1='' name='vergleichbarkeit')
+                                                                                                        input#form-softwarecompare.form-control(type='text' required='' name='vergleichbarkeit')
                                                                                                 .invalid-feedback
                                                                                                         | Pflichtfeld
                                                                                         .col-md-6.fields
@@ -700,7 +741,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         | Support durch*
                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                         for order in softwareListDetails
-                                                                                                                select.form-select.form-control(required1='' name='support' filled=order.support)
+                                                                                                                select.form-select.form-control(required='' name='support' filled=order.support)
                                                                                                                         option(selected='' disabled='' value='') Auswahl
                                                                                                                         option(value='Institut') Institut
                                                                                                                         option(value='FHNW') FHNW
@@ -708,7 +749,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
                                                                                                 else
-                                                                                                        select.form-select.form-control(required1='' name='support')
+                                                                                                        select.form-select.form-control(required='' name='support')
                                                                                                                 option(selected='' disabled='' value='') Auswahl
                                                                                                                 option(value='Institut') Institut
                                                                                                                 option(value='FHNW') FHNW
@@ -724,24 +765,39 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 | Wenn nein, wo werden Daten gespeichert:
                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                         for order in softwareListDetails
-                                                                                                           div.custom-radio-wrapper(filled=order.cloud)
-                                                                                                                .custom-control.custom-radio
-                                                                                                                        input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required1='')
-                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled7' answer='Ja') Ja
-                                                                                                                .custom-control.custom-radio
-                                                                                                                        input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required1='')
-                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled8' answer='open') Nein
-                                                                                                                        .invalid-feedback
-                                                                                                                                | Pflichtfeld
-                                                                                                                .collapse.inputHide
-                                                                                                                        .card.card-body
-                                                                                                                                input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo)
+                                                                                                                if (order.cloud == "Ja")
+                                                                                                                   div.custom-radio-wrapper(filled=order.cloud)
+                                                                                                                        .custom-control.custom-radio
+                                                                                                                                input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='' checked)
+                                                                                                                                label.custom-control-label.custom-control-label-js(for='customRadioDisabled7' answer='Ja') Ja
+                                                                                                                        .custom-control.custom-radio
+                                                                                                                                input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required='')
+                                                                                                                                label.custom-control-label.custom-control-label-js(for='customRadioDisabled8' answer='open') Nein
+                                                                                                                                .invalid-feedback
+                                                                                                                                        | Pflichtfeld
+                                                                                                                        .collapse.inputHide
+                                                                                                                                .card.card-body
+                                                                                                                                        input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo)
+                                                                                                                else if (order.cloud == "Nein")
+                                                                                                                        div.custom-radio-wrapper(filled=order.cloud)
+                                                                                                                                .custom-control.custom-radio
+                                                                                                                                        input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='' checked)
+                                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled7' answer='Ja') Ja
+                                                                                                                                .custom-control.custom-radio
+                                                                                                                                        input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required='')
+                                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled8' answer='open') Nein
+                                                                                                                                        .invalid-feedback
+                                                                                                                                                | Pflichtfeld
+                                                                                                                                .card.card-body
+                                                                                                                                        input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo required='')
+
+
                                                                                                 else
                                                                                                         .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required1='')
+                                                                                                                input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='')
                                                                                                                 label.custom-control-label.custom-control-label-js(for='customRadioDisabled7' answer='Ja') Ja
                                                                                                         .custom-control.custom-radio
-                                                                                                                input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required1='')
+                                                                                                                input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required='')
                                                                                                                 label.custom-control-label.custom-control-label-js(for='customRadioDisabled8' answer='open') Nein
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
@@ -757,9 +813,9 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 | Professur)
                                                                                                         if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                 for order in softwareListDetails
-                                                                                                                        input#form-productowner.form-control(type='text' required1='' name='productowner' value=order.productowner)
+                                                                                                                        input#form-productowner.form-control(type='text' required='' name='productowner' value=order.productowner)
                                                                                                         else
-                                                                                                                input#form-productowner.form-control(type='text' required1='' name='productowner')
+                                                                                                                input#form-productowner.form-control(type='text' required='' name='productowner')
                                                                                                         .invalid-feedback
                                                                                                                 | Pflichtfeld
                                                                                                         if (typeof (softwareListDetails) !== 'undefined')
@@ -767,21 +823,21 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         if order.bemerkungen !== 'undefined'
                                                                                                                                 br
                                                                                                                                 label.form-label(for='validationTextarea') Bemerkungen
-                                                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='bemerkungen')
-                                                                                                                                                | #{order.bemerkungen}
+                                                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='bemerkungen')
+                                                                                                                                        | #{order.bemerkungen}
                                                                                                                         else
                                                                                                                                 br
                                                                                                                                 label.form-label(for='validationTextarea') Bemerkungen
-                                                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='bemerkungen')
+                                                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='bemerkungen')
                                                                                                         else
                                                                                                                 br
                                                                                                                 label.form-label(for='validationTextarea') Bemerkungen
-                                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='bemerkungen')
+                                                                                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='bemerkungen')
                                                                                                         .row
                                                                                                                 .col-md-6.fields
                                                                                                                         br
                                                                                                                         label(for='form-data')
-                                                                                                                                | Datum
+                                                                                                                                | Datum:
                                                                                                                         label.form-date
                                                                                                                                 |
                                                                                                                         input.hidden.form-date-input(name="datumantrag")
@@ -801,7 +857,6 @@ input#form-status-input.form-control.hidden(type='text' name='status')
 
 script(type='text/javascript' src="./static/js/libs/jquery.js")
 script(type='text/javascript' src="./static/js/validator.js")
-
 script(type='text/javascript').
 
         $(document).ready(function () {
@@ -817,11 +872,12 @@ script(type='text/javascript').
                                        $('input:checkbox[value="' + nameArr[i] + '"]').attr('checked', true);
                                 }
                                 });
-                                // $(".custom-radio-wrapper").each(function () {
-                                //         let attrselectedform = $(this).attr('filled');
-                                //         $(this).find('input:radio[value="' + nameArr[i] + '"]').attr('checked', 'checked');
-                                //
-                                // });
+                        // $(".custom-radio-wrapper").each(function () {
+                        //         let attrselectedform = $(this).attr('filled');
+                        //                $(this).find('.custom-radio').find('input:radio[value="'+attrselectedform+'"]').attr('checked', 'checked');
+                        //         })
+                                       // .attr('checked', 'checked');
+                                      //  [value="' + attrselectedform + '"]').attr('checked', 'checked');
 
                         }
                                 if (window.location.href.indexOf("form") > -1) {
@@ -846,6 +902,11 @@ script(type='text/javascript').
 
 
                 }
+                $('.link-edit-back').click(function () {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const currenturlParam = urlParams.get('tsid');
+                        window.location.replace("/details?tsid=" + currenturlParam);
+                })
                 $(".custom-control-select").on('change', function (e) {
                         var valueSelected = $('option:selected', this).attr('answer');
                         if (valueSelected == "open") {
@@ -881,43 +942,42 @@ script(type='text/javascript').
                 let day = d.getDate();
                 let hour = d.getHours();
                 let minute = d.getMinutes();
-                let second = d.getSeconds();
                 let datetime =
                         (('' + day).length < 2 ? '0' : '') + day + '.' +
                         (('' + month).length < 2 ? '0' : '') + month + '.'+
                         d.getFullYear() + ' '+
                         (('' + hour).length < 2 ? '0' : '') + hour + ':' +
-                        (('' + minute).length < 2 ? '0' : '') + minute + ':' +
-                        (('' + second).length < 2 ? '0' : '') + second;
+                        (('' + minute).length < 2 ? '0' : '') + minute;
                 $('.form-date').text(datetime);
                 $('.form-date-input').attr('value', datetime);
                 let formsubmit = false;
                 $(".submitformbtnaction").one("click",function () {
                         $("#accordionForm").find(".accordion-item").each(function () {
-                                $(this).find("input, select, textarea").filter('[required1]').each(function () {
+                                $(this).find("input, select, textarea").filter('[required]').each(function () {
                                         if (($(this).val() == "") || ($(this).val() == null)) {
                                                 let current = $(this).closest(".accordion-collapse").prev();
-                                                current.addClass('required1-header');
+                                                current.addClass('required-header');
                                         } else {
                                                 let current = $(this).closest(".accordion-collapse").prev();
-                                                current.removeClass('required1-header');
+                                                current.removeClass('required-header');
                                         }
                                         return false;
                                 });
                         });
+
                         formsubmit = true;
                       if (formsubmit==true)  {
                               (function () {
                                       'use strict'
                                       // Fetch all the forms we want to apply custom Bootstrap validation styles to
                                       var forms = document.querySelectorAll('.needs-validation')
-                                      var failed = false;
-                                      if ($("[name='browser']:checked").length == 0) {
-                                              $("[name='browser']").attr('required1', true);
-                                              failed = true;
-                                      } else {
-                                              $("[name='browser']").attr('required1', false);
-                                      }
+
+                                      // if ($("[name='browser']:checked").length == 0) {
+                                      //         $("[name='browser']").attr('required', true);
+                                      //
+                                      // } else {
+                                      //         $("[name='browser']").attr('required', false);
+                                      // }
                                       // Loop over them and prevent submission
                                       Array.prototype.slice.call(forms)
                                               .forEach(function (form) {
@@ -945,21 +1005,21 @@ script(type='text/javascript').
                 //         firstName: {
                 //             validators: {
                 //                 notEmpty: {
-                //                     message: 'The first name is required1 and cannot be empty'
+                //                     message: 'The first name is required and cannot be empty'
                 //                 }
                 //             }
                 //         },
                 //         lastName: {
                 //             validators: {
                 //                 notEmpty: {
-                //                     message: 'The last name is required1 and cannot be empty'
+                //                     message: 'The last name is required and cannot be empty'
                 //                 }
                 //             }
                 //         },
                 //         email: {
                 //             validators: {
                 //                 notEmpty: {
-                //                     message: 'The email address is required1'
+                //                     message: 'The email address is required'
                 //                 },
                 //                 emailAddress: {
                 //                     message: 'The input is not a valid email address'
@@ -969,7 +1029,7 @@ script(type='text/javascript').
                 //         gender: {
                 //             validators: {
                 //                 notEmpty: {
-                //                     message: 'The gender is required1'
+                //                     message: 'The gender is required'
                 //                 }
                 //             }
                 //         }

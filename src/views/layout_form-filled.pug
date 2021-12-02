@@ -12,20 +12,24 @@ html(lang="en")
                         for order in softwareListDetails
                             h2(id='tables') Softwareantrag #!{order.orderid} !{order.softwarename} bearbeiten
                         form#formOrder.needs-validation(method='POST' novalidate='')
-                            include elements/buttons-edit
-                            br
-                            br
-                            if (admin == true)
-                                label.form-label(for='validationTextarea') Notizen zum Antrag (vertraulich)
-                                if (typeof (softwareListDetails) !== 'undefined')
-                                    for order in softwareListDetails
-                                        if (order.notizen !== 'undefined')
-                                            textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='notizen')
-                                                | #{order.notizen}
-                                        else
-                                            textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='notizen')
+                            for order in softwareListDetails
+                                if(order.status == 10)
+                                    include elements/buttons-edit-draft
+                                else
+                                    include elements/buttons-edit
                                 br
                                 br
-                            include form
+                                if (admin == true)
+                                    label.form-label(for='validationTextarea') Notizen zum Antrag (vertraulich)
+                                    if (typeof (softwareListDetails) !== 'undefined')
+                                        for order in softwareListDetails
+                                            if (order.notizen !== 'undefined')
+                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='notizen')
+                                                    | #{order.notizen}
+                                            else
+                                                textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='notizen')
+                                    br
+                                    br
+                                include form
     include footer
 

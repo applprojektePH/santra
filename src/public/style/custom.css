@@ -917,3 +917,9 @@ a:hover{
 .link-id:hover {
    text-decoration: none;
 }
+.service-buttons-wrapper button i{
+    margin-left: 5px;
+}
+.service-buttons-wrapper .link-back-edit{
+    margin-left: 15px;
+}

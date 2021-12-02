@@ -21,21 +21,13 @@ module.exports = function (models) {
 			page.path = "";
 		/* USER start */
 		let obj_user = {};
-		let admins = ['alesya.heymann@fhnw.ch', 'giovanni.casonati@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch'];
 		let adminlog;
 		req.rawHeaders.forEach(function(val, i) {
 			if (i % 2 === 1) return;
 			obj_user[val] = req.rawHeaders[i + 1];
 		});
 		JSON.stringify(obj_user);
-		admins.forEach(function(val, i) {
-			if(obj_user.mail==admins[i]){
-				adminlog = true;
-			}
-			else{
-				adminlog = false;
-			}
-		})
+		adminlog=LOGIN.admins.includes(obj_user.mail)
 		/* USER end */
 		let useridlog;
 		pool.getConnection((err, connection) => {

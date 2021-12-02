@@ -13,6 +13,16 @@ const pool  = mysql.createPool({
 module.exports = function (models) {
     let page = {};
     this.main = function (req, res, next) {
+        /* USER start */
+        let obj_user = {};
+        let adminlog;
+        req.rawHeaders.forEach(function(val, i) {
+            if (i % 2 === 1) return;
+            obj_user[val] = req.rawHeaders[i + 1];
+        });
+        JSON.stringify(obj_user);
+        adminlog=LOGIN.admins.includes(obj_user.mail)
+        /* USER end */
         let tsID = parseInt(req.query.tsid);
         let status = req.query.st;
         page.title = "Santra - Softwareantrag\n" +
@@ -78,7 +88,12 @@ module.exports = function (models) {
             setTimeout(
                 function(){
                     res.render('layout_history', {
-                        "softwareListHistory": softwareListHistory, "orderid": tsID, "orderstatus":status
+                        "softwareListHistory": softwareListHistory, "orderid": tsID, "orderstatus":status,
+                        "vornamelog": obj_user.givenName,
+                        "nachnamelog": obj_user.surname,
+                        "emaillog": obj_user.mail,
+                        "admin": adminlog,
+                        "useridlog": LOGIN.useridlog
                     });
                 }, 500);
 

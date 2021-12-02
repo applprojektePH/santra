@@ -59,13 +59,11 @@ $( document ).ready(function() {
         let day = d.getDate();
         let hour = d.getHours();
         let minute = d.getMinutes();
-        let second = d.getSeconds();
         let datetime = d.getFullYear() + '-' +
             ((''+month).length<2 ? '0' : '') + month + '-' +
             ((''+day).length<2 ? '0' : '') + day + ' ' +
             ((''+hour).length<2 ? '0' :'') + hour + ':' +
-            ((''+minute).length<2 ? '0' :'') + minute + ':' +
-            ((''+second).length<2 ? '0' :'') + second;
+            ((''+minute).length<2 ? '0' :'') + minute;
         $('.btn-datumantrag').attr('value', datetime);
     });
     $('#buttonsubmitform').click(function () {

@@ -1,7 +1,6 @@
 module.exports = {
-    login: true,
     titlelog: 'Frau',
-    useridlog: 3
+    useridlog: 4,
+    admins: ['alesya.heymann@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'giovanni.casonati@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch']
 }
-
 

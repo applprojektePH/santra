@@ -14,7 +14,10 @@
                             else
                                 include elements/buttons-view-draft
                         else
-                            include elements/buttons-view
+                            if (admin == true)
+                                include elements/buttons-view-admin
+                            else
+                                include elements/buttons-view-draft
                 for order in softwareListDetails
                     if(order.status != 10)
                         ul.progressbar
@@ -152,11 +155,12 @@
                         .row
                             br
                             .col-md-12
-                            for order in softwareListDetails
-                                if (order.notizen !== 'undefined') && ((order.notizen).length)
-                                    label(for='form-function')
-                                        | Notizen zum Antrag (vertraulich)
-                                    p= order.notizen
+                                if (admin == true)
+                                    for order in softwareListDetails
+                                        if (order.notizen !== 'undefined') && ((order.notizen).length)
+                                            label(for='form-function')
+                                                | Notizen zum Antrag (vertraulich)
+                                            p= order.notizen
                                 h3.alert.alert-primary Angaben zur Person
                             for order in softwareListDetails
                                 label
@@ -322,14 +326,12 @@ script(type='text/javascript').
             let day = d.getDate();
             let hour = d.getHours();
             let minute = d.getMinutes();
-            let second = d.getSeconds();
             let datetime =
                 (('' + day).length < 2 ? '0' : '') + day + '.' +
                 (('' + month).length < 2 ? '0' : '') + month + '.' +
                 d.getFullYear() + ' ' +
                 (('' + hour).length < 2 ? '0' : '') + hour + ':' +
-                (('' + minute).length < 2 ? '0' : '') + minute + ':' +
-                (('' + second).length < 2 ? '0' : '') + second;
+                (('' + minute).length < 2 ? '0' : '') + minute;
 
                 $.ajax({
                     type: 'POST',

@@ -4,8 +4,6 @@ const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
 let nodemailer = require('nodemailer');
 let LOGIN = require("../login");
-
-
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -29,21 +27,13 @@ module.exports = function (models) {
             page.path = "";
         /* USER start */
         let obj_user = {};
-        let admins = ['alesya.heymann@fhnw.ch', 'giovanni.casonati@fhnw.ch', 'sonja.lupsan@fhnw.ch', 'nicole.schmider@fhnw.ch', 'karin.rey@fhnw.ch'];
         let adminlog;
         req.rawHeaders.forEach(function(val, i) {
             if (i % 2 === 1) return;
             obj_user[val] = req.rawHeaders[i + 1];
         });
         JSON.stringify(obj_user);
-        admins.forEach(function(val, i) {
-            if(obj_user.mail==admins[i]){
-                adminlog = true;
-            }
-            else{
-                adminlog = false;
-            }
-        })
+        adminlog=LOGIN.admins.includes(obj_user.mail)
         /* USER end */
         pool.getConnection((err, connection) => {
             if (err) throw err
@@ -114,7 +104,12 @@ if (url=="/submit-form"){
         funktion2extr = funktion2[1];
     }
 
-    sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
+    if (adminlog==true){
+        sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") OR (email <> "'+obj_user.mail+'" AND status <> 10) ORDER BY orderid DESC';
+    }
+    else{
+        sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") ORDER BY orderid DESC';
+    }
     sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2extr+"', '"+nachname2extr+"', '"+email2extr+"', '"+funktion2extr+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql2+"",
         (err, rows) => {
@@ -215,22 +210,19 @@ if (url=="/submit-form"){
                             }
                         });
                         console.log('SMTP Configured');
-                        console.log('orderid'+orderidformail);
+
                                 // Message object
                         let messageSender = {
 
                             // sender info
                             from: 'Santra <applprojekte.ph@fhnw.ch>',
-
-                            // Comma separated list of recipients
-                            //to: '+nachname+ <'+email+'>',
-                            to: 'alesya.heymann@fhnw.ch',
-                            //bcc: 'applprojekte.ph@fhnw.ch',
+                            to: obj_user.mail,
+                            bcc: 'applprojekte.ph@fhnw.ch',
                             // Subject of the message
                             subject: 'Santra: Antrag Nummer #'+orderidformail+'',
 
                             // plaintext body
-                            text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/user nach der Anmeldung. \n' +
+                            text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderidformail+' nach der Anmeldung. \n' +
                                 '\n' +
                                 'Vielen Dank und freundliche Grüsse \n' +
                                 'Ihr ApplProjekte Supportteam \n' +
@@ -238,7 +230,7 @@ if (url=="/submit-form"){
 
                             // HTML body
                             html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-                                '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/user nach der Anmeldung.' +
+                                '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderidformail+' nach der Anmeldung.' +
                                 '</br></br>Vielen Dank und freundliche Grüsse' +
                                 '</br>Ihr ApplProjekte Supportteam ' +
                                 '</br>n|w</p>'
@@ -246,10 +238,9 @@ if (url=="/submit-form"){
                         let messageSupport = {
                             // sender info
                             from: 'Santra <applprojekte.ph@fhnw.ch>',
-
                             // Comma separated list of recipients
-                            //to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                            to: '<alesya.heymann@fhnw.ch>',
+                            to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
+                            //to: '<alesya.heymann@fhnw.ch>',
                             // Subject of the message
                             subject: 'Santra: Antrag Nummer #'+orderidformail+'',
 
@@ -260,7 +251,7 @@ if (url=="/submit-form"){
                             html:'<p><span>Liebes Applprojekte Team</span></br></br><p>Ein neuer Antrag ist eingegangen: </br>Antrag Nummer '+orderidformail+' </br> Name der Software '+softwarename+' </br>Direktlinkt auf Antrag: http://santra.ph.fhnw.ch/details?tsid='+orderidformail+' </br></br>Vielen Dank und freundliche Grüsse </br>Ihr ApplProjekte Supportteam </br>n|w</p>'
                         };
                         console.log('Sending Mail');
-                        /*transport.sendMail(messageSender, function(error){
+                        transport.sendMail(messageSender, function(error){
                             if(error){
                                 return console.log(error);
                             }
@@ -269,24 +260,23 @@ if (url=="/submit-form"){
                             if(error){
                                 return console.log(error);
                             }
-                        });*/
+                        });
                     }
             })
         })
 }
 else if (url == "/user"){
-    let admin= LOGIN.ADMIN;
     let tsID = req.body;
-    if (admin==true){
-        sql1 = 'SELECT * FROM orders ORDER BY orderid DESC';
+
+    if (adminlog==true){
+        sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") OR (email <> "'+obj_user.mail+'" AND status <> 10) ORDER BY orderid DESC';
     }
     else{
-        sql1 = 'SELECT * FROM orders WHERE userid IN (SELECT id FROM users) ORDER BY orderid DESC';
+        sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") ORDER BY orderid DESC';
     }
-    //sql2 = "INSERT INTO orders ( institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2+"','"+nachname2+"', '"+email2+"', '"+funktion2+"' '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql1+"",
         (err, rows) => {
-            //    connection.release() // return t
+            //    connection.release() // return
             //    he connection to pool
             if (!err) {
                 /*function convertDate(inputFormat) {

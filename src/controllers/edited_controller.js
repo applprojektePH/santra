@@ -1,6 +1,7 @@
 let db = require('../libs/db');
 const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
+const LOGIN = require("../login");
 
 const pool  = mysql.createPool({
     connectionLimit : 10,
@@ -13,6 +14,16 @@ module.exports = function (models) {
     let page = {};
     let CONSTANTS = require("../libs/constants");
     this.main = function (req, res, next) {
+        /* USER start */
+        let obj_user = {};
+        let adminlog;
+        req.rawHeaders.forEach(function(val, i) {
+            if (i % 2 === 1) return;
+            obj_user[val] = req.rawHeaders[i + 1];
+        });
+        JSON.stringify(obj_user);
+        adminlog=LOGIN.admins.includes(obj_user.mail)
+        /* USER end */
         let tsID = parseInt(req.query.tsid);
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
@@ -116,6 +127,8 @@ module.exports = function (models) {
                             'szenario':rows[i].szenario,
                             'softwarename':rows[i].softwarename,
                             'softwarewebseite':rows[i].softwarewebseite,
+                            'softwareupdate': rows[i].softwareupdate,
+                            'softwareupdatewelches': rows[i].softwareupdatewelches,
                             'softwareversion':rows[i].softwareversion,
                             'lizenzenanzahl':rows[i].lizenzenanzahl,
                             'nutzeranzahl':rows[i].nutzeranzahl,
