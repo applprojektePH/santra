@@ -72,7 +72,7 @@ module.exports = function (models) {
                         let order = {
                             'orderid':rows[i].orderid,
                             'datetime':rows[i].datetime,
-                            'mailuser':LOGIN.emaillog,
+                            'mailuser':rows[i].mailuser,
                             'mailtext':rows[i].mailtext,
                             'mailtype':mailtypecurrent,
                             'orderstatus':rows[i].orderstatus

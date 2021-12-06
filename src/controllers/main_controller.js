@@ -22,6 +22,7 @@ module.exports = function (models) {
 			if (i % 2 === 1) return;
 			obj_user[val] = req.rawHeaders[i + 1];
 		});
+
 		JSON.stringify(obj_user);
 		if((obj_user.fhnwOeID).includes("FP")){
 			accesslog = true;

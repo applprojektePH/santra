@@ -332,7 +332,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                         label.custom-control-label(for='customRadioDisabled2' answer='open') Ja
                                                                                                                         .invalid-feedback
                                                                                                                                 | Pflichtfeld
-                                                                                                                textarea#validationTextarea.form-control(maxlength='5000' rows='7' name='softwareupdatewelches' required)
+                                                                                                                textarea#validationTextarea.form-control(maxlength='5000' rows='7' name='softwareupdatewelches')
                                                                                                                         | #{order.softwareupdatewelches}
                                                                                                                 //small.floatright.text-small-char
                                                                                                                 //        | Noch
@@ -348,6 +348,17 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 //        | Zeichen
                                                                                                                 .invalid-feedback
                                                                                                                         | Pflichtfeld
+                                                                                                        else
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled1.custom-control-input(type='radio' value="Nein" name='softwareupdate' required='')
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled1' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled2.custom-control-input(type='radio' value="Ja" name='softwareupdate' required='')
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled2' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
+                                                                                                                .collapse.inputHide
+                                                                                                                        textarea#validationTextarea.form-control.textarea-js(maxlength='5000' rows='7' name='softwareupdatewelches')
                                                                                         else
                                                                                                 .custom-control.custom-radio
                                                                                                         input#customRadioDisabled1.custom-control-input(type='radio' value="Nein" name='softwareupdate' required='')
@@ -462,24 +473,24 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                         .col-md-6.form-check-wrapper(filled=order.browser)
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser')
+                                                                                                                                input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser' required)
                                                                                                                                 |  Microsoft Edge
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser')
+                                                                                                                                input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser' required)
                                                                                                                                 |  Safari (Apple)
                                                                                                         .col-md-6
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox3.form-check-input.form-check-input-js(type='checkbox' value='Firefox' name='browser')
+                                                                                                                                input#inlineCheckbox3.form-check-input.form-check-input-js(type='checkbox' value='Firefox' name='browser' required)
                                                                                                                                 |  Firefox
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox4.form-check-input.form-check-input-js(type='checkbox' value='Chrome' name='browser')
+                                                                                                                                input#inlineCheckbox4.form-check-input.form-check-input-js(type='checkbox' value='Chrome' name='browser' required)
                                                                                                                                 |  Chrome
                                                                                                                 .form-check
                                                                                                                         label.form-check-label
-                                                                                                                                input#inlineCheckbox5.form-check-input.check-alldisabled(type='checkbox' value='weissnicht' name='browser')
+                                                                                                                                input#inlineCheckbox5.form-check-input.check-alldisabled(type='checkbox' value='weissnicht' name='browser' required)
                                                                                                                                 |  Ich weiss es nicht
                                                                                                         .form-check.form-check-inline
                                                                                                                 label.form-check-label
@@ -489,24 +500,24 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                 .col-md-6.form-check-wrapper
                                                                                                         .form-check
                                                                                                                 label.form-check-label
-                                                                                                                        input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser')
+                                                                                                                        input#inlineCheckbox1.form-check-input.form-check-input-js(type='checkbox' value='Microsoft Edge' name='browser' required)
                                                                                                                         |  Microsoft Edge
                                                                                                         .form-check
                                                                                                                 label.form-check-label
-                                                                                                                        input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser')
+                                                                                                                        input#inlineCheckbox2.form-check-input.form-check-input-js(type='checkbox' value='Safari' name='browser' required )
                                                                                                                         |  Safari (Apple)
                                                                                                 .col-md-6
                                                                                                         .form-check
                                                                                                                 label.form-check-label
-                                                                                                                        input#inlineCheckbox3.form-check-input.form-check-input-js(type='checkbox' value='Firefox' name='browser')
+                                                                                                                        input#inlineCheckbox3.form-check-input.form-check-input-js(type='checkbox' value='Firefox' name='browser' required)
                                                                                                                         |  Firefox
                                                                                                         .form-check
                                                                                                                 label.form-check-label
-                                                                                                                        input#inlineCheckbox4.form-check-input.form-check-input-js(type='checkbox' value='Chrome' name='browser')
+                                                                                                                        input#inlineCheckbox4.form-check-input.form-check-input-js(type='checkbox' value='Chrome' name='browser' required)
                                                                                                                         |  Chrome
                                                                                                         .form-check
                                                                                                                 label.form-check-label
-                                                                                                                        input#inlineCheckbox5.form-check-input.check-alldisabled(type='checkbox' value='weissnicht' name='browser')
+                                                                                                                        input#inlineCheckbox5.form-check-input.check-alldisabled(type='checkbox' value='weissnicht' name='browser' required)
                                                                                                                         |  Ich weiss es nicht
                                                                                                 .form-check.form-check-inline
                                                                                                         label.form-check-label
@@ -567,7 +578,18 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                 | Pflichtfeld
                                                                                                                 .card.card-body
                                                                                                                         input#form-hs.form-control(type='text' name='softwareinstitut' value=order.softwareinstitut required='')
-
+                                                                                                else
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled3.custom-control-input(type='radio' value="Nein" required='' name='softwareinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled3' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled4.custom-control-input(type='radio' value="Ja" required='' name='softwareinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled4' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
+                                                                                                                .collapse.inputHide
+                                                                                                                        .card.card-body
+                                                                                                                                input#form-hs.form-control(type='text' name='softwareinstitut')
 
                                                                                 else
                                                                                         .custom-control.custom-radio
@@ -615,6 +637,18 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 .card.card-body
                                                                                                                         input#form-hs.form-control(type='text' name='softwarehochschule' value=order.softwarehochschule required='')
 
+                                                                                                else
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled5.custom-control-input(type='radio' value="Nein" required='' name='softwarehochschinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js2(for='customRadioDisabled5' answer='no') Nein
+                                                                                                                .custom-control.custom-radio
+                                                                                                                        input#customRadioDisabled6.custom-control-input.custom-control-label-js(type='radio' value="Ja" required='' name='softwarehochschinteresse')
+                                                                                                                        label.custom-control-label.custom-control-label-js2(for='customRadioDisabled6' answer='open') Ja
+                                                                                                                        .invalid-feedback
+                                                                                                                                | Pflichtfeld
+                                                                                                                .collapse.inputHide2
+                                                                                                                        .card.card-body
+                                                                                                                                input#form-hs.form-control(type='text' name='softwarehochschule')
 
                                                                                 else
                                                                                         .custom-control.custom-radio
@@ -781,15 +815,27 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                 else if (order.cloud == "Nein")
                                                                                                                         div.custom-radio-wrapper(filled=order.cloud)
                                                                                                                                 .custom-control.custom-radio
-                                                                                                                                        input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='' checked)
+                                                                                                                                        input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='' )
+                                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled7' answer='Ja') Ja
+                                                                                                                                .custom-control.custom-radio
+                                                                                                                                        input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required='' checked)
+                                                                                                                                        label.custom-control-label.custom-control-label-js(for='customRadioDisabled8' answer='open') Nein
+                                                                                                                                        .invalid-feedback
+                                                                                                                                                | Pflichtfeld
+                                                                                                                                .card.card-body
+                                                                                                                                        input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo)
+                                                                                                                else
+                                                                                                                                .custom-control.custom-radio
+                                                                                                                                        input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='')
                                                                                                                                         label.custom-control-label.custom-control-label-js(for='customRadioDisabled7' answer='Ja') Ja
                                                                                                                                 .custom-control.custom-radio
                                                                                                                                         input#customRadioDisabled8.custom-control-input(type='radio' name='cloud' value="Nein" required='')
                                                                                                                                         label.custom-control-label.custom-control-label-js(for='customRadioDisabled8' answer='open') Nein
                                                                                                                                         .invalid-feedback
                                                                                                                                                 | Pflichtfeld
-                                                                                                                                .card.card-body
-                                                                                                                                        input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo required='')
+                                                                                                                                .collapse.inputHide
+                                                                                                                                        .card.card-body
+                                                                                                                                                input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert")
 
 
                                                                                                 else
@@ -902,6 +948,28 @@ script(type='text/javascript').
 
 
                 }
+                else if (window.location.href.indexOf("edit") > -1){
+
+                        $('#buttonsubmitformdraft').click(function () {
+                                $('#form-status-input').attr('value', '1');
+                        });
+                                        $('#buttonsubmitsavechanges').click(function () {
+                                                $('#form-status-input').attr('value', '0');
+                                        });
+                        //only edit and form functions
+                        //         var maxChar = parseInt($('.textarea-js').attr('maxlength'));
+                        //         $('.textarea-js[maxlength]').parent().find('.charleft').html(maxChar - $(this).val().length);
+                        //         var char = $('.textarea-js').val().length;
+                        //         $('.textarea-js').parent().find('.charleft').html(maxChar - char);
+                        //         $('.textarea-js[maxlength]').keyup(function(){
+                        //             if($(this).val().length > maxChar){
+                        //                 $(this).val($(this).val().substr(0, maxChar));
+                        //             }
+                        //             $(this).parent().find('.charleft').html(maxChar - $(this).val().length);
+                        //         });
+
+
+                }
                 $('.link-edit-back').click(function () {
                         const urlParams = new URLSearchParams(window.location.search);
                         const currenturlParam = urlParams.get('tsid');
@@ -951,17 +1019,64 @@ script(type='text/javascript').
                 $('.form-date').text(datetime);
                 $('.form-date-input').attr('value', datetime);
                 let formsubmit = false;
-                $(".submitformbtnaction").one("click",function () {
+                if ($("[name='browser']:checked").length !== 0) {
+                        $("[name='browser']").attr('required', false);
+                }
+                $(function () {
+                        let requiredCheckboxes = $('input:checkbox[required]');
+                        requiredCheckboxes.change(function () {
+                                if (requiredCheckboxes.is(':checked')) {
+                                        requiredCheckboxes.removeAttr('required');
+                                } else {
+                                        requiredCheckboxes.attr('required', 'required');
+                                }
+                        });
+                });
+                $("#accordionForm .accordion-item").find("input, select, textarea").focus(function () {
+                        let current = $(this).closest(".accordion-collapse").prev();
+                        current.removeClass('required-header');
+                });
+                $(".submitformbtnaction").find("input, select, textarea").focus(function () {
+                        let current = $(this).closest(".accordion-collapse").prev();
+                        current.removeClass('required-header');
+                });
+                $(".submitformbtnaction").on("click",function () {
+                        $("#headingThree").removeClass('required-header');
                         $("#accordionForm").find(".accordion-item").each(function () {
-                                $(this).find("input, select, textarea").filter('[required]').each(function () {
-                                        if (($(this).val() == "") || ($(this).val() == null)) {
-                                                let current = $(this).closest(".accordion-collapse").prev();
+
+                                $(this).find("input, textarea, select").filter('[required]').each(function () {
+
+                                        if (($(this).val() == " ") || ($(this).val() == null) || ($.trim($(this).val()).length == 0)) {
+                                                let current = $(this).closest(".accordion-collapse").prev().eq(0);
                                                 current.addClass('required-header');
-                                        } else {
-                                                let current = $(this).closest(".accordion-collapse").prev();
-                                                current.removeClass('required-header');
+                                                return false;
                                         }
-                                        return false;
+                                        if (($("input[name='softwareupdate']:checked").length !== 0)) {
+                                                $('#headingThree').removeClass('required-header');
+                                        }
+                                                                if (($("input[name='browser']:checked").length == 0)) {
+                                                                        $("input[name='browser']").closest(".accordion-collapse").prev().addClass('required-header');
+                                                                }
+                                                                else if (($("input[name='softwareupdate']:checked").length == 0)) {
+                                                                        $("input[name='softwareupdate']").closest(".accordion-collapse").prev().addClass('required-header');
+                                                                        $('#headingThree').removeClass('required-header');
+                                                                }  else if  (($("input[name='softwareinstitut']:checked").length == 0)) {
+                                                                        $("input[name='softwareinstitut']").closest(".accordion-collapse").prev().addClass('required-header');
+                                                                        $('#headingThree').removeClass('required-header');
+                                                                } else if  (($("input[name='softwarehochschinteresse']:checked").length == 0)) {
+                                                                        $("input[name='softwarehochschinteresse']").closest(".accordion-collapse").prev().addClass('required-header');
+                                                                        $('#headingThree').removeClass('required-header');
+                                                                }  else if (($("input[name='cloud']:checked").length == 0)) {
+                                                                        $("input[name='cloud']").closest(".accordion-collapse").prev().addClass('required-header');
+                                                                        $('#headingThree').removeClass('required-header');
+                                                                }
+                                        else {
+                                                let current = $(this).closest(".accordion-collapse").prev().eq(0);
+                                                current.removeClass('required-header');
+                                                return true;
+                                        }
+
+
                                 });
                         });
 
@@ -972,12 +1087,6 @@ script(type='text/javascript').
                                       // Fetch all the forms we want to apply custom Bootstrap validation styles to
                                       var forms = document.querySelectorAll('.needs-validation')
 
-                                      // if ($("[name='browser']:checked").length == 0) {
-                                      //         $("[name='browser']").attr('required', true);
-                                      //
-                                      // } else {
-                                      //         $("[name='browser']").attr('required', false);
-                                      // }
                                       // Loop over them and prevent submission
                                       Array.prototype.slice.call(forms)
                                               .forEach(function (form) {

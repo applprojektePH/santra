@@ -1,9 +1,9 @@
 span.service-buttons-wrapper
-        button.btn.btn-primary.btn-sm.submitformbtnaction(type='submit')
+        button#buttonsubmitsavechanges.btn.btn-primary.btn-sm(type='submit')
                 | &Auml;nderungen speichern
                 i.fas.fa-save
         //a(href="/details?tsid=" + order.orderid + "&status=1" class="link-id")
-        button#buttonsubmitformdraft.submitformbtn.btn.btn-primary.btn-sm(type='submit')
+        button#buttonsubmitformdraft.submitformbtnaction.btn.btn-primary.btn-sm(type='submit')
             | Antrag einreichen
             i.fas.fa-paper-plane
         button.btn.btn-primary.btn-sm(type='button' data-bs-toggle='modal' data-bs-target='#removeModal')

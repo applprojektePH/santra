@@ -44,7 +44,6 @@ module.exports = function (models) {
                         var d = new Date(inputFormat)
                         return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('.')
                     }
-
                     for (let i = 0; i < rows.length; i++) {
                         // Create an object to save current row's data
                         let order = {
@@ -113,7 +112,7 @@ module.exports = function (models) {
                         "useridlog": LOGIN.useridlog,
                         "softwareListDetails": softwareListDetails
                     });
-                }, 100);
+                }, 500);
         })
     };
 };

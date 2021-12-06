@@ -923,3 +923,6 @@ a:hover{
 .service-buttons-wrapper .link-back-edit{
     margin-left: 15px;
 }
+#user-state-menu > #user:first-child{
+    margin-top: 2px;
+}

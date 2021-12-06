@@ -155,12 +155,12 @@
                         .row
                             br
                             .col-md-12
-                                if (admin == true)
-                                    for order in softwareListDetails
-                                        if (order.notizen !== 'undefined') && ((order.notizen).length)
-                                            label(for='form-function')
-                                                | Notizen zum Antrag (vertraulich)
-                                            p= order.notizen
+                            if (admin == true)
+                                for order in softwareListDetails
+                                    if (order.notizen !== 'undefined') && ((order.notizen).length)
+                                        label(for='form-function')
+                                            | Notizen zum Antrag (vertraulich)
+                                        p= order.notizen
                                 h3.alert.alert-primary Angaben zur Person
                             for order in softwareListDetails
                                 label
@@ -183,7 +183,7 @@
                             for order in softwareListDetails
                                 p= order.funktion
                                 for order in softwareListDetails
-                                    if order.anrede2!== 'undefined'
+                                    if order.anrede2 && order.anrede2!== 'undefined'
                                         label
                                             | zweite Kontaktperson
                                         span= order.anrede2
@@ -194,12 +194,12 @@
                                     if order.nachname2 && order.nachname2!== 'undefined'
                                         span= order.nachname2
                                 for order in softwareListDetails
-                                    if order.email2
+                                    if order.email2 && order.email2!== 'undefined'
                                         label
                                             | E-Mail-Adresse
                                         p= order.email2
                                 for order in softwareListDetails
-                                    if order.funktion2
+                                    if order.funktion2 && order.funktion2!== 'undefined'
                                         label(for='form-function')
                                             | Funktion
                                         p= order.funktion2

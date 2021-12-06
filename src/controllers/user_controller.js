@@ -87,21 +87,60 @@ module.exports = function (models) {
             let orderidformail;
 
 if (url=="/submit-form"){
+    let anrede2extr;
     let vorname2extr;
     let nachname2extr;
     let email2extr;
     let funktion2extr;
-    for (let i = 0; i < vorname2.length; i++) {
-        vorname2extr = vorname2[1];
+    if (Array.isArray(anrede2)) {
+        for (let i = 0; i < anrede2.length; i++) {
+            anrede2extr = anrede2[anrede2.length - 1];
+        }
+    } else
+    {
+        if (anrede2){
+            anrede2extr = anrede2;
+        }
     }
-    for (let i = 0; i < nachname2.length; i++) {
-        nachname2extr = nachname2[1];
+    if (Array.isArray(vorname2)) {
+        for (let i = 0; i < vorname2.length; i++) {
+            vorname2extr = vorname2[vorname2.length - 1];
+        }
+    } else
+    {
+        if (vorname2){
+            vorname2extr = vorname2;
+        }
     }
-    for (let i = 0; i < email2.length; i++) {
-        email2extr = email2[1];
+    if (Array.isArray(nachname2)) {
+        for (let i = 0; i < nachname2.length; i++) {
+            nachname2extr = nachname2[nachname2.length - 1];
+        }
+    } else
+    {
+        if (nachname2){
+            nachname2extr = nachname2;
+        }
     }
-    for (let i = 0; i < funktion2.length; i++) {
-        funktion2extr = funktion2[1];
+    if (Array.isArray(email2)) {
+        for (let i = 0; i < email2.length; i++) {
+            email2extr = email2[email2.length - 1];
+        }
+    } else
+    {
+        if (email2){
+            email2extr = email2;
+        }
+    }
+    if (Array.isArray(funktion2)) {
+        for (let i = 0; i < funktion2.length; i++) {
+            funktion2extr = funktion2[funktion2.length - 1];
+        }
+    } else
+    {
+        if (funktion2){
+            funktion2extr = funktion2;
+        }
     }
 
     if (adminlog==true){
@@ -217,7 +256,6 @@ if (url=="/submit-form"){
                             // sender info
                             from: 'Santra <applprojekte.ph@fhnw.ch>',
                             to: obj_user.mail,
-                            bcc: 'applprojekte.ph@fhnw.ch',
                             // Subject of the message
                             subject: 'Santra: Antrag Nummer #'+orderidformail+'',
 

@@ -39,18 +39,19 @@ $( document ).ready(function() {
 //         });
 
         $('#buttonsubmitform').click(function () {
-            $("#accordionForm").find(".accordion-item").each(function () {
-                $(this).find("input, select, textarea").filter('[required]').each(function () {
-                    if (($(this).val() == "") || ($(this).val() == null)) {
-                        let current = $(this).closest(".accordion-collapse").prev();
-                        current.addClass('required-header');
-                    } else {
-                        let current = $(this).closest(".accordion-collapse").prev();
-                        current.removeClass('required-header');
-                    }
-                    return false;
-                });
-            });
+            // $("#accordionForm").find(".accordion-item").each(function () {
+            //     $(this).find("input, select, textarea").filter('[required]').each(function () {
+            //         if (($(this).val() == "") || ($(this).val() == null)) {
+            //             let current = $(this).closest(".accordion-collapse").prev();
+            //             current.addClass('required-header');
+            //         } else {
+            //             let current = $(this).closest(".accordion-collapse").prev();
+            //             current.removeClass('required-header');
+            //         }
+            //         return false;
+            //     });
+            // });
+            $('#form-status-input').attr('value', '1');
         });
 
     $('.submitformbtn').click(function () {
@@ -66,9 +67,7 @@ $( document ).ready(function() {
             ((''+minute).length<2 ? '0' :'') + minute;
         $('.btn-datumantrag').attr('value', datetime);
     });
-    $('#buttonsubmitform').click(function () {
-        $('#form-status-input').attr('value', '1');
-    });
+
         $(".excel-export-btn").click(function(e){
             var table = $(".table-works");
             if(table && table.length){
@@ -182,22 +181,22 @@ $( document ).ready(function() {
             count--;
         });
     };
-    (() => {
-        'use strict';
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation');
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms).forEach((form) => {
-            form.addEventListener('submit', (event) => {
-                if (!form.checkValidity()) {
-                 //   event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    })();
+    // (() => {
+    //     'use strict';
+    //     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    //     const forms = document.querySelectorAll('.needs-validation');
+    //
+    //     // Loop over them and prevent submission
+    //     Array.prototype.slice.call(forms).forEach((form) => {
+    //         form.addEventListener('submit', (event) => {
+    //             if (!form.checkValidity()) {
+    //              //   event.preventDefault();
+    //                 event.stopPropagation();
+    //             }
+    //             form.classList.add('was-validated');
+    //         }, false);
+    //     });
+    // })();
 
     // BACK-TO-TOP
     var back_to_top_button = ['<a href="#top" class="back-to-top"></a>'].join('');
@@ -397,10 +396,6 @@ $( document ).ready(function() {
     });
 
 
-    $("#accordionForm .accordion-item").find("input, select, textarea").focus(function() {
-        let current = $(this).closest(".accordion-collapse").prev();
-        current.removeClass('required-header');
-    });
     $("#inlineCheckbox5").click(function () {
         var paramChangeBoxes = $("input:checkbox.form-check-input-js");
         if ($(this).is(":checked")) {

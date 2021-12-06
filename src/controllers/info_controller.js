@@ -24,14 +24,15 @@ module.exports = function (models) {
 			page.path = "/"+CONSTANTS.SETTINGS.WEB.PATH_STRING;
 		else
 			page.path = "";
-
+		setTimeout(
 		res.render('layout_info', {
 			"vornamelog": obj_user.givenName,
 			"nachnamelog": obj_user.surname,
 			"emaillog": obj_user.mail,
 			"admin": adminlog,
 			"useridlog": LOGIN.useridlog
-		});
+		}), 500);
+
 	};
 
 };

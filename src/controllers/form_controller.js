@@ -44,7 +44,8 @@ module.exports = function (models) {
 					req.query.start = "";
 
 				page.query = req.query;
-
+				setTimeout(
+					function(){
 				res.render('layout_form', {
 					"vornamelog": obj_user.givenName,
 					"nachnamelog": obj_user.surname,
@@ -52,9 +53,8 @@ module.exports = function (models) {
 					"admin": adminlog,
 					"useridlog": LOGIN.useridlog
 				});
-
 			})
-
+			}, 500);
 		})
 
 
