@@ -149,15 +149,15 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                                 if ((order.vorname2) && (order.vorname2 !== 'undefined'))
                                                                                                                                                         label(for='form-author-firstname2')
                                                                                                                                                                 | Vorname
-                                                                                                                                                        input#form-author-firstname.form-control(type='text' name='vorname2' value=order.vorname2)
+                                                                                                                                                        input.form-control(type='text' name='vorname2' value=order.vorname2)
                                                                                                                                                 else
                                                                                                                                                         label(for='form-author-firstname2')
                                                                                                                                                                 | Vorname
-                                                                                                                                                        input#form-author-firstname.form-control(type='text' name='vorname2')
+                                                                                                                                                        input.form-control(type='text' name='vorname2')
                                                                                                                                 else
                                                                                                                                         label(for='form-author-firstname2')
                                                                                                                                                 | Vorname
-                                                                                                                                        input#form-author-firstname.form-control(type='text' name='vorname2')
+                                                                                                                                        input.form-control(type='text' name='vorname2')
                                                                                                                                 .invalid-feedback
                                                                                                                                         | Pflichtfeld
                                                                                                                         .col-md-4.fields
@@ -166,15 +166,15 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                                 if ((order.nachname2) && (order.nachname2 !== 'undefined'))
                                                                                                                                                         label(for='form-author-name2')
                                                                                                                                                                 | Nachname
-                                                                                                                                                        input#form-author-nachname.form-control(type='text' name='nachname2' value=order.nachname2)
+                                                                                                                                                        input.form-control(type='text' name='nachname2' value=order.nachname2)
                                                                                                                                                 else
                                                                                                                                                         label(for='form-author-firstname2')
                                                                                                                                                                 | Nachname
-                                                                                                                                                        input#form-author-nachname.form-control(type='text' name='nachname2')
+                                                                                                                                                        input.form-control(type='text' name='nachname2')
                                                                                                                                 else
                                                                                                                                         label(for='form-author-name2')
                                                                                                                                                 | Nachname
-                                                                                                                                        input#form-author-firstname.form-control(type='text' name='nachname2')
+                                                                                                                                        input.form-control(type='text' name='nachname2')
                                                                                                                                 .invalid-feedback
                                                                                                                                         | Pflichtfeld
                                                                                                                         .col-md-6.fields
@@ -184,11 +184,11 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                                         for order in softwareListDetails
                                                                                                                                                 if ((order.email2) && (order.email2 !== 'undefined'))
-                                                                                                                                                        input#form-author-email.form-control(type='email' name='email2' value=order.email)
+                                                                                                                                                        input.form-control(type='email' name='email2' value=order.email)
                                                                                                                                                 else
-                                                                                                                                                        input#form-author-email.form-control(type='email' name='email2')
+                                                                                                                                                        input.form-control(type='email' name='email2')
                                                                                                                                 else
-                                                                                                                                        input#form-author-email.form-control(type='email' name='email2')
+                                                                                                                                        input.form-control(type='email' name='email2')
                                                                                                                                 .invalid-feedback
                                                                                                                                         | Pflichtfeld
                                                                                                                         .col-md-6.fields
@@ -198,13 +198,12 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                                                                                                 if (typeof (softwareListDetails) !== 'undefined')
                                                                                                                                         for order in softwareListDetails
                                                                                                                                                 if ((order.funktion2) && (order.funktion2 !== 'undefined'))
-                                                                                                                                                        input#form-author-function.form-control(type='text' name='funktion2' value=order.funktion2)
+                                                                                                                                                        input.form-control(type='text' name='funktion2' value=order.funktion2)
                                                                                                                                                 else
-                                                                                                                                                        input#form-author-function.form-control(type='text' name='funktion2')
+                                                                                                                                                        input.form-control(type='text' name='funktion2')
                                                                                                                                 else
-                                                                                                                                        input#form-author-function.form-control(type='text' name='funktion2')
-                                                                                                                                .invalid-feedback
-                                                                                                                                        | Pflichtfeld
+                                                                                                                                        input.form-control(type='text' name='funktion2')
+
                                                                                                                         // End of fields
                                                                                                                         .col-md-1
                                                                                                                                 span.delete

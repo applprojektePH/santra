@@ -79,7 +79,7 @@ module.exports = function (models) {
            //              })
            //      }
             if ( (!isNaN(orderid))||(!isNaN(datetime))||/*(!isNaN(mailuser))||*/(!isNaN(mailtype))||(!isNaN(mailtext)||(!isNaN(orderstatus)) )) {
-                sql3 = "INSERT INTO history (orderid, datetime, mailuser, mailtype, mailtext, orderstatus) VALUES ( '" + tsID + "', '" + datetime + "', 'alesya.heymann@fhnw.ch', '" + mailtype + "', '" + mailtext + "', '" + orderstatus + "')";
+                    sql3 = "INSERT INTO history (orderid, datetime, mailuser, mailtype, mailtext, orderstatus) VALUES ( '" + tsID + "', '" + datetime + "', '"+obj_user.mail+"', '" + mailtype + "', '" + mailtext + "', '" + orderstatus + "')";
                 connection.query("" + sql3 + "",
                     (err, rows) => {
                     })
@@ -108,7 +108,7 @@ module.exports = function (models) {
                             'vorname2':(rows[i].vorname2),
                             'nachname2':(rows[i].nachname2),
                             'email2':(rows[i].email2),
-                            'funktion2':(rows[i].funktion2),
+                            'funktion2':(rows[i].funktion2 === "undefined" ? " " : rows[i].funktion2),
                             'studiengang':(rows[i].studiengang === "undefined" ? " " : rows[i].studiengang),
                             'modulanlass':(rows[i].modulanlass === "undefined" ? " " : rows[i].modulanlass),
                             'szenario':(rows[i].szenario === "undefined" ? " " : rows[i].szenario),

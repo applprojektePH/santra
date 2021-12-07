@@ -923,6 +923,17 @@ a:hover{
 .service-buttons-wrapper .link-back-edit{
     margin-left: 15px;
 }
+#user{
+    border: none;
+}
 #user-state-menu > #user:first-child{
-    margin-top: 2px;
+    margin-top: 2.5px;
+}
+.modal-footer .btn-primary .btn-primary:not(:focus), .modal-footer .btn-primary.btn-primary:not(:active), .modal-footer a.btn-primary .btn-primary:not(:focus), .modal-footer a.btn-primary.btn-primary:not(:active){
+    border: 2px solid transparent;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #df305b;
+    border-color: #df305b;
 }

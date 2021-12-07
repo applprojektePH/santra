@@ -46,11 +46,11 @@ module.exports = function (models) {
             let nachname = req.body.nachname;
             let email = req.body.email;
             let funktion = req.body.funktion;
-            let anrede2 = req.body.anrede2;
-            let vorname2 = req.body.vorname2;
-            let nachname2 = req.body.nachname2;
-            let email2 = req.body.email2;
-            let funktion2 = req.body.funktion2;
+            let anrede2 = (typeof req.body.anrede2 === 'undefined' || req.body.anrede2 === 0 ? " " : req.body.anrede2);
+            let vorname2 = (typeof req.body.vorname2 === 'undefined' || req.body.vorname2 === 0 ? " " : req.body.vorname2);
+            let nachname2 = (typeof req.body.nachname2 === 'undefined' || req.body.nachname2 === 0 ? " " : req.body.nachname2);
+            let email2 = (typeof req.body.email2 === 'undefined' || req.body.email2 === 0 ? " " : req.body.email2);
+            let funktion2 = (typeof req.body.funktion2 === 'undefined' || req.body.funktion2 === 0 ? " " : req.body.funktion2);
             let studiengang = req.body.studiengang;
             let modulanlass = req.body.modulanlass;
             let szenario = req.body.szenario;
@@ -85,13 +85,13 @@ module.exports = function (models) {
             let status = req.body.status;
             let softwareList = [];
             let orderidformail;
-
 if (url=="/submit-form"){
     let anrede2extr;
     let vorname2extr;
     let nachname2extr;
     let email2extr;
     let funktion2extr;
+
     if (Array.isArray(anrede2)) {
         for (let i = 0; i < anrede2.length; i++) {
             anrede2extr = anrede2[anrede2.length - 1];
@@ -149,7 +149,7 @@ if (url=="/submit-form"){
     else{
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") ORDER BY orderid DESC';
     }
-    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2+"', '"+vorname2extr+"', '"+nachname2extr+"', '"+email2extr+"', '"+funktion2extr+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
+    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2extr+"', '"+vorname2extr+"', '"+nachname2extr+"', '"+email2extr+"', '"+funktion2extr+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql2+"",
         (err, rows) => {
             //  connection.release() // return the connection to pool
