@@ -3,7 +3,6 @@ const mysql = require('mysql');
 let CONSTANTS = require("../libs/constants");
 const LOGIN = require("../login");
 const nodemailer = require("nodemailer");
-
 const pool  = mysql.createPool({
     connectionLimit : 10,
     host            : CONSTANTS.SETTINGS.DB.HOST,
@@ -27,15 +26,11 @@ module.exports = function (models) {
         /* USER end */
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
-        if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
-            page.path = "/"+CONSTANTS.SETTINGS.WEB.PATH_STRING;
-        else
-            page.path = "";
+        let tsID = parseInt(req.query.tsid);
+        let status = req.body.status;
+        let sendorder;
+        console.log(req.body);
         pool.getConnection((err, connection) => {
-            let anrede2 = '';
-
-            let tsID = parseInt(req.query.tsid);
-            let status = req.body.status;
             let institut = req.body.institut;
             let professur = req.body.professur;
             let anrede = req.body.anrede;
@@ -43,11 +38,6 @@ module.exports = function (models) {
             let nachname = req.body.nachname;
             let email = req.body.email;
             let funktion = req.body.funktion;
-            anrede2 = req.body.anrede2;
-            let vorname2 = req.body.vorname2;
-            let nachname2 = req.body.nachname2;
-            let email2 = req.body.email2;
-            let funktion2 = req.body.funktion2;
             let studiengang = req.body.studiengang;
             let modulanlass = req.body.modulanlass;
             let szenario = req.body.szenario;
@@ -75,69 +65,11 @@ module.exports = function (models) {
             let cloudwo = req.body.cloudwo;
             let productowner = req.body.productowner;
             let bemerkungen = req.body.bemerkungen;
-            let datum = req.body.datum;
-            let datumantrag = req.body.datumantrag;
             let notizen = req.body.notizen;
-            let softwareList = [];
-            let anrede2extr;
-            let vorname2extr;
-            let nachname2extr;
-            let email2extr;
-            let funktion2extr;
-            if (Array.isArray(anrede2)) {
-                for (let i = 0; i < anrede2.length; i++) {
-                    anrede2extr = anrede2[anrede2.length - 1];
-                }
-            } else
-            {
-                if (anrede2){
-                    anrede2extr = anrede2;
-                }
-            }
-            if (Array.isArray(vorname2)) {
-                for (let i = 0; i < vorname2.length; i++) {
-                    vorname2extr = vorname2[vorname2.length - 1];
-                }
-            } else
-            {
-                if (vorname2){
-                    vorname2extr = vorname2;
-                }
-            }
-            if (Array.isArray(nachname2)) {
-                for (let i = 0; i < nachname2.length; i++) {
-                    nachname2extr = nachname2[nachname2.length - 1];
-                }
-            } else
-            {
-                if (nachname2){
-                    nachname2extr = nachname2;
-                }
-            }
-            if (Array.isArray(email2)) {
-                for (let i = 0; i < email2.length; i++) {
-                    email2extr = email2[email2.length - 1];
-                }
-            } else
-            {
-                if (email2){
-                    email2extr = email2;
-                }
-            }
-            if (Array.isArray(funktion2)) {
-                for (let i = 0; i < funktion2.length; i++) {
-                    funktion2extr = funktion2[funktion2.length - 1];
-                }
-            } else
-            {
-                if (funktion2){
-                    funktion2extr = funktion2;
-                }
-            }
             let softwareListDetails = [];
-            let sendorder;
+
             if (status == 1) {
-                sql = 'UPDATE orders SET institut="'+institut+'", professur="'+professur+'", anrede="'+anrede+'", nachname="'+nachname+'", vorname="'+vorname+'", email="'+email+'", funktion="'+funktion+'", anrede2="'+anrede2extr+'", vorname2="'+vorname2extr+'", nachname2="'+nachname2extr+'", email2="'+email2extr+'", funktion2="'+funktion2extr+'", studiengang="'+studiengang+'", modulanlass="'+modulanlass+'", szenario="'+szenario+'", softwarename="'+softwarename+'", softwarewebseite="'+softwarewebseite+'", softwareupdate="'+softwareupdate+'", softwareupdatewelches="'+softwareupdatewelches+'", lizenzenanzahl="'+lizenzenanzahl+'", nutzeranzahl="'+nutzeranzahl+'", nutzungsdauer="'+nutzungsdauer+'", nutzungsdauertext="'+nutzungsdauertext+'", betriebssystem="'+betriebssystem+'", browser="'+browser+'", softwareverfuegung="'+softwareverfuegung+'", softwareinteresse="'+softwareinteresse+'", softwareinstitut="'+softwareinstitut+'", softwarehochschinteresse="'+softwarehochschinteresse+'", softwarehochschule="'+softwarehochschule+'", lizenzinstitution="'+lizenzinstitution+'", lizenzart="'+lizenzart+'", lizenzkosten="'+lizenzkosten+'", vergleichbarkeit="'+vergleichbarkeit+'", support="'+support+'", cloud="'+cloud+'", cloudwo="'+cloudwo+'", productowner="'+productowner+'", bemerkungen="'+bemerkungen+'", notizen="'+notizen+'", status="'+status+'" WHERE orderid="'+tsID+'"'
+                sql = 'UPDATE orders SET institut="'+institut+'", professur="'+professur+'", anrede="'+anrede+'", nachname="'+nachname+'", vorname="'+vorname+'", email="'+email+'", funktion="'+funktion+'", studiengang="'+studiengang+'", modulanlass="'+modulanlass+'", szenario="'+szenario+'", softwarename="'+softwarename+'", softwarewebseite="'+softwarewebseite+'", softwareupdate="'+softwareupdate+'", softwareupdatewelches="'+softwareupdatewelches+'", lizenzenanzahl="'+lizenzenanzahl+'", nutzeranzahl="'+nutzeranzahl+'", nutzungsdauer="'+nutzungsdauer+'", nutzungsdauertext="'+nutzungsdauertext+'", betriebssystem="'+betriebssystem+'", browser="'+browser+'", softwareverfuegung="'+softwareverfuegung+'", softwareinteresse="'+softwareinteresse+'", softwareinstitut="'+softwareinstitut+'", softwarehochschinteresse="'+softwarehochschinteresse+'", softwarehochschule="'+softwarehochschule+'", lizenzinstitution="'+lizenzinstitution+'", lizenzart="'+lizenzart+'", lizenzkosten="'+lizenzkosten+'", vergleichbarkeit="'+vergleichbarkeit+'", support="'+support+'", cloud="'+cloud+'", cloudwo="'+cloudwo+'", productowner="'+productowner+'", bemerkungen="'+bemerkungen+'", notizen="'+notizen+'", status="'+status+'" WHERE orderid="'+tsID+'"'
                 sendorder = 1;
                 let transport2 = nodemailer.createTransport({
                     host: "lmailer.fhnw.ch",
@@ -175,7 +107,7 @@ module.exports = function (models) {
                     from: 'Santra <applprojekte.ph@fhnw.ch>',
                     // Comma separated list of recipients
                     to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-                    //to: '<alesya.heymann@fhnw.ch>',
+                   // to: '<alesya.heymann@fhnw.ch>',
                     // Subject of the message
                     subject: "Santra: Antrag Nummer #"+tsID+"",
                     // plaintext body
@@ -198,7 +130,7 @@ module.exports = function (models) {
                 });
             }
                 else if (status == 0) {
-                sql = 'UPDATE orders SET institut="'+institut+'", professur="'+professur+'", anrede="'+anrede+'", nachname="'+nachname+'", vorname="'+vorname+'", email="'+email+'", funktion="'+funktion+'", anrede2="'+anrede2extr+'", vorname2="'+vorname2extr+'", nachname2="'+nachname2extr+'", email2="'+email2extr+'", funktion2="'+funktion2extr+'", studiengang="'+studiengang+'", modulanlass="'+modulanlass+'", szenario="'+szenario+'", softwarename="'+softwarename+'", softwarewebseite="'+softwarewebseite+'", softwareupdate="'+softwareupdate+'", softwareupdatewelches="'+softwareupdatewelches+'", lizenzenanzahl="'+lizenzenanzahl+'", nutzeranzahl="'+nutzeranzahl+'", nutzungsdauer="'+nutzungsdauer+'", nutzungsdauertext="'+nutzungsdauertext+'", betriebssystem="'+betriebssystem+'", browser="'+browser+'", softwareverfuegung="'+softwareverfuegung+'", softwareinteresse="'+softwareinteresse+'", softwareinstitut="'+softwareinstitut+'", softwarehochschinteresse="'+softwarehochschinteresse+'", softwarehochschule="'+softwarehochschule+'", lizenzinstitution="'+lizenzinstitution+'", lizenzart="'+lizenzart+'", lizenzkosten="'+lizenzkosten+'", vergleichbarkeit="'+vergleichbarkeit+'", support="'+support+'", cloud="'+cloud+'", cloudwo="'+cloudwo+'", productowner="'+productowner+'", bemerkungen="'+bemerkungen+'", notizen="'+notizen+'" WHERE orderid="'+tsID+'"'
+                sql = 'UPDATE orders SET institut="'+institut+'", professur="'+professur+'", anrede="'+anrede+'", nachname="'+nachname+'", vorname="'+vorname+'", email="'+email+'", funktion="'+funktion+'", studiengang="'+studiengang+'", modulanlass="'+modulanlass+'", szenario="'+szenario+'", softwarename="'+softwarename+'", softwarewebseite="'+softwarewebseite+'", softwareupdate="'+softwareupdate+'", softwareupdatewelches="'+softwareupdatewelches+'", lizenzenanzahl="'+lizenzenanzahl+'", nutzeranzahl="'+nutzeranzahl+'", nutzungsdauer="'+nutzungsdauer+'", nutzungsdauertext="'+nutzungsdauertext+'", betriebssystem="'+betriebssystem+'", browser="'+browser+'", softwareverfuegung="'+softwareverfuegung+'", softwareinteresse="'+softwareinteresse+'", softwareinstitut="'+softwareinstitut+'", softwarehochschinteresse="'+softwarehochschinteresse+'", softwarehochschule="'+softwarehochschule+'", lizenzinstitution="'+lizenzinstitution+'", lizenzart="'+lizenzart+'", lizenzkosten="'+lizenzkosten+'", vergleichbarkeit="'+vergleichbarkeit+'", support="'+support+'", cloud="'+cloud+'", cloudwo="'+cloudwo+'", productowner="'+productowner+'", bemerkungen="'+bemerkungen+'", notizen="'+notizen+'" WHERE orderid="'+tsID+'"'
                 sendorder = 0;
                 }
             connection.query(""+sql+"",
@@ -216,11 +148,6 @@ module.exports = function (models) {
                             'nachname':rows[i].nachname,
                             'email':rows[i].email,
                             'funktion':rows[i].funktion,
-                            'anrede2':rows[i].anrede2,
-                            'vorname2':rows[i].vorname2,
-                            'nachname2':rows[i].nachname2,
-                            'email2':rows[i].email2,
-                            'funktion2':rows[i].funktion2,
                             'studiengang':rows[i].studiengang,
                             'modulanlass':rows[i].modulanlass,
                             'szenario':rows[i].szenario,
@@ -250,7 +177,6 @@ module.exports = function (models) {
                             'bemerkungen':rows[i].bemerkungen,
                             'datumantrag': rows[i].datumantrag,
                             'notizen': rows[i].notizen,
-                            'userid':rows[i].userid,
                             'status':rows[i].status
                         }
                         // Add object into array
@@ -265,7 +191,6 @@ module.exports = function (models) {
                     res.render('layout_edited', {
                         "softwareListDetails": softwareListDetails,
                         "status": status,
-                        "useridlog": LOGIN.useridlog,
                         "vornamelog": obj_user.givenName,
                         "nachnamelog": obj_user.surname,
                         "emaillog": obj_user.mail,

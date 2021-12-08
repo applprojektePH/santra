@@ -1,7 +1,7 @@
 function pdfTemplate(){
    let nodeID = localStorage.getItem('nodeIDprint');
     getNode(nodeID, data => {
-        document.title = `AltersAtlas | ${data.title}`;
+        document.title = `Santra | ${data.title}`;
         $('.pdfTitle').text(`${data.title}`);
         if (data.dynamic) {
             {

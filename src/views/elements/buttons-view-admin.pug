@@ -1,7 +1,6 @@
 span.service-buttons-wrapper
     for order in softwareListDetails
-        a(href="/edit?tsid="+ order.orderid class="link-id")
-            button.btn.btn-primary.btn-sm.btn-orderedit(type='submit')
+        a.btn.btn-primary.btn-sm.btn-orderedit(href="/edit?tsid="+ order.orderid class="link-id")
                 | Antrag bearbeiten
                 i.fas.fa-edit
         button#pdfexport.btn.btn-primary.btn-sm(type='button')
@@ -20,8 +19,8 @@ span.service-buttons-wrapper
                     .modal-footer
                         button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss="modal") Abbrechen
                         for order in softwareListDetails
-                            a(href="#" class="link-id-delete")
-                                button.btn.btn-primary.btn-sm.btn-remove(type='submit') Antrag l&ouml;schen
+                            a.btn.btn-primary.btn-sm.btn-remove.link-id-delete(href="#")
+                                | Antrag l&ouml;schen
         a(href='/user')
             button.btn.btn-primary.btn-sm.floatright(type='button')
                 | Zur&uuml;ck zu

@@ -1,15 +1,13 @@
 span.service-buttons-wrapper
     for order in softwareListDetails
         if(order.status == 10)
-            a(href="/edit?tsid=" + order.orderid class="link-id")
-                button.btn.btn-primary.btn-sm.btn-orderedit(type='submit')
+            a.btn.btn-primary.btn-sm.btn-orderedit(href="/edit?tsid=" + order.orderid class="link-id")
                     | Antrag bearbeiten
                     i.fas.fa-edit
         button#pdfexport.btn.btn-primary.btn-sm(type='button')
             | Antrag als PDF speichern
             i.fas.fa-file-pdf
-        a(href='/user')
-            button.btn.btn-primary.btn-sm(type='button')
+        a.btn.btn-primary.btn-sm.floatright(href='/user')
                 | Zur&uuml;ck zu
                 | allen Antr&auml;gen
                 i.fas.fa-search

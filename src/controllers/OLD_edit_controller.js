@@ -16,7 +16,6 @@ module.exports = function (models) {
         res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         res.setHeader("Expires", "0"); // Proxies.
-       // let tsID = parseInt(req.query.tsid);
         /* USER start */
         let obj_user = {};
         let adminlog;
@@ -29,21 +28,13 @@ module.exports = function (models) {
         /* USER end */
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
-        if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
-            page.path = "/"+CONSTANTS.SETTINGS.WEB.PATH_STRING;
-        else
-            page.path = "";
         pool.getConnection((err, connection) => {
             let tsID = parseInt(req.query.tsid);
             let softwareListDetails = [];
-            connection.query('SELECT * FROM orders WHERE (userid IN (SELECT id FROM users) AND orderid IN (SELECT '+tsID+' FROM orders))', (err, rows) => {
+            console.log(req.body);
+            connection.query('SELECT * FROM orders WHERE ("'+obj_user.mail+'" IN (SELECT email FROM users) AND orderid IN (SELECT '+tsID+' FROM orders))', (err, rows) => {
                 connection.release() // return the connection to pool
                 if (!err) {
-                    function convertDate(inputFormat) {
-                        function pad(s) { return (s < 10) ? '0' + s : s; }
-                        var d = new Date(inputFormat)
-                        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('.')
-                    }
                     for (let i = 0; i < rows.length; i++) {
                         // Create an object to save current row's data
                         let order = {
@@ -56,11 +47,6 @@ module.exports = function (models) {
                             'nachname':rows[i].nachname,
                             'email':rows[i].email,
                             'funktion':rows[i].funktion,
-                            'anrede2':rows[i].anrede2,
-                            'vorname2':rows[i].vorname2,
-                            'nachname2':rows[i].nachname2,
-                            'email2':rows[i].email2,
-                            'funktion2':rows[i].funktion2,
                             'studiengang':rows[i].studiengang,
                             'modulanlass':rows[i].modulanlass,
                             'szenario':rows[i].szenario,
@@ -90,7 +76,6 @@ module.exports = function (models) {
                             'productowner':rows[i].productowner,
                             'bemerkungen':rows[i].bemerkungen,
                             'datumantrag': rows[i].datumantrag,
-                            'userid':rows[i].userid,
                             'status':rows[i].status
                         }
                         // Add object into array
@@ -99,17 +84,14 @@ module.exports = function (models) {
                 else {
                     console.log(err)
                 }
-
             })
             setTimeout(
                 function(){
-                    // res.send(req.params.tsid);
                     res.render('layout_form-filled', {
                         "vornamelog": obj_user.givenName,
                         "nachnamelog": obj_user.surname,
                         "emaillog": obj_user.mail,
                         "admin": adminlog,
-                        "useridlog": LOGIN.useridlog,
                         "softwareListDetails": softwareListDetails
                     });
                 }, 500);

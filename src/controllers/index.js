@@ -12,7 +12,7 @@ module.exports = function(models) {
 
   this.removeController = new (require('./remove_controller'))(models);
 
-  this.editController = new (require('./edit_controller'))(models);
+  this.editController = new (require('./OLD_edit_controller'))(models);
 
   this.editedController = new (require('./edited_controller'))(models);
 

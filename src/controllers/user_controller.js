@@ -38,7 +38,6 @@ module.exports = function (models) {
         pool.getConnection((err, connection) => {
             if (err) throw err
             console.log('connected as id ' + connection.threadId)
-            let orderid = '';
             let institut = req.body.institut;
             let professur = req.body.professur;
             let anrede = req.body.anrede;
@@ -46,11 +45,6 @@ module.exports = function (models) {
             let nachname = req.body.nachname;
             let email = req.body.email;
             let funktion = req.body.funktion;
-            let anrede2 = (typeof req.body.anrede2 === 'undefined' || req.body.anrede2 === 0 ? " " : req.body.anrede2);
-            let vorname2 = (typeof req.body.vorname2 === 'undefined' || req.body.vorname2 === 0 ? " " : req.body.vorname2);
-            let nachname2 = (typeof req.body.nachname2 === 'undefined' || req.body.nachname2 === 0 ? " " : req.body.nachname2);
-            let email2 = (typeof req.body.email2 === 'undefined' || req.body.email2 === 0 ? " " : req.body.email2);
-            let funktion2 = (typeof req.body.funktion2 === 'undefined' || req.body.funktion2 === 0 ? " " : req.body.funktion2);
             let studiengang = req.body.studiengang;
             let modulanlass = req.body.modulanlass;
             let szenario = req.body.szenario;
@@ -79,85 +73,27 @@ module.exports = function (models) {
             let productowner = req.body.productowner;
             let bemerkungen = req.body.bemerkungen;
             let datumantrag = req.body.datumantrag;
-            let userid = req.body.userid;
-            //hier status unterscheiden
             let notizen = req.body.notizen;
             let status = req.body.status;
             let softwareList = [];
             let orderidformail;
+
+console.log(req.body);
 if (url=="/submit-form"){
-    let anrede2extr;
-    let vorname2extr;
-    let nachname2extr;
-    let email2extr;
-    let funktion2extr;
-
-    if (Array.isArray(anrede2)) {
-        for (let i = 0; i < anrede2.length; i++) {
-            anrede2extr = anrede2[anrede2.length - 1];
-        }
-    } else
-    {
-        if (anrede2){
-            anrede2extr = anrede2;
-        }
-    }
-    if (Array.isArray(vorname2)) {
-        for (let i = 0; i < vorname2.length; i++) {
-            vorname2extr = vorname2[vorname2.length - 1];
-        }
-    } else
-    {
-        if (vorname2){
-            vorname2extr = vorname2;
-        }
-    }
-    if (Array.isArray(nachname2)) {
-        for (let i = 0; i < nachname2.length; i++) {
-            nachname2extr = nachname2[nachname2.length - 1];
-        }
-    } else
-    {
-        if (nachname2){
-            nachname2extr = nachname2;
-        }
-    }
-    if (Array.isArray(email2)) {
-        for (let i = 0; i < email2.length; i++) {
-            email2extr = email2[email2.length - 1];
-        }
-    } else
-    {
-        if (email2){
-            email2extr = email2;
-        }
-    }
-    if (Array.isArray(funktion2)) {
-        for (let i = 0; i < funktion2.length; i++) {
-            funktion2extr = funktion2[funktion2.length - 1];
-        }
-    } else
-    {
-        if (funktion2){
-            funktion2extr = funktion2;
-        }
-    }
-
     if (adminlog==true){
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") OR (email <> "'+obj_user.mail+'" AND status <> 10) ORDER BY orderid DESC';
     }
     else{
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") ORDER BY orderid DESC';
     }
-    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, anrede2, vorname2, nachname2, email2, funktion2, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, userid, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+anrede2extr+"', '"+vorname2extr+"', '"+nachname2extr+"', '"+email2extr+"', '"+funktion2extr+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+userid+"', '"+notizen+"', '"+status+"')";
+    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql2+"",
         (err, rows) => {
             //  connection.release() // return the connection to pool
 
             connection.query(""+sql1+"",
                 (err, rows) => {
-                    //    connection.release() // return the connection to pool
-
+                    connection.release() // return the connection to pool
                     if (!err) {
                         for (let i = 0; i < rows.length; i++) {
                             let statuscurrent;
@@ -178,12 +114,6 @@ if (url=="/submit-form"){
                                 case 4:
                                     statuscurrent = 'Antrag Entscheid';
                                     break;
-                                case 5:
-                                    statuscurrent = 'Antrag abgeschlossen';
-                                    break;
-                                case 6:
-                                    statuscurrent = 'Antrag abgeschlossen';
-                                    break;
                             }
                             // Create an object to save current row's data
                             let order = {
@@ -196,11 +126,6 @@ if (url=="/submit-form"){
                                 'nachname': rows[i].nachname,
                                 'email': rows[i].email,
                                 'funktion': rows[i].funktion,
-                                'anrede2': rows[i].anrede2,
-                                'vorname2': rows[i].vorname2,
-                                'nachname2': rows[i].nachname2,
-                                'email2': rows[i].email2,
-                                'funktion2': rows[i].funktion2,
                                 'studiengang': rows[i].studiengang,
                                 'modulanlass': rows[i].modulanlass,
                                 'szenario': rows[i].szenario,
@@ -230,7 +155,6 @@ if (url=="/submit-form"){
                                 'bemerkungen': rows[i].bemerkungen,
                                 'datumantrag': rows[i].datumantrag,
                                 'notizen': rows[i].notizen,
-                                'userid': rows[i].userid,
                                 'status': statuscurrent
                             }
                             // Add object into array
@@ -304,8 +228,6 @@ if (url=="/submit-form"){
         })
 }
 else if (url == "/user"){
-    let tsID = req.body;
-
     if (adminlog==true){
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") OR (email <> "'+obj_user.mail+'" AND status <> 10) ORDER BY orderid DESC';
     }
@@ -314,16 +236,8 @@ else if (url == "/user"){
     }
     connection.query(""+sql1+"",
         (err, rows) => {
-            //    connection.release() // return
-            //    he connection to pool
+                connection.release();
             if (!err) {
-                /*function convertDate(inputFormat) {
-                    function pad(s) {
-                        return (s < 10) ? '0' + s : s;
-                    }
-                    var d = new Date(inputFormat)
-                    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('.')
-                }*/
                 for (let i = 0; i < rows.length; i++) {
                     // Create an object to save current row's data
                     let statuscurrent;
@@ -341,13 +255,10 @@ else if (url == "/user"){
                             statuscurrent = 'Antrag bei Gremium';
                             break;
                         case 4:
-                            statuscurrent = 'Antrag Entscheid';
+                            statuscurrent = 'Antrag genehmigt';
                             break;
                         case 5:
-                            statuscurrent = 'Antrag abgeschlossen';
-                            break;
-                        case 6:
-                            statuscurrent = 'Antrag abgeschlossen';
+                            statuscurrent = 'Antrag abgelehnt';
                             break;
                     }
                     let order = {
@@ -388,7 +299,6 @@ else if (url == "/user"){
                         'productowner': rows[i].productowner,
                         'bemerkungen': rows[i].bemerkungen,
                         'datumantrag': rows[i].datumantrag,
-                        'userid': rows[i].userid,
                         'status': statuscurrent
                     }
                     // Add object into array

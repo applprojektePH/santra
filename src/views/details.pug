@@ -20,31 +20,31 @@
                                 include elements/buttons-view-draft
                 for order in softwareListDetails
                     if(order.status != 10)
-                        ul.progressbar
-                            for order in softwareListDetails
-                                -let list = ['Antrag eingegangen', 'Antrag in Bearbeitung', 'Antrag in Prüfung', 'Antrag bei Gremium', 'Antrag Entscheid','Antrag abgeschlossen'];
+                            ul.progressbar
+                                -let list = ['Antrag eingegangen', 'Antrag in Bearbeitung', 'Antrag in Prüfung', 'Antrag bei Gremium', statuscurrent];
                                 if (admin == true)
-                                    -for (var i = 1; i < list.length; i++)
-                                                                            if((i < order.status))
-                                                                                li(class=["li-status", "active item" + i, "li-status-admin"] id="orderstatus" + i, )
-                                                                                    span= list[i]
-                                                                            else if(i == order.status)
-                                                                                li(class=["li-status", "preactive item" + i, "li-status-admin"] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal' + i)
-                                                                                    span= list[i]
-                                                                            else
-                                                                                li(class=["li-status", "item" + i, "li-status-admin"] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal' + i)
-                                                                                    span= list[i]
+                                        -for (var i = 1; i < list.length; i++)
+                                                                                if((i < order.status)) ||((i == order.status) && (i == list.length-1))
+                                                                                    li(class=["li-status", "active item" + i, "li-status-admin"] id="orderstatus" + i, )
+                                                                                        span= list[i]
+                                                                                else if((i == order.status) && (i != list.length-1))
+                                                                                    li(class=["li-status", "preactive item" + i, "li-status-admin"] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal' + i)
+                                                                                        span= list[i]
+                                                                                else
+                                                                                    li(class=["li-status", "item" + i, "li-status-admin"] id="orderstatus" + i type='button' data-bs-toggle='modal' data-bs-target='#Modal' + i)
+                                                                                        span= list[i]
+
                                 else
-                                    -for (var i = 1; i < list.length; i++)
-                                                                                                                if((i < order.status))
-                                                                                                                    li(class=["li-status", "active item" + i] id="orderstatus" + i)
-                                                                                                                        span= list[i]
-                                                                                                                else if(i == order.status)
-                                                                                                                    li(class=["li-status", "preactive item" + i] id="orderstatus" + i)
-                                                                                                                        span= list[i]
-                                                                                                                else
-                                                                                                                    li(class=["li-status", "item" + i] id="orderstatus" + i)
-                                                                                                                        span= list[i]
+                                        -for (var i = 1; i < list.length; i++)
+                                                                                if((i < order.status)) || ((i == order.status) && (i == list.length - 1))
+                                                                                    li(class=["li-status", "active item" + i, "li-status-admin"] id="orderstatus" + i, )
+                                                                                        span= list[i]
+                                                                                else if((i == order.status) && (i != list.length - 1))
+                                                                                    li(class=["li-status", "preactive item" + i, "li-status-admin"] id="orderstatus" + i)
+                                                                                        span= list[i]
+                                                                                else
+                                                                                    li(class=["li-status", "item" + i, "li-status-admin"] id="orderstatus" + i)
+                                                                                        span= list[i]
 
                 #Modal2.modalStatus.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
                     .modal-dialog.modal-dialog-centered(role='document')
@@ -56,12 +56,15 @@
                                 for order in softwareListDetails
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea1(placeholder='EmailVorlage' rows='10')
-                                            |Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                            |Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den
+                                            |<a href="https://subito.insideapps.fhnw.ch/itshop/custom" target="_blank">FHNW Subito - IT-Shop</a> bestellen können. </br>
+                                            |Preis für die Software
+                                            |</br>Auf der Seite <a href="https://welcome.inside.fhnw.ch/organisation/hochschule/PH/mitarbeitende/Seiten/softwarebestellung.aspx" target="_blank">«Softwarebestellung»</a> finden Sie eine kurze Anleitung, wie Sie die Software im FHNW Subito IT-Shop bestellen können.</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
                                         a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=4, mailtype=2, orderstatus=1)
                                             | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
                                         p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
-                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an Entwickler
+                                        p.hidden.red Das E-Mail wurde an Benutzer nicht verschickt. Wenden Sie sich bitte an applprojekt.ph.fhnw.ch
                                         hr
                                 br
                                 button.btn.btn-primary.btn-sm.custom-control-button-open(type='button') Antrag ablehnen
@@ -69,7 +72,7 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea2(placeholder='EmailVorlage' rows='10')
                                             | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde geprüft. Leider müssen wir Ihnen mitteilen, dass eine Anschaffung abgelehnt werden muss.</br>Begründung:</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=4, mailtype=2, orderstatus=2)
+                                        a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=5, mailtype=2, orderstatus=2)
                                             | Email senden
                                         //button.btn-email2.btn-email-status2.btn.btn-primary.btn-sm.button-email-send(type='button') Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
@@ -81,7 +84,7 @@
                                 for order in softwareListDetails
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea3(placeholder='EmailVorlage' rows='10')
-                                            | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} muss durch das Gremium weiter geprüft werden. </br>Bitte beachten Sie, dass die Bearbeitung in aufwendigen Fällen (Bsp. grössere Lizenzpakete) bis zu 3 Monate dauern kann. Sie erhalten dann eine Rückmeldung zur Anschaffung oder Nicht-Anschaffung der gewünschten Software. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                            | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} muss durch das Gremium weiter geprüft werden. </br>Bitte beachten Sie, dass die Bearbeitung in aufwendigen Fällen (Bsp. grössere Lizenzpakete) bis zu 3 Monate dauern kann. Sie erhalten zu gegebener Zeit eine Rückmeldung zur Anschaffung oder Nicht-Anschaffung der gewünschten Software. </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
                                         a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=3, mailtype=2, orderstatus=3)
                                             | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
@@ -105,7 +108,10 @@
                                 for order in softwareListDetails
                                     span.inputHide
                                         textarea.modalEmailTextarea#modalEmailTextarea12(placeholder='EmailVorlage' rows='10')
-                                            | Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} wurde durch das Gremium geprüft und teilen Ihnen gerne mit, dass Sie diese über den Subito Shop bestellen können.</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                            |Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde durch das Gremium geprüft und teilen Ihnen gerne mit, dass Sie diese über den
+                                            |<a href="https://subito.insideapps.fhnw.ch/itshop/custom" target="_blank">FHNW Subito - IT-Shop</a> bestellen können.</br>
+                                            |Preis für die Software
+                                            |</br>Auf der Seite <a href="https://welcome.inside.fhnw.ch/organisation/hochschule/PH/mitarbeitende/Seiten/softwarebestellung.aspx" target="_blank">«Softwarebestellung»</a> finden Sie eine kurze Anleitung, wie Sie die Software im FHNW Subito IT-Shop bestellen können.</br>Preis für die Software</br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
                                         a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=4, mailtype=2, orderstatus=4)
                                             | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
@@ -118,7 +124,7 @@
                                     span.inputHide
                                         textarea.modalEmailTextarea(placeholder='EmailVorlage' rows='10')
                                             | Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde durch das Gremium geprüft. Leider müssen wir Ihnen mitteilen, dass eine Anschaffung abgelehnt werden muss.</br>Begründung: </br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
-                                        a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=4, mailtype=2, orderstatus=5)
+                                        a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=5, mailtype=2, orderstatus=5)
                                             | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
                                         p.hidden.green Ihr E-Mail wurde erfolgreich an Benutzer verschickt
@@ -127,28 +133,26 @@
                             .modal-footer
                                 for order in softwareListDetails
                                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
-                #Modal4.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
-                    .modal-dialog.modal-dialog-centered(role='document')
-                        .modal-content
-                            .modal-header
-                                h5.modal-title Antrag abschliessen
-                            .modal-body
-                                for order in softwareListDetails
-                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=5, mailtype=0, orderstatus=6)
-                                        | Antrag abschliessen
-                                    a(href='#')
-                                        button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
-                #Modal5.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
-                    .modal-dialog.modal-dialog-centered(role='document')
-                        .modal-content
-                            .modal-header
-                                h5.modal-title Antrag abschliessen
-                            .modal-body
-                                for order in softwareListDetails
-                                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=6, mailtype=0, orderstatus=7)
-                                        | Antrag abschliessen
-                                    a(href='#')
-                                        button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
+                //#Modal4.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+                //    .modal-dialog.modal-dialog-centered(role='document')
+                //        .modal-content
+                //            .modal-header
+                //                h5.modal-title Antrag abschliessen
+                //            .modal-body
+                //                for order in softwareListDetails
+                //                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=5, mailtype=0, orderstatus=6, decision=0)
+                //                        | Antrag abschliessen
+                //                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
+                //#Modal5.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
+                //    .modal-dialog.modal-dialog-centered(role='document')
+                //        .modal-content
+                //            .modal-header
+                //                h5.modal-title Antrag abschliessen
+                //            .modal-body
+                //                for order in softwareListDetails
+                //                    a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=6, mailtype=0, orderstatus=7, decision=0)
+                //                        | Antrag abschliessen
+                //                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                 br
                 .form-group-view-wrapper
                     .form-group
@@ -182,27 +186,6 @@
                                     | Funktion
                             for order in softwareListDetails
                                 p= order.funktion
-                                for order in softwareListDetails
-                                    if order.anrede2 && order.anrede2!== 'undefined'
-                                        label
-                                            | zweite Kontaktperson
-                                        span= order.anrede2
-                                for order in softwareListDetails
-                                    if order.vorname2 && order.vorname2!== 'undefined'
-                                        span= order.vorname2
-                                for order in softwareListDetails
-                                    if order.nachname2 && order.nachname2!== 'undefined'
-                                        span= order.nachname2
-                                for order in softwareListDetails
-                                    if order.email2 && order.email2!== 'undefined'
-                                        label
-                                            | E-Mail-Adresse
-                                        p= order.email2
-                                for order in softwareListDetails
-                                    if order.funktion2 && order.funktion2!== 'undefined'
-                                        label(for='form-function')
-                                            | Funktion
-                                        p= order.funktion2
                                 label(for='form-function')
                                     | Studiengang
                                 p= order.studiengang
@@ -309,18 +292,14 @@ script(type='text/javascript').
         });
         $('.button-email-send').one('click',function (e) {
             e.preventDefault();
+            e.stopPropagation();
             let mailtype = $(this).attr('mailtype');
             let statuschange = $(this).attr('statuschange');
             let orderstatus  = $(this).attr('orderstatus');
             const urlParams = new URLSearchParams(window.location.search);
             const currenturlParam = urlParams.get('tsid');
             let mailtext;
-            if (orderstatus==6 || orderstatus==7){
-                mailtext = '';
-            }
-            else{
-             mailtext = $(this).prev().val();
-            }
+            mailtext = $(this).prev().val();
             let d = new Date();
             let month = d.getMonth() + 1;
             let day = d.getDate();
@@ -344,15 +323,12 @@ script(type='text/javascript').
                     },
                     url: '/details?tsid=' + currenturlParam,
                     success: function (data) {
-                        if (orderstatus == 6 || orderstatus == 7) {
-                            window.location.replace("/details?tsid=" + currenturlParam);
-                        }
-                        else{
+
                             $('.green').removeClass('hidden');
                             window.setTimeout(function () {
                                 window.location.replace("/details?tsid=" + currenturlParam);
                             }, 500);
-                               }
+
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         $('.red').removeClass('hidden');
