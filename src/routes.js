@@ -21,4 +21,6 @@ module.exports = function (app, models) {
     app.post('/edit', controllers.editedController.main);
     app.post('/submit-form', controllers.userController.main);
     app.get('/history', controllers.historyController.main);
+    app.get('/datenschutz', controllers.datenschutzController.main);
+    app.get('/impressum', controllers.impressumController.main);
 };

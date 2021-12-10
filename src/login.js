@@ -1,5 +1,5 @@
 module.exports = {
     titlelog: 'Frau',
-    admins: ['sonja.lupsan@fhnw.ch']
+    admins: ['alesya.heymann@fhnw.ch', 'sonja.lupsan@fhnw.ch']
 }
 

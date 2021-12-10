@@ -71,11 +71,9 @@ app.use('/bootstrap', express.static(path.join(__dirname, CONSTANTS.PATHS.BOOTST
 app.use('/static',express.static(path.join(__dirname, CONSTANTS.PATHS.STATIC)));
 app.use(helmet({contentSecurityPolicy: false}));
 
-
 // initialize persistence layer
 //models = require('./models/');
 
-require('./printpdf')(app, models);
 // load routes last!
 require('./routes')(app, models);
 

@@ -58,7 +58,7 @@
                                         textarea.modalEmailTextarea#modalEmailTextarea1(placeholder='EmailVorlage' rows='10')
                                             |Guten Tag #{order.anrede} #{order.nachname} </br></br>Wir haben Ihren Antrag für die Anschaffung der Software #{order.softwarename} geprüft und teilen Ihnen gerne mit, dass Sie diese über den
                                             |<a href="https://subito.insideapps.fhnw.ch/itshop/custom" target="_blank">FHNW Subito - IT-Shop</a> bestellen können. </br>
-                                            |Preis für die Software
+                                            |Preis für die Software:
                                             |</br>Auf der Seite <a href="https://welcome.inside.fhnw.ch/organisation/hochschule/PH/mitarbeitende/Seiten/softwarebestellung.aspx" target="_blank">«Softwarebestellung»</a> finden Sie eine kurze Anleitung, wie Sie die Software im FHNW Subito IT-Shop bestellen können.</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
                                         a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=4, mailtype=2, orderstatus=1)
                                             | Email senden
@@ -110,8 +110,8 @@
                                         textarea.modalEmailTextarea#modalEmailTextarea12(placeholder='EmailVorlage' rows='10')
                                             |Guten Tag #{order.anrede} #{order.nachname} </br></br>Ihr Antrag zur Anschaffung der Software #{order.softwarename} wurde durch das Gremium geprüft und teilen Ihnen gerne mit, dass Sie diese über den
                                             |<a href="https://subito.insideapps.fhnw.ch/itshop/custom" target="_blank">FHNW Subito - IT-Shop</a> bestellen können.</br>
-                                            |Preis für die Software
-                                            |</br>Auf der Seite <a href="https://welcome.inside.fhnw.ch/organisation/hochschule/PH/mitarbeitende/Seiten/softwarebestellung.aspx" target="_blank">«Softwarebestellung»</a> finden Sie eine kurze Anleitung, wie Sie die Software im FHNW Subito IT-Shop bestellen können.</br>Preis für die Software</br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
+                                            |Preis für die Software:
+                                            |</br>Auf der Seite <a href="https://welcome.inside.fhnw.ch/organisation/hochschule/PH/mitarbeitende/Seiten/softwarebestellung.aspx" target="_blank">«Softwarebestellung»</a> finden Sie eine kurze Anleitung, wie Sie die Software im FHNW Subito IT-Shop bestellen können.</br></br>Freundliche Grüsse</br> Ihr Applprojekte Team</br> applprojekte.ph@fhnw.ch</br> n|w
                                         a.button-email-send.btn.btn-secondary.btn-sm(href="/details?tsid=" + order.orderid statuschange=4, mailtype=2, orderstatus=4)
                                             | Email senden
                                         button.btn.btn-primary.btn-sm.custom-control-button-close(type='button') Abbrechen
@@ -154,7 +154,7 @@
                 //                        | Antrag abschliessen
                 //                    button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                 br
-                .form-group-view-wrapper
+                .form-group-view-wrapper#AntragDetailsWrapper
                     .form-group
                         .row
                             br

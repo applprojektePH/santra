@@ -19,4 +19,8 @@ module.exports = function(models) {
   this.pdfController = new (require('./pdf_controller'))(models);
 
   this.historyController = new (require('./history_controller'))(models);
+
+  this.datenschutzController = new (require('./datenschutz_controller'))(models);
+
+  this.impressumController = new (require('./impressum_controller'))(models);
 };

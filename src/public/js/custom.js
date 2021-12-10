@@ -99,14 +99,6 @@ $(document).ready(function () {
         window.location.reload();
     })
 
-    $('#pdfexport').click(function () {
-        doc.fromHTML($('.form-group-view-wrapper').html(), 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('SW-Antrag.pdf');
-    });
-
     $("#inlineCheckbox5").click(function () {
         var paramChangeBoxes = $("input:checkbox.form-check-input-js");
         if ($(this).is(":checked")) {
@@ -127,6 +119,14 @@ $(document).ready(function () {
     })
     $(".link-id").click(function (event) {
         event.stopPropagation()
-    })
+    });
+    $(".pdfexport").click(function () {
+        printJS({printable:'AntragDetailsWrapper',
+            type:'html',
+            header: 'Softwareantrag#" + order.orderid+" "+ order.softwarename+ "',
+            style: 'label { display: block; font-weight: 600; font-family: Arial, Helvetica, sans-serif;}; ' +
+                'span { display: inline; font-family: Arial, Helvetica, sans-serif;}; ' +
+                'p { display: inline; font-family: Arial, Helvetica, sans-serif;};'})
+    });
 });
 
