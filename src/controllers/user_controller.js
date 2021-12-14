@@ -50,6 +50,7 @@ module.exports = function (models) {
             let szenario = req.body.szenario;
             let softwarename = req.body.softwarename;
             let softwarewebseite = req.body.softwarewebseite;
+            let softwareversion = req.body.softwareversion;
             let softwareupdate = req.body.softwareupdate;
             let softwareupdatewelches = req.body.softwareupdatewelches;
             let lizenzenanzahl = req.body.lizenzenanzahl;
@@ -86,7 +87,7 @@ if (url=="/submit-form"){
     else{
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") ORDER BY orderid DESC';
     }
-    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+notizen+"', '"+status+"')";
+    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareversion, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareversion+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+notizen+"', '"+status+"')";
     connection.query(""+sql2+"",
         (err, rows) => {
             //  connection.release() // return the connection to pool
@@ -131,9 +132,9 @@ if (url=="/submit-form"){
                                 'szenario': rows[i].szenario,
                                 'softwarename': rows[i].softwarename,
                                 'softwarewebseite': rows[i].softwarewebseite,
+                                'softwareversion': rows[i].softwareversion,
                                 'softwareupdate': rows[i].softwareupdate,
                                 'softwareupdatewelches': rows[i].softwareupdatewelches,
-                                'softwareversion': rows[i].softwareversion,
                                 'lizenzenanzahl': rows[i].lizenzenanzahl,
                                 'nutzeranzahl': rows[i].nutzeranzahl,
                                 'nutzungsdauer': rows[i].nutzungsdauer,

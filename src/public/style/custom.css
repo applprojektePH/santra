@@ -59,14 +59,12 @@ button svg {
     margin-bottom: 25px;
 }
 
-/*old*/
-
     .service-buttons-wrapper {
         position: sticky;
-        top: 60px;
+        top: 62px;
         background: #fff;
         padding: 15px 0px 15px;
-        z-index: 2;
+        z-index: 200;
     }
 
 
@@ -141,7 +139,7 @@ div.dropdown-menu {
 
     .navbar-brand {
         height: 100%;
-        max-width: 80px;
+        max-width: 75px;
     }
 
     .navbar-brand img {
@@ -179,6 +177,7 @@ div.dropdown-menu {
     .table-works tr {
         margin-bottom: 1rem;
     }
+
 }
 
 .selectSmallInline {
@@ -405,13 +404,15 @@ and also iPads specifically.
         /* Now like a table header */
         position: absolute;
         /* Top/left values mimic padding */
-        top: 6px;
+        top: 9px;
         left: 6px;
         width: 45%;
         padding-right: 10px;
         white-space: nowrap;
     }
-
+    .table-works.table td{
+        min-height: 45px;
+    }
     .table-works.table td, .table-works.table th {
         padding-left: 35%;
     }
@@ -445,6 +446,9 @@ Label the data
 
     .table-works td:nth-of-type(6):before {
         content: "Status";
+    }
+    table.table-works td, table.table-works th{
+        font-size: 14px;
     }
 }
 
@@ -793,7 +797,9 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     color: #7d7d7d;
     background: none;
 }
-
+.progressbar li:last-child {
+    cursor: default;
+}
 .progressbar li:before {
     width: 30px;
     height: 30px;
@@ -1029,6 +1035,7 @@ a:hover {
 
 .accordion-item {
     margin-bottom: 0;
+    z-index: 100;
 }
 
 .form-date {
@@ -1056,7 +1063,7 @@ a:hover {
     text-decoration: none;
 }
 
-.service-buttons-wrapper button i, .service-buttons-wrapper a svg {
+.service-buttons-wrapper button i, .service-buttons-wrapper a i, .service-buttons-wrapper a svg {
     margin-left: 5px;
 }
 
@@ -1086,4 +1093,16 @@ a:hover {
     color: #fff;
     background-color: #df305b;
     border-color: #df305b;
+}
+.table-works td, .table-works th {
+    padding: 0.65rem 0.45rem;
+    vertical-align: top;
+    font-size: 18px;
+}
+.btn-primary .fas
+{
+    margin-left: 5px;
+}
+span i{
+    font-size: 16px;
 }

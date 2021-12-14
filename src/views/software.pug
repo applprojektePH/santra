@@ -1,6 +1,9 @@
 .row
     .col-md-12
-        table.table.table-striped.table-works(data-toggle="table" data-pagination="true"
+        button.excelexport.btn.btn-primary.btn-sm
+            | Excel Export
+            i.fas.fa-file-excel
+        table.table.table-striped.table-works#Softwaretable(data-toggle="table" data-pagination="true"
             data-search="true" data-sort="true")
             thead
                 tr(role='row')
@@ -14,27 +17,40 @@
             if (typeof (softwareList) !== 'undefined')
                 for order in softwareList
                         tr
-                            order.orderid
-                        td
-                            a#link(href="/details?tsid="+ order.orderid class="link-id")= order.orderid
-                        td= order.softwarename
-                        td= order.datumantrag
-                        td
-                            span= order.vorname
-                            span &nbsp;
-                            span= order.nachname
-
-                        if((order.institut) && (order.institut !== 'undefined'))
-                            td= order.institut
-                        else
-                            td=" "
-                        td= order.status
+                            td
+                                a#link(href="/details?tsid="+ order.orderid class="link-id")= order.orderid
+                            td= order.softwarename
+                            td= order.datumantrag
+                            td
+                                span= order.vorname
+                                span &nbsp;
+                                span= order.nachname
+                            if((order.institut) && (order.institut !== 'undefined'))
+                                td= order.institut
+                            else
+                                td=" "
+                            td= order.status
 
 script(type='text/javascript' src="./static/js/libs/jquery.js")
 //script(type='text/javascript' src="./static/js/libs/bootstrap.bundle.min.js" crossorigin="anonymous")
+
 script(type='text/javascript' src="./static/js/custom.js")
 //script(type='text/javascript' src="./static/js/libs/bootstrap-table.js")
 script(type="text/javascript" src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js")
 script(type='text/javascript' src="./static/js/libs/bootstrap-extension.js")
+<script lang="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.2/xlsx.full.min.js"></script>
+<script lang="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+script(type='text/javascript').
+    var wb = XLSX.utils.table_to_book(document.getElementById('Softwaretable'), {sheet:"Santra Anträge", blankRows: false, raw: true});
+    var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+    function s2ab(s) {
+        var buf = new ArrayBuffer(s.length);
+        var view = new Uint8Array(buf);
+        for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
+    $(".excelexport").click(function () {
+        saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'SantraAntraege.xlsx');
+    })
 
 

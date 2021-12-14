@@ -108,7 +108,6 @@ $(document).ready(function () {
             $(".form-check-input-js").removeAttr("disabled");
         }
     });
-
     if ((location.pathname.split("/")[1]) !== "") {
         $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
     } else {
@@ -120,13 +119,18 @@ $(document).ready(function () {
     $(".link-id").click(function (event) {
         event.stopPropagation()
     });
-    $(".pdfexport").click(function () {
-        printJS({printable:'AntragDetailsWrapper',
-            type:'html',
-            header: 'Softwareantrag#" + order.orderid+" "+ order.softwarename+ "',
-            style: 'label { display: block; font-weight: 600; font-family: Arial, Helvetica, sans-serif;}; ' +
-                'span { display: inline; font-family: Arial, Helvetica, sans-serif;}; ' +
-                'p { display: inline; font-family: Arial, Helvetica, sans-serif;};'})
-    });
+    $('.pdfexport').click(function () {
+        window.frames["pdfframe"].contentWindow.focus();
+            let srcpdf =  $('#pdfframe').attr('srcpdf');
+            window.frames["pdfframe"].src=""+srcpdf;
+            const urlParams = new URLSearchParams(window.location.search);
+            const currenturlParam = urlParams.get('tsid');
+        setTimeout(function () {
+            document.title = "Softwareantrag"+currenturlParam;
+            window.frames["pdfframe"].contentWindow.print();
+    }, 1300);
+        });
+
+
 });
 

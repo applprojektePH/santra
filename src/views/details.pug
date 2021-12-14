@@ -9,6 +9,7 @@
                     for order in softwareListDetails
                         if(order.status == 10)
                             span.span-draft Entwurf
+                                i &nbsp;(Um den Antrag einreichen zu können, bitte "Antrag bearbeiten" auswählen)
                             if (admin == true)
                                 include elements/buttons-view-admin
                             else
@@ -206,6 +207,7 @@
                                 p= order.softwarewebseite
                                 label
                                     | Version der Software
+                                p= order.softwareversion
                                 label
                                     | Handelt es sich um ein Update/Änderung eines bestehenden Paketes. Wenn ja, welches?
                                 p= order.softwareupdate
@@ -246,7 +248,7 @@
                                     p= order.softwarehochschule
                             .col-md-12
                             for order in softwareListDetails
-                                h3.alert.alert-primary Lizensierung
+                                h3.alert.alert-primary Lizenzierung
                                 label
                                     | F&uuml;r welche Institution
                                 p= order.lizenzinstitution
@@ -281,6 +283,8 @@
                                 label(for='form-function')
                                     | Datum
                                 p= order.datumantrag
+                                iframe#pdfframe(srcpdf="/document.pdf?tsid="+ order.orderid frameborder='0' style='border:0;' height='0')
+
 script(type='text/javascript' src="./static/js/libs/jquery.js")                                                                                                             button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal')
 script(type='text/javascript').
     $(document).ready(function () {

@@ -165,7 +165,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                     | Pflichtfeld
                 br
                 .row
-                    .col-md-12.fields
+                    .col-md-6.fields
                         label(for='form-softwarename')
                             | Name der Software*
                         if (typeof (softwareListDetails) !== 'undefined')
@@ -175,8 +175,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                             input#form-softwarename.form-control(type='text' required='' name='softwarename')
                         .invalid-feedback
                             | Pflichtfeld
-                    .col-md-12.fields
-                        br
+                    .col-md-6.fields
                         label(for='form-softwarewebsite')
                             | Webseite der Software*
                         if (typeof (softwareListDetails) !== 'undefined')
@@ -186,10 +185,19 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                             input#form-softwarewebsite.form-control(type='text' required='' name='softwarewebseite')
                         .invalid-feedback
                             | Pflichtfeld
-                    .col-md-12.fields
+                    .col-md-6.fields
                         br
                         label.form-label(for='validationTextarea') Version der Software*
-                        span
+                        if (typeof (softwareListDetails) !== 'undefined')
+                            for order in softwareListDetails
+                                input#form-softwareversion.form-control(type='text' required='' name='softwareversion' value=order.softwareversion)
+                        else
+                            input#form-softwareversion.form-control(type='text' required='' name='softwareversion')
+                        .invalid-feedback
+                            | Pflichtfeld
+                        br
+                    .col-md-12.fields
+                        label
                             | Handelt es sich um ein Update/&Auml;nderung eines bestehenden Paketes. Wenn
                             | ja, welches?
                         if (typeof (softwareListDetails) !== 'undefined')
@@ -624,7 +632,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                 select.form-select.form-control(required='' name='lizenzkosten' filled=order.lizenzkosten)
                                     option(selected='' disabled='' value='') Auswahl
                                     option(value='Freeware') Freeware
-                                    option(value='Jährlich') J&auml;hrlich
+                                    option(value='Jährlich') Jährlich
                                     option(value='Einmalig') Einmalig
                                     option(value='Einmalig/Abo') Einmalig/Abo
                                     option(value='Person- o. Arbeitsplatzgebunden') Person- o. Arbeitsplatzgebunden
@@ -634,7 +642,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                             select.form-select.form-control(required='' name='lizenzkosten')
                                 option(selected='' disabled='' value='') Auswahl
                                 option(value='Freeware') Freeware
-                                option(value='Jährlich') J&auml;hrlich
+                                option(value='Jährlich') Jährlich
                                 option(value='Einmalig') Einmalig
                                 option(value='Einmalig/Abo') Einmalig/Abo
                                 option(value='Person- o. Arbeitsplatzgebunden') Person- o. Arbeitsplatzgebunden
@@ -961,7 +969,13 @@ script(type='text/javascript').
                 })()
                 formsubmit = false;
             }
-
         })
+
+        $('.accordion-collapse').on('shown.bs.collapse', function (e) {
+            var $panel = $(this).closest('.accordion-item');
+            $('html,body').animate({
+                scrollTop: $panel.offset().top - 120
+            }, 200);
+        });
 
     });
