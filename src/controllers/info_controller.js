@@ -1,9 +1,17 @@
 const LOGIN = require("../login");
+const mysql = require("mysql");
+const CONSTANTS = require("../libs/constants");
 module.exports = function (models) {
 
 	let page = {};
 	let CONSTANTS = require("../libs/constants");
-
+	const pool  = mysql.createPool({
+		connectionLimit : 10,
+		host            : CONSTANTS.SETTINGS.DB.HOST,
+		user            : CONSTANTS.SETTINGS.DB.USERNAME,
+		password        : CONSTANTS.SETTINGS.DB.PASSWORD,
+		database        : CONSTANTS.SETTINGS.DBNAME.NAME
+	})
 	this.main = function (req, res, next) {
 		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 		res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
@@ -18,6 +26,13 @@ module.exports = function (models) {
 		JSON.stringify(obj_user);
 		adminlog=LOGIN.admins.includes(obj_user.mail)
 		/* USER end */
+		pool.getConnection((err, connection) => {
+			if (err) throw err
+			sql1 = "INSERT INTO users (email, vorname, nachname) SELECT '"+obj_user.mail+"', '"+decodeURIComponent(obj_user.givenName)+"', '"+decodeURIComponent(obj_user.surname)+"' FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE email='"+obj_user.mail+"')";
+			connection.query(""+sql1+"",
+				(err, rows) => {
+				})
+		})
 		page.title = "Santra - Softwareantrag\n" +
 			"Pädagogische Hochschule FHNW";
 		if(CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -25,13 +40,13 @@ module.exports = function (models) {
 		else
 			page.path = "";
 		setTimeout(
-		res.render('layout_info', {
-			"vornamelog": obj_user.givenName,
-			"nachnamelog": obj_user.surname,
-			"emaillog": obj_user.mail,
-			"admin": adminlog,
-			"useridlog": LOGIN.useridlog
-		}), 500);
+			function () {
+				res.render('layout_info', {
+					"vornamelog": decodeURIComponent(obj_user.givenName),
+					"nachnamelog": decodeURIComponent(obj_user.surname),
+					"admin": adminlog
+				});
+			}, 500);
 
 	};
 

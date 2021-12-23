@@ -111,7 +111,7 @@ $(document).ready(function () {
     if ((location.pathname.split("/")[1]) !== "") {
         $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
     } else {
-        $('nav li.home-ink a').addClass('active');
+        $('nav li.home-link a').addClass('active');
     }
     $('.nav-tabs .nav-item a').on('click', function (e) {
         $(this).tab('show')

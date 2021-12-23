@@ -23,5 +23,5 @@ module.exports = function (app, models) {
     app.get('/history', controllers.historyController.main);
     app.get('/datenschutz', controllers.datenschutzController.main);
     app.get('/impressum', controllers.impressumController.main);
-    app.get('/document.pdf',controllers.pdfController.main)
+    app.get('/document.pdf',controllers.pdfController.main);
 };

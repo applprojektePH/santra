@@ -1,4 +1,4 @@
-span.service-buttons-wrapper
+span.service-buttons-wrapper.service-buttons-wrapper-viewdraft
     for order in softwareListDetails
         if(order.status == 10)
             a.btn.btn-primary.btn-sm.btn-orderedit(href="/edit?tsid=" + order.orderid class="link-id")

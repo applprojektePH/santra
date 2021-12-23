@@ -32,6 +32,7 @@ module.exports = function (models) {
         let tsID = parseInt(req.query.tsid);
         let status = parseInt(req.query.status);
         let anrede;
+        let vorname;
         let nachname;
         let email;
         let orderid;
@@ -43,6 +44,7 @@ module.exports = function (models) {
         let mailtype;
         let orderstatus;
         let statuscurrent;
+        let anredeMail;
         if(reqBody !=='undefined'){
            statuschange = reqBody.statuschange;
            mailtext = reqBody.mailtext;
@@ -66,6 +68,12 @@ module.exports = function (models) {
                     (err, rows) => {
                     })
             }
+            if ((!isNaN(statuschange))) {
+                sql5 = 'UPDATE orders SET orderstatus=' + orderstatus + ' WHERE orderid IN (SELECT ' + tsID + ' FROM orders)';
+                connection.query("" + sql5 + "",
+                    (err, rows) => {
+                    })
+            }
             //nur für Entwurf einreichen
             if ((!isNaN(status))) {
                 sql4 = 'UPDATE orders SET status=' + status + ' WHERE orderid IN (SELECT ' + tsID + ' FROM orders)';
@@ -79,6 +87,7 @@ module.exports = function (models) {
                     (err, rows) => {
                     })
             }
+
             connection.query("" + sql1 + "", (err, rows) => {
                 connection.release() // return the connection to pool
                 if (!err) {
@@ -144,6 +153,7 @@ module.exports = function (models) {
                         }
                         // Add object into array
                         anrede = rows[i].anrede;
+                        vorname = rows[i].vorname;
                         nachname = rows[i].nachname;
                         email = rows[i].email;
                         orderid = rows[i].orderid;
@@ -152,6 +162,12 @@ module.exports = function (models) {
                     }
                 } else {
                     console.log(err)
+                }
+                if (anrede == "Neutrale Anrede"){
+                    anredeMail = vorname +' '+nachname;
+                }
+                else{
+                    anredeMail = anrede +' '+nachname;
                 }
                 if ((mailtype == 2) && (typeof statuschange != 'undefined') && (typeof email != 'undefined')) {
                     let transport2 = nodemailer.createTransport({
@@ -170,7 +186,6 @@ module.exports = function (models) {
                         bcc: 'applprojekte.ph@fhnw.ch',
                         // Subject of the message
                         subject: 'Santra: Antrag Nummer #' + orderid + '',
-
                         // plaintext body
                         text: mailtext,
                         // HTML body
@@ -203,13 +218,13 @@ module.exports = function (models) {
                         subject: "Santra: Antrag Nummer #" + orderid + " in bearbeitung",
 
                         // plaintext body
-                        text: 'Guten Tag ' + anrede + ' ' + nachname + ', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' nach der Anmeldung. \n' +
+                        text: 'Guten Tag ' + anredeMail + ', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' nach der Anmeldung. \n' +
                             '\n' +
                             'Vielen Dank und freundliche Grüsse \n' +
                             'Ihr ApplProjekte Supportteam \n' +
                             'n|w\n',
                         // HTML body
-                        html: '<p><span>Guten Tag ' + anrede + ' ' + nachname + '</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
+                        html: '<p><span>Guten Tag ' + anredeMail + '</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
                             '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' nach der Anmeldung.' +
                             '</br></br>Vielen Dank und freundliche Grüsse' +
                             '</br>Ihr ApplProjekte Supportteam ' +
@@ -249,8 +264,10 @@ module.exports = function (models) {
                     res.render('layout_details', {
                         "softwareListDetails": softwareListDetails,
                         "statuscurrent": statuscurrent,
-                        "vornamelog": obj_user.givenName,
-                        "nachnamelog": obj_user.surname,
+                        "orderstatus": orderstatus,
+                        "vornamelog": decodeURIComponent(obj_user.givenName),
+                        "nachnamelog": decodeURIComponent(obj_user.surname),
+                        "anredeMail": anredeMail,
                         "admin": adminlog
                     });
                 }, 500);

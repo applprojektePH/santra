@@ -63,15 +63,25 @@ button svg {
         position: sticky;
         top: 62px;
         background: #fff;
-        padding: 15px 0px 15px;
         z-index: 200;
+        display: block;
     }
-
-
+@media (max-width: 1147px) {
+    .service-buttons-wrapper {
+        top: 105px;
+    }
+}
+@media (max-width: 992px) {
+    .service-buttons-wrapper {
+        top: 49px;
+    }
+    .hidden-sm{
+        display: none;
+    }
+}
 nav {
     width: 100%;
 }
-
 @media (min-width: 992px) {
     .navbar-nav .nav-item:first-child {
         padding: 0.05rem 1rem 0rem;
@@ -133,15 +143,11 @@ div.dropdown-menu {
 }
 
 @media only screen and (max-width: 992px) {
-    header .navbar-toggler {
-        margin-top: 4px;
-    }
 
     .navbar-brand {
         height: 100%;
         max-width: 75px;
     }
-
     .navbar-brand img {
         height: 36px;
         width: auto;
@@ -153,20 +159,34 @@ div.dropdown-menu {
     }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
     ul#user-state-menu {
         margin-top: 0px;
     }
+    .table-works td:before{
+        max-width: 0;
+    }
+    .service-buttons-wrapper button, .service-buttons-wrapper a{
+        height: 55px;
+        padding: 15px 10px;
+        margin-bottom: 5px;
+    }
 }
-
 @media only screen and (max-width: 768px) {
     .service-buttons-wrapper button {
         display: inline-block;
-        margin: 0px 5px 15px 0px;
         width: 100%;
         max-width: 200px;
     }
-
+    .service-buttons-wrapper-viewdraft .floatright{
+        margin-left: 0;
+    }
+    .service-buttons-wrapper-admin .floatright{
+        margin-left: 0;
+    }
+    .service-buttons-wrapper-history .floatright{
+        margin-left: 0;
+    }
     .table-works button {
         display: inline-block;
         margin: 0px 5px 15px 0px;
@@ -179,7 +199,18 @@ div.dropdown-menu {
     }
 
 }
-
+@media only screen and (max-width: 767px) {
+    .service-buttons-wrapper button, .service-buttons-wrapper a {
+        width: 100%;
+        max-width: 100%;
+    }
+    form label{
+        margin-top: 15px;
+    }
+    form br{
+        display: none;
+    }
+}
 .selectSmallInline {
     max-width: 100px;
     display: inline-block;
@@ -244,14 +275,15 @@ div.dropdown-menu {
     z-index: 1;
 }
 
-.table-works th.minwidth {
+.table-works th.minwidth, .table-history th.minwidth {
     min-width: 170px;
 }
-
+.table-history th, .table-history td{
+    font-size: 15px;
+}
 form .workdetails-labelcol input {
     display: inline;
 }
-
 form label {
     display: inherit;
     margin-right: 15px;
@@ -346,7 +378,10 @@ form label {
 .js .box__file {
     display: none;
 }
-
+.table-works td{
+    word-break: keep-all;
+    white-space: nowrap;
+}
 .table-works button {
     display: block;
     width: 100%;
@@ -377,30 +412,29 @@ and also iPads specifically.
 (min-device-width: 768px) and (max-device-width: 1024px) {
 
     /* Force table to not be like tables anymore */
-    .table-works table, .table-works thead, .table-works tbody, .table-works th, .table-works td, .table-works tr {
+    .table-works table, .table-works thead, .table-works tbody, .table-works th, .table-works td, .table-works tr, .table-history table, .table-history thead, .table-history tbody, .table-history th, .table-history td, .table-history tr {
         display: block;
     }
 
     /* Hide table headers (but not display: none;, for accessibility) */
-    .table-works thead tr {
+    .table-works thead tr, .table-history thead tr{
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
 
-    .table-works tr {
+    .table-works tr, .table-history tr {
         border: 1px solid #ccc;
     }
 
-    .table-works td {
+    .table-works td, .table-history td {
         /* Behave  like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-
     }
 
-    .table-works td:before {
+    .table-works td:before, .table-history td:before {
         /* Now like a table header */
         position: absolute;
         /* Top/left values mimic padding */
@@ -410,18 +444,23 @@ and also iPads specifically.
         padding-right: 10px;
         white-space: nowrap;
     }
-    .table-works.table td{
+    .table-works.table td, .table-history.table td{
         min-height: 45px;
     }
     .table-works.table td, .table-works.table th {
-        padding-left: 35%;
+        padding-left: 42%;
+        overflow: auto;
     }
-
+     .table-history.table td, .table-history.table th {
+        padding-left: 15%;
+        overflow: auto;
+    }
     /*
 Label the data
 */
-    .table-works td:before {
+    .table-works td:before, .table-history td:before {
         font-weight: 700;
+        width: 0px;
     }
 
     .table-works td:nth-of-type(1):before {
@@ -447,11 +486,22 @@ Label the data
     .table-works td:nth-of-type(6):before {
         content: "Status";
     }
-    table.table-works td, table.table-works th{
-        font-size: 14px;
+    .table-history td:nth-of-type(1):before {
+        content: "Datum";
+    }
+    .table-history td:nth-of-type(2):before {
+        content: "Eregnis";
+    }
+    .table-history td:nth-of-type(3):before {
+        content: "Nachricht";
+    }
+    .table-history td:nth-of-type(4):before {
+        content: "Absender";
     }
 }
-
+.table-history-wrapper{
+    overflow: auto;
+}
 .dataTable a {
     text-decoration: underline;
 }
@@ -471,14 +521,12 @@ Label the data
     border-bottom: 1px solid #f4f4f4;
     margin-bottom: 10px;
 }
-
 header {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 300;
 }
-
 .box-tools {
     position: absolute;
     right: 10px;
@@ -602,7 +650,6 @@ a.morelink {
         margin-left: 0px;
         clear: both;
     }
-
     .hidden-xs {
         display: none !important;
     }
@@ -656,12 +703,31 @@ table.table-works thead .nosort {
     cursor: default !important;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1200px) {
     .floatright {
         float: right;
     }
 }
+@media only screen and (max-width: 1200px) {
+    .floatright {
+        margin-left: 5px;
+    }
+    .service-buttons-wrapper-admin .floatright{
+        margin-left: 0;
+    }
+    .hidden-md {
+        display: none !important;
+    }
+}
 
+@media only screen and (max-width: 768px) {
+    .service-buttons-wrapper-edit .floatright, .service-buttons-wrapper-editdraft .floatright, .service-buttons-wrapper-form .floatright{
+        margin-left: 0px;
+    }
+}
+.modal-content{
+    padding-bottom: 15px;
+}
 .text-small-char {
     float: right;
     position: relative;
@@ -797,6 +863,11 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     color: #7d7d7d;
     background: none;
 }
+@media (max-width: 992px) {
+    .progressbar li{
+        width: 25%;
+    }
+}
 .progressbar li:last-child {
     cursor: default;
 }
@@ -811,9 +882,8 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     text-align: center;
     margin: 0 auto 10px auto;
     border-radius: 50%;
-    background-color: white;
+    background-color: #fff;
 }
-
 .progressbar li:after {
     width: 100%;
     height: 2px;
@@ -824,19 +894,15 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
     left: -50%;
     z-index: -1;
 }
-
 .progressbar li:first-child:after {
     content: none;
 }
-
 .progressbar li.active, .progressbar li.active a {
     color: #55b776;
 }
-
 .progressbar li.active:before {
     border-color: #55b776;
 }
-
 .progressbar li.active + li:after {
     background-color: #55b776;
 }
@@ -856,6 +922,7 @@ table.dataTable tbody td:last-child, table.dataTable thead tr th:last-child {
 .form-group-view-wrapper label {
     font-weight: 700;
     padding-left: 15px;
+    display: block;
 }
 
 .form-group-view-wrapper span {
@@ -1072,13 +1139,28 @@ a:hover {
 }
 
 #user {
+    font-size: .875rem !important;
+    font-weight: 400;
     border: none;
+}
+#user span, #user label {
+    color: #000;
 }
 
 #user-state-menu > #user:first-child {
-    margin-top: 2.5px;
+    margin-top: 6.5px;
 }
-
+#userlogout{
+    margin-left: 5px;
+}
+@media (max-width: 992px) {
+    #user-state-menu > #user:first-child{
+        margin-left: 17px;
+    }
+    #userlogout {
+        margin-left: 2px;
+    }
+}
 .modal-footer .btn-primary .btn-primary:not(:focus), .modal-footer .btn-primary.btn-primary:not(:active), .modal-footer a.btn-primary .btn-primary:not(:focus), .modal-footer a.btn-primary.btn-primary:not(:active) {
     border: 2px solid transparent;
 }

@@ -29,7 +29,6 @@ module.exports = function (models) {
         let tsID = parseInt(req.query.tsid);
         let status = req.body.status;
         let sendorder;
-        console.log(req.body);
         pool.getConnection((err, connection) => {
             let institut = req.body.institut;
             let professur = req.body.professur;
@@ -68,8 +67,14 @@ module.exports = function (models) {
             let bemerkungen = req.body.bemerkungen;
             let notizen = req.body.notizen;
             let softwareListDetails = [];
-
+            let anredeMail;
             if (status == 1) {
+                if (anrede == "Neutrale Anrede"){
+                    anredeMail = req.body.vorname +' '+req.body.nachname;
+                }
+                else{
+                    anredeMail = anrede +' '+req.body.nachname;
+                }
                 sql = 'UPDATE orders SET institut="'+institut+'", professur="'+professur+'", anrede="'+anrede+'", nachname="'+nachname+'", vorname="'+vorname+'", email="'+email+'", funktion="'+funktion+'", studiengang="'+studiengang+'", modulanlass="'+modulanlass+'", szenario="'+szenario+'", softwarename="'+softwarename+'", softwarewebseite="'+softwarewebseite+'", softwareversion="'+softwareversion+'", softwareupdate="'+softwareupdate+'", softwareupdatewelches="'+softwareupdatewelches+'", lizenzenanzahl="'+lizenzenanzahl+'", nutzeranzahl="'+nutzeranzahl+'", nutzungsdauer="'+nutzungsdauer+'", nutzungsdauertext="'+nutzungsdauertext+'", betriebssystem="'+betriebssystem+'", browser="'+browser+'", softwareverfuegung="'+softwareverfuegung+'", softwareinteresse="'+softwareinteresse+'", softwareinstitut="'+softwareinstitut+'", softwarehochschinteresse="'+softwarehochschinteresse+'", softwarehochschule="'+softwarehochschule+'", lizenzinstitution="'+lizenzinstitution+'", lizenzart="'+lizenzart+'", lizenzkosten="'+lizenzkosten+'", vergleichbarkeit="'+vergleichbarkeit+'", support="'+support+'", cloud="'+cloud+'", cloudwo="'+cloudwo+'", productowner="'+productowner+'", bemerkungen="'+bemerkungen+'", notizen="'+notizen+'", status="'+status+'" WHERE orderid="'+tsID+'"'
                 sendorder = 1;
                 let transport2 = nodemailer.createTransport({
@@ -85,19 +90,19 @@ module.exports = function (models) {
                     from: 'Santra <applprojekte.ph@fhnw.ch>',
 
                     // Comma separated list of recipients
-                    to: '+nachname+ <'+obj_user.mail+'>',
+                    to: email,
 
                     // Subject of the message
                     subject: "Santra: Antrag Nummer #"+tsID+" in bearbeitung",
 
                     // plaintext body
-                    text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+tsID+' nach der Anmeldung. \n' +
+                    text: 'Guten Tag '+anredeMail+', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+tsID+' nach der Anmeldung. \n' +
                         '\n' +
                         'Vielen Dank und freundliche Grüsse \n' +
                         'Ihr ApplProjekte Supportteam \n' +
                         'n|w\n',
                     // HTML body
-                    html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
+                    html:'<p><span>Guten Tag '+anredeMail+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
                         '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+tsID+' nach der Anmeldung.' +
                         '</br></br>Vielen Dank und freundliche Grüsse' +
                         '</br>Ihr ApplProjekte Supportteam ' +
@@ -192,8 +197,8 @@ module.exports = function (models) {
                     res.render('layout_edited', {
                         "softwareListDetails": softwareListDetails,
                         "status": status,
-                        "vornamelog": obj_user.givenName,
-                        "nachnamelog": obj_user.surname,
+                        "vornamelog": decodeURIComponent(obj_user.givenName),
+                        "nachnamelog": decodeURIComponent(obj_user.surname),
                         "emaillog": obj_user.mail,
                         "sendorder": sendorder,
                         "admin": adminlog

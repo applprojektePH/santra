@@ -65,15 +65,17 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                     option(selected='' disabled='' value='') Auswahl
                                                     option(value="Frau") Frau
                                                     option(value="Herr") Herr
+                                                    option(value="Neutrale Anrede") Neutrale Anrede
                                                 .invalid-feedback
-                                                    | Wählen Sie eine option
+                                                    | Pflichtfeld
                                         else
                                             select.form-select.form-control.custom-control-select(required='' name='anrede')
                                                 option(selected='' disabled='' value='') Auswahl
                                                 option(value="Frau") Frau
                                                 option(value="Herr") Herr
+                                                option(value="Neutrale Anrede") Neutrale Anrede
                                             .invalid-feedback
-                                                | Wählen Sie eine option
+                                                | Pflichtfeld
 
                                 .col-md-4.fields
                                     label(for='form-author-firstname')
@@ -321,7 +323,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                             | eigene Eingabe
                                     .collapse.inputHide
                                         br
-                                        input#form-author-name.form-control(type='text' name='nutzungsdauertext' placeholder='Nutzungsdauer' value=order.nutzungsdauertext)
+                                        input#form-author-name.form-control(type='text' name='nutzungsdauertext' value=order.nutzungsdauertext)
                                         .invalid-feedback
                                             | Pflichtfeld
                             else
@@ -334,7 +336,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                         | eigene Eingabe
                                 .collapse.inputHide
                                     br
-                                    input#form-author-name.form-control(type='text' name='nutzungsdauertext' placeholder='Nutzungsdauer')
+                                    input#form-author-name.form-control(type='text' name='nutzungsdauertext' )
                                 .invalid-feedback
                                     | Pflichtfeld
                 br
@@ -714,7 +716,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                     | Pflichtfeld
                                             .collapse.inputHide
                                                 .card.card-body
-                                                    input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo)
+                                                    input#form-safety.form-control(type='text' name="cloudwo" value=order.cloudwo)
                                     else if (order.cloud == "Nein")
                                         div.custom-radio-wrapper(filled=order.cloud)
                                             .custom-control.custom-radio
@@ -726,7 +728,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                 .invalid-feedback
                                                     | Pflichtfeld
                                             .card.card-body
-                                                input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert" value=order.cloudwo)
+                                                input#form-safety.form-control(type='text' name="cloudwo" value=order.cloudwo)
                                     else
                                         .custom-control.custom-radio
                                             input#customRadioDisabled7.custom-control-input(type='radio' name='cloud' value="Ja" required='')
@@ -738,7 +740,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                                 | Pflichtfeld
                                         .collapse.inputHide
                                             .card.card-body
-                                                input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert")
+                                                input#form-safety.form-control(type='text' name="cloudwo")
 
 
                             else
@@ -752,7 +754,7 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                                         | Pflichtfeld
                                 .collapse.inputHide
                                     .card.card-body
-                                        input#form-safety.form-control(type='text' name="cloudwo" placeholder="wo werden Daten gespeichert")
+                                        input#form-safety.form-control(type='text' name="cloudwo")
                         .col-md-6.fields
                             .form-group
                                 br
@@ -973,9 +975,19 @@ script(type='text/javascript').
 
         $('.accordion-collapse').on('shown.bs.collapse', function (e) {
             var $panel = $(this).closest('.accordion-item');
-            $('html,body').animate({
-                scrollTop: $panel.offset().top - 120
-            }, 200);
+            let offset;
+            if ($(window).width() > 992) {
+                offset = 120
+            }
+            else if (($(window).width() < 992) && ($(window).width() > 768)) {
+                offset = 150
+            } else if ($(window).width() < 768)  {
+                offset = 300
+            }
+                $('html,body').animate({
+                    scrollTop: $panel.offset().top - offset
+                }, 200);
+
         });
 
     });

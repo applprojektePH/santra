@@ -1,4 +1,4 @@
-span.service-buttons-wrapper
+span.service-buttons-wrapper.service-buttons-wrapper-admin
     for order in softwareListDetails
         a.btn.btn-primary.btn-sm.btn-orderedit(href="/edit?tsid="+ order.orderid class="link-id")
                 | Antrag bearbeiten
@@ -21,14 +21,12 @@ span.service-buttons-wrapper
                         for order in softwareListDetails
                             a.btn.btn-primary.btn-sm.btn-remove.link-id-delete(href="#")
                                 | Antrag l&ouml;schen
-        a(href='/user')
-            button.btn.btn-primary.btn-sm.floatright(type='button')
-                | Zur&uuml;ck zu
-                | allen Antr&auml;gen
-                i.fas.fa-search
         for order in softwareListDetails
-            a(href="/history?tsid="+ order.orderid class="link-id")
-                button.btn.btn-primary.btn-sm
+            a(href="/history?tsid="+ order.orderid class="link-id").btn.btn-primary.btn-sm
                     | Detallierter Verlauf der Bestellung
                     i.fas.fa-history
+        a(href='/user').btn.btn-primary.btn-sm.floatright
+            | Zur&uuml;ck zu
+            | allen Antr&auml;gen
+            i.fas.fa-search
 br

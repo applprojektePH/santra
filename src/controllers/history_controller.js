@@ -83,11 +83,10 @@ module.exports = function (models) {
                 function(){
                     res.render('layout_history', {
                         "softwareListHistory": softwareListHistory, "orderid": tsID, "orderstatus":status,
-                        "vornamelog": obj_user.givenName,
-                        "nachnamelog": obj_user.surname,
+                        "vornamelog": decodeURIComponent(obj_user.givenName),
+                        "nachnamelog": decodeURIComponent(obj_user.surname),
                         "emaillog": obj_user.mail,
-                        "admin": adminlog,
-                        "useridlog": LOGIN.useridlog
+                        "admin": adminlog
                     });
                 }, 500);
 

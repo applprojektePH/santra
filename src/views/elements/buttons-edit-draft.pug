@@ -1,4 +1,4 @@
-span.service-buttons-wrapper
+span.service-buttons-wrapper.service-buttons-wrapper-editdraft
         button#buttonsubmitsavechanges.btn.btn-primary.btn-sm(type='submit')
                 | &Auml;nderungen speichern
                 i.fas.fa-save
@@ -21,11 +21,9 @@ span.service-buttons-wrapper
                         a.btn.btn-primary.btn-sm.link-edit-back
                                 | Änderungen verwerfen
 
-        a(href="/")
-            button.btn.btn-primary.btn-sm.floatright(type='button' data-toggle='modal' data-target='#removeModalBack')
+        a.btn.btn-primary.btn-sm.hidden-sm.floatright(href="/" type='button' data-toggle='modal' data-target='#removeModalBack')
                 | Zur&uuml;ck zur Startseite
                 i.fas.fa-search
-
 // Modal
 #removeModalBack.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
     .modal-dialog.modal-dialog-centered(role='document')
@@ -40,8 +38,7 @@ span.service-buttons-wrapper
                 | Formulardaten werden nicht gespeichert.
             .modal-footer
                 button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Abbrechen
-                a(href='/')
-                    button.btn.btn-primary.btn-sm(type='button') OK
+                a(href='/').btn.btn-primary.btn-sm(type='button') OK
 // Modal
 #countModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')
     .modal-dialog.modal-dialog-centered(role='document')

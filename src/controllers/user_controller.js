@@ -78,8 +78,9 @@ module.exports = function (models) {
             let status = req.body.status;
             let softwareList = [];
             let orderidformail;
-
-console.log(req.body);
+            let orderstatus = 0;
+            let ordercurrent;
+            let anredeMail;
 if (url=="/submit-form"){
     if (adminlog==true){
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") OR (email <> "'+obj_user.mail+'" AND status <> 10) ORDER BY orderid DESC';
@@ -87,7 +88,7 @@ if (url=="/submit-form"){
     else{
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") ORDER BY orderid DESC';
     }
-    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareversion, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, notizen, status) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareversion+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+notizen+"', '"+status+"')";
+    sql2 = "INSERT INTO orders (institut, professur, anrede, vorname, nachname, email, funktion, studiengang, modulanlass, szenario, softwarename, softwarewebseite, softwareversion, softwareupdate, softwareupdatewelches, lizenzenanzahl, nutzeranzahl, nutzungsdauer, nutzungsdauertext, betriebssystem, browser, softwareverfuegung, softwareinteresse, softwareinstitut, softwarehochschinteresse, softwarehochschule, lizenzinstitution, lizenzart, lizenzkosten, vergleichbarkeit, support, cloud, cloudwo, productowner, bemerkungen, datumantrag, notizen, status, orderstatus) VALUES ( '"+institut+"', '"+professur+"','"+anrede+"', '"+vorname+"','"+nachname+"', '"+email+"', '"+funktion+"', '"+studiengang+"', '"+modulanlass+"', '"+szenario+"', '"+softwarename+"', '"+softwarewebseite+"', '"+softwareversion+"', '"+softwareupdate+"', '"+softwareupdatewelches+"', '"+lizenzenanzahl+"', '"+nutzeranzahl+"', '"+nutzungsdauer+"', '"+nutzungsdauertext+"', '"+betriebssystem+"', '"+browser+"', '"+softwareverfuegung+"', '"+softwareinteresse+"', '"+softwareinstitut+"', '"+softwarehochschinteresse+"', '"+softwarehochschule+"', '"+lizenzinstitution+"', '"+lizenzart+"', '"+lizenzkosten+"', '"+vergleichbarkeit+"', '"+support+"', '"+cloud+"', '"+cloudwo+"', '"+productowner+"', '"+bemerkungen+"', '"+datumantrag+"', '"+notizen+"', '"+status+"', '"+orderstatus+"')";
     connection.query(""+sql2+"",
         (err, rows) => {
             //  connection.release() // return the connection to pool
@@ -116,6 +117,24 @@ if (url=="/submit-form"){
                                     statuscurrent = 'Antrag Entscheid';
                                     break;
                             }
+                            switch (rows[i].orderstatus) {
+                                case 1:
+                                    statuscurrent = 'Antrag genehmigt';
+                                    break;
+                                case 2:
+                                    statuscurrent = 'Antrag abgelehnt';
+                                    break;
+                                case 3:
+                                    ordercurrent = 'Antrag zu Gremium';
+                                    break;
+                                case 4:
+                                    statuscurrent = 'Antrag vom Gremium genehmigt';
+                                    break;
+                                case 5:
+                                    statuscurrent = 'Antrag vom Gremium abgelehnt';
+                                    break;
+                            }
+
                             // Create an object to save current row's data
                             let order = {
                                 'orderid': rows[i].orderid,
@@ -164,6 +183,12 @@ if (url=="/submit-form"){
                     } else {
                         console.log(err)
                     }
+                    if (anrede == "Neutrale Anrede"){
+                        anredeMail = vorname +' '+nachname;
+                    }
+                    else{
+                        anredeMail = anrede +' '+nachname;
+                    }
                     if (req.body.status!=='10'){
                         let transport = nodemailer.createTransport({
                             host: "lmailer.fhnw.ch",
@@ -180,19 +205,19 @@ if (url=="/submit-form"){
 
                             // sender info
                             from: 'Santra <applprojekte.ph@fhnw.ch>',
-                            to: obj_user.mail,
+                            to: email,
                             // Subject of the message
                             subject: 'Santra: Antrag Nummer #'+orderidformail+'',
 
                             // plaintext body
-                            text: 'Guten Tag '+anrede+' '+nachname+', Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderidformail+' nach der Anmeldung. \n' +
+                            text: 'Guten Tag '+anredeMail+', Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderidformail+' nach der Anmeldung. \n' +
                                 '\n' +
                                 'Vielen Dank und freundliche Grüsse \n' +
                                 'Ihr ApplProjekte Supportteam \n' +
                                 'n|w\n',
 
                             // HTML body
-                            html:'<p><span>Guten Tag '+anrede+' '+nachname+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
+                            html:'<p><span>Guten Tag '+anredeMail+'</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
                                 '</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid='+orderidformail+' nach der Anmeldung.' +
                                 '</br></br>Vielen Dank und freundliche Grüsse' +
                                 '</br>Ihr ApplProjekte Supportteam ' +
@@ -229,6 +254,13 @@ if (url=="/submit-form"){
         })
 }
 else if (url == "/user"){
+    pool.getConnection((err, connection) => {
+        if (err) throw err
+        sql2 = "INSERT INTO users (email, vorname, nachname) SELECT '"+obj_user.mail+"', '"+decodeURIComponent(obj_user.givenName)+"', '"+decodeURIComponent(obj_user.surname)+"' FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE email='"+obj_user.mail+"')";
+        connection.query(""+sql2+"",
+            (err, rows) => {
+            })
+    })
     if (adminlog==true){
         sql1 = 'SELECT * FROM orders WHERE (email = "'+obj_user.mail+'") OR (email <> "'+obj_user.mail+'" AND status <> 10) ORDER BY orderid DESC';
     }
@@ -260,6 +292,23 @@ else if (url == "/user"){
                             break;
                         case 5:
                             statuscurrent = 'Antrag abgelehnt';
+                            break;
+                    }
+                    switch (rows[i].orderstatus) {
+                        case 1:
+                            statuscurrent = 'Antrag genehmigt';
+                            break;
+                        case 2:
+                            statuscurrent = 'Antrag abgelehnt';
+                            break;
+                        case 3:
+                            ordercurrent = 'Antrag zu Gremium';
+                            break;
+                        case 4:
+                            statuscurrent = 'Antrag vom Gremium genehmigt';
+                            break;
+                        case 5:
+                            statuscurrent = 'Antrag vom Gremium abgelehnt';
                             break;
                     }
                     let order = {
@@ -315,8 +364,8 @@ else if (url == "/user"){
                     res.render('layout_user', {
                         "softwareList": softwareList,
                         "useridlog": LOGIN.useridlog,
-                        "vornamelog": obj_user.givenName,
-                        "nachnamelog": obj_user.surname,
+                        "vornamelog": decodeURIComponent(obj_user.givenName),
+                        "nachnamelog": decodeURIComponent(obj_user.surname),
                         "emaillog": obj_user.mail,
                         "admin": adminlog
                     });

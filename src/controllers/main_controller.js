@@ -2,7 +2,6 @@ const mysql = require("mysql");
 const CONSTANTS = require("../libs/constants");
 const LOGIN = require("../login");
 module.exports = function (models) {
-    //const LOGIN = require("../login");
     let page = {};
     let CONSTANTS = require("../libs/constants");
     const pool = mysql.createPool({
@@ -30,24 +29,23 @@ module.exports = function (models) {
         adminlog = LOGIN.admins.includes(obj_user.mail)
         /* USER end */
 
-        // if(accesslog==true){
-        // 	pool.getConnection((err, connection) => {
-        // 		if (err) throw err
-        // 		console.log('connected as id ' + connection.threadId)
-        // 		//sql1 = "INSERT INTO users (id, email, vorname, nachname) SELECT (obj_user.mail, obj_user.givenName) FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE email=obj_user.mail)';
-        // 		sql1 = "INSERT IGNORE INTO users ( email, vorname, nachname) SET ( '"+obj_user.mail+"', '"+obj_user.givenName+"', '"+obj_user.surname+"')";
-        // 		connection.query(""+sql1+"",
-        // 			(err, rows) => {
-        // 			})
-        // 	})
-        // }
+        if(accesslog==true){
+        	pool.getConnection((err, connection) => {
+        		if (err) throw err
+
+                sql1 = "INSERT INTO users (email, vorname, nachname) SELECT '"+obj_user.mail+"', '"+decodeURIComponent(obj_user.givenName)+"', '"+decodeURIComponent(obj_user.surname)+"' FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE email='"+obj_user.mail+"')";
+                connection.query(""+sql1+"",
+        			(err, rows) => {
+        			})
+        	})
+        }
         page.title = "Santra - Softwareantrag\n" +
             "Pädagogische Hochschule FHNW";
         setTimeout(
             function () {
                 res.render('layout', {
-                    "vornamelog": obj_user.givenName,
-                    "nachnamelog": obj_user.surname,
+                    "vornamelog": decodeURIComponent(obj_user.givenName),
+                    "nachnamelog": decodeURIComponent(obj_user.surname),
                     "admin": adminlog,
                     "access": accesslog
                 });

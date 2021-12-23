@@ -88,8 +88,8 @@ module.exports = function (models) {
             setTimeout(
                 function(){
                     res.render('layout_form-filled', {
-                        "vornamelog": obj_user.givenName,
-                        "nachnamelog": obj_user.surname,
+                        "vornamelog": decodeURIComponent(obj_user.givenName),
+                        "nachnamelog": decodeURIComponent(obj_user.surname),
                         "emaillog": obj_user.mail,
                         "admin": adminlog,
                         "softwareListDetails": softwareListDetails

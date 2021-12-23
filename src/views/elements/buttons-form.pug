@@ -1,4 +1,4 @@
-span.service-buttons-wrapper
+span.service-buttons-wrapper.service-buttons-wrapper-form
     button#buttonsubmitformdraft.submitformbtn.btn.btn-primary.btn-sm(type='submit')
         | &Auml;nderungen speichern (Entwurf)
         i.fas.fa-save
@@ -19,7 +19,7 @@ span.service-buttons-wrapper
                     button.btn.btn-secondary.btn-sm(type='button' data-bs-dismiss='modal') Abbrechen
                     a(href="/form").btn.btn-primary.btn-sm.btn-remove
                         |  Daten l&ouml;schen
-    button.btn.btn-primary.btn-sm.floatright(type='button' data-bs-toggle='modal' data-bs-target='#removeModalBack')
+    button.btn.btn-primary.btn-sm.floatright.hidden-sm(type='button' data-bs-toggle='modal' data-bs-target='#removeModalBack')
         | Zur&uuml;ck zur Startseite
         i.fas.fa-search
     #removeModalBack.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalCenterTitle' aria-hidden='true')

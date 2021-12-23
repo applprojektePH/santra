@@ -24,8 +24,8 @@ module.exports = function (models) {
         setTimeout(
             function () {
                 res.render('layout_impressum', {
-                    "vornamelog": obj_user.givenName,
-                    "nachnamelog": obj_user.surname
+                    "vornamelog": decodeURIComponent(obj_user.givenName),
+                    "nachnamelog": decodeURIComponent(obj_user.surname)
                 });
             }, 500);
 

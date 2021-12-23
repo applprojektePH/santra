@@ -43,13 +43,7 @@ module.exports = function (models) {
 		let mailtype;
 		let orderstatus;
 		let statuscurrent;
-		if(reqBody !=='undefined'){
-			statuschange = reqBody.statuschange;
-			mailtext = reqBody.mailtext;
-			datetime = reqBody.datetime;
-			mailtype = reqBody.mailtype;
-			orderstatus = reqBody.orderstatus;
-		}
+
 		page.title = "Santra - Softwareantrag\n" +
 			"Pädagogische Hochschule FHNW";
 		if (CONSTANTS.SETTINGS.WEB.SUB_PATH)
@@ -60,46 +54,10 @@ module.exports = function (models) {
 			if (err) throw err
 			let softwareListDetails = [];
 			sql1 = 'SELECT * FROM orders WHERE ("' + obj_user.mail + '" IN (SELECT email FROM users) AND orderid IN (SELECT ' + tsID + ' FROM orders))';
-			if ((!isNaN(statuschange))) {
-				sql4 = 'UPDATE orders SET status=' + statuschange + ' WHERE orderid IN (SELECT ' + tsID + ' FROM orders)';
-				connection.query("" + sql4 + "",
-					(err, rows) => {
-					})
-			}
-			//nur für Entwurf einreichen
-			if ((!isNaN(status))) {
-				sql4 = 'UPDATE orders SET status=' + status + ' WHERE orderid IN (SELECT ' + tsID + ' FROM orders)';
-				connection.query("" + sql4 + "",
-					(err, rows) => {
-					})
-			}
-			if ((!isNaN(orderid)) || (!isNaN(datetime)) || (!isNaN(mailtype)) || (!isNaN(mailtext) || (!isNaN(orderstatus)))) {
-				sql3 = "INSERT INTO history (orderid, datetime, mailuser, mailtype, mailtext, orderstatus) VALUES ( '" + tsID + "', '" + datetime + "', '" + obj_user.mail + "', '" + mailtype + "', '" + mailtext + "', '" + orderstatus + "')";
-				connection.query("" + sql3 + "",
-					(err, rows) => {
-					})
-			}
 			connection.query("" + sql1 + "", (err, rows) => {
 				connection.release() // return the connection to pool
 				if (!err) {
 					for (let i = 0; i < rows.length; i++) {
-						switch (rows[i].status) {
-							case 1:
-								statuscurrent = 'Antrag Entscheid';
-								break;
-							case 2:
-								statuscurrent = 'Antrag Entscheid';
-								break;
-							case 3:
-								statuscurrent = 'Antrag Entscheid';
-								break;
-							case 4:
-								statuscurrent = 'Antrag genehmigt';
-								break;
-							case 5:
-								statuscurrent = 'Antrag abgelehnt';
-								break;
-						}
 						// Create an object to save current row's data
 						let order = {
 							'orderid': rows[i].orderid,
@@ -153,95 +111,6 @@ module.exports = function (models) {
 				} else {
 					console.log(err)
 				}
-				if ((mailtype == 2) && (typeof statuschange != 'undefined') && (typeof email != 'undefined')) {
-					let transport2 = nodemailer.createTransport({
-						host: "lmailer.fhnw.ch",
-						secure: false, // use SSL
-						port: 25,
-						tls: {
-							rejectUnauthorized: false
-						}
-					});
-					let messageSender2 = {
-						// sender info
-						from: 'Santra <applprojekte.ph@fhnw.ch>',
-						// Comma separated list of recipients
-						to: email, //NICHT ABÄNDERN EMAIL
-						bcc: 'applprojekte.ph@fhnw.ch',
-						// Subject of the message
-						subject: 'Santra: Antrag Nummer #' + orderid + '',
-
-						// plaintext body
-						text: mailtext,
-						// HTML body
-						html: '' + mailtext
-					};
-					transport2.sendMail(messageSender2, function (error) {
-						if (error) {
-							console.log('Error occured');
-							console.log(error.message);
-							return;
-						}
-						transport2.close();
-					});
-				} else if ((status == 1) && (typeof email != 'undefined')) {
-					let transport2 = nodemailer.createTransport({
-						host: "lmailer.fhnw.ch",
-						secure: false, // use SSL
-						port: 25,
-						tls: {
-							rejectUnauthorized: false
-						}
-					});
-					let messageSender2 = {
-						// sender info
-						from: 'Santra <applprojekte.ph@fhnw.ch>',
-
-						// Comma separated list of recipients
-						to: email, //NICHT ABÄNDERN EMAIL
-						// Subject of the message
-						subject: "Santra: Antrag Nummer #" + orderid + " in bearbeitung",
-
-						// plaintext body
-						text: 'Guten Tag ' + anrede + ' ' + nachname + ', Ihr Antrag wurde zur Bearbeitung weitergeleitet. Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' nach der Anmeldung. \n' +
-							'\n' +
-							'Vielen Dank und freundliche Grüsse \n' +
-							'Ihr ApplProjekte Supportteam \n' +
-							'n|w\n',
-						// HTML body
-						html: '<p><span>Guten Tag ' + anrede + ' ' + nachname + '</span><p>Ihr Antrag wurde von unserem System entgegengenommen und zur Bearbeitung an das entsprechende Team weitergeleitet.' +
-							'</br>Eine Gesamtübersicht Ihrer Tickets erhalten Sie unter http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' nach der Anmeldung.' +
-							'</br></br>Vielen Dank und freundliche Grüsse' +
-							'</br>Ihr ApplProjekte Supportteam ' +
-							'</br>n|w</p>'
-					};
-					let messageSupport2 = {
-						// sender info
-						from: 'Santra <applprojekte.ph@fhnw.ch>',
-						// Comma separated list of recipients
-						to: 'Applprojekte Team <applprojekte.ph@fhnw.ch>',
-						// to: '<alesya.heymann@fhnw.ch>',
-						// Subject of the message
-						subject: "Santra: Antrag Nummer #" + orderid + "",
-						// plaintext body
-						text: 'Liebes Applprojekte Team</br></br>Ein neuer Antrag ist eingegangen: </br>Antrag Nummer ' + orderid + ' </br> Name der Software ' + softwarename + ' </br>Direktlinkt auf Antrag: http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' </br></br>Vielen Dank und freundliche Grüsse </br>Ihr ApplProjekte Supportteam </br>n|w',
-						// HTML body
-						html: '<p><span>Liebes Applprojekte Team</span></br></br><p>Ein neuer Antrag ist eingegangen: </br>Antrag Nummer ' + orderid + ' </br> Name der Software ' + softwarename + ' </br>Direktlinkt auf Antrag: http://santra.ph.fhnw.ch/details?tsid=' + orderid + ' </br></br>Vielen Dank und freundliche Grüsse </br>Ihr ApplProjekte Supportteam </br>n|w</p>'
-
-					};
-					transport2.sendMail(messageSender2, function (error) {
-						if (error) {
-							console.log('Error occured');
-							console.log(error.message);
-							return;
-						}
-						console.log('Message sent successfully!');
-						transport2.close();
-					});
-					transport2.sendMail(messageSupport2, function (error) {
-						transport2.close();
-					});
-				}
 			})
 
 			setTimeout(
@@ -249,8 +118,8 @@ module.exports = function (models) {
 					res.render('layout_pdf', {
 						"softwareListDetails": softwareListDetails,
 						"statuscurrent": statuscurrent,
-						"vornamelog": obj_user.givenName,
-						"nachnamelog": obj_user.surname,
+						"vornamelog": decodeURIComponent(obj_user.givenName),
+						"nachnamelog": decodeURIComponent(obj_user.surname),
 						"admin": adminlog
 					});
 				}, 500);

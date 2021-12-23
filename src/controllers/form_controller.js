@@ -27,12 +27,19 @@ module.exports = function (models) {
         });
         JSON.stringify(obj_user);
         adminlog = LOGIN.admins.includes(obj_user.mail)
+        pool.getConnection((err, connection) => {
+            if (err) throw err
+            sql1 = "INSERT INTO users (email, vorname, nachname) SELECT '"+obj_user.mail+"', '"+decodeURIComponent(obj_user.givenName)+"', '"+decodeURIComponent(obj_user.surname)+"' FROM DUAL WHERE NOT EXISTS (SELECT * FROM users WHERE email='"+obj_user.mail+"')";
+            connection.query(""+sql1+"",
+                (err, rows) => {
+                })
+        })
         /* USER end */
         setTimeout(
             function () {
                 res.render('layout_form', {
-                    "vornamelog": obj_user.givenName,
-                    "nachnamelog": obj_user.surname,
+                    "vornamelog": decodeURIComponent(obj_user.givenName),
+                    "nachnamelog": decodeURIComponent(obj_user.surname),
                     "emaillog": obj_user.mail,
                     "admin": adminlog
                 });
