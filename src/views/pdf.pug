@@ -34,7 +34,7 @@ div(id='wrapper-screen-pdf')
                                         | Professur/Zentrum/Ressort
                                     p(name='professur')= order.professur
                                     label(style="font-weight: 700;")
-                                        | Beantragter*in
+                                        | Name
                                     span
                                         if (order.anrede !== 'Neutrale Anrede')
                                             | !{order.anrede} !{order.vorname} !{order.nachname}

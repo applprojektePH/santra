@@ -52,7 +52,6 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                         .col-md-12.fields
                             br
                             label(for='form-name')
-                                | Beantragter*innen
                             .row
                                 .col-md-4.fields
                                     label(for='form-author-firstname')
@@ -602,8 +601,8 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                             for order in softwareListDetails
                                 select.form-select.form-control(required='' name='lizenzart' filled=order.lizenzart)
                                     option(selected='' disabled='' value='') Auswahl
-                                    option(value='Cloude/Abo')  Cloude/Abo
-                                    option(value='Cloude/Abo & Support/Storage')  Cloude/Abo & Support/Storage
+                                    option(value='Cloud/Abo')  Cloud/Abo
+                                    option(value='Cloud/Abo & Support/Storage')  Cloud/Abo & Support/Storage
                                     option(value='Einmalkauf')  Einmalkauf
                                     option(value='Einmalkauf & Support')  Einmalkauf & Support
                                     option(value='andere')  andere
@@ -612,8 +611,8 @@ input#form-status-input.form-control.hidden(type='text' name='status')
                         else
                             select.form-select.form-control(required='' name='lizenzart')
                                 option(selected='' disabled='' value='') Auswahl
-                                option(value='Cloude/Abo')  Cloude/Abo
-                                option(value='Cloude/Abo & Support/Storage')  Cloude/Abo & Support/Storage
+                                option(value='Cloud/Abo')  Cloud/Abo
+                                option(value='Cloud/Abo & Support/Storage')  Cloud/Abo & Support/Storage
                                 option(value='Einmalkauf')  Einmalkauf
                                 option(value='Einmalkauf & Support')  Einmalkauf & Support
                                 option(value='andere')  andere
